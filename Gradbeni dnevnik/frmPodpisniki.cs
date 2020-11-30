@@ -27,6 +27,7 @@ namespace Komunala
         int tid;
         int dodaj = 0;
 
+
         public frmPodpisniki()
         {
             InitializeComponent();

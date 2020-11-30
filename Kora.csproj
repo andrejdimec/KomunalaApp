@@ -108,6 +108,12 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSodelavci.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSodelavci.designer.cs">
+      <DependentUpon>frmSodelavci.cs</DependentUpon>
+    </Compile>
     <Compile Include="Kataster\frmIjsvo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,9 @@
     <EmbeddedResource Include="crCeniko.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crCeniko.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmSodelavci.resx">
+      <DependentUpon>frmSodelavci.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kataster\frmIjsvo.resx">
       <DependentUpon>frmIjsvo.cs</DependentUpon>
