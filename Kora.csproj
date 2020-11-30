@@ -108,10 +108,10 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSodelavci.cs">
+    <Compile Include="Sifranti\frmSodelavci.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSodelavci.designer.cs">
+    <Compile Include="Sifranti\frmSodelavci.designer.cs">
       <DependentUpon>frmSodelavci.cs</DependentUpon>
     </Compile>
     <Compile Include="Kataster\frmIjsvo.cs">
@@ -156,10 +156,10 @@
     <Compile Include="Kataster\frmStavba.designer.cs">
       <DependentUpon>frmStavba.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\DDV.cs">
+    <Compile Include="Sifranti\DDV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\DDV.Designer.cs">
+    <Compile Include="Sifranti\DDV.Designer.cs">
       <DependentUpon>DDV.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\TablessControl.cs">
@@ -171,16 +171,16 @@
     <Compile Include="Kataster\frmBaze.designer.cs">
       <DependentUpon>frmBaze.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCeniko_Izpis.cs">
+    <Compile Include="Sifranti\frmCeniko_Izpis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCeniko_Izpis.Designer.cs">
+    <Compile Include="Sifranti\frmCeniko_Izpis.Designer.cs">
       <DependentUpon>frmCeniko_Izpis.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCenikt_Izpis.cs">
+    <Compile Include="Sifranti\frmCenikt_Izpis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCenikt_Izpis.Designer.cs">
+    <Compile Include="Sifranti\frmCenikt_Izpis.Designer.cs">
       <DependentUpon>frmCenikt_Izpis.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\frmDnevnik_Izpis.cs">
@@ -207,10 +207,10 @@
     <Compile Include="Gradbeni dnevnik\frmPocakaj.Designer.cs">
       <DependentUpon>frmPocakaj.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmPodpisniki.cs">
+    <Compile Include="Sifranti\frmPodpisniki.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmPodpisniki.Designer.cs">
+    <Compile Include="Sifranti\frmPodpisniki.Designer.cs">
       <DependentUpon>frmPodpisniki.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\frmSituacija_izpis.cs">
@@ -219,22 +219,22 @@
     <Compile Include="Gradbeni dnevnik\frmSituacija_izpis.Designer.cs">
       <DependentUpon>frmSituacija_izpis.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSkupine.cs">
+    <Compile Include="Sifranti\frmSkupine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSkupine.Designer.cs">
+    <Compile Include="Sifranti\frmSkupine.Designer.cs">
       <DependentUpon>frmSkupine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCenik.cs">
+    <Compile Include="Sifranti\frmCenik.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmCenik.Designer.cs">
+    <Compile Include="Sifranti\frmCenik.Designer.cs">
       <DependentUpon>frmCenik.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmEnote.cs">
+    <Compile Include="Sifranti\frmEnote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmEnote.Designer.cs">
+    <Compile Include="Sifranti\frmEnote.Designer.cs">
       <DependentUpon>frmEnote.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\frmMain.cs">
@@ -261,22 +261,22 @@
     <Compile Include="Gradbeni dnevnik\frmSituacije.Designer.cs">
       <DependentUpon>frmSituacije.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmStoritve.cs">
+    <Compile Include="Sifranti\frmStoritve.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmStoritve.Designer.cs">
+    <Compile Include="Sifranti\frmStoritve.Designer.cs">
       <DependentUpon>frmStoritve.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSkupineStoritev.cs">
+    <Compile Include="Sifranti\frmSkupineStoritev.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmSkupineStoritev.Designer.cs">
+    <Compile Include="Sifranti\frmSkupineStoritev.Designer.cs">
       <DependentUpon>frmSkupineStoritev.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmTrgCenik.cs">
+    <Compile Include="Sifranti\frmTrgCenik.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmTrgCenik.Designer.cs">
+    <Compile Include="Sifranti\frmTrgCenik.Designer.cs">
       <DependentUpon>frmTrgCenik.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\Gradbeni_dnevnik.cs">
@@ -317,7 +317,7 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crCeniko.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmSodelavci.resx">
+    <EmbeddedResource Include="Sifranti\frmSodelavci.resx">
       <DependentUpon>frmSodelavci.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kataster\frmIjsvo.resx">
@@ -341,16 +341,16 @@
     <EmbeddedResource Include="Kataster\frmStavba.resx">
       <DependentUpon>frmStavba.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\DDV.resx">
+    <EmbeddedResource Include="Sifranti\DDV.resx">
       <DependentUpon>DDV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Kataster\frmBaze.resx">
       <DependentUpon>frmBaze.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmCeniko_Izpis.resx">
+    <EmbeddedResource Include="Sifranti\frmCeniko_Izpis.resx">
       <DependentUpon>frmCeniko_Izpis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmCenikt_Izpis.resx">
+    <EmbeddedResource Include="Sifranti\frmCenikt_Izpis.resx">
       <DependentUpon>frmCenikt_Izpis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradbeni dnevnik\frmDnevnik_Izpis.resx">
@@ -365,19 +365,19 @@
     <EmbeddedResource Include="Gradbeni dnevnik\frmPocakaj.resx">
       <DependentUpon>frmPocakaj.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmPodpisniki.resx">
+    <EmbeddedResource Include="Sifranti\frmPodpisniki.resx">
       <DependentUpon>frmPodpisniki.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradbeni dnevnik\frmSituacija_izpis.resx">
       <DependentUpon>frmSituacija_izpis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmSkupine.resx">
+    <EmbeddedResource Include="Sifranti\frmSkupine.resx">
       <DependentUpon>frmSkupine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmCenik.resx">
+    <EmbeddedResource Include="Sifranti\frmCenik.resx">
       <DependentUpon>frmCenik.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmEnote.resx">
+    <EmbeddedResource Include="Sifranti\frmEnote.resx">
       <DependentUpon>frmEnote.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradbeni dnevnik\frmMain.resx">
@@ -392,13 +392,13 @@
     <EmbeddedResource Include="Gradbeni dnevnik\frmSituacije.resx">
       <DependentUpon>frmSituacije.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmStoritve.resx">
+    <EmbeddedResource Include="Sifranti\frmStoritve.resx">
       <DependentUpon>frmStoritve.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmSkupineStoritev.resx">
+    <EmbeddedResource Include="Sifranti\frmSkupineStoritev.resx">
       <DependentUpon>frmSkupineStoritev.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmTrgCenik.resx">
+    <EmbeddedResource Include="Sifranti\frmTrgCenik.resx">
       <DependentUpon>frmTrgCenik.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradbeni dnevnik\Gradbeni_dnevnik.resx">
@@ -448,6 +448,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dataset\" />
+    <Folder Include="PotniNalog\" />
     <Folder Include="Reporti\" />
   </ItemGroup>
   <ItemGroup>
