@@ -1,0 +1,64 @@
+﻿
+23. 10.	Dodani avtomatski podpisniki
+
+26. 10. Situacije naj izpisuje samo polna polja
+
+// zbriši vse prazne naslove skupin iz tabele tblSituacija_temp 26-10-2020
+
+                q1 = "select * from tblSkupinestoritev WHERE EXISTS (select * from tblsituacija_temp where tblskupinestoritev.id = tblSituacija_temp.skupina_id)";
+                cmd = new SqlCommand(q1, con);
+                SqlDataAdapter da1 = new SqlDataAdapter(q1, con);
+                DataSet ds = new DataSet();
+                da1.Fill(dataReport, "tblskupinestoritev");
+                da1.Fill(ds, "tblskupinestoritev");
+
+                for (i = 0; i <= ds.Tables[0].Rows.Count - 1; i++)
+                {
+                    sidx_skupina = ds.Tables[0].Rows[i].ItemArray[0].ToString();
+                    idx_skupina = Convert.ToInt32(sidx_skupina);
+                    // q2 = "select * from tblSituacija_temp where skupina_id = @skupina_id";
+                    q2 = "select * from tblSituacija_temp where skupina_id = @skupina_id AND k_skupaj<>'0' OR skupina_id='0'";  // novo 26-10-2020 - samo polne storitve in glave
+                    cmd = new SqlCommand(q2, con);
+                    SqlDataAdapter da2 = new SqlDataAdapter(q2, con);
+                    da2.SelectCommand.Parameters.Add("@skupina_id", idx_skupina);
+                    da2.Fill(dataReport, "tblsituacija_temp");
+
+                }
+
+                                    // zbriši vse prazne naslove skupin iz tabele tblSituacija_temp 26-10-2020
+                    q2 = "select * from tblskupinestoritev";
+                    try
+                    {
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        rdr2 = cmd2.ExecuteReader();
+                        while (rdr2.Read())
+                        {
+                            tmp_id_skupina = (int)rdr2["Id"];
+
+                            // preveri če je v skupini kaj polnih zapisov s količino
+                            con.Open();
+                            SqlCommand chk_record = new SqlCommand("SELECT COUNT(*) FROM tblSituacija_temp WHERE [Skupina_id] = @id_skupine and [k_skupaj]>0", con);
+                            chk_record.Parameters.AddWithValue("@id_skupine", tmp_id_skupina);
+                            int skupina_obstaja = (int)chk_record.ExecuteScalar();
+                            con.Close();
+                            if (skupina_obstaja == 0)
+                            {
+                                // ne obstaja polni zapis v skupini - zbriši celo skupino
+                                q3 = "delete from tblsituacija_temp WHERE [Skupina_id] = @id_skupine";
+                                try
+                                {
+                                    cmd3 = new SqlCommand(q3, con3);
+                                    con3.Open();
+                                    cmd3.Parameters.AddWithValue("@id_skupine", tmp_id_skupina);
+                                    cmd3.ExecuteNonQuery();
+                                    str_em = (string)cmd3.ExecuteScalar();
+                                    con3.Close();
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("Napaka: Zbriši prazne zapise iz tblSituacija_temp : " + ex.Message);
+                                }
+                            }
+                        }
+                    }

@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3911D11E-A161-4D46-B25A-28C411EF62E7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Komunala</RootNamespace>
+    <AssemblyName>Kora</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ikona.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System">
+      <HintPath>..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls.RadDock, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="TelerikCommon, Version=2020.1.113.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cr1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cr1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crCeniktrg.cs">
+      <DependentUpon>crCeniktrg.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="crCenikt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crCenikt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crSituacija.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crSituacija.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="crCeniko.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crCeniko.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmIjsvo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmIjsvo.designer.cs">
+      <DependentUpon>frmIjsvo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\frmIsci_n.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmIsci_n.designer.cs">
+      <DependentUpon>frmIsci_n.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\frmIsci_o.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmIsci_o.designer.cs">
+      <DependentUpon>frmIsci_o.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\frmMain_kat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmMain_kat.designer.cs">
+      <DependentUpon>frmMain_kat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\FrmNaselje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\FrmNaselje.designer.cs">
+      <DependentUpon>FrmNaselje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\frmOseba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmOseba.designer.cs">
+      <DependentUpon>frmOseba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kataster\frmStavba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmStavba.designer.cs">
+      <DependentUpon>frmStavba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\DDV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\DDV.Designer.cs">
+      <DependentUpon>DDV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\TablessControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmBaze.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmBaze.designer.cs">
+      <DependentUpon>frmBaze.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCeniko_Izpis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCeniko_Izpis.Designer.cs">
+      <DependentUpon>frmCeniko_Izpis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCenikt_Izpis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCenikt_Izpis.Designer.cs">
+      <DependentUpon>frmCenikt_Izpis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmDnevnik_Izpis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmDnevnik_Izpis.Designer.cs">
+      <DependentUpon>frmDnevnik_Izpis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmNastavitve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmNastavitve.Designer.cs">
+      <DependentUpon>frmNastavitve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmObcinaCenik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmObcinaCenik.Designer.cs">
+      <DependentUpon>frmObcinaCenik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPocakaj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPocakaj.Designer.cs">
+      <DependentUpon>frmPocakaj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPodpisniki.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPodpisniki.Designer.cs">
+      <DependentUpon>frmPodpisniki.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSituacija_izpis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSituacija_izpis.Designer.cs">
+      <DependentUpon>frmSituacija_izpis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSkupine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSkupine.Designer.cs">
+      <DependentUpon>frmSkupine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCenik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmCenik.Designer.cs">
+      <DependentUpon>frmCenik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmEnote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmEnote.Designer.cs">
+      <DependentUpon>frmEnote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPrejsnji_dnevniki.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPrejsnji_dnevniki.Designer.cs">
+      <DependentUpon>frmPrejsnji_dnevniki.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmPrint.Designer.cs">
+      <DependentUpon>frmPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSituacije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSituacije.Designer.cs">
+      <DependentUpon>frmSituacije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmStoritve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmStoritve.Designer.cs">
+      <DependentUpon>frmStoritve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSkupineStoritev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmSkupineStoritev.Designer.cs">
+      <DependentUpon>frmSkupineStoritev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmTrgCenik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\frmTrgCenik.Designer.cs">
+      <DependentUpon>frmTrgCenik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\Gradbeni_dnevnik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gradbeni dnevnik\Gradbeni_dnevnik.Designer.cs">
+      <DependentUpon>Gradbeni_dnevnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Komunala_DBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Komunala_DBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="cr1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>cr1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crCeniktrg.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crCeniktrg.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crCenikt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crCenikt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crSituacija.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crSituacija.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crCeniko.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crCeniko.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmIjsvo.resx">
+      <DependentUpon>frmIjsvo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmIsci_n.resx">
+      <DependentUpon>frmIsci_n.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmIsci_o.resx">
+      <DependentUpon>frmIsci_o.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmMain_kat.resx">
+      <DependentUpon>frmMain_kat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\FrmNaselje.resx">
+      <DependentUpon>FrmNaselje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmOseba.resx">
+      <DependentUpon>frmOseba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmStavba.resx">
+      <DependentUpon>frmStavba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\DDV.resx">
+      <DependentUpon>DDV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmBaze.resx">
+      <DependentUpon>frmBaze.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmCeniko_Izpis.resx">
+      <DependentUpon>frmCeniko_Izpis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmCenikt_Izpis.resx">
+      <DependentUpon>frmCenikt_Izpis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmDnevnik_Izpis.resx">
+      <DependentUpon>frmDnevnik_Izpis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmNastavitve.resx">
+      <DependentUpon>frmNastavitve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmObcinaCenik.resx">
+      <DependentUpon>frmObcinaCenik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmPocakaj.resx">
+      <DependentUpon>frmPocakaj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmPodpisniki.resx">
+      <DependentUpon>frmPodpisniki.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmSituacija_izpis.resx">
+      <DependentUpon>frmSituacija_izpis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmSkupine.resx">
+      <DependentUpon>frmSkupine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmCenik.resx">
+      <DependentUpon>frmCenik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmEnote.resx">
+      <DependentUpon>frmEnote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmPrejsnji_dnevniki.resx">
+      <DependentUpon>frmPrejsnji_dnevniki.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmPrint.resx">
+      <DependentUpon>frmPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmSituacije.resx">
+      <DependentUpon>frmSituacije.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmStoritve.resx">
+      <DependentUpon>frmStoritve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmSkupineStoritev.resx">
+      <DependentUpon>frmSkupineStoritev.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\frmTrgCenik.resx">
+      <DependentUpon>frmTrgCenik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gradbeni dnevnik\Gradbeni_dnevnik.resx">
+      <DependentUpon>Gradbeni_dnevnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Komunala_DBDataSet.xsc">
+      <DependentUpon>Komunala_DBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Komunala_DBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Komunala_DBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Komunala_DBDataSet.xss">
+      <DependentUpon>Komunala_DBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dataset\" />
+    <Folder Include="Reporti\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo komunala radgona 2020.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo komunala radgona 2020-120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo komunala radgona 2020-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logo komunala radgona 2020-170.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hisa.jpg" />
+    <Content Include="ikona.ico" />
+    <None Include="ikone\file-alt-regular.wmf" />
+    <None Include="ikone\GUMB-DNEVNIK.wmf" />
+    <None Include="ikone\gumb-dnevnik-01.png" />
+    <None Include="ikone\gumbi-dnevnik-01.jpg" />
+    <None Include="ikone\gumb-dnevnik-01-01.png" />
+    <None Include="ikone\gumb-dnevnik-01-01-01.png" />
+    <None Include="ikone\bm_dnevnik-01.png" />
+    <None Include="ikone\bm_dnevnik-01-01.png" />
+    <None Include="ikone\gumbi-170x200-dnevnik.png" />
+    <None Include="ikone\bm_pregled_dnevnikov.png" />
+    <None Include="ikone\bm_situacije.png" />
+    <None Include="ikone\logo-komunala-radgona-2020-100.png" />
+    <None Include="ikone\bm_gjs.png" />
+    <None Include="ikone\bm_baze.png" />
+    <None Include="ikone\bm_storitve.png" />
+    <None Include="ikone\gumbi-manjši-skupine.jpg" />
+    <None Include="ikone\gumbi-manjši-ddv.jpg" />
+    <None Include="ikone\gumbi-podpisniki.jpg" />
+    <None Include="ikone\gumbi-cenik.jpg" />
+    <None Include="ikone\gumbi-enote.jpg" />
+    <Content Include="on.jpg" />
+    <Content Include="ona.jpg" />
+    <Content Include="Opombe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
