@@ -95,7 +95,7 @@ namespace Komunala
             crta_dnevnik.Height = 1;
             crta_dnevnik.BorderStyle = BorderStyle.Fixed3D;
 
-            frmPodpisniki secondForm = new frmPodpisniki();
+            frmSodelavci secondForm = new frmSodelavci();
             secondForm.ShowDialog();
             //Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
             //secondForm.ShowDialog();
@@ -107,7 +107,7 @@ namespace Komunala
             //Environment.Exit(0);
             //frmStoritve secondForm = new frmStoritve();
             //secondForm.ShowDialog();
-            //Environment.Exit(0);
+            Environment.Exit(0);
         }
 
 
