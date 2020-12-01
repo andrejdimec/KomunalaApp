@@ -31,168 +31,598 @@ namespace Komunala
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.dgv1 = new System.Windows.Forms.DataGridView();
+            this.btnNazaj = new System.Windows.Forms.Button();
+            this.btnDodaj = new System.Windows.Forms.Button();
             this.btnSpremeni = new System.Windows.Forms.Button();
             this.btnBrisi = new System.Windows.Forms.Button();
-            this.btnDodaj = new System.Windows.Forms.Button();
-            this.btnNazaj = new System.Windows.Forms.Button();
-            this.btnPreklici = new System.Windows.Forms.Button();
             this.btnShrani = new System.Windows.Forms.Button();
-            this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.tb1 = new System.Windows.Forms.TextBox();
-            this.tb2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPreklici = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.crtal = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDodatno = new System.Windows.Forms.Button();
+            this.tc = new TablessControl();
+            this.tpOsnovno = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbSm = new System.Windows.Forms.TextBox();
+            this.tbDelovnoMesto = new System.Windows.Forms.TextBox();
+            this.tbOddelek = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tbPrivatMail = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbSluzbeniMail = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbPrivatMob = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.tbMpo = new System.Windows.Forms.TextBox();
+            this.tbSluzbeniMob = new System.Windows.Forms.TextBox();
+            this.tbSluzbeniStac = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.tbNazivPoste = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tbIme = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbPriimek = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tbPosta = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tbUlica = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tbHs = new System.Windows.Forms.TextBox();
+            this.tpDodatno = new System.Windows.Forms.TabPage();
+            this.crtal2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
+            this.tc.SuspendLayout();
+            this.tpOsnovno.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dgv1
+            // 
+            this.dgv1.AllowUserToAddRows = false;
+            this.dgv1.AllowUserToDeleteRows = false;
+            this.dgv1.AllowUserToOrderColumns = true;
+            this.dgv1.AllowUserToResizeColumns = false;
+            this.dgv1.AllowUserToResizeRows = false;
+            this.dgv1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgv1.Location = new System.Drawing.Point(31, 87);
+            this.dgv1.Name = "dgv1";
+            this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv1.Size = new System.Drawing.Size(433, 446);
+            this.dgv1.TabIndex = 32;
+            this.dgv1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellContentClick);
+            this.dgv1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_RowEnter);
+            this.dgv1.SelectionChanged += new System.EventHandler(this.dgv1_SelectionChanged);
+            this.dgv1.LocationChanged += new System.EventHandler(this.dgv1_LocationChanged);
+            // 
+            // btnNazaj
+            // 
+            this.btnNazaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnNazaj.FlatAppearance.BorderSize = 0;
+            this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNazaj.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnNazaj.Location = new System.Drawing.Point(330, 612);
+            this.btnNazaj.Name = "btnNazaj";
+            this.btnNazaj.Size = new System.Drawing.Size(120, 36);
+            this.btnNazaj.TabIndex = 35;
+            this.btnNazaj.Text = "Izhod";
+            this.btnNazaj.UseVisualStyleBackColor = false;
+            this.btnNazaj.Click += new System.EventHandler(this.btnNazaj_Click);
+            // 
+            // btnDodaj
+            // 
+            this.btnDodaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnDodaj.FlatAppearance.BorderSize = 0;
+            this.btnDodaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDodaj.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnDodaj.Location = new System.Drawing.Point(43, 560);
+            this.btnDodaj.Name = "btnDodaj";
+            this.btnDodaj.Size = new System.Drawing.Size(120, 36);
+            this.btnDodaj.TabIndex = 36;
+            this.btnDodaj.Text = "Nov sodelavec";
+            this.btnDodaj.UseVisualStyleBackColor = false;
             // 
             // btnSpremeni
             // 
-            this.btnSpremeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnSpremeni.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSpremeni.ForeColor = System.Drawing.Color.White;
-            this.btnSpremeni.Location = new System.Drawing.Point(198, 557);
-            this.btnSpremeni.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSpremeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnSpremeni.FlatAppearance.BorderSize = 0;
+            this.btnSpremeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSpremeni.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnSpremeni.Location = new System.Drawing.Point(188, 560);
             this.btnSpremeni.Name = "btnSpremeni";
-            this.btnSpremeni.Size = new System.Drawing.Size(136, 44);
-            this.btnSpremeni.TabIndex = 26;
-            this.btnSpremeni.Text = "Spremeni";
+            this.btnSpremeni.Size = new System.Drawing.Size(120, 36);
+            this.btnSpremeni.TabIndex = 37;
+            this.btnSpremeni.Text = "Uredi";
             this.btnSpremeni.UseVisualStyleBackColor = false;
             // 
             // btnBrisi
             // 
-            this.btnBrisi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnBrisi.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnBrisi.ForeColor = System.Drawing.Color.White;
-            this.btnBrisi.Location = new System.Drawing.Point(355, 557);
-            this.btnBrisi.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnBrisi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnBrisi.FlatAppearance.BorderSize = 0;
+            this.btnBrisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrisi.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnBrisi.Location = new System.Drawing.Point(330, 560);
             this.btnBrisi.Name = "btnBrisi";
-            this.btnBrisi.Size = new System.Drawing.Size(136, 44);
-            this.btnBrisi.TabIndex = 30;
+            this.btnBrisi.Size = new System.Drawing.Size(120, 36);
+            this.btnBrisi.TabIndex = 38;
             this.btnBrisi.Text = "Briši";
             this.btnBrisi.UseVisualStyleBackColor = false;
             // 
-            // btnDodaj
-            // 
-            this.btnDodaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnDodaj.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDodaj.ForeColor = System.Drawing.Color.White;
-            this.btnDodaj.Location = new System.Drawing.Point(40, 557);
-            this.btnDodaj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDodaj.Name = "btnDodaj";
-            this.btnDodaj.Size = new System.Drawing.Size(136, 44);
-            this.btnDodaj.TabIndex = 31;
-            this.btnDodaj.Text = "Dodaj";
-            this.btnDodaj.UseVisualStyleBackColor = false;
-            // 
-            // btnNazaj
-            // 
-            this.btnNazaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnNazaj.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnNazaj.ForeColor = System.Drawing.Color.White;
-            this.btnNazaj.Location = new System.Drawing.Point(355, 618);
-            this.btnNazaj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnNazaj.Name = "btnNazaj";
-            this.btnNazaj.Size = new System.Drawing.Size(136, 44);
-            this.btnNazaj.TabIndex = 27;
-            this.btnNazaj.Text = "Izhod";
-            this.btnNazaj.UseVisualStyleBackColor = false;
-            // 
-            // btnPreklici
-            // 
-            this.btnPreklici.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnPreklici.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPreklici.ForeColor = System.Drawing.Color.White;
-            this.btnPreklici.Location = new System.Drawing.Point(198, 618);
-            this.btnPreklici.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnPreklici.Name = "btnPreklici";
-            this.btnPreklici.Size = new System.Drawing.Size(136, 44);
-            this.btnPreklici.TabIndex = 28;
-            this.btnPreklici.Text = "Prekliči";
-            this.btnPreklici.UseVisualStyleBackColor = false;
-            // 
             // btnShrani
             // 
-            this.btnShrani.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(62)))), ((int)(((byte)(107)))));
-            this.btnShrani.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnShrani.ForeColor = System.Drawing.Color.White;
-            this.btnShrani.Location = new System.Drawing.Point(40, 618);
-            this.btnShrani.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnShrani.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnShrani.FlatAppearance.BorderSize = 0;
+            this.btnShrani.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShrani.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnShrani.Location = new System.Drawing.Point(43, 612);
             this.btnShrani.Name = "btnShrani";
-            this.btnShrani.Size = new System.Drawing.Size(136, 44);
-            this.btnShrani.TabIndex = 29;
+            this.btnShrani.Size = new System.Drawing.Size(120, 36);
+            this.btnShrani.TabIndex = 39;
             this.btnShrani.Text = "Shrani";
             this.btnShrani.UseVisualStyleBackColor = false;
             // 
-            // dgv1
+            // btnPreklici
             // 
-            this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv1.Location = new System.Drawing.Point(12, 12);
-            this.dgv1.Name = "dgv1";
-            this.dgv1.Size = new System.Drawing.Size(350, 252);
-            this.dgv1.TabIndex = 32;
+            this.btnPreklici.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnPreklici.FlatAppearance.BorderSize = 0;
+            this.btnPreklici.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPreklici.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnPreklici.Location = new System.Drawing.Point(188, 612);
+            this.btnPreklici.Name = "btnPreklici";
+            this.btnPreklici.Size = new System.Drawing.Size(120, 36);
+            this.btnPreklici.TabIndex = 40;
+            this.btnPreklici.Text = "Prekliči";
+            this.btnPreklici.UseVisualStyleBackColor = false;
             // 
-            // tb1
+            // label1
             // 
-            this.tb1.Location = new System.Drawing.Point(513, 100);
-            this.tb1.Name = "tb1";
-            this.tb1.Size = new System.Drawing.Size(234, 26);
-            this.tb1.TabIndex = 33;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(31, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(97, 27);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Sodelavci";
             // 
-            // tb2
+            // crtal
             // 
-            this.tb2.Location = new System.Drawing.Point(513, 154);
-            this.tb2.Name = "tb2";
-            this.tb2.Size = new System.Drawing.Size(234, 26);
-            this.tb2.TabIndex = 34;
+            this.crtal.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.crtal.Location = new System.Drawing.Point(28, 55);
+            this.crtal.Name = "crtal";
+            this.crtal.Size = new System.Drawing.Size(436, 18);
+            this.crtal.TabIndex = 42;
+            this.crtal.Text = "label2";
             // 
-            // button1
+            // label2
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Window;
-            this.button1.Location = new System.Drawing.Point(40, 468);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 42);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(508, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(161, 27);
+            this.label2.TabIndex = 55;
+            this.label2.Text = "Osnovni podatki";
+            // 
+            // btnDodatno
+            // 
+            this.btnDodatno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.btnDodatno.FlatAppearance.BorderSize = 0;
+            this.btnDodatno.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDodatno.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnDodatno.Location = new System.Drawing.Point(677, 560);
+            this.btnDodatno.Name = "btnDodatno";
+            this.btnDodatno.Size = new System.Drawing.Size(202, 41);
+            this.btnDodatno.TabIndex = 56;
+            this.btnDodatno.Text = "Pokaži dodatne podatke";
+            this.btnDodatno.UseVisualStyleBackColor = false;
+            this.btnDodatno.Click += new System.EventHandler(this.btnDodatno_Click);
+            // 
+            // tc
+            // 
+            this.tc.Controls.Add(this.tpOsnovno);
+            this.tc.Controls.Add(this.tpDodatno);
+            this.tc.Location = new System.Drawing.Point(493, 87);
+            this.tc.Name = "tc";
+            this.tc.SelectedIndex = 0;
+            this.tc.Size = new System.Drawing.Size(592, 467);
+            this.tc.TabIndex = 54;
+            // 
+            // tpOsnovno
+            // 
+            this.tpOsnovno.Controls.Add(this.label17);
+            this.tpOsnovno.Controls.Add(this.tbSm);
+            this.tpOsnovno.Controls.Add(this.tbDelovnoMesto);
+            this.tpOsnovno.Controls.Add(this.tbOddelek);
+            this.tpOsnovno.Controls.Add(this.label18);
+            this.tpOsnovno.Controls.Add(this.label19);
+            this.tpOsnovno.Controls.Add(this.tbPrivatMail);
+            this.tpOsnovno.Controls.Add(this.label20);
+            this.tpOsnovno.Controls.Add(this.tbSluzbeniMail);
+            this.tpOsnovno.Controls.Add(this.label21);
+            this.tpOsnovno.Controls.Add(this.tbPrivatMob);
+            this.tpOsnovno.Controls.Add(this.label22);
+            this.tpOsnovno.Controls.Add(this.label23);
+            this.tpOsnovno.Controls.Add(this.tbMpo);
+            this.tpOsnovno.Controls.Add(this.tbSluzbeniMob);
+            this.tpOsnovno.Controls.Add(this.tbSluzbeniStac);
+            this.tpOsnovno.Controls.Add(this.label24);
+            this.tpOsnovno.Controls.Add(this.label25);
+            this.tpOsnovno.Controls.Add(this.tbNazivPoste);
+            this.tpOsnovno.Controls.Add(this.label26);
+            this.tpOsnovno.Controls.Add(this.tbIme);
+            this.tpOsnovno.Controls.Add(this.label27);
+            this.tpOsnovno.Controls.Add(this.tbPriimek);
+            this.tpOsnovno.Controls.Add(this.label28);
+            this.tpOsnovno.Controls.Add(this.tbPosta);
+            this.tpOsnovno.Controls.Add(this.label29);
+            this.tpOsnovno.Controls.Add(this.label30);
+            this.tpOsnovno.Controls.Add(this.tbUlica);
+            this.tpOsnovno.Controls.Add(this.label31);
+            this.tpOsnovno.Controls.Add(this.tbHs);
+            this.tpOsnovno.Location = new System.Drawing.Point(4, 27);
+            this.tpOsnovno.Name = "tpOsnovno";
+            this.tpOsnovno.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOsnovno.Size = new System.Drawing.Size(584, 436);
+            this.tpOsnovno.TabIndex = 0;
+            this.tpOsnovno.Text = "tabPage1";
+            this.tpOsnovno.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(322, 79);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(27, 18);
+            this.label17.TabIndex = 100;
+            this.label17.Text = "SM";
+            // 
+            // tbSm
+            // 
+            this.tbSm.Location = new System.Drawing.Point(325, 100);
+            this.tbSm.Name = "tbSm";
+            this.tbSm.Size = new System.Drawing.Size(49, 26);
+            this.tbSm.TabIndex = 99;
+            // 
+            // tbDelovnoMesto
+            // 
+            this.tbDelovnoMesto.Location = new System.Drawing.Point(16, 100);
+            this.tbDelovnoMesto.Name = "tbDelovnoMesto";
+            this.tbDelovnoMesto.Size = new System.Drawing.Size(278, 26);
+            this.tbDelovnoMesto.TabIndex = 95;
+            // 
+            // tbOddelek
+            // 
+            this.tbOddelek.Location = new System.Drawing.Point(411, 100);
+            this.tbOddelek.Name = "tbOddelek";
+            this.tbOddelek.Size = new System.Drawing.Size(152, 26);
+            this.tbOddelek.TabIndex = 96;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(13, 79);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(102, 18);
+            this.label18.TabIndex = 97;
+            this.label18.Text = "Delovno mesto";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(408, 79);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(61, 18);
+            this.label19.TabIndex = 98;
+            this.label19.Text = "Oddelek";
+            // 
+            // tbPrivatMail
+            // 
+            this.tbPrivatMail.Location = new System.Drawing.Point(313, 393);
+            this.tbPrivatMail.Name = "tbPrivatMail";
+            this.tbPrivatMail.Size = new System.Drawing.Size(250, 26);
+            this.tbPrivatMail.TabIndex = 93;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(310, 372);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(94, 18);
+            this.label20.TabIndex = 94;
+            this.label20.Text = "Privat e-pošta";
+            // 
+            // tbSluzbeniMail
+            // 
+            this.tbSluzbeniMail.Location = new System.Drawing.Point(16, 393);
+            this.tbSluzbeniMail.Name = "tbSluzbeniMail";
+            this.tbSluzbeniMail.Size = new System.Drawing.Size(278, 26);
+            this.tbSluzbeniMail.TabIndex = 91;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(13, 372);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(114, 18);
+            this.label21.TabIndex = 92;
+            this.label21.Text = "Službena e-pošta";
+            // 
+            // tbPrivatMob
+            // 
+            this.tbPrivatMob.Location = new System.Drawing.Point(421, 321);
+            this.tbPrivatMob.Name = "tbPrivatMob";
+            this.tbPrivatMob.Size = new System.Drawing.Size(142, 26);
+            this.tbPrivatMob.TabIndex = 89;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(418, 300);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(95, 18);
+            this.label22.TabIndex = 90;
+            this.label22.Text = "Privat mobilni";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(177, 300);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(38, 18);
+            this.label23.TabIndex = 88;
+            this.label23.Text = "MPO";
+            // 
+            // tbMpo
+            // 
+            this.tbMpo.Location = new System.Drawing.Point(180, 321);
+            this.tbMpo.Name = "tbMpo";
+            this.tbMpo.Size = new System.Drawing.Size(49, 26);
+            this.tbMpo.TabIndex = 87;
+            // 
+            // tbSluzbeniMob
+            // 
+            this.tbSluzbeniMob.Location = new System.Drawing.Point(16, 321);
+            this.tbSluzbeniMob.Name = "tbSluzbeniMob";
+            this.tbSluzbeniMob.Size = new System.Drawing.Size(142, 26);
+            this.tbSluzbeniMob.TabIndex = 83;
+            // 
+            // tbSluzbeniStac
+            // 
+            this.tbSluzbeniStac.Location = new System.Drawing.Point(251, 321);
+            this.tbSluzbeniStac.Name = "tbSluzbeniStac";
+            this.tbSluzbeniStac.Size = new System.Drawing.Size(147, 26);
+            this.tbSluzbeniStac.TabIndex = 84;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(13, 300);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(112, 18);
+            this.label24.TabIndex = 85;
+            this.label24.Text = "Službeni mobilni";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(248, 300);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(132, 18);
+            this.label25.TabIndex = 86;
+            this.label25.Text = "Službeni stacionarni";
+            // 
+            // tbNazivPoste
+            // 
+            this.tbNazivPoste.Location = new System.Drawing.Point(379, 213);
+            this.tbNazivPoste.Name = "tbNazivPoste";
+            this.tbNazivPoste.Size = new System.Drawing.Size(184, 26);
+            this.tbNazivPoste.TabIndex = 80;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(376, 192);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(80, 18);
+            this.label26.TabIndex = 82;
+            this.label26.Text = "Naziv pošte";
+            // 
+            // tbIme
+            // 
+            this.tbIme.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbIme.Location = new System.Drawing.Point(16, 32);
+            this.tbIme.Name = "tbIme";
+            this.tbIme.Size = new System.Drawing.Size(278, 29);
+            this.tbIme.TabIndex = 71;
+            this.tbIme.WordWrap = false;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(308, 192);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(42, 18);
+            this.label27.TabIndex = 81;
+            this.label27.Text = "Pošta";
+            // 
+            // tbPriimek
+            // 
+            this.tbPriimek.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbPriimek.Location = new System.Drawing.Point(311, 32);
+            this.tbPriimek.Name = "tbPriimek";
+            this.tbPriimek.Size = new System.Drawing.Size(252, 29);
+            this.tbPriimek.TabIndex = 72;
+            this.tbPriimek.WordWrap = false;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(13, 11);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(32, 18);
+            this.label28.TabIndex = 73;
+            this.label28.Text = "Ime";
+            // 
+            // tbPosta
+            // 
+            this.tbPosta.Location = new System.Drawing.Point(311, 213);
+            this.tbPosta.Name = "tbPosta";
+            this.tbPosta.Size = new System.Drawing.Size(50, 26);
+            this.tbPosta.TabIndex = 79;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(308, 11);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(56, 18);
+            this.label29.TabIndex = 74;
+            this.label29.Text = "Priimek";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(248, 192);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(24, 18);
+            this.label30.TabIndex = 78;
+            this.label30.Text = "HŠ";
+            // 
+            // tbUlica
+            // 
+            this.tbUlica.Location = new System.Drawing.Point(16, 213);
+            this.tbUlica.Name = "tbUlica";
+            this.tbUlica.Size = new System.Drawing.Size(215, 26);
+            this.tbUlica.TabIndex = 75;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(13, 192);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(97, 18);
+            this.label31.TabIndex = 77;
+            this.label31.Text = "Ulica / Naselje";
+            // 
+            // tbHs
+            // 
+            this.tbHs.Location = new System.Drawing.Point(251, 213);
+            this.tbHs.Name = "tbHs";
+            this.tbHs.Size = new System.Drawing.Size(43, 26);
+            this.tbHs.TabIndex = 76;
+            // 
+            // tpDodatno
+            // 
+            this.tpDodatno.Location = new System.Drawing.Point(4, 27);
+            this.tpDodatno.Name = "tpDodatno";
+            this.tpDodatno.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDodatno.Size = new System.Drawing.Size(584, 436);
+            this.tpDodatno.TabIndex = 1;
+            this.tpDodatno.Text = "tabPage2";
+            this.tpDodatno.UseVisualStyleBackColor = true;
+            // 
+            // crtal2
+            // 
+            this.crtal2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.crtal2.Location = new System.Drawing.Point(513, 55);
+            this.crtal2.Name = "crtal2";
+            this.crtal2.Size = new System.Drawing.Size(547, 18);
+            this.crtal2.TabIndex = 57;
+            this.crtal2.Text = "label2";
             // 
             // frmSodelavci
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 694);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tb2);
-            this.Controls.Add(this.tb1);
-            this.Controls.Add(this.dgv1);
-            this.Controls.Add(this.btnDodaj);
-            this.Controls.Add(this.btnBrisi);
-            this.Controls.Add(this.btnShrani);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.ClientSize = new System.Drawing.Size(1091, 682);
+            this.Controls.Add(this.crtal2);
+            this.Controls.Add(this.btnDodatno);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.tc);
+            this.Controls.Add(this.crtal);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPreklici);
-            this.Controls.Add(this.btnNazaj);
+            this.Controls.Add(this.btnShrani);
+            this.Controls.Add(this.btnBrisi);
             this.Controls.Add(this.btnSpremeni);
+            this.Controls.Add(this.btnDodaj);
+            this.Controls.Add(this.btnNazaj);
+            this.Controls.Add(this.dgv1);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmSodelavci";
-            this.Text = "frmSodelavci";
+            this.Text = "Komunala Radgona";
             this.Load += new System.EventHandler(this.frmSodelavci_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
+            this.tc.ResumeLayout(false);
+            this.tpOsnovno.ResumeLayout(false);
+            this.tpOsnovno.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+        private System.Windows.Forms.DataGridView dgv1;
+        private System.Windows.Forms.Button btnNazaj;
+        private System.Windows.Forms.Button btnDodaj;
         private System.Windows.Forms.Button btnSpremeni;
         private System.Windows.Forms.Button btnBrisi;
-        private System.Windows.Forms.Button btnDodaj;
-        private System.Windows.Forms.Button btnNazaj;
-        private System.Windows.Forms.Button btnPreklici;
         private System.Windows.Forms.Button btnShrani;
-        private System.Windows.Forms.DataGridView dgv1;
-        private System.Windows.Forms.TextBox tb1;
-        private System.Windows.Forms.TextBox tb2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPreklici;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label crtal;
+        private TablessControl tc;
+        private System.Windows.Forms.TabPage tpOsnovno;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tbSm;
+        private System.Windows.Forms.TextBox tbDelovnoMesto;
+        private System.Windows.Forms.TextBox tbOddelek;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox tbPrivatMail;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbSluzbeniMail;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox tbPrivatMob;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tbMpo;
+        private System.Windows.Forms.TextBox tbSluzbeniMob;
+        private System.Windows.Forms.TextBox tbSluzbeniStac;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox tbNazivPoste;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox tbIme;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox tbPriimek;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox tbPosta;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox tbUlica;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tbHs;
+        private System.Windows.Forms.TabPage tpDodatno;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnDodatno;
+        private System.Windows.Forms.Label crtal2;
     }
 }

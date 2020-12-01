@@ -67,11 +67,24 @@ namespace Komunala
         string leto = "2020"; // začasno - dobi ga iz combobox
         string baza;
 
-        Color barva_gumb_neakt = Color.FromArgb(0, 32, 77);
-        Color barva_gumb_akt = Color.FromArgb(0, 72, 117);
-        Color barva_gumb_pis_akt = Color.FromArgb(203, 151, 52); // pisava aktivnega gumba
-        Color barva_gumb_pneakt = Color.FromArgb(255, 255, 255); // pisava neaktivnega gumba
-        Color barva_crta = Color.FromArgb(140, 140, 140);
+        // gumbi menija
+        public static Color barva_gumb_neakt = Color.FromArgb(0, 32, 77);
+        public static Color barva_gumb_akt = Color.FromArgb(0, 72, 117);
+        public static Color barva_gumb_pis_akt = Color.FromArgb(203, 151, 52); // pisava aktivnega gumba
+        public static Color barva_gumb_pneakt = Color.FromArgb(255, 255, 255); // pisava neaktivnega gumba
+        
+        // gumbi za formo
+        //public static Color barva_gumb2_neakt = Color.FromArgb(119, 119, 119);
+        public static Color barva_gumb2_neakt = Color.FromArgb(207, 198, 193);
+        //public static Color barva_gumb2_neakt = Color.FromArgb(119, 119, 119);
+        public static Color barva_gumb2_akt = Color.FromArgb(0, 72, 117);
+        public static Color barva_gumb2_pis_akt = Color.FromArgb(0, 0, 0); // pisava aktivnega gumba
+        public static Color barva_gumb2_pis_neakt = Color.FromArgb(255, 255, 255); // pisava neaktivnega gumba
+        public static int gumb2_sirina = 120;
+        public static int gumb2_visina = 36;
+
+        public static Color barva_crta = Color.FromArgb(140, 140, 140);
+        public static Color barva_form_back = Color.FromArgb(249, 249, 249);
 
         bool akt_dnevnik, akt_storitve, akt_nalog, akt_ponudba, akt_ijsvo, akt_nastavitve, akt_sifranti;  // kateri zavihek je aktiven
 
@@ -91,6 +104,7 @@ namespace Komunala
             Razbarvaj_gumbe();
             bm_dnevnik.BackColor = barva_gumb_akt;
 
+            // črta iz label
             crta_dnevnik.AutoSize = false;
             crta_dnevnik.Height = 1;
             crta_dnevnik.BorderStyle = BorderStyle.Fixed3D;
