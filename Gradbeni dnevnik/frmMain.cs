@@ -21,7 +21,7 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "26.11.2020";
+        string verzija = "2.12.2020";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
@@ -109,9 +109,9 @@ namespace Komunala
             crta_dnevnik.Height = 1;
             crta_dnevnik.BorderStyle = BorderStyle.Fixed3D;
 
-            frmSodelavci secondForm = new frmSodelavci();
-            secondForm.ShowDialog();
-            //Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
+            //frmSodelavci secondForm = new frmSodelavci();
+            //secondForm.ShowDialog();
+            ////Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
             //secondForm.ShowDialog();
 
             //frmTrgCenik secondForm = new frmTrgCenik();
@@ -121,7 +121,7 @@ namespace Komunala
             //Environment.Exit(0);
             //frmStoritve secondForm = new frmStoritve();
             //secondForm.ShowDialog();
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 
@@ -480,6 +480,13 @@ namespace Komunala
         DateTime tmp_datum;
         int ii, xx; // števci
         bool tmp_jepraznik;
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            frmSodelavci sec = new frmSodelavci();
+            sec.ShowDialog();
+        }
+
         int st_dni;
 
         SqlConnection con = frmMain.c;

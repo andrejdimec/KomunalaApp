@@ -419,6 +419,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Komunala_DBDataSet.xsc">
       <DependentUpon>Komunala_DBDataSet.xsd</DependentUpon>
     </None>
@@ -439,9 +440,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
@@ -486,6 +484,7 @@
     <None Include="ikone\gumbi-podpisniki.jpg" />
     <None Include="ikone\gumbi-cenik.jpg" />
     <None Include="ikone\gumbi-enote.jpg" />
+    <None Include="ikone\gumbi-manjsi-sodelavci.jpg" />
     <Content Include="on.jpg" />
     <Content Include="ona.jpg" />
     <Content Include="Opombe.txt" />

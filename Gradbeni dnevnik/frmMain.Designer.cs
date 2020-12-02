@@ -69,6 +69,7 @@
             this.button22 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
@@ -488,6 +489,7 @@
             // tp_sifranti
             // 
             this.tp_sifranti.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_sifranti.Controls.Add(this.button3);
             this.tp_sifranti.Controls.Add(this.button7);
             this.tp_sifranti.Controls.Add(this.button4);
             this.tp_sifranti.Controls.Add(this.button16);
@@ -669,6 +671,23 @@
             this.button10.TabIndex = 19;
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.BackgroundImage = global::Komunala.Resources.gumbi_manjsi_sodelavci;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(379, 282);
+            this.button3.Margin = new System.Windows.Forms.Padding(0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(126, 148);
+            this.button3.TabIndex = 32;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button7
             // 
@@ -870,6 +889,7 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button3;
     }
 }
 
