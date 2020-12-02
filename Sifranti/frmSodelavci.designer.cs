@@ -76,10 +76,25 @@ namespace Komunala
             this.label31 = new System.Windows.Forms.Label();
             this.tbHs = new System.Windows.Forms.TextBox();
             this.tpDodatno = new System.Windows.Forms.TabPage();
+            this.tbDs = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbIzobrazba = new System.Windows.Forms.TextBox();
+            this.tbEmso = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.l = new System.Windows.Forms.Label();
+            this.tbTrr = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbBanka = new System.Windows.Forms.TextBox();
+            this.tbIme2 = new System.Windows.Forms.TextBox();
+            this.tbPriimek2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.crtal2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.tc.SuspendLayout();
             this.tpOsnovno.SuspendLayout();
+            this.tpDodatno.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv1
@@ -136,6 +151,7 @@ namespace Komunala
             this.btnDodaj.TabIndex = 36;
             this.btnDodaj.Text = "Nov sodelavec";
             this.btnDodaj.UseVisualStyleBackColor = false;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click_1);
             // 
             // btnSpremeni
             // 
@@ -149,6 +165,7 @@ namespace Komunala
             this.btnSpremeni.TabIndex = 37;
             this.btnSpremeni.Text = "Uredi";
             this.btnSpremeni.UseVisualStyleBackColor = false;
+            this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click);
             // 
             // btnBrisi
             // 
@@ -175,6 +192,7 @@ namespace Komunala
             this.btnShrani.TabIndex = 39;
             this.btnShrani.Text = "Shrani";
             this.btnShrani.UseVisualStyleBackColor = false;
+            this.btnShrani.Click += new System.EventHandler(this.btnShrani_Click);
             // 
             // btnPreklici
             // 
@@ -188,6 +206,7 @@ namespace Komunala
             this.btnPreklici.TabIndex = 40;
             this.btnPreklici.Text = "Prekliči";
             this.btnPreklici.UseVisualStyleBackColor = false;
+            this.btnPreklici.Click += new System.EventHandler(this.btnPreklici_Click);
             // 
             // label1
             // 
@@ -296,21 +315,22 @@ namespace Komunala
             this.tbSm.Location = new System.Drawing.Point(325, 100);
             this.tbSm.Name = "tbSm";
             this.tbSm.Size = new System.Drawing.Size(49, 26);
-            this.tbSm.TabIndex = 99;
+            this.tbSm.TabIndex = 4;
+            this.tbSm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbDelovnoMesto
             // 
             this.tbDelovnoMesto.Location = new System.Drawing.Point(16, 100);
             this.tbDelovnoMesto.Name = "tbDelovnoMesto";
             this.tbDelovnoMesto.Size = new System.Drawing.Size(278, 26);
-            this.tbDelovnoMesto.TabIndex = 95;
+            this.tbDelovnoMesto.TabIndex = 3;
             // 
             // tbOddelek
             // 
             this.tbOddelek.Location = new System.Drawing.Point(411, 100);
             this.tbOddelek.Name = "tbOddelek";
             this.tbOddelek.Size = new System.Drawing.Size(152, 26);
-            this.tbOddelek.TabIndex = 96;
+            this.tbOddelek.TabIndex = 5;
             // 
             // label18
             // 
@@ -335,7 +355,7 @@ namespace Komunala
             this.tbPrivatMail.Location = new System.Drawing.Point(313, 393);
             this.tbPrivatMail.Name = "tbPrivatMail";
             this.tbPrivatMail.Size = new System.Drawing.Size(250, 26);
-            this.tbPrivatMail.TabIndex = 93;
+            this.tbPrivatMail.TabIndex = 16;
             // 
             // label20
             // 
@@ -351,7 +371,7 @@ namespace Komunala
             this.tbSluzbeniMail.Location = new System.Drawing.Point(16, 393);
             this.tbSluzbeniMail.Name = "tbSluzbeniMail";
             this.tbSluzbeniMail.Size = new System.Drawing.Size(278, 26);
-            this.tbSluzbeniMail.TabIndex = 91;
+            this.tbSluzbeniMail.TabIndex = 15;
             // 
             // label21
             // 
@@ -367,7 +387,7 @@ namespace Komunala
             this.tbPrivatMob.Location = new System.Drawing.Point(421, 321);
             this.tbPrivatMob.Name = "tbPrivatMob";
             this.tbPrivatMob.Size = new System.Drawing.Size(142, 26);
-            this.tbPrivatMob.TabIndex = 89;
+            this.tbPrivatMob.TabIndex = 14;
             // 
             // label22
             // 
@@ -390,23 +410,25 @@ namespace Komunala
             // tbMpo
             // 
             this.tbMpo.Location = new System.Drawing.Point(180, 321);
+            this.tbMpo.Margin = new System.Windows.Forms.Padding(0);
             this.tbMpo.Name = "tbMpo";
             this.tbMpo.Size = new System.Drawing.Size(49, 26);
-            this.tbMpo.TabIndex = 87;
+            this.tbMpo.TabIndex = 11;
+            this.tbMpo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbSluzbeniMob
             // 
             this.tbSluzbeniMob.Location = new System.Drawing.Point(16, 321);
             this.tbSluzbeniMob.Name = "tbSluzbeniMob";
             this.tbSluzbeniMob.Size = new System.Drawing.Size(142, 26);
-            this.tbSluzbeniMob.TabIndex = 83;
+            this.tbSluzbeniMob.TabIndex = 10;
             // 
             // tbSluzbeniStac
             // 
             this.tbSluzbeniStac.Location = new System.Drawing.Point(251, 321);
             this.tbSluzbeniStac.Name = "tbSluzbeniStac";
             this.tbSluzbeniStac.Size = new System.Drawing.Size(147, 26);
-            this.tbSluzbeniStac.TabIndex = 84;
+            this.tbSluzbeniStac.TabIndex = 12;
             // 
             // label24
             // 
@@ -431,7 +453,7 @@ namespace Komunala
             this.tbNazivPoste.Location = new System.Drawing.Point(379, 213);
             this.tbNazivPoste.Name = "tbNazivPoste";
             this.tbNazivPoste.Size = new System.Drawing.Size(184, 26);
-            this.tbNazivPoste.TabIndex = 80;
+            this.tbNazivPoste.TabIndex = 9;
             // 
             // label26
             // 
@@ -448,7 +470,7 @@ namespace Komunala
             this.tbIme.Location = new System.Drawing.Point(16, 32);
             this.tbIme.Name = "tbIme";
             this.tbIme.Size = new System.Drawing.Size(278, 29);
-            this.tbIme.TabIndex = 71;
+            this.tbIme.TabIndex = 1;
             this.tbIme.WordWrap = false;
             // 
             // label27
@@ -466,7 +488,7 @@ namespace Komunala
             this.tbPriimek.Location = new System.Drawing.Point(311, 32);
             this.tbPriimek.Name = "tbPriimek";
             this.tbPriimek.Size = new System.Drawing.Size(252, 29);
-            this.tbPriimek.TabIndex = 72;
+            this.tbPriimek.TabIndex = 2;
             this.tbPriimek.WordWrap = false;
             // 
             // label28
@@ -483,7 +505,8 @@ namespace Komunala
             this.tbPosta.Location = new System.Drawing.Point(311, 213);
             this.tbPosta.Name = "tbPosta";
             this.tbPosta.Size = new System.Drawing.Size(50, 26);
-            this.tbPosta.TabIndex = 79;
+            this.tbPosta.TabIndex = 8;
+            this.tbPosta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label29
             // 
@@ -508,7 +531,7 @@ namespace Komunala
             this.tbUlica.Location = new System.Drawing.Point(16, 213);
             this.tbUlica.Name = "tbUlica";
             this.tbUlica.Size = new System.Drawing.Size(215, 26);
-            this.tbUlica.TabIndex = 75;
+            this.tbUlica.TabIndex = 6;
             // 
             // label31
             // 
@@ -524,10 +547,25 @@ namespace Komunala
             this.tbHs.Location = new System.Drawing.Point(251, 213);
             this.tbHs.Name = "tbHs";
             this.tbHs.Size = new System.Drawing.Size(43, 26);
-            this.tbHs.TabIndex = 76;
+            this.tbHs.TabIndex = 7;
+            this.tbHs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tpDodatno
             // 
+            this.tpDodatno.Controls.Add(this.tbDs);
+            this.tpDodatno.Controls.Add(this.label12);
+            this.tpDodatno.Controls.Add(this.tbIzobrazba);
+            this.tpDodatno.Controls.Add(this.tbEmso);
+            this.tpDodatno.Controls.Add(this.label6);
+            this.tpDodatno.Controls.Add(this.label7);
+            this.tpDodatno.Controls.Add(this.l);
+            this.tpDodatno.Controls.Add(this.tbTrr);
+            this.tpDodatno.Controls.Add(this.label11);
+            this.tpDodatno.Controls.Add(this.tbBanka);
+            this.tpDodatno.Controls.Add(this.tbIme2);
+            this.tpDodatno.Controls.Add(this.tbPriimek2);
+            this.tpDodatno.Controls.Add(this.label3);
+            this.tpDodatno.Controls.Add(this.label4);
             this.tpDodatno.Location = new System.Drawing.Point(4, 27);
             this.tpDodatno.Name = "tpDodatno";
             this.tpDodatno.Padding = new System.Windows.Forms.Padding(3);
@@ -535,6 +573,126 @@ namespace Komunala
             this.tpDodatno.TabIndex = 1;
             this.tpDodatno.Text = "tabPage2";
             this.tpDodatno.UseVisualStyleBackColor = true;
+            // 
+            // tbDs
+            // 
+            this.tbDs.Location = new System.Drawing.Point(238, 197);
+            this.tbDs.Name = "tbDs";
+            this.tbDs.Size = new System.Drawing.Size(201, 26);
+            this.tbDs.TabIndex = 22;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(235, 176);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(103, 18);
+            this.label12.TabIndex = 116;
+            this.label12.Text = "Davčna številka";
+            // 
+            // tbIzobrazba
+            // 
+            this.tbIzobrazba.Location = new System.Drawing.Point(16, 130);
+            this.tbIzobrazba.Name = "tbIzobrazba";
+            this.tbIzobrazba.Size = new System.Drawing.Size(423, 26);
+            this.tbIzobrazba.TabIndex = 20;
+            // 
+            // tbEmso
+            // 
+            this.tbEmso.Location = new System.Drawing.Point(16, 197);
+            this.tbEmso.Name = "tbEmso";
+            this.tbEmso.Size = new System.Drawing.Size(201, 26);
+            this.tbEmso.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 109);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 18);
+            this.label6.TabIndex = 111;
+            this.label6.Text = "Izobrazba";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 176);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 18);
+            this.label7.TabIndex = 112;
+            this.label7.Text = "EMŠO";
+            // 
+            // l
+            // 
+            this.l.AutoSize = true;
+            this.l.Location = new System.Drawing.Point(235, 256);
+            this.l.Name = "l";
+            this.l.Size = new System.Drawing.Size(45, 18);
+            this.l.TabIndex = 104;
+            this.l.Text = "Banka";
+            // 
+            // tbTrr
+            // 
+            this.tbTrr.Location = new System.Drawing.Point(16, 277);
+            this.tbTrr.Name = "tbTrr";
+            this.tbTrr.Size = new System.Drawing.Size(201, 26);
+            this.tbTrr.TabIndex = 23;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(17, 256);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(122, 18);
+            this.label11.TabIndex = 103;
+            this.label11.Text = "Transakcijski račun";
+            // 
+            // tbBanka
+            // 
+            this.tbBanka.Location = new System.Drawing.Point(238, 277);
+            this.tbBanka.Name = "tbBanka";
+            this.tbBanka.Size = new System.Drawing.Size(201, 26);
+            this.tbBanka.TabIndex = 24;
+            // 
+            // tbIme2
+            // 
+            this.tbIme2.Enabled = false;
+            this.tbIme2.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbIme2.Location = new System.Drawing.Point(16, 32);
+            this.tbIme2.Name = "tbIme2";
+            this.tbIme2.ReadOnly = true;
+            this.tbIme2.Size = new System.Drawing.Size(278, 29);
+            this.tbIme2.TabIndex = 75;
+            this.tbIme2.WordWrap = false;
+            // 
+            // tbPriimek2
+            // 
+            this.tbPriimek2.Enabled = false;
+            this.tbPriimek2.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbPriimek2.Location = new System.Drawing.Point(311, 32);
+            this.tbPriimek2.Name = "tbPriimek2";
+            this.tbPriimek2.ReadOnly = true;
+            this.tbPriimek2.Size = new System.Drawing.Size(252, 29);
+            this.tbPriimek2.TabIndex = 76;
+            this.tbPriimek2.WordWrap = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 18);
+            this.label3.TabIndex = 77;
+            this.label3.Text = "Ime";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(308, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 18);
+            this.label4.TabIndex = 78;
+            this.label4.Text = "Priimek";
             // 
             // crtal2
             // 
@@ -573,6 +731,8 @@ namespace Komunala
             this.tc.ResumeLayout(false);
             this.tpOsnovno.ResumeLayout(false);
             this.tpOsnovno.PerformLayout();
+            this.tpDodatno.ResumeLayout(false);
+            this.tpDodatno.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -624,5 +784,19 @@ namespace Komunala
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDodatno;
         private System.Windows.Forms.Label crtal2;
+        private System.Windows.Forms.TextBox tbIme2;
+        private System.Windows.Forms.TextBox tbPriimek2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbDs;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tbIzobrazba;
+        private System.Windows.Forms.TextBox tbEmso;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label l;
+        private System.Windows.Forms.TextBox tbTrr;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbBanka;
     }
 }

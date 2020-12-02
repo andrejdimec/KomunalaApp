@@ -23,7 +23,6 @@ namespace Komunala
         SqlDataReader rdr,rdr2 = null;
 
         string q,q2;
-        int dodaj;
         string time = "";
         string tpriimek = "";
         string tdelovnomesto = "";
@@ -31,17 +30,9 @@ namespace Komunala
         string index;
         string stindeks;
         int tid, tindeks;
-        bool osnovno;
+        bool osnovno=true;
+        bool dodajanje;
         
-        private Color ColorOzadje;
-        //public Color ColorOzadje
-        //{
-        //    get { return ColorOozadje; }
-        //    set { ColorOOzadje = value; Invalidate(); }
-        //}
-        ////private Color ColorOzadje;
-        //Color ColorOzadje = new Color.FromArgb(0, 62, 107);  // ozadje neaktivnega
-
         public frmSodelavci()
         {
             InitializeComponent();
@@ -53,8 +44,6 @@ namespace Komunala
             // črta iz label
             Design();
             this.BackColor = frmMain.barva_form_back;
-
-
             onemogoci_tb();
             Grid();
             Display();
@@ -90,8 +79,28 @@ namespace Komunala
             btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
             btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
 
-
-
+            tbIme.BackColor = frmMain.bela;
+            tbPriimek.BackColor = frmMain.bela;
+            tbIme2.BackColor = frmMain.bela;
+            tbPriimek2.BackColor = frmMain.bela;
+            tbDelovnoMesto.BackColor = frmMain.bela;
+            tbSm.BackColor = frmMain.bela;
+            tbPosta.BackColor = frmMain.bela;
+            tbNazivPoste.BackColor = frmMain.bela;
+            tbHs.BackColor = frmMain.bela;
+            tbUlica.BackColor = frmMain.bela;
+            tbPrivatMail.BackColor = frmMain.bela;
+            tbSluzbeniMail.BackColor = frmMain.bela;
+            tbSluzbeniMob.BackColor = frmMain.bela;
+            tbSluzbeniStac.BackColor = frmMain.bela;
+            tbPrivatMob.BackColor = frmMain.bela;
+            tbMpo.BackColor = frmMain.bela;
+            tbIzobrazba.BackColor = frmMain.bela;
+            tbEmso.BackColor = frmMain.bela;
+            tbDs.BackColor = frmMain.bela;
+            tbTrr.BackColor = frmMain.bela;
+            tbBanka.BackColor = frmMain.bela;
+            tbOddelek.BackColor = frmMain.bela;
 
         }
         private void Izprazni_dgv()
@@ -102,20 +111,81 @@ namespace Komunala
 
         private void onemogoci_tb()
         {
-            //tb1.Enabled = false;
-            //tb2.Enabled = false;
+            tbIme.Enabled = false;
+            tbPriimek.Enabled = false;
+            tbIme2.Enabled = false;
+            tbPriimek2.Enabled = false;
+            tbDelovnoMesto.Enabled = false;
+            tbSm.Enabled = false;
+            tbPosta.Enabled = false;
+            tbNazivPoste.Enabled = false;
+            tbHs.Enabled = false;
+            tbUlica.Enabled = false;
+            tbPrivatMail.Enabled = false;
+            tbSluzbeniMail.Enabled = false;
+            tbSluzbeniMob.Enabled = false;
+            tbSluzbeniStac.Enabled = false;
+            tbPrivatMob.Enabled = false;
+            tbMpo.Enabled = false;
+            tbIzobrazba.Enabled = false;
+            tbEmso.Enabled = false;
+            tbDs.Enabled = false;
+            tbTrr.Enabled = false;
+            tbBanka.Enabled = false;
+            tbOddelek.Enabled = false;
         }
 
         private void omogoci_tb()
         {
-            //tb1.Enabled = true;
-            //tb2.Enabled = true;
+            tbIme.Enabled = true;
+            tbPriimek.Enabled = true;
+            //tbIme2.Enabled = true;
+            //tbPriimek2.Enabled = true;
+            tbDelovnoMesto.Enabled = true;
+            tbSm.Enabled = true;
+            tbPosta.Enabled = true;
+            tbNazivPoste.Enabled = true;
+            tbHs.Enabled = true;
+            tbUlica.Enabled = true;
+            tbPrivatMail.Enabled = true;
+            tbSluzbeniMail.Enabled = true;
+            tbSluzbeniMob.Enabled = true;
+            tbSluzbeniStac.Enabled = true;
+            tbPrivatMob.Enabled = true;
+            tbMpo.Enabled = true;
+            tbIzobrazba.Enabled = true;
+            tbEmso.Enabled = true;
+            tbDs.Enabled = true;
+            tbTrr.Enabled = true;
+            tbBanka.Enabled = true;
+            tbOddelek.Enabled = true;
         }
 
         private void izprazni_tb()
         {
             tbIme.Text = "";
             tbPriimek.Text = "";
+            tbIme2.Text = "";
+            tbPriimek2.Text = "";
+            tbDelovnoMesto.Text = "";
+            tbSm.Text = "";
+            tbPosta.Text = "";
+            tbNazivPoste.Text = "";
+            tbHs.Text = "";
+            tbUlica.Text = "";
+            tbPrivatMail.Text = "";
+            tbSluzbeniMail.Text = "";
+            tbSluzbeniMob.Text = "";
+            tbSluzbeniStac.Text = "";
+            tbPrivatMob.Text = "";
+            //.Text = (string)rdr2[""];
+            tbMpo.Text = "";
+            tbIzobrazba.Text = "";
+            tbEmso.Text = "";
+            tbDs.Text = "";
+            tbTrr.Text = "";
+            tbBanka.Text = "";
+            tbOddelek.Text = "";
         }
 
         private void Grid()
@@ -160,7 +230,6 @@ namespace Komunala
                     string strid = Convert.ToString(tid);
                     string[] row1 = new string[] { strid,tpriimek, time, tdelovnomesto };
                     dgv1.Rows.Add(row1);
-
                 }
             }
             catch (Exception ex)
@@ -183,7 +252,7 @@ namespace Komunala
 
         private void Zacetek()
         {
-            dodaj = 0;
+            dodajanje = false;
             osnovno = true;
             izprazni_tb();
             onemogoci_tb();
@@ -209,9 +278,10 @@ namespace Komunala
                 {
                     tbIme.Text = (string)rdr2["ime"];
                     tbPriimek.Text = (string)rdr2["priimek"];
+                    tbIme2.Text = (string)rdr2["ime"];
+                    tbPriimek2.Text = (string)rdr2["priimek"];
                     tbDelovnoMesto.Text = (string)rdr2["del_mesto"];
-                    tbSm.Text = Convert.ToString((Int32)rdr2["sm"]); // poišči sm
-                    tbPrivatMob.Text = (string)rdr2["tel_privat"];
+                    tbSm.Text = (string)rdr2["sm"]; // poišči sm
                     tbPosta.Text = (string)rdr2["posta"];
                     tbNazivPoste.Text = (string)rdr2["posta_ime"];
                     tbHs.Text = (string)rdr2["hs"];
@@ -220,8 +290,15 @@ namespace Komunala
                     tbSluzbeniMail.Text = (string)rdr2["email_sluzba"];
                     tbSluzbeniMob.Text = (string)rdr2["tel_sluzba_1"];
                     tbSluzbeniStac.Text = (string)rdr2["tel_sluzba_2"];
+                    tbPrivatMob.Text = (string)rdr2["tel_privat"];
                     //.Text = (string)rdr2[""];
-
+                    tbMpo.Text = (string)rdr2["mpo"];
+                    tbIzobrazba.Text = (string)rdr2["izobrazba"];
+                    tbEmso.Text = (string)rdr2["emso"];
+                    tbDs.Text = (string)rdr2["ds"];
+                    tbTrr.Text = (string)rdr2["trr"];
+                    tbBanka.Text = (string)rdr2["banka"];
+                    tbOddelek.Text= (string)rdr2["oddelek"];
                 }
             }
             catch (Exception ex)
@@ -283,32 +360,53 @@ namespace Komunala
                 //tindeks = Convert.ToInt32(stindeks);
                 try
                 {
-                    if (dodaj == 1)
+                    if (dodajanje)
                     {
                         // dodaj
-                        q = "insert into tblSkupinestoritev (skupina,indeks) values(@tskupina,@tindeks)";
+                        q = "insert into tbl_Sodelavci (emso,ime,priimek,ulica,hs,posta,posta_ime,ds,tel_privat,tel_sluzba_1,tel_sluzba_2," +
+                            "email_privat,email_sluzba,trr,banka,izobrazba,del_mesto,oddelek,sm,mpo) " +
+                            "values(@emso,@ime,@priimek,@hs,@ulica,@posta,@posta_ime,@ds,@tel_privat,@tel_sluzba_1,@tel_sluzba_2," +
+                            "@email_privat,@email_sluzba,@trr,@banka,@izobrazba,@del_mesto,@oddelek,@sm,@mpo)";
                         cmd = new SqlCommand(q, con);
                         con.Open();
-                        //cmd.Parameters.AddWithValue("@tskupina", tskupina);
-                        cmd.Parameters.AddWithValue("@tindeks", tindeks);
+                        cmd.Parameters.AddWithValue("@emso", tbEmso.Text); 
+                        cmd.Parameters.AddWithValue("@ime", tbIme.Text);
+                        cmd.Parameters.AddWithValue("@priimek", tbPriimek.Text);
+                        cmd.Parameters.AddWithValue("@ulica", tbUlica.Text);
+                        cmd.Parameters.AddWithValue("@hs", tbHs.Text);
+                        cmd.Parameters.AddWithValue("@posta", tbPosta.Text);
+                        cmd.Parameters.AddWithValue("@posta_ime", tbNazivPoste.Text);
+                        cmd.Parameters.AddWithValue("@ds", tbDs.Text);
+                        cmd.Parameters.AddWithValue("@tel_privat", tbPrivatMob.Text);
+                        cmd.Parameters.AddWithValue("@tel_sluzba_1", tbSluzbeniMob.Text);
+                        cmd.Parameters.AddWithValue("@tel_sluzba_2", tbSluzbeniStac.Text);
+                        cmd.Parameters.AddWithValue("@email_privat", tbPrivatMail.Text);
+                        cmd.Parameters.AddWithValue("@email_sluzba", tbSluzbeniMail.Text);
+                        cmd.Parameters.AddWithValue("@trr", tbTrr.Text);
+                        cmd.Parameters.AddWithValue("@banka", tbBanka.Text);
+                        cmd.Parameters.AddWithValue("@izobrazba", tbIzobrazba.Text);
+                        cmd.Parameters.AddWithValue("@del_mesto", tbDelovnoMesto.Text);
+                        cmd.Parameters.AddWithValue("@oddelek", tbOddelek.Text);
+                        cmd.Parameters.AddWithValue("@sm", tbSm.Text);
+                        cmd.Parameters.AddWithValue("@mpo", tbMpo.Text);
                         cmd.ExecuteNonQuery();
                     }
                     else
                     {
                         // spremeni
-                        q = "update tblSkupinestoritev set skupina = @tskupina, indeks= @tindeks where id=@tid";
+                        q = "update tbl_Sodelavci set ime = @time, priimek= @tpriimek where id=@tid";
                         cmd = new SqlCommand(q, con);
                         con.Open();
                         cmd.Parameters.AddWithValue("@tid", tid);
-                        //cmd.Parameters.AddWithValue("@tskupina", tskupina);
-                        cmd.Parameters.AddWithValue("@tindeks", tindeks);
+                        cmd.Parameters.AddWithValue("@time", tbIme.Text);
+                        cmd.Parameters.AddWithValue("@tpriimek", tbPriimek.Text);
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Napaka: " + ex.Message);
+                    MessageBox.Show("Napaka pri shranjevanju zapisa: " + ex.Message);
                 }
                 finally
                 {
@@ -322,7 +420,7 @@ namespace Komunala
             }
             else
             {
-                MessageBox.Show("Napaka: Polje ne sme biti prazno.");
+                MessageBox.Show("Napaka: Ime in priimek ne smeta biti prazna!");
                 tbIme.Focus();
             }
             Display();
@@ -330,7 +428,7 @@ namespace Komunala
 
         private void Dodaj()
         {
-            dodaj = 1;
+            dodajanje = true;
             omogoci_tb();
             izprazni_tb();
             btnShrani.Enabled = true;
@@ -344,7 +442,7 @@ namespace Komunala
 
         private void Spremeni()
         {
-            dodaj = 0;
+            dodajanje = false;
             omogoci_tb();
             btnShrani.Enabled = true;
             btnPreklici.Enabled = true;
@@ -370,6 +468,8 @@ namespace Komunala
             if (osnovno)
             {
                 osnovno = false;
+                tbIme2.Text = tbIme.Text;
+                tbPriimek2.Text = tbPriimek.Text;
                 btnDodatno.Text = "Pokaži osnovne podatke";
                 label2.Text = "Dodatni podatki";
                 this.tc.SelectedTab = this.tpDodatno;
@@ -387,10 +487,30 @@ namespace Komunala
 
         private void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            tid = Convert.ToInt32(index);
-            Nalozi(tid);
+            //index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
+            //tid = Convert.ToInt32(index);
+            //Nalozi(tid);
             //tbIme.Text = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
+        }
+
+        private void btnDodaj_Click_1(object sender, EventArgs e)
+        {
+            Dodaj();
+        }
+
+        private void btnPreklici_Click(object sender, EventArgs e)
+        {
+            Preklici();
+        }
+
+        private void btnSpremeni_Click(object sender, EventArgs e)
+        {
+            Spremeni();
+        }
+
+        private void btnShrani_Click(object sender, EventArgs e)
+        {
+            Shrani();
         }
 
         private void dgv1_SelectionChanged(object sender, EventArgs e)
@@ -414,8 +534,32 @@ namespace Komunala
 
         private void Preklici()
         {
-            izprazni_tb();
-            Zacetek();
+            if (dodajanje)
+            {
+                DialogResult result = MessageBox.Show("Želiš preklicati vnašanje novega sodelavca?", "Prekliči", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    izprazni_tb();
+                    Zacetek();
+                }
+                else
+                {
+                    // cb1.Focus();
+                }
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show("Želiš preklicati urejanje sodelavca?", "Prekliči", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    izprazni_tb();
+                    Zacetek();
+                }
+                else
+                {
+                    // cb1.Focus();
+                }
+            }
         }
     }
 }

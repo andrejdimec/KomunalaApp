@@ -237,10 +237,10 @@
     <Compile Include="Sifranti\frmEnote.Designer.cs">
       <DependentUpon>frmEnote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmMain.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gradbeni dnevnik\frmMain.Designer.cs">
+    <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Gradbeni dnevnik\frmPrejsnji_dnevniki.cs">
@@ -380,7 +380,7 @@
     <EmbeddedResource Include="Sifranti\frmEnote.resx">
       <DependentUpon>frmEnote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Gradbeni dnevnik\frmMain.resx">
+    <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Gradbeni dnevnik\frmPrejsnji_dnevniki.resx">
