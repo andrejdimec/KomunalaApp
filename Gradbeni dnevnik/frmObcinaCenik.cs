@@ -54,11 +54,43 @@ namespace Komunala
             prvic = 1;
             prikazi_vse = true;
             spreminjanje = false;
+            Design();
             onemogoci_tb();
             Zacetek();
             Display();
         }
 
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnIzpis.BackColor = frmMain.barva_gumb2_neakt; btnIzpis.ForeColor = frmMain.barva_gumb2_pis_akt;
+
+            tb1.BackColor = frmMain.bela;
+            tb2.BackColor = frmMain.bela;
+            tb3.BackColor = frmMain.bela;
+            tb7.BackColor = frmMain.bela;
+            
+            cb1.BackColor = frmMain.bela;
+            cb2.BackColor = frmMain.bela;
+
+//            cb3.BackColor = frmMain.bela;
+            //tb2.BackColor = frmMain.bela;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+
+        }
 
 
         int id_storitev, id_skupina;
@@ -336,41 +368,20 @@ namespace Komunala
 
         private void onemogoci_tb()
         {
-            //tb3.BackColor = Color.Black;
-            tb3.BackColor = DefaultBackColor;
-            tb2.BackColor = DefaultBackColor;
-            tb7.BackColor = DefaultBackColor;
-            //tb4.BackColor = DefaultBackColor;
-            //tb5.BackColor = DefaultBackColor;
-            //tb6.BackColor = DefaultBackColor;
             tb3.Enabled = false;
             tb2.Enabled = false;
             tb1.Enabled = false;
             tb7.Enabled = false;
-            //tb5.Enabled = false;
-            //tb6.Enabled = false;
             dgv1.Enabled = true;
-            dgv2.Enabled = false;
             cb2.Enabled = false;
             cb1.Enabled = true;
         }
 
         private void omogoci_tb()
         {
-            tb3.BackColor = Color.White;
-          //  tb4.BackColor = Color.White;
-            tb7.BackColor = Color.White;
-            tb2.BackColor = Color.White;
-            //tb5.BackColor = Color.White;
-            //tb6.BackColor = Color.White;
-            //tb6.ForeColor = Color.Black;
-            //tb5.ForeColor = Color.Black;
             tb2.ForeColor = Color.Black;
             tb3.ForeColor = Color.Black;
-            //tb4.ForeColor = Color.Black;
-            //tb7.ForeColor = Color.Black;
             dgv1.Enabled = false;
-            dgv2.Enabled = false;
             tb1.Enabled = true;
             tb2.Enabled = true;
             tb3.Enabled = true;
@@ -384,9 +395,6 @@ namespace Komunala
             tb3.Text = "";
             tb2.Text = "";
             tb1.Text = "";
-            //tb4.Text = "";
-            //tb5.Text = "";
-            //tb6.Text = "";
             tb7.Text = "";
             cb1.Text = "";
             cb2.Text = "";
@@ -582,20 +590,20 @@ namespace Komunala
 
                     int sirina_znesek = 90; // širina kolone z zneski
 
-                    dgv2.AllowUserToAddRows = false;
-                    dgv2.RowHeadersVisible = false;
+                    //dgv2.AllowUserToAddRows = false;
+                    //dgv2.RowHeadersVisible = false;
 
-                    dgv2.ColumnCount = 2;
-                    dgv2.Columns[0].Name = "";
-                    dgv2.Columns[1].Name = "Cene za Občino";
+                    //dgv2.ColumnCount = 2;
+                    //dgv2.Columns[0].Name = "";
+                    //dgv2.Columns[1].Name = "Cene za Občino";
 
-                    dgv2.Rows.Add("", "", "Cene za Občino");
-                    dgv2.Columns[0].Width = 359;
-                    dgv2.Columns[1].Width = sirina_znesek * 3+17;
+                    //dgv2.Rows.Add("", "", "Cene za Občino");
+                    //dgv2.Columns[0].Width = 359;
+                    //dgv2.Columns[1].Width = sirina_znesek * 3+17;
 
-                    this.dgv2.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    this.dgv2.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    this.dgv2.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //this.dgv2.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //this.dgv2.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //this.dgv2.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                     DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Storitev = new DataGridViewTextBoxCell();
@@ -614,7 +622,7 @@ namespace Komunala
                     DataGridViewColumn kolid = dgv1.Columns[0];
                     kolid.Width = 1;
                     DataGridViewColumn kolstoritev = dgv1.Columns[1];
-                    kolstoritev.Width = 309;
+                    kolstoritev.Width = 399;
                     DataGridViewColumn kolem = dgv1.Columns[2];
                     kolem.Width = 50;
                     DataGridViewColumn kolobcina = dgv1.Columns[3];

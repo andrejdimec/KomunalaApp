@@ -28,126 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.label3 = new System.Windows.Forms.Label();
+            this.crtal = new System.Windows.Forms.Label();
+            this.btnNazaj = new System.Windows.Forms.Button();
+            this.btnPreklici = new System.Windows.Forms.Button();
             this.btnBrisi = new System.Windows.Forms.Button();
             this.btnSpremeni = new System.Windows.Forms.Button();
             this.btnDodaj = new System.Windows.Forms.Button();
-            this.btnNazaj = new System.Windows.Forms.Button();
-            this.btnPreklici = new System.Windows.Forms.Button();
-            this.btnShrani = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb2 = new System.Windows.Forms.TextBox();
-            this.tb1 = new System.Windows.Forms.TextBox();
             this.dgv1 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnShrani = new System.Windows.Forms.Button();
+            this.tb1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnBrisi
+            // label3
             // 
-            this.btnBrisi.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnBrisi.Location = new System.Drawing.Point(205, 259);
-            this.btnBrisi.Name = "btnBrisi";
-            this.btnBrisi.Size = new System.Drawing.Size(75, 23);
-            this.btnBrisi.TabIndex = 3;
-            this.btnBrisi.Text = "Briši";
-            this.btnBrisi.UseVisualStyleBackColor = true;
-            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Location = new System.Drawing.Point(41, 22);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(117, 27);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Šifrant DDV";
             // 
-            // btnSpremeni
+            // crtal
             // 
-            this.btnSpremeni.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSpremeni.Location = new System.Drawing.Point(112, 259);
-            this.btnSpremeni.Name = "btnSpremeni";
-            this.btnSpremeni.Size = new System.Drawing.Size(75, 23);
-            this.btnSpremeni.TabIndex = 2;
-            this.btnSpremeni.Text = "Spremeni";
-            this.btnSpremeni.UseVisualStyleBackColor = true;
-            this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click);
-            // 
-            // btnDodaj
-            // 
-            this.btnDodaj.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnDodaj.Location = new System.Drawing.Point(22, 259);
-            this.btnDodaj.Name = "btnDodaj";
-            this.btnDodaj.Size = new System.Drawing.Size(75, 23);
-            this.btnDodaj.TabIndex = 1;
-            this.btnDodaj.Text = "Dodaj";
-            this.btnDodaj.UseVisualStyleBackColor = true;
-            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
+            this.crtal.Location = new System.Drawing.Point(20, 55);
+            this.crtal.Name = "crtal";
+            this.crtal.Size = new System.Drawing.Size(405, 13);
+            this.crtal.TabIndex = 24;
+            this.crtal.Text = "label4";
             // 
             // btnNazaj
             // 
+            this.btnNazaj.FlatAppearance.BorderSize = 0;
+            this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNazaj.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnNazaj.Location = new System.Drawing.Point(207, 305);
+            this.btnNazaj.Location = new System.Drawing.Point(307, 483);
+            this.btnNazaj.Margin = new System.Windows.Forms.Padding(4);
             this.btnNazaj.Name = "btnNazaj";
-            this.btnNazaj.Size = new System.Drawing.Size(75, 23);
-            this.btnNazaj.TabIndex = 6;
-            this.btnNazaj.Text = "Konec";
+            this.btnNazaj.Size = new System.Drawing.Size(100, 32);
+            this.btnNazaj.TabIndex = 31;
+            this.btnNazaj.Text = "Izhod";
             this.btnNazaj.UseVisualStyleBackColor = true;
-            this.btnNazaj.Click += new System.EventHandler(this.btnNazaj_Click);
+            this.btnNazaj.Click += new System.EventHandler(this.btnNazaj_Click_1);
             // 
             // btnPreklici
             // 
+            this.btnPreklici.FlatAppearance.BorderSize = 0;
+            this.btnPreklici.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreklici.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnPreklici.Location = new System.Drawing.Point(112, 305);
+            this.btnPreklici.Location = new System.Drawing.Point(166, 483);
+            this.btnPreklici.Margin = new System.Windows.Forms.Padding(4);
             this.btnPreklici.Name = "btnPreklici";
-            this.btnPreklici.Size = new System.Drawing.Size(75, 23);
-            this.btnPreklici.TabIndex = 5;
+            this.btnPreklici.Size = new System.Drawing.Size(100, 32);
+            this.btnPreklici.TabIndex = 30;
             this.btnPreklici.Text = "Prekliči";
             this.btnPreklici.UseVisualStyleBackColor = true;
-            this.btnPreklici.Click += new System.EventHandler(this.btnPreklici_Click);
+            this.btnPreklici.Click += new System.EventHandler(this.btnPreklici_Click_1);
             // 
-            // btnShrani
+            // btnBrisi
             // 
-            this.btnShrani.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnShrani.Location = new System.Drawing.Point(22, 305);
-            this.btnShrani.Name = "btnShrani";
-            this.btnShrani.Size = new System.Drawing.Size(75, 23);
-            this.btnShrani.TabIndex = 4;
-            this.btnShrani.Text = "Shrani";
-            this.btnShrani.UseVisualStyleBackColor = true;
-            this.btnShrani.Click += new System.EventHandler(this.btnShrani_Click);
+            this.btnBrisi.FlatAppearance.BorderSize = 0;
+            this.btnBrisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrisi.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnBrisi.Location = new System.Drawing.Point(307, 420);
+            this.btnBrisi.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBrisi.Name = "btnBrisi";
+            this.btnBrisi.Size = new System.Drawing.Size(100, 32);
+            this.btnBrisi.TabIndex = 28;
+            this.btnBrisi.Text = "Briši";
+            this.btnBrisi.UseVisualStyleBackColor = true;
+            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click_1);
             // 
-            // label1
+            // btnSpremeni
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(17, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 14);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Naziv";
+            this.btnSpremeni.FlatAppearance.BorderSize = 0;
+            this.btnSpremeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSpremeni.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnSpremeni.Location = new System.Drawing.Point(166, 420);
+            this.btnSpremeni.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSpremeni.Name = "btnSpremeni";
+            this.btnSpremeni.Size = new System.Drawing.Size(100, 32);
+            this.btnSpremeni.TabIndex = 27;
+            this.btnSpremeni.Text = "Spremeni";
+            this.btnSpremeni.UseVisualStyleBackColor = true;
+            this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click_1);
             // 
-            // label2
+            // btnDodaj
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(204, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 14);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Stopnja DDV";
-            // 
-            // tb2
-            // 
-            this.tb2.Location = new System.Drawing.Point(207, 52);
-            this.tb2.Name = "tb2";
-            this.tb2.Size = new System.Drawing.Size(73, 20);
-            this.tb2.TabIndex = 8;
-            this.tb2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb2_KeyDown);
-            // 
-            // tb1
-            // 
-            this.tb1.Location = new System.Drawing.Point(20, 52);
-            this.tb1.Name = "tb1";
-            this.tb1.Size = new System.Drawing.Size(167, 20);
-            this.tb1.TabIndex = 7;
-            this.tb1.Enter += new System.EventHandler(this.tb1_Enter);
-            this.tb1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb1_KeyDown);
-            this.tb1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb1_KeyPress);
+            this.btnDodaj.FlatAppearance.BorderSize = 0;
+            this.btnDodaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDodaj.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnDodaj.Location = new System.Drawing.Point(25, 420);
+            this.btnDodaj.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDodaj.Name = "btnDodaj";
+            this.btnDodaj.Size = new System.Drawing.Size(100, 32);
+            this.btnDodaj.TabIndex = 26;
+            this.btnDodaj.Text = "Dodaj";
+            this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click_1);
             // 
             // dgv1
             // 
@@ -155,83 +140,123 @@
             this.dgv1.AllowUserToDeleteRows = false;
             this.dgv1.AllowUserToResizeColumns = false;
             this.dgv1.AllowUserToResizeRows = false;
+            this.dgv1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv1.ColumnHeadersVisible = false;
-            this.dgv1.Location = new System.Drawing.Point(20, 87);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dgv1.Location = new System.Drawing.Point(23, 181);
+            this.dgv1.Margin = new System.Windows.Forms.Padding(4);
             this.dgv1.Name = "dgv1";
             this.dgv1.ReadOnly = true;
             this.dgv1.RowHeadersVisible = false;
             this.dgv1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv1.Size = new System.Drawing.Size(260, 150);
-            this.dgv1.TabIndex = 0;
-            this.dgv1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv1_CellMouseDoubleClick);
-            this.dgv1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv1_KeyDown);
-            this.dgv1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgv1_KeyPress);
-            this.dgv1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv1_KeyUp);
+            this.dgv1.Size = new System.Drawing.Size(397, 208);
+            this.dgv1.TabIndex = 25;
             // 
-            // label3
+            // btnShrani
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Roboto", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(31, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 23);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Šifrant DDV";
+            this.btnShrani.FlatAppearance.BorderSize = 0;
+            this.btnShrani.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShrani.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnShrani.Location = new System.Drawing.Point(29, 483);
+            this.btnShrani.Margin = new System.Windows.Forms.Padding(4);
+            this.btnShrani.Name = "btnShrani";
+            this.btnShrani.Size = new System.Drawing.Size(100, 32);
+            this.btnShrani.TabIndex = 29;
+            this.btnShrani.Text = "Shrani";
+            this.btnShrani.UseVisualStyleBackColor = true;
+            this.btnShrani.Click += new System.EventHandler(this.btnShrani_Click_1);
             // 
-            // groupBox1
+            // tb1
             // 
-            this.groupBox1.Controls.Add(this.btnNazaj);
-            this.groupBox1.Controls.Add(this.btnPreklici);
-            this.groupBox1.Controls.Add(this.btnBrisi);
-            this.groupBox1.Controls.Add(this.btnSpremeni);
-            this.groupBox1.Controls.Add(this.btnDodaj);
-            this.groupBox1.Controls.Add(this.dgv1);
-            this.groupBox1.Controls.Add(this.btnShrani);
-            this.groupBox1.Controls.Add(this.tb1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tb2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(24, 56);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(304, 357);
-            this.groupBox1.TabIndex = 23;
-            this.groupBox1.TabStop = false;
+            this.tb1.Location = new System.Drawing.Point(23, 125);
+            this.tb1.Margin = new System.Windows.Forms.Padding(4);
+            this.tb1.Name = "tb1";
+            this.tb1.Size = new System.Drawing.Size(221, 26);
+            this.tb1.TabIndex = 33;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(19, 93);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 14);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "Naziv";
+            // 
+            // tb2
+            // 
+            this.tb2.Location = new System.Drawing.Point(291, 125);
+            this.tb2.Margin = new System.Windows.Forms.Padding(4);
+            this.tb2.Name = "tb2";
+            this.tb2.Size = new System.Drawing.Size(96, 26);
+            this.tb2.TabIndex = 35;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(288, 93);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 14);
+            this.label2.TabIndex = 34;
+            this.label2.Text = "Stopnja DDV";
             // 
             // DDV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 433);
-            this.Controls.Add(this.groupBox1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.ClientSize = new System.Drawing.Size(448, 554);
+            this.Controls.Add(this.btnNazaj);
+            this.Controls.Add(this.btnPreklici);
+            this.Controls.Add(this.btnBrisi);
+            this.Controls.Add(this.btnSpremeni);
+            this.Controls.Add(this.btnDodaj);
+            this.Controls.Add(this.dgv1);
+            this.Controls.Add(this.btnShrani);
+            this.Controls.Add(this.tb1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tb2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.crtal);
             this.Controls.Add(this.label3);
+            this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DDV";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DDV";
             this.Load += new System.EventHandler(this.DDV_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label crtal;
+        private System.Windows.Forms.Button btnNazaj;
+        private System.Windows.Forms.Button btnPreklici;
         private System.Windows.Forms.Button btnBrisi;
         private System.Windows.Forms.Button btnSpremeni;
         private System.Windows.Forms.Button btnDodaj;
-        private System.Windows.Forms.Button btnNazaj;
-        private System.Windows.Forms.Button btnPreklici;
-        private System.Windows.Forms.Button btnShrani;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tb2;
-        private System.Windows.Forms.TextBox tb1;
         private System.Windows.Forms.DataGridView dgv1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnShrani;
+        private System.Windows.Forms.TextBox tb1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb2;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -48,7 +48,8 @@ namespace Komunala
         // public static string pot = "G:\\KomunalaApp\\Komunala\\data\\";
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
-       
+        public static string nazivPrograma = "Komunala Radgona";
+
         public static string direktor, imenik, datum_o_1, datum_o_2, tekst_o_1, tekst_o_2, datum_t_1, datum_t_2, tekst_t_1, tekst_t_2;
         public static string fname;
 

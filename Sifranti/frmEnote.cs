@@ -31,9 +31,39 @@ namespace Komunala
         private void frmEnote_Load(object sender, EventArgs e)
         {
             onemogoci_tb();
+            Design();
             Grid();
             Display();
             Zacetek();
+        }
+
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+            //btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
+            //btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
+            //btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
+            //btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
+            //btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
+            //btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
+
+            tb1.BackColor = frmMain.bela;
+            tb2.BackColor = frmMain.bela;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+
         }
 
         private void Izprazni_dgv()
@@ -65,8 +95,8 @@ namespace Komunala
             dgv1.ColumnHeadersVisible = false;
             dgv1.RowHeadersVisible = false;
             dgv1.ColumnCount = 3;
-            dgv1.Columns[1].Width = 80;
-            dgv1.Columns[2].Width = 177;
+            dgv1.Columns[1].Width = 100;
+            dgv1.Columns[2].Width = 247;
             dgv1.Columns[0].Name = "Id";
             dgv1.Columns[1].Name = "Enota";
             dgv1.Columns[2].Name = "Opis";
@@ -81,7 +111,7 @@ namespace Komunala
         private void Display()
         {
             Izprazni_dgv();
-            string q = "select * from tbl_Enote";
+            string q = "select * from tbl_Enote order by em";
             try
             {
                 cmd = new SqlCommand(q, con);

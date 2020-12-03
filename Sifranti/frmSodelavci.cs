@@ -54,11 +54,9 @@ namespace Komunala
         {
             crtal2.AutoSize = false;
             crtal2.Height = 1;
-            //crtal.Width = 500;
             crtal2.BorderStyle = BorderStyle.Fixed3D;
             crtal.AutoSize = false;
             crtal.Height = 1;
-            //crtal.Width = 500;
             crtal.BorderStyle = BorderStyle.Fixed3D;
 
             tpOsnovno.BackColor = frmMain.barva_form_back;
@@ -139,8 +137,6 @@ namespace Komunala
         {
             tbIme.Enabled = true;
             tbPriimek.Enabled = true;
-            //tbIme2.Enabled = true;
-            //tbPriimek2.Enabled = true;
             tbDelovnoMesto.Enabled = true;
             tbSm.Enabled = true;
             tbPosta.Enabled = true;
@@ -206,9 +202,7 @@ namespace Komunala
             this.dgv1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            // this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv1.Focus();
-
         }
 
         private void Display()
@@ -393,12 +387,12 @@ namespace Komunala
         }
         private void Brisi()
         {
-            DialogResult result = MessageBox.Show("Izbrišem zapis?", "Potrdi brisanje", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Izbrišem zapis "+tbPriimek.Text+" "+tbIme.Text+"?", "Potrdi brisanje", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 try
                 {
-                    string q = "delete from tblSkupinestoritev where id = @tid";
+                    string q = "delete from tbl_Sodelavci where id = @tid";
                     cmd = new SqlCommand(q, con);
                     con.Open();
                     cmd.Parameters.AddWithValue("@tid", tid);
@@ -413,15 +407,17 @@ namespace Komunala
                     if (con != null)
                     {
                         con.Close();
+                        Display();
                     }
                 }
+                
                 Zacetek();
             }
             else if (result == DialogResult.No)
             {
                 Zacetek();
             }
-            Display();
+            // Display();
         }
 
         private void Shrani()
@@ -431,10 +427,6 @@ namespace Komunala
             {
                 int tmpsm_id=Sm_id(tbSm.Text);
 
-
-                //tskupina = tb2.Text;
-                //stindeks = tb1.Text;
-                //tindeks = Convert.ToInt32(stindeks);
                 try
                 {
                     if (dodajanje)
@@ -556,15 +548,15 @@ namespace Komunala
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void btnDodaj_Click(object sender, EventArgs e)
+        private void btnBrisi_Click(object sender, EventArgs e)
         {
-
+            Brisi();
         }
 
         private void tbSm_Leave(object sender, EventArgs e)
         {
-            tsm_opis = "Neznano stroškovno mesto.";
             // najdi opis in kodo sm 
+            tsm_opis = "Neznano stroškovno mesto.";
             int tmpid = Sm_id(tbSm.Text);
             lsm.Text = tsm_opis;
         }
@@ -587,16 +579,6 @@ namespace Komunala
                 label2.Text = "Osnovni podatki";
                 this.tc.SelectedTab = this.tpOsnovno;
             }
-
-
-        }
-
-        private void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            //tid = Convert.ToInt32(index);
-            //Nalozi(tid);
-            //tbIme.Text = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
         }
 
         private void btnDodaj_Click_1(object sender, EventArgs e)
@@ -617,18 +599,6 @@ namespace Komunala
         private void btnShrani_Click(object sender, EventArgs e)
         {
             Shrani();
-        }
-
-        private void dgv1_SelectionChanged(object sender, EventArgs e)
-        {
-            //index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            //tid = Convert.ToInt32(index);
-            //Nalozi(tid);
-        }
-
-        private void dgv1_LocationChanged(object sender, EventArgs e)
-        {
-           
         }
 
         private void dgv1_RowEnter(object sender, DataGridViewCellEventArgs e)

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace Komunala
 {
@@ -25,6 +27,34 @@ namespace Komunala
         int tid;
         int dodaj = 0;
 
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
+            btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
+            btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
+            btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
+            btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
+            btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
+
+            tb1.BackColor = frmMain.bela;
+            tb2.BackColor = frmMain.bela;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+
+        }
         private void ShraniPozicijo()
         {
             int saveRow = 0;
@@ -45,6 +75,7 @@ namespace Komunala
         private void DDV_Load(object sender, EventArgs e)
         {
             onemogoci_tb();
+            Design();
             Grid();
             Display();
             Zacetek();
@@ -79,8 +110,8 @@ namespace Komunala
             dgv1.ColumnHeadersVisible = false;
             dgv1.RowHeadersVisible = false;
             dgv1.ColumnCount = 3;
-            dgv1.Columns[1].Width = 150;
-            dgv1.Columns[2].Width = 107;
+            dgv1.Columns[1].Width = 250;
+            dgv1.Columns[2].Width = 147;
             dgv1.Columns[0].Name = "Id";
             dgv1.Columns[1].Name = "Opis";
             dgv1.Columns[2].Name = "Stopnja";
@@ -274,37 +305,27 @@ namespace Komunala
 
         private void btnPreklici_Click(object sender, EventArgs e)
         {
-            Preklici();
         }
 
         private void btnShrani_Click(object sender, EventArgs e)
         {
-            Shrani();
         }
 
         private void btnNazaj_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
         {
-            Dodaj();
+           
         }
 
         private void btnSpremeni_Click(object sender, EventArgs e)
         {
-            tb1.Text = dgv1.SelectedCells[1].Value.ToString();
-            tb2.Text = dgv1.SelectedCells[2].Value.ToString();
-            tid = Convert.ToInt32(index);
-            Spremeni();
         }
 
         private void btnBrisi_Click(object sender, EventArgs e)
         {
-            index = dgv1.SelectedCells[0].Value.ToString();
-            tid = Convert.ToInt32(index);
-            Brisi();
         }
 
         private void dgv1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -372,6 +393,41 @@ namespace Komunala
         private void dgv1_KeyUp(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void btnDodaj_Click_1(object sender, EventArgs e)
+        {
+            Dodaj();
+        }
+
+        private void btnSpremeni_Click_1(object sender, EventArgs e)
+        {
+            tb1.Text = dgv1.SelectedCells[1].Value.ToString();
+            tb2.Text = dgv1.SelectedCells[2].Value.ToString();
+            tid = Convert.ToInt32(index);
+            Spremeni();
+        }
+
+        private void btnBrisi_Click_1(object sender, EventArgs e)
+        {
+            index = dgv1.SelectedCells[0].Value.ToString();
+            tid = Convert.ToInt32(index);
+            Brisi();
+        }
+
+        private void btnPreklici_Click_1(object sender, EventArgs e)
+        {
+            Preklici();
+        }
+
+        private void btnShrani_Click_1(object sender, EventArgs e)
+        {
+            Shrani();
+        }
+
+        private void btnNazaj_Click_1(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     } // partial
 }  // namespace

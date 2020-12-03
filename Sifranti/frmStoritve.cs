@@ -48,9 +48,38 @@ namespace Komunala
         {
             prvic = 1;
             onemogoci_tb();
+            Design();
             Display();
             //Zacetek();
         }
+
+
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+
+            tb1.BackColor = frmMain.bela;
+            cb1.BackColor = frmMain.bela;
+            cb2.BackColor = frmMain.bela;
+            cb3.BackColor = frmMain.bela;
+            //tb2.BackColor = frmMain.bela;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+
+        }
+
         private void Izprazni_dgv()
         {
             dgv1.Rows.Clear();
@@ -96,12 +125,20 @@ namespace Komunala
             sort = "storitev asc";
             if (prvic == 1)
             {
-                q = "select * from tblStoritve order by " + sort;
+                q=  "SELECT TblStoritve.Id,TblStoritve.Storitev, tbl_DDV.Stopnja, tbl_Enote.em AS Expr3, tblSkupinestoritev.Skupina AS Expr5 "+
+                    "FROM TblStoritve INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id INNER JOIN "+
+                    "tbl_DDV ON TblStoritve.Ddv = tbl_DDV.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id order by " + sort;
+
+                // q = "select * from tblStoritve order by " + sort;  ///             ***********  spremeni SQL ***********
                 prvic = 0;
             }
             else
             {
-                q = "select * from tblStoritve order by " + sort;
+                //q = "select * from tblStoritve order by " + sort;
+                q = "SELECT TblStoritve.Id,TblStoritve.Storitev, tbl_DDV.Stopnja, tbl_Enote.em AS Expr3, tblSkupinestoritev.Skupina AS Expr5 " +
+                    "FROM TblStoritve INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id INNER JOIN " +
+                    "tbl_DDV ON TblStoritve.Ddv = tbl_DDV.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id order by " + sort;
+
             }
             try
             {
@@ -113,40 +150,43 @@ namespace Komunala
                 {
                     tid = (int)rdr["Id"];
                     string tstoritev = (string)rdr["storitev"]; // Opis
-                    int tenota = (int)rdr["em"];
-                    int tskupina = (int)rdr["skupina"];
-                    int tceniko = (int)rdr["ceniko"];
-                    int tcenikt = (int)rdr["cenikt"];
-                    int tempddv = (int)rdr["ddv"];
+                    //int tenota = (int)rdr["em"];
+                    //int tskupina = (int)rdr["skupina"];
+                    //int tceniko = (int)rdr["ceniko"];
+                    //int tcenikt = (int)rdr["cenikt"];
+                    //int tempddv = (int)rdr["ddv"];
                     string strid = Convert.ToString(tid);
 
-                    // poišči enoto mere
-                    q2 = "select em from tbl_enote where id = @tid";  // če sta indexa iz ulic enaka
-                    cmd2 = new SqlCommand(q2, con2);
-                    con2.Open();
-                    cmd2.Parameters.AddWithValue("@tid", tenota);
-                    cmd2.ExecuteNonQuery();
-                    string stem = (string)cmd2.ExecuteScalar();
-                    con2.Close();
+                    string stem = (string)rdr["Expr3"];
+                    string stskupina = (string)rdr["Expr5"];
+                    double temp_ddv_double = (Double)rdr["Stopnja"];
 
-                    // poišči skupino
-                    q2 = "select skupina from tblskupinestoritev where id = @tid";  // če sta indexa iz ulic enaka
-                    cmd2 = new SqlCommand(q2, con2);
-                    con2.Open();
-                    cmd2.Parameters.AddWithValue("@tid", tskupina);
-                    cmd2.ExecuteNonQuery();
-                    string stskupina = (string)cmd2.ExecuteScalar();
-                    con2.Close();
+                    //// poišči enoto mere
+                    //q2 = "select em from tbl_enote where id = @tid";  // če sta indexa iz ulic enaka
+                    //cmd2 = new SqlCommand(q2, con2);
+                    //con2.Open();
+                    //cmd2.Parameters.AddWithValue("@tid", tenota);
+                    //cmd2.ExecuteNonQuery();
+                    //string stem = (string)cmd2.ExecuteScalar();
+                    //con2.Close();
 
-                    // poišči ddv
-                    q2 = "select stopnja from tbl_ddv where id = @tempddv";  // če sta indexa iz ulic enaka
-                    cmd2 = new SqlCommand(q2, con2);
-                    con2.Open();
-                    cmd2.Parameters.AddWithValue("@tempddv", tempddv);
-                    cmd2.ExecuteNonQuery();
-                    double temp_ddv_double = Convert.ToDouble(cmd2.ExecuteScalar());
-//                    float temp_ddv_float = (float)cmd2.ExecuteScalar();  // napaka
-                    con2.Close();
+                    //// poišči skupino
+                    //q2 = "select skupina from tblskupinestoritev where id = @tid";  // če sta indexa iz ulic enaka
+                    //cmd2 = new SqlCommand(q2, con2);
+                    //con2.Open();
+                    //cmd2.Parameters.AddWithValue("@tid", tskupina);
+                    //cmd2.ExecuteNonQuery();
+                    //string stskupina = (string)cmd2.ExecuteScalar();
+                    //con2.Close();
+
+                    //// poišči ddv
+                    //q2 = "select stopnja from tbl_ddv where id = @tempddv";  // če sta indexa iz ulic enaka
+                    //cmd2 = new SqlCommand(q2, con2);
+                    //con2.Open();
+                    //cmd2.Parameters.AddWithValue("@tempddv", tempddv);
+                    //cmd2.ExecuteNonQuery();
+                    //double temp_ddv_double = Convert.ToDouble(cmd2.ExecuteScalar());
+                    //con2.Close();
 
                     if (tceniko == 1)
                     {
@@ -169,16 +209,11 @@ namespace Komunala
                     DataGridViewTextBoxCell Storitev = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Em = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell ddv = new DataGridViewTextBoxCell();
-                    //DataGridViewCheckBoxCell obcina = new DataGridViewCheckBoxCell();
-                    //DataGridViewCheckBoxCell trg = new DataGridViewCheckBoxCell();
                     DataGridViewTextBoxCell skupina = new DataGridViewTextBoxCell();
-                    //DataGridViewTextBoxCell ddv = new DataGridViewTextBoxCell();
 
                     Id.Value = tid;
                     Storitev.Value = tstoritev;
                     Em.Value = stem;
-                    //obcina.Value = boolo;
-                    //trg.Value = boolt;
                     skupina.Value = stskupina;
                     ddv.Value = temp_ddv_double;
 
@@ -190,17 +225,11 @@ namespace Komunala
                     kolem.Width = 70;
                     DataGridViewColumn kolddv = dgv1.Columns[3];
                     kolddv.Width = 70;
-                    //DataGridViewColumn kolobcina = dgv1.Columns[4];
-                    //kolobcina.Width = 70;
-                    //DataGridViewColumn koltrg = dgv1.Columns[5];
-                    //koltrg.Width = 70;
                     DataGridViewColumn kolskupina = dgv1.Columns[4];
-                    kolskupina.Width = 195;
+                    kolskupina.Width = 276;
 
                     kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                     kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //kolobcina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //koltrg.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
@@ -210,8 +239,6 @@ namespace Komunala
                     row.Cells.Add(Storitev);
                     row.Cells.Add(Em);
                     row.Cells.Add(ddv);
-                    //row.Cells.Add(obcina);
-                    //row.Cells.Add(trg);
                     row.Cells.Add(skupina);
 
                     dgv1.Rows.Add(row);  // dodaj vrstico
@@ -219,7 +246,7 @@ namespace Komunala
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Napaka: " + ex.Message);
+                MessageBox.Show("Napaka display: " + ex.Message);
             }
             finally
             {
@@ -457,7 +484,6 @@ namespace Komunala
                     cmd2.ExecuteNonQuery();
                     id_ddv = Convert.ToInt32(cmd2.ExecuteScalar());
                     con2.Close();
-                    // MessageBox.Show("ddv: " + Convert.ToString(id_ddv));
                 }
                 catch (Exception ex)
                 {
@@ -536,8 +562,6 @@ namespace Komunala
             dodaj = 1;
             omogoci_tb();
             izprazni_tb();
-            //chb1.Checked = true;
-            //chb2.Checked = true;
             btnShrani.Enabled = true;
             btnPreklici.Enabled = true;
             btnDodaj.Enabled = false;
@@ -558,23 +582,6 @@ namespace Komunala
             tb1.Text = dgv1.SelectedCells[1].Value.ToString();
             cb2.Text = dgv1.SelectedCells[2].Value.ToString();
             cb3.Text = dgv1.SelectedCells[3].Value.ToString();
-            //if (dgv1.SelectedCells[4].Value.ToString() == "True")
-            //{ 
-            //    chb1.Checked = true;
-            //}
-            //else
-            //{
-            //    chb1.Checked = false;
-            //}
-            //if (dgv1.SelectedCells[5].Value.ToString() == "True")
-            //{
-            //    chb2.Checked = true;
-            //}
-            //else
-            //{
-            //    chb2.Checked = false;
-            //}
-
             btnShrani.Enabled = true;
             btnPreklici.Enabled = true;
             btnDodaj.Enabled = false;
@@ -589,29 +596,17 @@ namespace Komunala
             Zacetek();
         }
 
-        private void btnPreklici_Click(object sender, EventArgs e)
+        private void btnShrani_Click_1(object sender, EventArgs e)
         {
-            
-            Preklici();
+            Shrani();
         }
 
-        private void cb1_Enter(object sender, EventArgs e)
+        private void cb3_MouseClick_1(object sender, MouseEventArgs e)
         {
-            // cb1.DroppedDown = true;
+            cb3.DroppedDown = true;
         }
 
-        private void cb2_Enter(object sender, EventArgs e)
-        {
-            //cb2.DroppedDown = true;
-        }
-
-        private void cb1_MouseClick(object sender, MouseEventArgs e)
-        {
-            cb1.DroppedDown = true;
-
-        }
-
-        private void cb3_KeyDown(object sender, KeyEventArgs e)
+        private void cb3_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -619,63 +614,12 @@ namespace Komunala
             }
         }
 
-        private void cb3_MouseClick(object sender, MouseEventArgs e)
+        private void cb1_MouseClick_1(object sender, MouseEventArgs e)
         {
-            cb3.DroppedDown = true;
+            cb1.DroppedDown = true;
         }
 
-        private void cb3_Enter(object sender, EventArgs e)
-        {
-            //cb3.DroppedDown = true;
-        }
-
-        private void cb1_Leave(object sender, EventArgs e)
-        {
-            //if (cb1.Text=="")
-            //{
-            //    MessageBox.Show("Polje 'Skupina' ne sme biti prazno!");
-            //    cb1.Focus();
-            //}
-        }
-
-        private void tb1_Leave(object sender, EventArgs e)
-        {
-            //if (tb1.Text == "")
-            //{
-            //    if (preklicujem == false)
-            //    {
-            //        MessageBox.Show("Polje 'Storitev' ne sme biti prazno!");
-            //        tb1.Focus();
-            //    }
-            //}
-
-        }
-
-        private void cb2_Leave(object sender, EventArgs e)
-        {
-            //if (cb2.Text == "")
-            //{
-            //    MessageBox.Show("Polje 'Enota mere' ne sme biti prazno!");
-            //    cb2.Focus();
-            //}
-         }
-
-        private void cb3_Leave(object sender, EventArgs e)
-        {
-            //if (cb3.Text == "")
-            //{
-            //    MessageBox.Show("Polje 'DDV' ne sme biti prazno!");
-            //    cb3.Focus();
-            //}
-
-        }
-
-        private void cb2_MouseClick(object sender, MouseEventArgs e)
-        {
-            cb2.DroppedDown = true;
-        }
-
-        private void cb1_KeyDown(object sender, KeyEventArgs e)
+        private void cb1_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 tb1.Focus();
@@ -687,10 +631,9 @@ namespace Komunala
             {
                 Preklici();
             }
-
         }
 
-        private void cb2_KeyDown(object sender, KeyEventArgs e)
+        private void cb2_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 cb3.Focus();
@@ -702,39 +645,14 @@ namespace Komunala
             {
                 Preklici();
             }
-
         }
 
-        private void btnShrani_Click(object sender, EventArgs e)
+        private void cb2_MouseClick_1(object sender, MouseEventArgs e)
         {
-            Shrani();
+            cb2.DroppedDown = true;
         }
 
-        private void btnNazaj_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-        }
-
-        private void btnSpremeni_Click(object sender, EventArgs e)
-        {
-            Spremeni();
-        }
-
-        private void btnDodaj_Click(object sender, EventArgs e)
-        {
-            Dodaj();
-        }
-
-        private void btnBrisi_Click(object sender, EventArgs e)
-        {
-
-            index = dgv1.SelectedCells[0].Value.ToString();
-            //MessageBox.Show(index);
-            tid = Convert.ToInt32(index);
-            Brisi();
-        }
-
-        private void dgv1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv1_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
             index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
             tid = Convert.ToInt32(index);
@@ -743,7 +661,7 @@ namespace Komunala
             Spremeni();
         }
 
-        private void tb1_KeyDown(object sender, KeyEventArgs e)
+        private void tb1_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -756,7 +674,7 @@ namespace Komunala
             }
         }
 
-        private void dgv1_KeyDown(object sender, KeyEventArgs e)
+        private void dgv1_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -767,9 +685,32 @@ namespace Komunala
             }
         }
 
-        private void frmVozila_KeyPress(object sender, KeyPressEventArgs e)
+        private void btnDodaj_Click_1(object sender, EventArgs e)
         {
- 
+            Dodaj();
+        }
+
+        private void btnBrisi_Click_1(object sender, EventArgs e)
+        {
+            index = dgv1.SelectedCells[0].Value.ToString();
+            //MessageBox.Show(index);
+            tid = Convert.ToInt32(index);
+            Brisi();
+        }
+
+        private void btnPreklici_Click_1(object sender, EventArgs e)
+        {
+            Preklici();
+        }
+
+        private void btnNazaj_Click_1(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnSpremeni_Click_1(object sender, EventArgs e)
+        {
+            Spremeni();
         }
 
         private void frmVozila_KeyDown(object sender, KeyEventArgs e)

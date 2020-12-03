@@ -122,10 +122,7 @@ namespace Komunala
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv1.Size = new System.Drawing.Size(433, 446);
             this.dgv1.TabIndex = 32;
-            this.dgv1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellContentClick);
             this.dgv1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_RowEnter);
-            this.dgv1.SelectionChanged += new System.EventHandler(this.dgv1_SelectionChanged);
-            this.dgv1.LocationChanged += new System.EventHandler(this.dgv1_LocationChanged);
             // 
             // btnNazaj
             // 
@@ -181,6 +178,7 @@ namespace Komunala
             this.btnBrisi.TabIndex = 38;
             this.btnBrisi.Text = "Briši";
             this.btnBrisi.UseVisualStyleBackColor = false;
+            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click);
             // 
             // btnShrani
             // 
