@@ -19,10 +19,10 @@ namespace Komunala
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
 
-        SqlCommand cmd,cmd2;
-        SqlDataReader rdr,rdr2 = null;
+        SqlCommand cmd, cmd2,cmd3;
+        SqlDataReader rdr, rdr2,rdr3 = null;
 
-        string q,q2;
+        string q, q2, q3, tsm, sm_koda, tsm_koda, sm_opis,tsm_opis;
         string time = "";
         string tpriimek = "";
         string tdelovnomesto = "";
@@ -30,9 +30,9 @@ namespace Komunala
         string index;
         string stindeks;
         int tid, tindeks;
-        bool osnovno=true;
+        bool osnovno = true;
         bool dodajanje;
-        
+
         public frmSodelavci()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace Komunala
 
         private void frmSodelavci_Load(object sender, EventArgs e)
         {
-            
+
             // črta iz label
             Design();
             this.BackColor = frmMain.barva_form_back;
@@ -67,11 +67,11 @@ namespace Komunala
             // gumbi
             btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnNazaj.BackColor = frmMain.barva_gumb2_neakt;btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnPreklici.BackColor = frmMain.barva_gumb2_neakt;btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnShrani.BackColor = frmMain.barva_gumb2_neakt;btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnDodatno.BackColor = frmMain.barva_gumb2_neakt;btnDodatno.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodatno.BackColor = frmMain.barva_gumb2_neakt; btnDodatno.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
             btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
             btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
@@ -198,7 +198,7 @@ namespace Komunala
             dgv1.Columns[2].Width = 120;
             dgv1.Columns[3].Width = 190;
 
-            dgv1.Columns[0].Name = "Id"; 
+            dgv1.Columns[0].Name = "Id";
             dgv1.Columns[1].Name = "Priimek";
             dgv1.Columns[2].Name = "Ime";
             dgv1.Columns[3].Name = "Delovno mesto";
@@ -228,7 +228,7 @@ namespace Komunala
                     tdelovnomesto = (string)rdr["del_mesto"];
 
                     string strid = Convert.ToString(tid);
-                    string[] row1 = new string[] { strid,tpriimek, time, tdelovnomesto };
+                    string[] row1 = new string[] { strid, tpriimek, time, tdelovnomesto };
                     dgv1.Rows.Add(row1);
                 }
             }
@@ -265,6 +265,78 @@ namespace Komunala
             dgv1.Focus();
         }
 
+        public int Sm_id (string sm_koda)  // najdi id in opis stroškovnega mesta
+        {
+            //sm_koda = "";
+            int tsm_id = -99;
+            
+            q3 = "select * from tbl_sm where koda_sm=@idx";
+            try
+            {
+                cmd3 = new SqlCommand(q3, con3);
+                cmd3.Parameters.AddWithValue("@idx", sm_koda);
+                con3.Open();
+                rdr3 = cmd3.ExecuteReader();
+                while (rdr3.Read())
+                {
+                    tsm_id = (Int32)rdr3["id"];
+                    tsm_opis = (string)rdr3["opis_sm"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka reader (Najdi SM id): " + ex.Message);
+            }
+            finally
+            {
+                if (rdr3 != null)
+                {
+                    rdr3.Close();
+                }
+                if (con3 != null)
+                {
+                    con3.Close();
+                }
+            }
+            return tsm_id;
+        }
+
+        public String Najdi_sm (int id) // najdi kodo in opis stroškovnega mesta
+            {
+            sm_koda = "";
+            sm_opis= "Neznano stroškovno mesto.";
+            q3 = "select * from tbl_sm where id=@idx";
+            try
+            {
+                cmd3 = new SqlCommand(q3, con3);
+                cmd3.Parameters.AddWithValue("@idx", id);
+                con3.Open();
+                rdr3 = cmd3.ExecuteReader();
+                while (rdr3.Read())
+                {
+                    sm_koda = (string)rdr3["koda_sm"];
+                    sm_opis = (string)rdr3["opis_sm"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka reader (Najdi SM): " + ex.Message);
+            }
+            finally
+            {
+                if (rdr3 != null)
+                {
+                    rdr3.Close();
+                }
+                if (con3 != null)
+                {
+                    con3.Close();
+                }
+            }
+            return tsm; 
+            }
+
+
         void Nalozi(int idx) // naloži podatke v polja
         {
             q2 = "select * from tbl_Sodelavci where id=@idx";
@@ -281,7 +353,9 @@ namespace Komunala
                     tbIme2.Text = (string)rdr2["ime"];
                     tbPriimek2.Text = (string)rdr2["priimek"];
                     tbDelovnoMesto.Text = (string)rdr2["del_mesto"];
-                    tbSm.Text = (string)rdr2["sm"]; // poišči sm
+                    tbSm.Text = Najdi_sm((Int32)rdr2["sm"]); // poišči sm
+                    lsm.Text = sm_opis;
+                    tbSm.Text = sm_koda;
                     tbPosta.Text = (string)rdr2["posta"];
                     tbNazivPoste.Text = (string)rdr2["posta_ime"];
                     tbHs.Text = (string)rdr2["hs"];
@@ -298,7 +372,7 @@ namespace Komunala
                     tbDs.Text = (string)rdr2["ds"];
                     tbTrr.Text = (string)rdr2["trr"];
                     tbBanka.Text = (string)rdr2["banka"];
-                    tbOddelek.Text= (string)rdr2["oddelek"];
+                    // najdi oddelek tbOddelek.Text= (string)rdr2["oddelek"];
                 }
             }
             catch (Exception ex)
@@ -355,6 +429,9 @@ namespace Komunala
             string q;
             if (tbIme.Text != "" && tbPriimek.Text != "")
             {
+                int tmpsm_id=Sm_id(tbSm.Text);
+
+
                 //tskupina = tb2.Text;
                 //stindeks = tb1.Text;
                 //tindeks = Convert.ToInt32(stindeks);
@@ -387,19 +464,40 @@ namespace Komunala
                         cmd.Parameters.AddWithValue("@izobrazba", tbIzobrazba.Text);
                         cmd.Parameters.AddWithValue("@del_mesto", tbDelovnoMesto.Text);
                         cmd.Parameters.AddWithValue("@oddelek", tbOddelek.Text);
-                        cmd.Parameters.AddWithValue("@sm", tbSm.Text);
+                        cmd.Parameters.AddWithValue("@sm", tmpsm_id);
                         cmd.Parameters.AddWithValue("@mpo", tbMpo.Text);
                         cmd.ExecuteNonQuery();
                     }
                     else
                     {
+                        
                         // spremeni
-                        q = "update tbl_Sodelavci set ime = @time, priimek= @tpriimek where id=@tid";
+                        q = "update tbl_Sodelavci set emso=@emso, ime=@ime, priimek=@priimek ,ulica=@ulica,hs=@hs,posta=@posta,posta_ime=@posta_ime,ds=@ds,tel_privat=@tel_privat,tel_sluzba_1=@tel_sluzba_1,tel_sluzba_2=tel_sluzba_2," +
+                            "email_privat=@email_privat,email_sluzba=@email_sluzba,trr=@trr,banka=@banka,izobrazba=@izobrazba,del_mesto=@del_mesto,oddelek=@oddelek,sm=@sm,mpo=@mpo " +
+                            "where id=@tid";
                         cmd = new SqlCommand(q, con);
                         con.Open();
                         cmd.Parameters.AddWithValue("@tid", tid);
-                        cmd.Parameters.AddWithValue("@time", tbIme.Text);
-                        cmd.Parameters.AddWithValue("@tpriimek", tbPriimek.Text);
+                        cmd.Parameters.AddWithValue("@emso", tbEmso.Text);
+                        cmd.Parameters.AddWithValue("@ime", tbIme.Text);
+                        cmd.Parameters.AddWithValue("@priimek", tbPriimek.Text);
+                        cmd.Parameters.AddWithValue("@ulica", tbUlica.Text);
+                        cmd.Parameters.AddWithValue("@hs", tbHs.Text);
+                        cmd.Parameters.AddWithValue("@posta", tbPosta.Text);
+                        cmd.Parameters.AddWithValue("@posta_ime", tbNazivPoste.Text);
+                        cmd.Parameters.AddWithValue("@ds", tbDs.Text);
+                        cmd.Parameters.AddWithValue("@tel_privat", tbPrivatMob.Text);
+                        cmd.Parameters.AddWithValue("@tel_sluzba_1", tbSluzbeniMob.Text);
+                        cmd.Parameters.AddWithValue("@tel_sluzba_2", tbSluzbeniStac.Text);
+                        cmd.Parameters.AddWithValue("@email_privat", tbPrivatMail.Text);
+                        cmd.Parameters.AddWithValue("@email_sluzba", tbSluzbeniMail.Text);
+                        cmd.Parameters.AddWithValue("@trr", tbTrr.Text);
+                        cmd.Parameters.AddWithValue("@banka", tbBanka.Text);
+                        cmd.Parameters.AddWithValue("@izobrazba", tbIzobrazba.Text);
+                        cmd.Parameters.AddWithValue("@del_mesto", tbDelovnoMesto.Text);
+                        cmd.Parameters.AddWithValue("@oddelek", tbOddelek.Text);
+                        cmd.Parameters.AddWithValue("@sm", tmpsm_id);
+                        cmd.Parameters.AddWithValue("@mpo", tbMpo.Text);
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -461,6 +559,14 @@ namespace Komunala
         private void btnDodaj_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tbSm_Leave(object sender, EventArgs e)
+        {
+            tsm_opis = "Neznano stroškovno mesto.";
+            // najdi opis in kodo sm 
+            int tmpid = Sm_id(tbSm.Text);
+            lsm.Text = tsm_opis;
         }
 
         private void btnDodatno_Click(object sender, EventArgs e)

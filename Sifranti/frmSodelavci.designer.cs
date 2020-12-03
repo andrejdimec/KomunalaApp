@@ -43,8 +43,10 @@ namespace Komunala
             this.crtal = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDodatno = new System.Windows.Forms.Button();
+            this.crtal2 = new System.Windows.Forms.Label();
             this.tc = new TablessControl();
             this.tpOsnovno = new System.Windows.Forms.TabPage();
+            this.lsm = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.tbSm = new System.Windows.Forms.TextBox();
             this.tbDelovnoMesto = new System.Windows.Forms.TextBox();
@@ -90,7 +92,6 @@ namespace Komunala
             this.tbPriimek2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.crtal2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.tc.SuspendLayout();
             this.tpOsnovno.SuspendLayout();
@@ -117,6 +118,7 @@ namespace Komunala
             this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgv1.Location = new System.Drawing.Point(31, 87);
             this.dgv1.Name = "dgv1";
+            this.dgv1.ReadOnly = true;
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv1.Size = new System.Drawing.Size(433, 446);
             this.dgv1.TabIndex = 32;
@@ -251,6 +253,15 @@ namespace Komunala
             this.btnDodatno.UseVisualStyleBackColor = false;
             this.btnDodatno.Click += new System.EventHandler(this.btnDodatno_Click);
             // 
+            // crtal2
+            // 
+            this.crtal2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.crtal2.Location = new System.Drawing.Point(513, 55);
+            this.crtal2.Name = "crtal2";
+            this.crtal2.Size = new System.Drawing.Size(547, 18);
+            this.crtal2.TabIndex = 57;
+            this.crtal2.Text = "label2";
+            // 
             // tc
             // 
             this.tc.Controls.Add(this.tpOsnovno);
@@ -263,6 +274,7 @@ namespace Komunala
             // 
             // tpOsnovno
             // 
+            this.tpOsnovno.Controls.Add(this.lsm);
             this.tpOsnovno.Controls.Add(this.label17);
             this.tpOsnovno.Controls.Add(this.tbSm);
             this.tpOsnovno.Controls.Add(this.tbDelovnoMesto);
@@ -301,10 +313,19 @@ namespace Komunala
             this.tpOsnovno.Text = "tabPage1";
             this.tpOsnovno.UseVisualStyleBackColor = true;
             // 
+            // lsm
+            // 
+            this.lsm.AutoSize = true;
+            this.lsm.Location = new System.Drawing.Point(83, 162);
+            this.lsm.Name = "lsm";
+            this.lsm.Size = new System.Drawing.Size(27, 18);
+            this.lsm.TabIndex = 101;
+            this.lsm.Text = "SM";
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(322, 79);
+            this.label17.Location = new System.Drawing.Point(16, 138);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(27, 18);
             this.label17.TabIndex = 100;
@@ -312,11 +333,12 @@ namespace Komunala
             // 
             // tbSm
             // 
-            this.tbSm.Location = new System.Drawing.Point(325, 100);
+            this.tbSm.Location = new System.Drawing.Point(16, 159);
             this.tbSm.Name = "tbSm";
             this.tbSm.Size = new System.Drawing.Size(49, 26);
-            this.tbSm.TabIndex = 4;
+            this.tbSm.TabIndex = 5;
             this.tbSm.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbSm.Leave += new System.EventHandler(this.tbSm_Leave);
             // 
             // tbDelovnoMesto
             // 
@@ -327,10 +349,10 @@ namespace Komunala
             // 
             // tbOddelek
             // 
-            this.tbOddelek.Location = new System.Drawing.Point(411, 100);
+            this.tbOddelek.Location = new System.Drawing.Point(313, 100);
             this.tbOddelek.Name = "tbOddelek";
-            this.tbOddelek.Size = new System.Drawing.Size(152, 26);
-            this.tbOddelek.TabIndex = 5;
+            this.tbOddelek.Size = new System.Drawing.Size(250, 26);
+            this.tbOddelek.TabIndex = 4;
             // 
             // label18
             // 
@@ -344,7 +366,7 @@ namespace Komunala
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(408, 79);
+            this.label19.Location = new System.Drawing.Point(310, 79);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(61, 18);
             this.label19.TabIndex = 98;
@@ -450,7 +472,7 @@ namespace Komunala
             // 
             // tbNazivPoste
             // 
-            this.tbNazivPoste.Location = new System.Drawing.Point(379, 213);
+            this.tbNazivPoste.Location = new System.Drawing.Point(379, 237);
             this.tbNazivPoste.Name = "tbNazivPoste";
             this.tbNazivPoste.Size = new System.Drawing.Size(184, 26);
             this.tbNazivPoste.TabIndex = 9;
@@ -458,7 +480,7 @@ namespace Komunala
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(376, 192);
+            this.label26.Location = new System.Drawing.Point(376, 216);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(80, 18);
             this.label26.TabIndex = 82;
@@ -476,7 +498,7 @@ namespace Komunala
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(308, 192);
+            this.label27.Location = new System.Drawing.Point(308, 216);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(42, 18);
             this.label27.TabIndex = 81;
@@ -502,7 +524,7 @@ namespace Komunala
             // 
             // tbPosta
             // 
-            this.tbPosta.Location = new System.Drawing.Point(311, 213);
+            this.tbPosta.Location = new System.Drawing.Point(311, 237);
             this.tbPosta.Name = "tbPosta";
             this.tbPosta.Size = new System.Drawing.Size(50, 26);
             this.tbPosta.TabIndex = 8;
@@ -520,7 +542,7 @@ namespace Komunala
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(248, 192);
+            this.label30.Location = new System.Drawing.Point(248, 216);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(24, 18);
             this.label30.TabIndex = 78;
@@ -528,7 +550,7 @@ namespace Komunala
             // 
             // tbUlica
             // 
-            this.tbUlica.Location = new System.Drawing.Point(16, 213);
+            this.tbUlica.Location = new System.Drawing.Point(16, 237);
             this.tbUlica.Name = "tbUlica";
             this.tbUlica.Size = new System.Drawing.Size(215, 26);
             this.tbUlica.TabIndex = 6;
@@ -536,7 +558,7 @@ namespace Komunala
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(13, 192);
+            this.label31.Location = new System.Drawing.Point(13, 216);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(97, 18);
             this.label31.TabIndex = 77;
@@ -544,7 +566,7 @@ namespace Komunala
             // 
             // tbHs
             // 
-            this.tbHs.Location = new System.Drawing.Point(251, 213);
+            this.tbHs.Location = new System.Drawing.Point(251, 237);
             this.tbHs.Name = "tbHs";
             this.tbHs.Size = new System.Drawing.Size(43, 26);
             this.tbHs.TabIndex = 7;
@@ -694,15 +716,6 @@ namespace Komunala
             this.label4.TabIndex = 78;
             this.label4.Text = "Priimek";
             // 
-            // crtal2
-            // 
-            this.crtal2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.crtal2.Location = new System.Drawing.Point(513, 55);
-            this.crtal2.Name = "crtal2";
-            this.crtal2.Size = new System.Drawing.Size(547, 18);
-            this.crtal2.TabIndex = 57;
-            this.crtal2.Text = "label2";
-            // 
             // frmSodelavci
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -798,5 +811,6 @@ namespace Komunala
         private System.Windows.Forms.TextBox tbTrr;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbBanka;
+        private System.Windows.Forms.Label lsm;
     }
 }
