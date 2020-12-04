@@ -376,6 +376,7 @@ namespace Komunala
             dgv1.Enabled = true;
             cb2.Enabled = false;
             cb2.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb2.Items.Clear();
             cb1.Enabled = true;
             cb1.DropDownStyle = ComboBoxStyle.DropDown;
         }
@@ -403,6 +404,7 @@ namespace Komunala
             tb7.Text = "";
             cb1.Text = "";
             cb2.Text = "";
+            //MessageBox.Show("hhh");
         }
 
         public string naziv_storitve(int vhod) // poišči naziv storitve

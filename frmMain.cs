@@ -64,8 +64,8 @@ namespace Komunala
         public static Color barva_gumb2_akt = Color.FromArgb(0, 72, 117);
         public static Color barva_gumb2_pis_akt = Color.FromArgb(0, 0, 0); // pisava aktivnega gumba
         public static Color barva_gumb2_pis_neakt = Color.FromArgb(255, 255, 255); // pisava neaktivnega gumba
-        
-        public static Color barva_tb_onemogoceno = Color.FromArgb(238, 238, 238);
+        public static Color barva_gumb2_disabled = Color.FromArgb(239, 233, 230);
+        public static Color barva_tb_onemogoceno = Color.FromArgb(248, 248, 248);
         public static Color barva_tb_omogoceno = Color.FromArgb(255, 255, 255);
 
         public static int gumb2_sirina = 120;
@@ -101,17 +101,17 @@ namespace Komunala
 
             //frmSodelavci secondForm = new frmSodelavci();
             //secondForm.ShowDialog();
-            Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
-            secondForm.ShowDialog();
+            //Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
+            //secondForm.ShowDialog();
 
-            //frmTrgCenik secondForm = new frmTrgCenik();
-            //secondForm.ShowDialog();
-            //frmCeniko_Izpis secondForm = new frmCeniko_Izpis();
-            //secondForm.ShowDialog();
+            ////frmTrgCenik secondForm = new frmTrgCenik();
+            ////secondForm.ShowDialog();
+            ////frmCeniko_Izpis secondForm = new frmCeniko_Izpis();
+            ////secondForm.ShowDialog();
+            ////Environment.Exit(0);
+            ////frmStoritve secondForm = new frmStoritve();
+            ////secondForm.ShowDialog();
             //Environment.Exit(0);
-            //frmStoritve secondForm = new frmStoritve();
-            //secondForm.ShowDialog();
-            Environment.Exit(0);
         }
 
 
