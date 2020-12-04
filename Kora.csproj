@@ -111,12 +111,6 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Sifranti\EnableDisplayCombo.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Sifranti\EnableDisplayCombo.designer.cs">
-      <DependentUpon>EnableDisplayCombo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sifranti\frmSodelavci.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -409,7 +409,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EM;
         private System.Windows.Forms.DataGridViewTextBoxColumn DDV;
         private System.Windows.Forms.DataGridViewTextBoxColumn Skupina;
-        private EnableDisplayCombo.EnableDisplayCombo cb1e;
+        //private EnableDisplayCombo.EnableDisplayCombo cb1e;
         private System.Windows.Forms.ComboBox cbed1;
     }
 }
