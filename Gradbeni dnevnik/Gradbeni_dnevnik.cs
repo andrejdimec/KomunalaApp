@@ -84,8 +84,43 @@ namespace Komunala
 
         private void Gradbeni_dnevnik_Load(object sender, EventArgs e)
         {
+            Design();
             Zacetek();
         }
+
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+            crta2.AutoSize = false;
+            crta2.Height = 1;
+            crta2.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnPreklici_stor.BackColor = frmMain.barva_gumb2_neakt; btnPreklici_stor.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnDodaj_stor.BackColor = frmMain.barva_gumb2_neakt; btnDodaj_stor.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNovo.BackColor = frmMain.barva_gumb2_neakt; btnNovo.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnIzpis.BackColor = frmMain.barva_gumb2_neakt; btnIzpis.ForeColor = frmMain.barva_gumb2_pis_akt;
+            button1.BackColor = frmMain.barva_gumb2_neakt; button1.ForeColor = frmMain.barva_gumb2_pis_akt;
+            button2.BackColor = frmMain.barva_gumb2_neakt; button2.ForeColor = frmMain.barva_gumb2_pis_akt;
+
+
+
+            cb2.BackColor = frmMain.bela;
+            cb3.BackColor = frmMain.bela;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+        }
+
 
         public static bool Je_stevilo(string vhod)
         {
@@ -98,9 +133,10 @@ namespace Komunala
 
         private void Gumbi_dodaj()
         {
-            gb1.Enabled = true;
-            gb3.Enabled = true;
-            gb2.Enabled = true;
+            //gb1.Enabled = true;
+            //pb1.Enabled = true;
+            //pb3.Enabled = true;
+            //pb2.Enabled = true;
 
             button1.Enabled = false;
             button2.Enabled = false;
@@ -114,9 +150,10 @@ namespace Komunala
         }
         private void Gumbi_nov_dnevnik()
         {
-            gb1.Enabled = true;
-            gb3.Enabled = true;
-            gb2.Enabled = true;
+            //gb1.Enabled = true;
+            //pb1.Enabled = true;
+            //pb3.Enabled = true;
+            //pb2.Enabled = true;
 
             button1.Enabled = false;
             button2.Enabled = false;
@@ -139,21 +176,12 @@ namespace Komunala
 
         private void Gumbi_zacetek2()
         {
-            gb1.Enabled = false;
-            gb3.Enabled = false;
-            gb2.Enabled = false;
-            tb101.BackColor = DefaultBackColor;
-            tb103.BackColor = DefaultBackColor;
-            tb6.BackColor = DefaultBackColor;
-            tb12.BackColor = DefaultBackColor;
-            tb18.BackColor = DefaultBackColor;
             btnShrani.Enabled = false;
             btnSpremeni.Enabled = false;
             btnPreklici.Enabled = false;
             btnBrisi.Enabled = false;
             btnNazaj.Enabled = true;
             btnIzpis.Enabled = false;
-           // btnStoritve.Enabled = true;
             button1.Enabled = true;
             button2.Enabled = true;
             btnNovo.Enabled = true;
@@ -337,6 +365,11 @@ namespace Komunala
         private void cb2_Enter(object sender, EventArgs e)
         {
             //cb2.DroppedDown = true;
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -609,15 +642,16 @@ namespace Komunala
                     DataGridViewTextBoxCell em = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell kol = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell znesek = new DataGridViewTextBoxCell();
+                    
 
                     DataGridViewColumn kolid_dnevnika = dgv1.Columns[0];
                     kolid_dnevnika.Width = 60;
                     DataGridViewColumn kolzap = dgv1.Columns[1];
-                    kolzap.Width = 50;
+                    kolzap.Width = 100;
                     DataGridViewColumn kolopis_dela = dgv1.Columns[2];
-                    kolopis_dela.Width = 377;
+                    kolopis_dela.Width = 430;
                     DataGridViewColumn kolstoritev = dgv1.Columns[3];
-                    kolstoritev.Width = 263;
+                    kolstoritev.Width = 314;
                     DataGridViewColumn kolem = dgv1.Columns[4];
                     kolem.Width = 46;
                     DataGridViewColumn kolkol = dgv1.Columns[5];
@@ -625,6 +659,7 @@ namespace Komunala
                     DataGridViewColumn kolznesek = dgv1.Columns[6];
                     kolznesek.Width = 83;
 
+                    kolznesek.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
                     DataGridViewRow row = new DataGridViewRow();
 
                     id_dnevnika.Value = index_odpri;  // pri spreminjanju je drugače
@@ -846,6 +881,8 @@ namespace Komunala
 
         private void Zacetek()
         {
+            onemogoci_tb();
+
             prvic = true;
             dodaj = true;
             odprt = false;
@@ -961,7 +998,7 @@ namespace Komunala
         private void Novi_dnevnik()
         {
             Gumbi_dodaj();
-
+            omogoci_tb();
             // preštej stevilo zapisov v bazi dnevniki
             q2 = "SELECT COUNT(*) FROM tbl_dnevnik";
             cmd2 = new SqlCommand(q2, con2);
@@ -986,7 +1023,7 @@ namespace Komunala
             novi_id = max_id+1;
             vpisi0 = false;
             izprazni_tb();
-            omogoci_tb();
+            //omogoci_tb();
             dodajanje = true;
 
             // polje za datum
@@ -2111,9 +2148,6 @@ namespace Komunala
         }
         private void onemogoci_tb()
         {
-            //gb1.Enabled = false;
-            //gb2.Enabled = false;
-            //gb3.Enabled = false;
             tb3.Enabled = false;
             tb2.Enabled = false;
             tb1.Enabled = false;
@@ -2149,12 +2183,72 @@ namespace Komunala
             tb52.Enabled = false;
             dt1.Enabled = false;
             cb1.Enabled = false;
-            dgv1.Enabled = true;
-            tb6.BackColor = DefaultBackColor;
-            tb12.BackColor = DefaultBackColor;
-            tb18.BackColor = DefaultBackColor;
+            dgv1.Enabled = false;
+
+            tb1.BackColor = frmMain.barva_tb_onemogoceno;
+            tb2.BackColor = frmMain.barva_tb_onemogoceno;
+            tb3.BackColor = frmMain.barva_tb_onemogoceno;
+            tb4.BackColor = frmMain.barva_tb_onemogoceno;
+            tb5.BackColor = frmMain.barva_tb_onemogoceno;
+            tb6.BackColor = frmMain.barva_tb_onemogoceno;
+            tb7.BackColor = frmMain.barva_tb_onemogoceno;
+            tb8.BackColor = frmMain.barva_tb_onemogoceno;
+            tb9.BackColor = frmMain.barva_tb_onemogoceno;
+            tb10.BackColor = frmMain.barva_tb_onemogoceno;
+            tb11.BackColor = frmMain.barva_tb_onemogoceno;
+            tb12.BackColor = frmMain.barva_tb_onemogoceno;
+            tb13.BackColor = frmMain.barva_tb_onemogoceno;
+            tb14.BackColor = frmMain.barva_tb_onemogoceno;
+            tb15.BackColor = frmMain.barva_tb_onemogoceno;
+            tb16.BackColor = frmMain.barva_tb_onemogoceno;
+            tb17.BackColor = frmMain.barva_tb_onemogoceno;
+            tb18.BackColor = frmMain.barva_tb_onemogoceno;
+
+            tb19.BackColor = frmMain.barva_tb_onemogoceno;
+            tb20.BackColor = frmMain.barva_tb_onemogoceno;
+            tb21.BackColor = frmMain.barva_tb_onemogoceno;
+            tb22.BackColor = frmMain.barva_tb_onemogoceno;
+            tb23.BackColor = frmMain.barva_tb_onemogoceno;
+            tb24.BackColor = frmMain.barva_tb_onemogoceno;
+            tb25.BackColor = frmMain.barva_tb_onemogoceno;
+            tb26.BackColor = frmMain.barva_tb_onemogoceno;
+            tb27.BackColor = frmMain.barva_tb_onemogoceno;
+            tb28.BackColor = frmMain.barva_tb_onemogoceno;
+            tb29.BackColor = frmMain.barva_tb_onemogoceno;
+            tb30.BackColor = frmMain.barva_tb_onemogoceno;
+
+            tbv1.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv2.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv3.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv4.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv5.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv6.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv7.BackColor = frmMain.barva_tb_onemogoceno;
+            tbv8.BackColor = frmMain.barva_tb_onemogoceno;
+
+            tb50.BackColor = frmMain.barva_tb_onemogoceno;
+            tb51.BackColor = frmMain.barva_tb_onemogoceno;
+            tb52.BackColor = frmMain.barva_tb_onemogoceno;
+
+            cb1.BackColor = frmMain.barva_tb_onemogoceno;
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb2.BackColor = frmMain.barva_tb_onemogoceno;
+            cb2.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb3.BackColor = frmMain.barva_tb_onemogoceno;
+            cb3.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb4.BackColor = frmMain.barva_tb_onemogoceno;
+            cb4.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb5.BackColor = frmMain.barva_tb_onemogoceno;
+            cb5.DropDownStyle = ComboBoxStyle.DropDownList;
+
             tb101.BackColor = DefaultBackColor;
             tb103.BackColor = DefaultBackColor;
+
+            tb100.BackColor = frmMain.barva_tb_onemogoceno;
+            tb101.BackColor = frmMain.barva_tb_onemogoceno;
+            tb102.BackColor = frmMain.barva_tb_onemogoceno;
+            tb103.BackColor = frmMain.barva_tb_onemogoceno;
+
         }
 
         private void omogoci_tb()
@@ -2175,9 +2269,6 @@ namespace Komunala
             tb6.ReadOnly = true;
             tb12.ReadOnly = true;
             tb18.ReadOnly = true;
-            tb6.BackColor = Color.White;
-            tb12.BackColor = Color.White;
-            tb18.BackColor = Color.White;
             tb18.ForeColor = Color.Black;
             tb7.Enabled = true;
             tb10.Enabled = true;
@@ -2206,6 +2297,72 @@ namespace Komunala
             tb101.ReadOnly = true;
             tb103.ReadOnly = true;
             //tb101.BackColor = Color.White;
+
+            tb1.BackColor = frmMain.barva_tb_omogoceno;
+            tb2.BackColor = frmMain.barva_tb_omogoceno;
+            tb3.BackColor = frmMain.barva_tb_omogoceno;
+            tb4.BackColor = frmMain.barva_tb_omogoceno;
+            tb5.BackColor = frmMain.barva_tb_omogoceno;
+            tb6.BackColor = frmMain.barva_tb_omogoceno;
+            tb7.BackColor = frmMain.barva_tb_omogoceno;
+            tb8.BackColor = frmMain.barva_tb_omogoceno;
+            tb9.BackColor = frmMain.barva_tb_omogoceno;
+            tb10.BackColor = frmMain.barva_tb_omogoceno;
+            tb11.BackColor = frmMain.barva_tb_omogoceno;
+            tb12.BackColor = frmMain.barva_tb_omogoceno;
+            tb13.BackColor = frmMain.barva_tb_omogoceno;
+            tb14.BackColor = frmMain.barva_tb_omogoceno;
+            tb15.BackColor = frmMain.barva_tb_omogoceno;
+            tb16.BackColor = frmMain.barva_tb_omogoceno;
+            tb17.BackColor = frmMain.barva_tb_omogoceno;
+            tb18.BackColor = frmMain.barva_tb_omogoceno;
+
+            tb19.BackColor = frmMain.barva_tb_omogoceno;
+            tb20.BackColor = frmMain.barva_tb_omogoceno;
+            tb21.BackColor = frmMain.barva_tb_omogoceno;
+            tb22.BackColor = frmMain.barva_tb_omogoceno;
+            tb23.BackColor = frmMain.barva_tb_omogoceno;
+            tb24.BackColor = frmMain.barva_tb_omogoceno;
+            tb25.BackColor = frmMain.barva_tb_omogoceno;
+            tb26.BackColor = frmMain.barva_tb_omogoceno;
+            tb27.BackColor = frmMain.barva_tb_omogoceno;
+            tb28.BackColor = frmMain.barva_tb_omogoceno;
+            tb29.BackColor = frmMain.barva_tb_omogoceno;
+            tb30.BackColor = frmMain.barva_tb_omogoceno;
+
+            tbv1.BackColor = frmMain.barva_tb_omogoceno;
+            tbv2.BackColor = frmMain.barva_tb_omogoceno;
+            tbv3.BackColor = frmMain.barva_tb_omogoceno;
+            tbv4.BackColor = frmMain.barva_tb_omogoceno;
+            tbv5.BackColor = frmMain.barva_tb_omogoceno;
+            tbv6.BackColor = frmMain.barva_tb_omogoceno;
+            tbv7.BackColor = frmMain.barva_tb_omogoceno;
+            tbv8.BackColor = frmMain.barva_tb_omogoceno;
+
+            tb50.BackColor = frmMain.barva_tb_omogoceno;
+            tb51.BackColor = frmMain.barva_tb_omogoceno;
+            tb52.BackColor = frmMain.barva_tb_omogoceno;
+
+            cb1.BackColor = frmMain.barva_tb_omogoceno;
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb2.BackColor = frmMain.barva_tb_omogoceno;
+            cb2.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb3.BackColor = frmMain.barva_tb_omogoceno;
+            cb3.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb4.BackColor = frmMain.barva_tb_omogoceno;
+            cb4.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb5.BackColor = frmMain.barva_tb_omogoceno;
+            cb5.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            tb101.BackColor = DefaultBackColor;
+            tb103.BackColor = DefaultBackColor;
+
+            tb100.BackColor = frmMain.barva_tb_omogoceno;
+            tb101.BackColor = frmMain.barva_tb_omogoceno;
+            tb102.BackColor = frmMain.barva_tb_omogoceno;
+            tb103.BackColor = frmMain.barva_tb_omogoceno;
+
+
         }
 
         private void izprazni_tb()

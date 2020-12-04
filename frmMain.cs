@@ -64,12 +64,16 @@ namespace Komunala
         public static Color barva_gumb2_akt = Color.FromArgb(0, 72, 117);
         public static Color barva_gumb2_pis_akt = Color.FromArgb(0, 0, 0); // pisava aktivnega gumba
         public static Color barva_gumb2_pis_neakt = Color.FromArgb(255, 255, 255); // pisava neaktivnega gumba
+        
+        public static Color barva_tb_onemogoceno = Color.FromArgb(238, 238, 238);
+        public static Color barva_tb_omogoceno = Color.FromArgb(255, 255, 255);
+
         public static int gumb2_sirina = 120;
         public static int gumb2_visina = 36;
         public static Color bela = Color.White;
 
         public static Color barva_crta = Color.FromArgb(140, 140, 140);
-        public static Color barva_form_back = Color.FromArgb(249, 249, 249);
+        public static Color barva_form_back = Color.FromArgb(242, 242, 242);
 
         bool akt_dnevnik, akt_storitve, akt_nalog, akt_ponudba, akt_ijsvo, akt_nastavitve, akt_sifranti;  // kateri zavihek je aktiven
 
@@ -97,8 +101,8 @@ namespace Komunala
 
             //frmSodelavci secondForm = new frmSodelavci();
             //secondForm.ShowDialog();
-            ////Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
-            //secondForm.ShowDialog();
+            Gradbeni_dnevnik secondForm = new Gradbeni_dnevnik();
+            secondForm.ShowDialog();
 
             //frmTrgCenik secondForm = new frmTrgCenik();
             //secondForm.ShowDialog();
@@ -107,7 +111,7 @@ namespace Komunala
             //Environment.Exit(0);
             //frmStoritve secondForm = new frmStoritve();
             //secondForm.ShowDialog();
-         //   Environment.Exit(0);
+            Environment.Exit(0);
         }
 
 
