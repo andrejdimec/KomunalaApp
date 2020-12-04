@@ -50,6 +50,7 @@ namespace Komunala
             onemogoci_tb();
             Design();
             Display();
+
             //Zacetek();
         }
 
@@ -70,7 +71,10 @@ namespace Komunala
             btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
 
             tb1.BackColor = frmMain.bela;
-            cb1.BackColor = frmMain.bela;
+            cbed1.BackColor = frmMain.bela;
+            cbed1.ForeColor = Color.Black;
+
+            //cb1e.BackColor = frmMain.bela;
             cb2.BackColor = frmMain.bela;
             cb3.BackColor = frmMain.bela;
             //tb2.BackColor = frmMain.bela;
@@ -89,11 +93,16 @@ namespace Komunala
         private void onemogoci_tb()
         {
             tb1.Enabled = false;
-            cb1.Enabled = false;
+            cbed1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb3.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb2.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbed1.Enabled = false;
             cb2.Enabled = false;
             cb3.Enabled = false;
+            //cb1e.Enabled = false;
             //chb1.Enabled = false;
             //chb2.Enabled = false;
+            //dis = true;
         }
 
         private void omogoci_tb()
@@ -101,7 +110,10 @@ namespace Komunala
             //chb1.Enabled = true;
             //chb2.Enabled = true;
             tb1.Enabled = true;
-            cb1.Enabled = true;
+            cbed1.Enabled = true;
+            cbed1.DropDownStyle = ComboBoxStyle.DropDown;
+            cb2.DropDownStyle = ComboBoxStyle.DropDown;
+            cb3.DropDownStyle = ComboBoxStyle.DropDown;
             cb2.Enabled = true;
             cb3.Enabled = true;
         }
@@ -109,7 +121,7 @@ namespace Komunala
         private void izprazni_tb()
         {
             tb1.Text = "";
-            cb1.Text = "";
+            cbed1.Text = "";
             cb2.Text = "";
             cb3.Text = "";
             //chb1.Checked = false;
@@ -275,10 +287,10 @@ namespace Komunala
                 cmd2 = new SqlCommand(q2, con2);
                 con2.Open();
                 rdr2 = cmd2.ExecuteReader();
-                cb1.Items.Clear();
+                cbed1.Items.Clear();
                 while (rdr2.Read())
                 {
-                    cb1.Items.Add(rdr2[1].ToString());
+                    cbed1.Items.Add(rdr2[1].ToString());
                 }
             }
             catch (Exception ex)
@@ -400,7 +412,7 @@ namespace Komunala
         private void Shrani()
         {
             shrani_ok = true;
-            if (cb1.Text=="" || tb1.Text=="" || cb2.Text=="" || cb3.Text=="")
+            if (cbed1.Text=="" || tb1.Text=="" || cb2.Text=="" || cb3.Text=="")
             {
                 shrani_ok = false;
             }
@@ -409,7 +421,7 @@ namespace Komunala
             {
                 tceniko = 1;
                 tcenikt = 1;
-                stskupina = cb1.Text;
+                stskupina = cbed1.Text;
                 tstoritev = tb1.Text;
                 stem = cb2.Text;
                 stddv = cb3.Text;
@@ -568,7 +580,7 @@ namespace Komunala
             btnBrisi.Enabled = false;
             btnSpremeni.Enabled = false;
             btnNazaj.Enabled = false;
-            cb1.Focus();
+            cbed1.Focus();
         }
 
         private void Spremeni()
@@ -578,7 +590,7 @@ namespace Komunala
             index = dgv1.SelectedCells[0].Value.ToString();
             tid = Convert.ToInt32(index);
 
-            cb1.Text = dgv1.SelectedCells[4].Value.ToString();
+            cbed1.Text = dgv1.SelectedCells[4].Value.ToString();
             tb1.Text = dgv1.SelectedCells[1].Value.ToString();
             cb2.Text = dgv1.SelectedCells[2].Value.ToString();
             cb3.Text = dgv1.SelectedCells[3].Value.ToString();
@@ -588,7 +600,7 @@ namespace Komunala
             btnBrisi.Enabled = false;
             btnSpremeni.Enabled = false;
             btnNazaj.Enabled = false;
-            cb1.Focus();
+            cbed1.Focus();
         }
         private void Preklici()
         {
@@ -614,9 +626,52 @@ namespace Komunala
             }
         }
 
+        private void cb1e_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                tb1.Focus();
+            //{
+            //    Shrani();
+            //}
+            // prekliči
+            if (e.KeyCode == Keys.Escape)
+            {
+                Preklici();
+            }
+        }
+
+        private void cb1e_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbed1.DroppedDown = true;
+        }
+
+        private void cbed1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbed1_MouseClick(object sender, MouseEventArgs e)
+        {
+            cbed1.DroppedDown = true;
+        }
+
+        private void cbed1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                tb1.Focus();
+            //{
+            //    Shrani();
+            //}
+            // prekliči
+            if (e.KeyCode == Keys.Escape)
+            {
+                Preklici();
+            }
+        }
+
         private void cb1_MouseClick_1(object sender, MouseEventArgs e)
         {
-            cb1.DroppedDown = true;
+            cbed1.DroppedDown = true;
         }
 
         private void cb1_KeyDown_1(object sender, KeyEventArgs e)
@@ -635,16 +690,16 @@ namespace Komunala
 
         private void cb2_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                cb3.Focus();
-            //{
-            //    Shrani();
-            //}
-            // prekliči
-            if (e.KeyCode == Keys.Escape)
-            {
-                Preklici();
-            }
+                if (e.KeyCode == Keys.Enter)
+                    cb3.Focus();
+                //{
+                //    Shrani();
+                //}
+                // prekliči
+                if (e.KeyCode == Keys.Escape)
+                {
+                    Preklici();
+                }
         }
 
         private void cb2_MouseClick_1(object sender, MouseEventArgs e)

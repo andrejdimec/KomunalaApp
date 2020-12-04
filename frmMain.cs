@@ -21,34 +21,17 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "2.12.2020";
+        string verzija = "4.12.2020";
+        public static string nazivPrograma = "Komunala Radgona";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
 
-        // KatasterApp
-        
         public static string app_path = ConfigurationManager.AppSettings["app_path"];
         public static string app_path_data = ConfigurationManager.AppSettings["app_path_data"];
         
-        // prenesi v formo frmNaselje
-        //public static int a_prebivalcev, a_zacasnih, a_stalnih, a_stavb;
-        //public static double a_povrsina;
-        //public static string a_naselje;
-        //public static int a_v_stavb, a_k_stavb, a_s_stavb, a_g_stavb = 0, a_v_ljudi, a_k_ljudi, a_s_ljudi, a_g_ljudi;
-        //public static double a_v_procstavb, a_k_procstavb, a_s_procstavb, a_g_procstavb, a_v_procljudi, a_k_procljudi, a_s_procljudi, a_g_procljudi;
-
-        //public static bool iz_naselja, iz_search, iz_stavbe, iz_osebe;
-        //public static string izbrani_hsmid, izbrana_oseba;
-        //public static string aplikacija = "Kataster";
-
-
-
-
-        // public static string pot = "G:\\KomunalaApp\\Komunala\\data\\";
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
-        public static string nazivPrograma = "Komunala Radgona";
 
         public static string direktor, imenik, datum_o_1, datum_o_2, tekst_o_1, tekst_o_2, datum_t_1, datum_t_2, tekst_t_1, tekst_t_2;
         public static string fname;
@@ -90,6 +73,7 @@ namespace Komunala
 
         bool akt_dnevnik, akt_storitve, akt_nalog, akt_ponudba, akt_ijsvo, akt_nastavitve, akt_sifranti;  // kateri zavihek je aktiven
 
+        SqlConnection con = frmMain.c;
 
         public frmMain()
         {
@@ -131,7 +115,6 @@ namespace Komunala
         {
             try
             {
-
                 q = "select * from tblNastavitve"; //+ sort;
                 cmd = new SqlCommand(q, con);
                 con.Open();
@@ -489,11 +472,6 @@ namespace Komunala
             sec.ShowDialog();
         }
 
-        int st_dni;
-
-        SqlConnection con = frmMain.c;
-        string DataDirectory = "C:\\KomunalaApp";
-        int d1,d2,d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29, d30, d31;
 
         private void button13_Click(object sender, EventArgs e)
         {

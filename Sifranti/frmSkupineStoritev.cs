@@ -95,7 +95,7 @@ namespace Komunala
             dgv1.ColumnHeadersVisible = false;
             dgv1.RowHeadersVisible = false;
             dgv1.ColumnCount = 2;
-            dgv1.Columns[1].Width = 260;
+            dgv1.Columns[1].Width = 347;
             dgv1.Columns[0].Name = "Id";
             dgv1.Columns[1].Name = "Skupina";
             dgv1.Columns["Id"].Visible = false;

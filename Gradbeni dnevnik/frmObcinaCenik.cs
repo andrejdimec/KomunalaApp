@@ -58,6 +58,7 @@ namespace Komunala
             onemogoci_tb();
             Zacetek();
             Display();
+            dgv1.Focus();
         }
 
         private void Design()
@@ -374,7 +375,9 @@ namespace Komunala
             tb7.Enabled = false;
             dgv1.Enabled = true;
             cb2.Enabled = false;
+            cb2.DropDownStyle = ComboBoxStyle.DropDownList;
             cb1.Enabled = true;
+            cb1.DropDownStyle = ComboBoxStyle.DropDown;
         }
 
         private void omogoci_tb()
@@ -388,6 +391,8 @@ namespace Komunala
             tb7.Enabled = true;
             cb1.Enabled = false;
             cb2.Enabled = true;
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb2.DropDownStyle = ComboBoxStyle.DropDown;
         }
 
         private void izprazni_tb()
