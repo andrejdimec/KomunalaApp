@@ -157,18 +157,33 @@ namespace Komunala
             }
             //Zacetek();
         }
+        private void Gumbi_2() // dodajanje, urejanje
+        {
+            btnShrani.Enabled = true; btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true; btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false; btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false; btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false; btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false; btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
+        }
+
+        private void Gumbi_1()  // začetek
+        {
+            btnShrani.Enabled = false;btnShrani.BackColor = frmMain.barva_gumb2_disabled;
+            btnPreklici.Enabled = false;btnPreklici.BackColor = frmMain.barva_gumb2_disabled;
+            btnDodaj.Enabled = true;btnDodaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnBrisi.Enabled = true;btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
+            btnSpremeni.Enabled = true;btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+            btnNazaj.Enabled = true;btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
+        }
 
         private void Zacetek()
         {
             dodaj = 0;
             izprazni_tb();
             onemogoci_tb();
-            btnShrani.Enabled = false;
-            btnPreklici.Enabled = false;
-            btnDodaj.Enabled = true;
-            btnBrisi.Enabled = true;
-            btnSpremeni.Enabled = true;
-            btnNazaj.Enabled = true;
+            Gumbi_1();
+
             dgv1.Focus();
         }
 
@@ -268,7 +283,6 @@ namespace Komunala
                 }
                 Display();
             }
-
         }
 
         private void Dodaj()
@@ -276,12 +290,8 @@ namespace Komunala
             dodaj = 1;
             omogoci_tb();
             izprazni_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+
+            Gumbi_2();
             tb1.Focus();
         }
 
@@ -289,43 +299,13 @@ namespace Komunala
         {
             dodaj = 0;
             omogoci_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            Gumbi_2();
             tb1.Focus();
         }
         private void Preklici()
         {
             izprazni_tb();
             Zacetek();
-        }
-
-        private void btnPreklici_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnShrani_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnNazaj_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnDodaj_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnSpremeni_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnBrisi_Click(object sender, EventArgs e)
-        {
         }
 
         private void dgv1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -340,11 +320,6 @@ namespace Komunala
         private void tb1_Enter(object sender, EventArgs e)
         {
 //            Shrani();
-        }
-
-        private void tb1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void tb1_KeyDown(object sender, KeyEventArgs e)
@@ -384,15 +359,6 @@ namespace Komunala
                 tid = Convert.ToInt32(index);
                 Spremeni();
             }
-        }
-
-        private void dgv1_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-        {
-        }
-
-        private void dgv1_KeyUp(object sender, KeyEventArgs e)
-        {
-
         }
 
         private void btnDodaj_Click_1(object sender, EventArgs e)

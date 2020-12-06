@@ -48,6 +48,19 @@ namespace Komunala
         // variable za shrani
         string tstr_storitev, tstr_em, tstr_cenat, tstr_cenao, tstr_skupina;
 
+        int id_storitev, id_skupina;
+        //int idx_storitev;
+        bool dgvprvic;
+        //string skupina_zavpis;
+        int index_spremeni, idx_display;
+        bool shranjevanje, dodajanje, prikazi_vse;
+        bool spreminjanje = false;
+        int stara_skupina; // po spreminjanju napolni staro skupino
+        string zacasna_skupina, skupina_za_prikaz;
+        int vsestoritve_idx, skupina_za_prikaz_idx; // za prikaz je vse storitve
+        string stara_skupina_str, vsestoritve_str, skupina_za_prikaz_str;
+        string rezultat_str;
+
         private void frmObcinaCenik_Load(object sender, EventArgs e)
         {
             dgvprvic = true;
@@ -67,7 +80,6 @@ namespace Komunala
             crtal.Height = 1;
             crtal.BorderStyle = BorderStyle.Fixed3D;
 
-
             // gumbi
             btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnDodaj.BackColor = frmMain.barva_gumb2_neakt; btnDodaj.ForeColor = frmMain.barva_gumb2_pis_akt;
@@ -81,31 +93,55 @@ namespace Komunala
             tb2.BackColor = frmMain.bela;
             tb3.BackColor = frmMain.bela;
             tb7.BackColor = frmMain.bela;
-            
+
             cb1.BackColor = frmMain.bela;
             cb2.BackColor = frmMain.bela;
 
-//            cb3.BackColor = frmMain.bela;
-            //tb2.BackColor = frmMain.bela;
-
             this.BackColor = frmMain.barva_form_back; // Form ozadje
             this.Text = frmMain.nazivPrograma; // Form tekst
+        }
+
+        private void Gumbi_1()
+        {
+            btnShrani.Enabled = false;
+            btnShrani.BackColor = frmMain.barva_gumb2_disabled;
+            btnPreklici.Enabled = false;
+            btnPreklici.BackColor = frmMain.barva_gumb2_disabled; 
+            btnDodaj.Enabled = true;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnBrisi.Enabled = true;
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
+            btnSpremeni.Enabled = true;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+            btnNazaj.Enabled = true;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnIzpis.Enabled = true;
+            btnIzpis.BackColor = frmMain.barva_gumb2_neakt;
+            btnStoritve.Enabled = true;
+            btnStoritve.BackColor = frmMain.barva_gumb2_neakt;
+        }
+
+        private void Gumbi_2()
+        {
+            btnShrani.Enabled = true;
+            btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true;
+            btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false;
+            btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false;
+            btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnIzpis.Enabled = false;
+            btnIzpis.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false;
+            btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnStoritve.Enabled = false;
+            btnStoritve.BackColor = frmMain.barva_gumb2_disabled;
 
         }
 
-
-        int id_storitev, id_skupina;
-        //int idx_storitev;
-        bool dgvprvic;
-        //string skupina_zavpis;
-        int index_spremeni, idx_display;
-        bool shranjevanje, dodajanje, prikazi_vse;
-        bool spreminjanje = false;
-        int stara_skupina; // po spreminjanju napolni staro skupino
-        string zacasna_skupina, skupina_za_prikaz;
-        int vsestoritve_idx, skupina_za_prikaz_idx; // za prikaz je vse storitve
-        string stara_skupina_str, vsestoritve_str, skupina_za_prikaz_str;
-        string rezultat_str;
 
         private void cb2_Enter(object sender, EventArgs e)
         {
@@ -351,6 +387,25 @@ namespace Komunala
         }
 
         int rezultat_int;
+
+        private void cb1_Enter(object sender, EventArgs e)
+        {
+            cb1.SelectionLength = 0;
+        }
+
+        private void cb1_DropDownClosed(object sender, EventArgs e)
+        {
+            dgv1.Focus();
+        }
+
+        private void btnStoritve_Click(object sender, EventArgs e)
+        {
+            frmStoritve secondForm = new frmStoritve();
+            secondForm.ShowDialog();
+            Storitve_v_cb2();
+            dgv1.Focus();
+        }
+
         string vse_skupine_storitev = "Vse skupine storitev";
         string temp_skupina;
         bool drugi_display = true;
@@ -377,6 +432,8 @@ namespace Komunala
             cb2.Enabled = false;
             cb2.DropDownStyle = ComboBoxStyle.DropDownList;
             cb2.Items.Clear();
+            // naloži storitve
+            Storitve_v_cb2();
             cb1.Enabled = true;
             cb1.DropDownStyle = ComboBoxStyle.DropDown;
         }
@@ -387,9 +444,9 @@ namespace Komunala
             tb3.ForeColor = Color.Black;
             dgv1.Enabled = false;
             tb1.Enabled = true;
-            tb2.Enabled = true;
-            tb3.Enabled = true;
-            tb7.Enabled = true;
+//            tb2.Enabled = true;
+//            tb3.Enabled = true;
+            // tb7.Enabled = true;
             cb1.Enabled = false;
             cb2.Enabled = true;
             cb1.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -556,23 +613,36 @@ namespace Komunala
             {
                 cb1.Text = skupina_za_prikaz_str;
                 // novo 29-11-2020
-                q2 = "SELECT tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Cenik.Cena_obcina, tblSkupinestoritev.Id " +
-                    "AS Expr1, tblSkupinestoritev.Skupina AS Expr2, TblStoritve.Id AS Expr3, TblStoritve.Storitev AS Expr4, TblStoritve.Skupina " +
-                    "AS Expr5, TblStoritve.Em AS Expr6, TblStoritve.Ceniko, TblStoritve.Cenikt, TblStoritve.Ddv, tbl_Enote.Id AS Expr7, tbl_Enote.em " +
-                    "AS Expr8 FROM tbl_Cenik INNER JOIN tblSkupinestoritev ON tbl_Cenik.Skupina = tblSkupinestoritev.Id INNER JOIN TblStoritve " +
-                    "ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.id " +
-                    "ORDER BY TblStoritve.Storitev";
+                q2 = "SELECT tbl_Cenik.Cena_obcina, tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Enote.em " +
+                    "AS e_em, tblSkupinestoritev.Skupina AS e_sku, TblStoritve.Storitev AS e_sto, tblSkupinestoritev.Id " +
+                    "AS e_id_sku FROM tbl_Cenik INNER JOIN TblStoritve ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote " +
+                    "ON TblStoritve.Em = tbl_Enote.Id INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id " +
+                    "ORDER BY e_sto";
+
+               //q2 = "SELECT tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Cenik.Cena_obcina, tblSkupinestoritev.Id " +
+               //     "AS Expr1, tblSkupinestoritev.Skupina AS Expr2, TblStoritve.Id AS Expr3, TblStoritve.Storitev AS Expr4, TblStoritve.Skupina " +
+               //     "AS Expr5, TblStoritve.Em AS Expr6, TblStoritve.Ceniko, TblStoritve.Cenikt, TblStoritve.Ddv, tbl_Enote.Id AS Expr7, tbl_Enote.em " +
+               //     "AS Expr8 FROM tbl_Cenik INNER JOIN tblSkupinestoritev ON tbl_Cenik.Skupina = tblSkupinestoritev.Id INNER JOIN TblStoritve " +
+               //     "ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.id " +
+               //     "ORDER BY TblStoritve.Storitev";
             }
             else
             {
                 cb1.Text = skupina_za_prikaz_str;
 
-                q2 = "SELECT tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Cenik.Cena_obcina, tblSkupinestoritev.Id " +
-                    "AS Expr1, tblSkupinestoritev.Skupina AS Expr2, TblStoritve.Id AS Expr3, TblStoritve.Storitev AS Expr4, TblStoritve.Skupina " +
-                    "AS Expr5, TblStoritve.Em AS Expr6, TblStoritve.Ceniko, TblStoritve.Cenikt, TblStoritve.Ddv, tbl_Enote.Id AS Expr7, tbl_Enote.em " +
-                    "AS Expr8 FROM tbl_Cenik INNER JOIN tblSkupinestoritev ON tbl_Cenik.Skupina = tblSkupinestoritev.Id INNER JOIN TblStoritve " +
-                    "ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id WHERE(tbl_Cenik.Skupina = @tmpskupina) " +
-                    "ORDER BY TblStoritve.Storitev";
+                //q2 = "SELECT tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Cenik.Cena_obcina, tblSkupinestoritev.Id " +
+                //    "AS Expr1, tblSkupinestoritev.Skupina AS Expr2, TblStoritve.Id AS Expr3, TblStoritve.Storitev AS Expr4, TblStoritve.Skupina " +
+                //    "AS Expr5, TblStoritve.Em AS Expr6, TblStoritve.Ceniko, TblStoritve.Cenikt, TblStoritve.Ddv, tbl_Enote.Id AS Expr7, tbl_Enote.em " +
+                //    "AS Expr8 FROM tbl_Cenik INNER JOIN tblSkupinestoritev ON tbl_Cenik.Skupina = tblSkupinestoritev.Id INNER JOIN TblStoritve " +
+                //    "ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id WHERE(tbl_Cenik.Skupina = @tmpskupina) " +
+                //    "ORDER BY TblStoritve.Storitev";
+                
+                q2 = "SELECT tbl_Cenik.Cena_obcina, tbl_Cenik.Id, tbl_Cenik.Storitev, tbl_Cenik.Em, tbl_Cenik.Skupina, tbl_Enote.em " +
+                    "AS e_em, tblSkupinestoritev.Skupina AS e_sku, TblStoritve.Storitev AS e_sto, tblSkupinestoritev.Id " +
+                    "AS e_id_sku FROM tbl_Cenik INNER JOIN TblStoritve ON tbl_Cenik.Storitev = TblStoritve.Id INNER JOIN tbl_Enote " +
+                    "ON TblStoritve.Em = tbl_Enote.Id INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id " +
+                    "WHERE(tblSkupinestoritev.Id = @tmpskupina) ORDER BY e_sto";
+
             }
             Izprazni_dgv();
             try
@@ -591,26 +661,11 @@ namespace Komunala
                     strid = Convert.ToString(idx_display);
                     cenao_string = Convert.ToString(tcenao);
 
-                    stskupina = (string)rdr["Expr2"];
-                    ststoritev = (string)rdr["Expr4"];
-                    storitev_em_str = (string)rdr["Expr8"];
+                    stskupina = (string)rdr["e_sku"];
+                    ststoritev = (string)rdr["e_sto"];
+                    storitev_em_str = (string)rdr["e_em"];
 
                     int sirina_znesek = 90; // širina kolone z zneski
-
-                    //dgv2.AllowUserToAddRows = false;
-                    //dgv2.RowHeadersVisible = false;
-
-                    //dgv2.ColumnCount = 2;
-                    //dgv2.Columns[0].Name = "";
-                    //dgv2.Columns[1].Name = "Cene za Občino";
-
-                    //dgv2.Rows.Add("", "", "Cene za Občino");
-                    //dgv2.Columns[0].Width = 359;
-                    //dgv2.Columns[1].Width = sirina_znesek * 3+17;
-
-                    //this.dgv2.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //this.dgv2.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //this.dgv2.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                     DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Storitev = new DataGridViewTextBoxCell();
@@ -673,6 +728,43 @@ namespace Komunala
             drugi_display = true;
         }
 
+        private void Storitve_v_cb2()
+        {
+            q2 = "select * from tblstoritve order by storitev";
+            try
+            {
+                cmd2 = new SqlCommand(q2, con2);
+                con2.Open();
+                rdr2 = cmd2.ExecuteReader();
+                cb2.Items.Clear();
+                while (rdr2.Read())
+                {
+                    string stor_zac = (string)rdr2["Storitev"];
+                    //int tindeks = (int)rdr2["Indeks"];
+                    int tid_indeks = (int)rdr2["Id"];
+                    cb2.Items.Add(stor_zac);
+                    {
+                        aktivni_indeks_storitve = tid_indeks;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka skupina: " + ex.Message);
+            }
+            finally
+            {
+                if (rdr2 != null)
+                {
+                    rdr2.Close();
+                }
+                if (con2 != null)
+                {
+                    con2.Close();
+                }
+            }
+        }
+
         private void Zacetek()
         {
             drugi_display = false;
@@ -715,39 +807,8 @@ namespace Komunala
                 }
 
                 // če je prvič dodaj vse storitve v cb2
-                q2 = "select * from tblstoritve order by storitev";
-                try
-                {
-                    cmd2 = new SqlCommand(q2, con2);
-                    con2.Open();
-                    rdr2 = cmd2.ExecuteReader();
-                    cb2.Items.Clear();
-                    while (rdr2.Read())
-                    {
-                        string stor_zac = (string)rdr2["Storitev"];
-                        //int tindeks = (int)rdr2["Indeks"];
-                        int tid_indeks = (int)rdr2["Id"];
-                        cb2.Items.Add(stor_zac);
-                        {
-                            aktivni_indeks_storitve = tid_indeks;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Napaka skupina: " + ex.Message);
-                }
-                finally
-                {
-                    if (rdr2 != null)
-                    {
-                        rdr2.Close();
-                    }
-                    if (con2 != null)
-                    {
-                        con2.Close();
-                    }
-                }
+                Storitve_v_cb2();
+                
                 // če je prvič dodaj vse em v cb3 ???? potrebno???
                 q2 = "select * from tbl_enote order by em";
                 try
@@ -787,12 +848,7 @@ namespace Komunala
 
             stara_skupina_str = cb1.Text;
 
-            btnShrani.Enabled = false;
-            btnPreklici.Enabled = false;
-            btnDodaj.Enabled = true;
-            btnBrisi.Enabled = true;
-            btnSpremeni.Enabled = true;
-            btnNazaj.Enabled = true;
+            Gumbi_1();
         }
 
         private void Brisi()
@@ -927,13 +983,7 @@ namespace Komunala
                 dodajanje = false; // ni cb1 on change
                 izprazni_tb();
                 onemogoci_tb();
-                btnShrani.Enabled = false;
-                btnPreklici.Enabled = false;
-                btnDodaj.Enabled = true;
-                btnBrisi.Enabled = true;
-                btnSpremeni.Enabled = true;
-                btnIzpis.Enabled = true;
-                btnNazaj.Enabled = true;
+                Gumbi_1();
                 Display();    //?????
             }
         }
@@ -947,13 +997,7 @@ namespace Komunala
             //dodaj = 1;
             omogoci_tb();
             izprazni_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
-            btnIzpis.Enabled = false;
+            Gumbi_2();
             cb2.Focus();
         }
 
@@ -966,6 +1010,8 @@ namespace Komunala
 
                 zacasna_skupina = cb1.Text;
                 omogoci_tb();
+                cb2.Enabled = false;
+                tb7.Enabled = false;
                 spreminjanje = true;
                 index = dgv1.SelectedCells[0].Value.ToString();
                 index_spremeni = Convert.ToInt32(index);
@@ -988,6 +1034,9 @@ namespace Komunala
                        // tcenat = (Double)rdr["cena_trg"];
                         cenao_string = Convert.ToString(tcenao);
                         cenat_string = Convert.ToString(tcenat);
+                        
+                        
+                        // to ni dobro - poišči iz storitev
                         stskupina = naziv_skupine(tskupina);
                         ststoritev = naziv_storitve(storitev_int);
                         storitev_em_str = naziv_em(storitev_em);
@@ -1017,12 +1066,7 @@ namespace Komunala
                 //tb5.Text = Convert.ToString(Izračunaj_ddv22(tcenat));
                 //tb6.Text = Convert.ToString(Izračunaj_ddv95(tcenat));
                 tb7.Text = storitev_em_str;
-                btnShrani.Enabled = true;
-                btnPreklici.Enabled = true;
-                btnDodaj.Enabled = false;
-                btnBrisi.Enabled = false;
-                btnSpremeni.Enabled = false;
-                btnNazaj.Enabled = false;
+                Gumbi_2();
                 tb3.Focus();
             }
         }
@@ -1033,12 +1077,7 @@ namespace Komunala
             dodajanje = false; // ni cb1 on change
             izprazni_tb();
             onemogoci_tb();
-            btnShrani.Enabled = false;
-            btnPreklici.Enabled = false;
-            btnDodaj.Enabled = true;
-            btnBrisi.Enabled = true;
-            btnSpremeni.Enabled = true;
-            btnNazaj.Enabled = true;
+            Gumbi_1();
             drugi_display = false;
             Display();
         }

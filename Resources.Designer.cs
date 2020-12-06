@@ -73,6 +73,26 @@ namespace Komunala {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bm_baze1 {
+            get {
+                object obj = ResourceManager.GetObject("bm_baze1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bm_baze2 {
+            get {
+                object obj = ResourceManager.GetObject("bm_baze2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bm_dnevnik_01 {
             get {
                 object obj = ResourceManager.GetObject("bm_dnevnik-01", resourceCulture);
@@ -216,6 +236,36 @@ namespace Komunala {
         internal static System.Drawing.Bitmap gumbi_podpisniki {
             get {
                 object obj = ResourceManager.GetObject("gumbi-podpisniki", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gumbi_tel_imenik {
+            get {
+                object obj = ResourceManager.GetObject("gumbi-tel-imenik", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gumbi_tel_imenik1 {
+            get {
+                object obj = ResourceManager.GetObject("gumbi-tel-imenik1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gumbibaza_stevilk {
+            get {
+                object obj = ResourceManager.GetObject("gumbibaza-stevilk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

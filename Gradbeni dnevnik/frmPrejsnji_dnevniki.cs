@@ -48,12 +48,30 @@ namespace Komunala
 
         private void frmPrejsnji_dnevniki_Load(object sender, EventArgs e)
         {
+            Design();
             Zacetek();
             Display();
             // Novi_dnevnik();
         }
 
-        private void btnIzpis_Click(object sender, EventArgs e)
+        private void Design()
+        {
+            crtal.AutoSize = false;
+            crtal.Height = 1;
+            crtal.BorderStyle = BorderStyle.Fixed3D;
+
+
+            // gumbi
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt; btnBrisi.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt; btnNazaj.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnOdpri.BackColor = frmMain.barva_gumb2_neakt; btnOdpri.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnIzpis.BackColor = frmMain.barva_gumb2_neakt; btnIzpis.ForeColor = frmMain.barva_gumb2_pis_akt;
+
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+        }
+
+            private void btnIzpis_Click(object sender, EventArgs e)
         {
             Izpis();
         }
@@ -258,7 +276,7 @@ namespace Komunala
                             DataGridViewColumn koldatum = dgv1.Columns[2];
                             koldatum.Width = 130;
                             DataGridViewColumn kolobjekt = dgv1.Columns[3];
-                            kolobjekt.Width = 220;
+                            kolobjekt.Width = 230;
 
                             kolid.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
                             kolst.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;

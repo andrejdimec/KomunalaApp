@@ -111,6 +111,12 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmTelBaza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTelBaza.Designer.cs">
+      <DependentUpon>frmTelBaza.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sifranti\frmSodelavci.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crCeniko.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTelBaza.resx">
+      <DependentUpon>frmTelBaza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sifranti\frmSodelavci.resx">
       <DependentUpon>frmSodelavci.cs</DependentUpon>
     </EmbeddedResource>
@@ -467,6 +476,14 @@
   <ItemGroup>
     <Content Include="hisa.jpg" />
     <Content Include="ikona.ico" />
+    <None Include="Resources\gumbi-tel-imenik1.jpg" />
+    <None Include="Resources\gumbibaza-stevilk.jpg" />
+    <None Include="Resources\gumbi-tel-imenik.jpg" />
+    <None Include="Resources\bm_baze3.png" />
+    <None Include="Resources\bm_baze2.png" />
+    <None Include="Resources\bm_baze1.png" />
+    <None Include="Resources\bm_baze.png" />
+    <None Include="Resources\gumbi-manjši-nastavitve.jpg" />
     <None Include="ikone\file-alt-regular.wmf" />
     <None Include="ikone\GUMB-DNEVNIK.wmf" />
     <None Include="ikone\gumb-dnevnik-01.png" />

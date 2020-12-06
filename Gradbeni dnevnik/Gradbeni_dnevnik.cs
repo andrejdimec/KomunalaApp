@@ -415,6 +415,71 @@ namespace Komunala
 
         }
 
+        private void tb1_Leave_1(object sender, EventArgs e)
+        {
+            tb1s = tb1.Text;
+            if (tb1s == "")
+            {
+                tb1s = "0";
+            }
+            if (Je_stevilo(tb1s))
+            {
+                sestej_i();
+                shrani_ok = true;
+            }
+            else
+            {
+                MessageBox.Show("Vnesi število delavcev!");
+                tb1.Focus();
+                shrani_ok = false;
+            }
+        }
+
+        private void tb2_Leave_1(object sender, EventArgs e)
+        {
+            tb2s = tb2.Text;
+            if (tb2s == "")
+            {
+                tb2s = "0";
+            }
+            if (Je_stevilo(tb2s))
+            {
+                sestej_i();
+                shrani_ok = true;
+            }
+            else
+            {
+                MessageBox.Show("Vnesi število delavcev!");
+                tb2.Focus();
+                shrani_ok = false;
+            }
+        }
+
+        private void tb3_Leave(object sender, EventArgs e)
+        {
+            tb3s = tb3.Text;
+            if (tb3s == "")
+            {
+                tb3s = "0";
+            }
+            if (Je_stevilo(tb3s))
+            {
+                sestej_i();
+                shrani_ok = true;
+            }
+            else
+            {
+                MessageBox.Show("Vnesi število delavcev!");
+                tb3.Focus();
+                shrani_ok = false;
+            }
+        }
+
+        private void tb4_Leave_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             frmSituacije secondForm = new frmSituacije();
@@ -731,7 +796,7 @@ namespace Komunala
                 MessageBox.Show("Napaka: najdi idx storitve.: " + ex.Message);
             }
 
-            dgv1.Enabled = true;
+            //dgv1.Enabled = true;
 
             shranjeno = true;
         }
@@ -1831,9 +1896,13 @@ namespace Komunala
                     //Novi_dnevnik();
 
                     Gumbi_zacetek2();
+                    Gumbi_storitve_off();
+                    onemogoci_tb();
                     btnIzpis.Enabled = true;
-                    btnSpremeni.Enabled = true;  // novo 31.8.
-                                                 //Zacetek(); // novo 30-8
+                    btnIzpis.BackColor = frmMain.barva_gumb2_neakt;
+                    btnSpremeni.Enabled = true;
+                    btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+                    //Zacetek(); // novo 30-8
                 } // if (dodajanje=true)
                 } // yesno
                 else
@@ -2182,7 +2251,20 @@ namespace Komunala
             DialogResult result = MessageBox.Show("Želiš preklicati vnašanje gradbenega dnevnika?", "Prekliči", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                Zacetek();
+                if (dodajanje)
+                {
+                    Zacetek();
+                }
+                else
+                {
+                    Gumbi_zacetek2();
+                    Gumbi_storitve_off();
+                    onemogoci_tb();
+                    btnIzpis.Enabled = true;
+                    btnIzpis.BackColor = frmMain.barva_gumb2_neakt;
+                    btnSpremeni.Enabled = true;
+                    btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+                }
             }
             else
             {
@@ -2490,6 +2572,9 @@ namespace Komunala
             cb3.Text = "";
             cb4.Text = "";
             cb5.Text = "";
+            tb50.Text = "";
+            tb51.Text = "";
+            tb52.Text = "";
             // vreme - novo
             tbv1.Text = "";
             tbv2.Text = "";
@@ -2665,62 +2750,17 @@ namespace Komunala
 
         private void tb1_Leave(object sender, EventArgs e)
         {
-            tb1s = tb1.Text;
-            if (tb1s == "")
-            {
-                tb1s = "0";
-            }
-            if (Je_stevilo(tb1s))
-            {
-                sestej_i();
-                shrani_ok = true;
-            }
-            else
-            {
-                MessageBox.Show("Vnesi število delavcev!");
-                tb1.Focus();
-                shrani_ok = false;
-            }
+    
         }
 
         private void tb2_Leave(object sender, EventArgs e)
         {
-            tb2s = tb2.Text;
-            if (tb2s == "")
-            {
-                tb2s = "0";
-            }
-            if (Je_stevilo(tb2s))
-            {
-                sestej_i();
-                shrani_ok = true;
-            }
-            else
-            {
-                MessageBox.Show("Vnesi število delavcev!");
-                tb2.Focus();
-                shrani_ok = false;
-            }
+         
         }
 
         private void tb3_TextChanged(object sender, EventArgs e)
         {
-            tb3s = tb3.Text;
-            if (tb3s == "")
-            {
-                tb3s = "0";
-            }
-            if (Je_stevilo(tb3s))
-            {
-                sestej_i();
-                shrani_ok = true;
-            }
-            else
-            {
-                MessageBox.Show("Vnesi število delavcev!");
-                tb3.Focus();
-                shrani_ok = false;
-            }
+           
         }
 
         private void tb4_Leave(object sender, EventArgs e)

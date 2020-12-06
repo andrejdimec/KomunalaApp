@@ -30,7 +30,8 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.bm_nastavitve = new System.Windows.Forms.Button();
+            this.bm_delovni_nalog = new System.Windows.Forms.Button();
+            this.bm_telefonija = new System.Windows.Forms.Button();
             this.bm_šifranti = new System.Windows.Forms.Button();
             this.bm_ijsvo = new System.Windows.Forms.Button();
             this.bm_izhod = new System.Windows.Forms.Button();
@@ -42,10 +43,15 @@
             this.tc = new TablessControl();
             this.tp_dnevnik = new System.Windows.Forms.TabPage();
             this.crta_dnevnik = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button22 = new System.Windows.Forms.Button();
             this.tp_storitve = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.cr_storitve = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
             this.tp_ponudbe = new System.Windows.Forms.TabPage();
             this.cr_ponudbe = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,19 +62,7 @@
             this.cr_ijsvo = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.tp_sifranti = new System.Windows.Forms.TabPage();
-            this.cr_sifranti = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tp_nastavitve = new System.Windows.Forms.TabPage();
-            this.cr_nastavitve = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lverzija = new System.Windows.Forms.Label();
-            this.lbaza = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -76,7 +70,23 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.cr_sifranti = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tp_nastavitve = new System.Windows.Forms.TabPage();
+            this.cr_nastavitve = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tp_delovni = new System.Windows.Forms.TabPage();
+            this.cr_delovni = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tp_telefonija = new System.Windows.Forms.TabPage();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.cr_telefonija = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lverzija = new System.Windows.Forms.Label();
+            this.lbaza = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -94,6 +104,8 @@
             this.tp_ijsvo.SuspendLayout();
             this.tp_sifranti.SuspendLayout();
             this.tp_nastavitve.SuspendLayout();
+            this.tp_delovni.SuspendLayout();
+            this.tp_telefonija.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,7 +130,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
-            this.splitContainer1.Panel1.Controls.Add(this.bm_nastavitve);
+            this.splitContainer1.Panel1.Controls.Add(this.bm_delovni_nalog);
+            this.splitContainer1.Panel1.Controls.Add(this.bm_telefonija);
             this.splitContainer1.Panel1.Controls.Add(this.bm_šifranti);
             this.splitContainer1.Panel1.Controls.Add(this.bm_ijsvo);
             this.splitContainer1.Panel1.Controls.Add(this.bm_izhod);
@@ -137,33 +150,52 @@
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 18;
             // 
-            // bm_nastavitve
+            // bm_delovni_nalog
             // 
-            this.bm_nastavitve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
-            this.bm_nastavitve.FlatAppearance.BorderSize = 0;
-            this.bm_nastavitve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bm_nastavitve.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bm_nastavitve.ForeColor = System.Drawing.Color.White;
-            this.bm_nastavitve.Location = new System.Drawing.Point(-1, 395);
-            this.bm_nastavitve.Name = "bm_nastavitve";
-            this.bm_nastavitve.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.bm_nastavitve.Size = new System.Drawing.Size(220, 57);
-            this.bm_nastavitve.TabIndex = 18;
-            this.bm_nastavitve.Text = "Nastavitve";
-            this.bm_nastavitve.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bm_nastavitve.UseVisualStyleBackColor = false;
-            this.bm_nastavitve.Click += new System.EventHandler(this.bm_nastavitve_Click);
-            this.bm_nastavitve.MouseEnter += new System.EventHandler(this.bm_nastavitve_MouseEnter);
-            this.bm_nastavitve.MouseLeave += new System.EventHandler(this.bm_nastavitve_MouseLeave);
+            this.bm_delovni_nalog.BackColor = System.Drawing.Color.Navy;
+            this.bm_delovni_nalog.FlatAppearance.BorderSize = 0;
+            this.bm_delovni_nalog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bm_delovni_nalog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bm_delovni_nalog.ForeColor = System.Drawing.Color.White;
+            this.bm_delovni_nalog.Location = new System.Drawing.Point(-1, 265);
+            this.bm_delovni_nalog.Name = "bm_delovni_nalog";
+            this.bm_delovni_nalog.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.bm_delovni_nalog.Size = new System.Drawing.Size(220, 57);
+            this.bm_delovni_nalog.TabIndex = 19;
+            this.bm_delovni_nalog.Text = "Delovni nalog";
+            this.bm_delovni_nalog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bm_delovni_nalog.UseVisualStyleBackColor = false;
+            this.bm_delovni_nalog.Click += new System.EventHandler(this.bm_delovni_nalog_Click);
+            this.bm_delovni_nalog.MouseEnter += new System.EventHandler(this.bm_delovni_nalog_MouseEnter);
+            this.bm_delovni_nalog.MouseLeave += new System.EventHandler(this.bm_delovni_nalog_MouseLeave);
+            // 
+            // bm_telefonija
+            // 
+            this.bm_telefonija.BackColor = System.Drawing.Color.Navy;
+            this.bm_telefonija.FlatAppearance.BorderSize = 0;
+            this.bm_telefonija.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bm_telefonija.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.bm_telefonija.ForeColor = System.Drawing.Color.White;
+            this.bm_telefonija.Location = new System.Drawing.Point(-1, 326);
+            this.bm_telefonija.Name = "bm_telefonija";
+            this.bm_telefonija.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.bm_telefonija.Size = new System.Drawing.Size(220, 57);
+            this.bm_telefonija.TabIndex = 18;
+            this.bm_telefonija.Text = "Telefonija";
+            this.bm_telefonija.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bm_telefonija.UseVisualStyleBackColor = false;
+            this.bm_telefonija.Click += new System.EventHandler(this.bm_telefonija_Click);
+            this.bm_telefonija.MouseEnter += new System.EventHandler(this.bm_nastavitve_MouseEnter);
+            this.bm_telefonija.MouseLeave += new System.EventHandler(this.bm_nastavitve_MouseLeave);
             // 
             // bm_šifranti
             // 
-            this.bm_šifranti.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_šifranti.BackColor = System.Drawing.Color.Navy;
             this.bm_šifranti.FlatAppearance.BorderSize = 0;
             this.bm_šifranti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_šifranti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bm_šifranti.ForeColor = System.Drawing.Color.White;
-            this.bm_šifranti.Location = new System.Drawing.Point(-1, 332);
+            this.bm_šifranti.Location = new System.Drawing.Point(-1, 446);
             this.bm_šifranti.Name = "bm_šifranti";
             this.bm_šifranti.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_šifranti.Size = new System.Drawing.Size(220, 57);
@@ -177,17 +209,17 @@
             // 
             // bm_ijsvo
             // 
-            this.bm_ijsvo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_ijsvo.BackColor = System.Drawing.Color.Navy;
             this.bm_ijsvo.FlatAppearance.BorderSize = 0;
             this.bm_ijsvo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_ijsvo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bm_ijsvo.ForeColor = System.Drawing.Color.White;
-            this.bm_ijsvo.Location = new System.Drawing.Point(-1, 273);
+            this.bm_ijsvo.Location = new System.Drawing.Point(-1, 386);
             this.bm_ijsvo.Name = "bm_ijsvo";
             this.bm_ijsvo.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_ijsvo.Size = new System.Drawing.Size(220, 57);
             this.bm_ijsvo.TabIndex = 16;
-            this.bm_ijsvo.Text = "IJSVO";
+            this.bm_ijsvo.Text = "Poročanje IJSVO";
             this.bm_ijsvo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_ijsvo.UseVisualStyleBackColor = false;
             this.bm_ijsvo.Click += new System.EventHandler(this.bm_ijsvo_Click);
@@ -196,7 +228,7 @@
             // 
             // bm_izhod
             // 
-            this.bm_izhod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_izhod.BackColor = System.Drawing.Color.Navy;
             this.bm_izhod.FlatAppearance.BorderSize = 0;
             this.bm_izhod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_izhod.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -215,7 +247,7 @@
             // 
             // bm_storitve
             // 
-            this.bm_storitve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_storitve.BackColor = System.Drawing.Color.Navy;
             this.bm_storitve.FlatAppearance.BorderSize = 0;
             this.bm_storitve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_storitve.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -236,7 +268,7 @@
             // 
             // bm_ponudbe
             // 
-            this.bm_ponudbe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_ponudbe.BackColor = System.Drawing.Color.Navy;
             this.bm_ponudbe.FlatAppearance.BorderSize = 0;
             this.bm_ponudbe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_ponudbe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -246,7 +278,7 @@
             this.bm_ponudbe.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_ponudbe.Size = new System.Drawing.Size(220, 57);
             this.bm_ponudbe.TabIndex = 2;
-            this.bm_ponudbe.Text = "Ponudbe";
+            this.bm_ponudbe.Text = "Ponudba";
             this.bm_ponudbe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_ponudbe.UseVisualStyleBackColor = false;
             this.bm_ponudbe.Click += new System.EventHandler(this.bm_ponudbe_Click);
@@ -255,17 +287,17 @@
             // 
             // bm_nalogi
             // 
-            this.bm_nalogi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_nalogi.BackColor = System.Drawing.Color.Navy;
             this.bm_nalogi.FlatAppearance.BorderSize = 0;
             this.bm_nalogi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_nalogi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bm_nalogi.ForeColor = System.Drawing.Color.White;
-            this.bm_nalogi.Location = new System.Drawing.Point(-1, 207);
+            this.bm_nalogi.Location = new System.Drawing.Point(-1, 205);
             this.bm_nalogi.Name = "bm_nalogi";
             this.bm_nalogi.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_nalogi.Size = new System.Drawing.Size(220, 57);
             this.bm_nalogi.TabIndex = 1;
-            this.bm_nalogi.Text = "Potni nalogi";
+            this.bm_nalogi.Text = "Potni nalog";
             this.bm_nalogi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_nalogi.UseVisualStyleBackColor = false;
             this.bm_nalogi.Click += new System.EventHandler(this.bm_nalogi_Click);
@@ -274,12 +306,12 @@
             // 
             // bm_dnevnik
             // 
-            this.bm_dnevnik.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(32)))), ((int)(((byte)(77)))));
+            this.bm_dnevnik.BackColor = System.Drawing.Color.Navy;
             this.bm_dnevnik.FlatAppearance.BorderSize = 0;
             this.bm_dnevnik.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bm_dnevnik.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.bm_dnevnik.ForeColor = System.Drawing.Color.White;
-            this.bm_dnevnik.Location = new System.Drawing.Point(-1, 27);
+            this.bm_dnevnik.Location = new System.Drawing.Point(-1, 24);
             this.bm_dnevnik.Name = "bm_dnevnik";
             this.bm_dnevnik.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_dnevnik.Size = new System.Drawing.Size(220, 57);
@@ -323,6 +355,8 @@
             this.tc.Controls.Add(this.tp_ijsvo);
             this.tc.Controls.Add(this.tp_sifranti);
             this.tc.Controls.Add(this.tp_nastavitve);
+            this.tc.Controls.Add(this.tp_delovni);
+            this.tc.Controls.Add(this.tp_telefonija);
             this.tc.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tc.Location = new System.Drawing.Point(0, 0);
             this.tc.Margin = new System.Windows.Forms.Padding(0);
@@ -357,6 +391,23 @@
             this.crta_dnevnik.TabIndex = 18;
             this.crta_dnevnik.Text = "label8";
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.BackgroundImage = global::Komunala.Resources.bm_situacije;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(496, 189);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(176, 206);
+            this.button2.TabIndex = 18;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -366,6 +417,40 @@
             this.label10.Size = new System.Drawing.Size(205, 33);
             this.label10.TabIndex = 17;
             this.label10.Text = "Gradbeni dnevnik";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::Komunala.Resources.bm_pregled_dnevnikov;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(276, 189);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(176, 206);
+            this.button1.TabIndex = 17;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button22
+            // 
+            this.button22.BackColor = System.Drawing.Color.Transparent;
+            this.button22.BackgroundImage = global::Komunala.Resources.gumbi_170x200_dnevnik;
+            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button22.FlatAppearance.BorderSize = 0;
+            this.button22.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button22.Location = new System.Drawing.Point(54, 189);
+            this.button22.Margin = new System.Windows.Forms.Padding(0);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(176, 206);
+            this.button22.TabIndex = 3;
+            this.button22.UseVisualStyleBackColor = false;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // tp_storitve
             // 
@@ -380,6 +465,23 @@
             this.tp_storitve.Size = new System.Drawing.Size(734, 514);
             this.tp_storitve.TabIndex = 1;
             this.tp_storitve.Text = "Storitve";
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.BackgroundImage = global::Komunala.Resources.bm_baze2;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(276, 189);
+            this.button5.Margin = new System.Windows.Forms.Padding(0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(176, 206);
+            this.button5.TabIndex = 22;
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // cr_storitve
             // 
@@ -398,6 +500,23 @@
             this.label11.Size = new System.Drawing.Size(470, 33);
             this.label11.TabIndex = 22;
             this.label11.Text = "Pregled storitev gospodarskih javnih služb";
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.Transparent;
+            this.button10.BackgroundImage = global::Komunala.Resources.bm_gjs;
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(54, 189);
+            this.button10.Margin = new System.Windows.Forms.Padding(0);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(176, 206);
+            this.button10.TabIndex = 19;
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // tp_ponudbe
             // 
@@ -437,7 +556,7 @@
             this.tp_nalogi.Name = "tp_nalogi";
             this.tp_nalogi.Size = new System.Drawing.Size(734, 514);
             this.tp_nalogi.TabIndex = 3;
-            this.tp_nalogi.Text = "Nalogi";
+            this.tp_nalogi.Text = "Potni nalog";
             // 
             // cr_nalogi
             // 
@@ -489,6 +608,7 @@
             // tp_sifranti
             // 
             this.tp_sifranti.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_sifranti.Controls.Add(this.button8);
             this.tp_sifranti.Controls.Add(this.button3);
             this.tp_sifranti.Controls.Add(this.button7);
             this.tp_sifranti.Controls.Add(this.button4);
@@ -504,173 +624,22 @@
             this.tp_sifranti.TabIndex = 5;
             this.tp_sifranti.Text = "Šifranti";
             // 
-            // cr_sifranti
+            // button8
             // 
-            this.cr_sifranti.Location = new System.Drawing.Point(35, 64);
-            this.cr_sifranti.Name = "cr_sifranti";
-            this.cr_sifranti.Size = new System.Drawing.Size(654, 12);
-            this.cr_sifranti.TabIndex = 25;
-            this.cr_sifranti.Text = "label8";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label17.Location = new System.Drawing.Point(48, 29);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(91, 33);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "Šifranti";
-            // 
-            // tp_nastavitve
-            // 
-            this.tp_nastavitve.BackColor = System.Drawing.Color.AliceBlue;
-            this.tp_nastavitve.Controls.Add(this.cr_nastavitve);
-            this.tp_nastavitve.Controls.Add(this.button6);
-            this.tp_nastavitve.Controls.Add(this.label19);
-            this.tp_nastavitve.Location = new System.Drawing.Point(4, 22);
-            this.tp_nastavitve.Name = "tp_nastavitve";
-            this.tp_nastavitve.Size = new System.Drawing.Size(734, 514);
-            this.tp_nastavitve.TabIndex = 6;
-            this.tp_nastavitve.Text = "Nastavitve";
-            // 
-            // cr_nastavitve
-            // 
-            this.cr_nastavitve.Location = new System.Drawing.Point(35, 64);
-            this.cr_nastavitve.Name = "cr_nastavitve";
-            this.cr_nastavitve.Size = new System.Drawing.Size(654, 12);
-            this.cr_nastavitve.TabIndex = 25;
-            this.cr_nastavitve.Text = "label8";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(112, 206);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 32);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Nastavitve";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label19.Location = new System.Drawing.Point(48, 29);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(130, 33);
-            this.label19.TabIndex = 24;
-            this.label19.Text = "Nastavitve";
-            this.label19.Click += new System.EventHandler(this.label19_Click);
-            // 
-            // lverzija
-            // 
-            this.lverzija.AutoSize = true;
-            this.lverzija.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lverzija.ForeColor = System.Drawing.Color.Black;
-            this.lverzija.Location = new System.Drawing.Point(507, 6);
-            this.lverzija.Name = "lverzija";
-            this.lverzija.Size = new System.Drawing.Size(69, 13);
-            this.lverzija.TabIndex = 14;
-            this.lverzija.Text = "v 28.10.2020";
-            this.lverzija.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lbaza
-            // 
-            this.lbaza.AutoSize = true;
-            this.lbaza.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lbaza.ForeColor = System.Drawing.Color.Black;
-            this.lbaza.Location = new System.Drawing.Point(507, 24);
-            this.lbaza.Name = "lbaza";
-            this.lbaza.Size = new System.Drawing.Size(69, 13);
-            this.lbaza.TabIndex = 15;
-            this.lbaza.Text = "v 28.10.2020";
-            this.lbaza.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.BackgroundImage = global::Komunala.Resources.bm_situacije;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(496, 189);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(176, 206);
-            this.button2.TabIndex = 18;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::Komunala.Resources.bm_pregled_dnevnikov;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(276, 189);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(176, 206);
-            this.button1.TabIndex = 17;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button22
-            // 
-            this.button22.BackColor = System.Drawing.Color.Transparent;
-            this.button22.BackgroundImage = global::Komunala.Resources.gumbi_170x200_dnevnik;
-            this.button22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button22.FlatAppearance.BorderSize = 0;
-            this.button22.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button22.Location = new System.Drawing.Point(54, 189);
-            this.button22.Margin = new System.Windows.Forms.Padding(0);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(176, 206);
-            this.button22.TabIndex = 3;
-            this.button22.UseVisualStyleBackColor = false;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImage = global::Komunala.Resources.bm_baze;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(276, 189);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(176, 206);
-            this.button5.TabIndex = 22;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button10
-            // 
-            this.button10.BackColor = System.Drawing.Color.Transparent;
-            this.button10.BackgroundImage = global::Komunala.Resources.bm_gjs;
-            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(54, 189);
-            this.button10.Margin = new System.Windows.Forms.Padding(0);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(176, 206);
-            this.button10.TabIndex = 19;
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.button8.BackColor = System.Drawing.Color.Transparent;
+            this.button8.BackgroundImage = global::Komunala.Properties.Resources.gumbi_manjši_nastavitve;
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(546, 282);
+            this.button8.Margin = new System.Windows.Forms.Padding(0);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(126, 148);
+            this.button8.TabIndex = 33;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
             // button3
             // 
@@ -791,6 +760,160 @@
             this.button13.UseVisualStyleBackColor = false;
             this.button13.Click += new System.EventHandler(this.button13_Click_1);
             // 
+            // cr_sifranti
+            // 
+            this.cr_sifranti.Location = new System.Drawing.Point(35, 64);
+            this.cr_sifranti.Name = "cr_sifranti";
+            this.cr_sifranti.Size = new System.Drawing.Size(654, 12);
+            this.cr_sifranti.TabIndex = 25;
+            this.cr_sifranti.Text = "label8";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label17.Location = new System.Drawing.Point(48, 29);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(91, 33);
+            this.label17.TabIndex = 24;
+            this.label17.Text = "Šifranti";
+            // 
+            // tp_nastavitve
+            // 
+            this.tp_nastavitve.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_nastavitve.Controls.Add(this.cr_nastavitve);
+            this.tp_nastavitve.Controls.Add(this.button6);
+            this.tp_nastavitve.Controls.Add(this.label19);
+            this.tp_nastavitve.Location = new System.Drawing.Point(4, 22);
+            this.tp_nastavitve.Name = "tp_nastavitve";
+            this.tp_nastavitve.Size = new System.Drawing.Size(734, 514);
+            this.tp_nastavitve.TabIndex = 6;
+            this.tp_nastavitve.Text = "Nastavitve";
+            // 
+            // cr_nastavitve
+            // 
+            this.cr_nastavitve.Location = new System.Drawing.Point(35, 64);
+            this.cr_nastavitve.Name = "cr_nastavitve";
+            this.cr_nastavitve.Size = new System.Drawing.Size(654, 12);
+            this.cr_nastavitve.TabIndex = 25;
+            this.cr_nastavitve.Text = "label8";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(112, 206);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(109, 32);
+            this.button6.TabIndex = 14;
+            this.button6.Text = "Nastavitve";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label19.Location = new System.Drawing.Point(48, 29);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(130, 33);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "Nastavitve";
+            this.label19.Click += new System.EventHandler(this.label19_Click);
+            // 
+            // tp_delovni
+            // 
+            this.tp_delovni.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_delovni.Controls.Add(this.cr_delovni);
+            this.tp_delovni.Controls.Add(this.label2);
+            this.tp_delovni.Location = new System.Drawing.Point(4, 22);
+            this.tp_delovni.Name = "tp_delovni";
+            this.tp_delovni.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_delovni.Size = new System.Drawing.Size(734, 514);
+            this.tp_delovni.TabIndex = 7;
+            this.tp_delovni.Text = "Delovni nalog";
+            // 
+            // cr_delovni
+            // 
+            this.cr_delovni.Location = new System.Drawing.Point(35, 64);
+            this.cr_delovni.Name = "cr_delovni";
+            this.cr_delovni.Size = new System.Drawing.Size(654, 12);
+            this.cr_delovni.TabIndex = 27;
+            this.cr_delovni.Text = "label8";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Location = new System.Drawing.Point(48, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(169, 33);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Delovni nalogi";
+            // 
+            // tp_telefonija
+            // 
+            this.tp_telefonija.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_telefonija.Controls.Add(this.button9);
+            this.tp_telefonija.Controls.Add(this.button11);
+            this.tp_telefonija.Controls.Add(this.cr_telefonija);
+            this.tp_telefonija.Controls.Add(this.label4);
+            this.tp_telefonija.Location = new System.Drawing.Point(4, 22);
+            this.tp_telefonija.Name = "tp_telefonija";
+            this.tp_telefonija.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_telefonija.Size = new System.Drawing.Size(734, 514);
+            this.tp_telefonija.TabIndex = 8;
+            this.tp_telefonija.Text = "Telefonija";
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.Transparent;
+            this.button9.BackgroundImage = global::Komunala.Resources.gumbibaza_stevilk;
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Location = new System.Drawing.Point(54, 189);
+            this.button9.Margin = new System.Windows.Forms.Padding(0);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(176, 206);
+            this.button9.TabIndex = 29;
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click_1);
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.Transparent;
+            this.button11.BackgroundImage = global::Komunala.Resources.gumbi_tel_imenik1;
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button11.FlatAppearance.BorderSize = 0;
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Location = new System.Drawing.Point(282, 189);
+            this.button11.Margin = new System.Windows.Forms.Padding(0);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(176, 206);
+            this.button11.TabIndex = 28;
+            this.button11.UseVisualStyleBackColor = false;
+            // 
+            // cr_telefonija
+            // 
+            this.cr_telefonija.Location = new System.Drawing.Point(35, 64);
+            this.cr_telefonija.Name = "cr_telefonija";
+            this.cr_telefonija.Size = new System.Drawing.Size(654, 12);
+            this.cr_telefonija.TabIndex = 27;
+            this.cr_telefonija.Text = "label8";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(48, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(118, 33);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Telefonija";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Komunala.Properties.Resources.logo_komunala_radgona_2020_100;
@@ -799,6 +922,30 @@
             this.pictureBox1.Size = new System.Drawing.Size(110, 31);
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
+            // 
+            // lverzija
+            // 
+            this.lverzija.AutoSize = true;
+            this.lverzija.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lverzija.ForeColor = System.Drawing.Color.Black;
+            this.lverzija.Location = new System.Drawing.Point(507, 6);
+            this.lverzija.Name = "lverzija";
+            this.lverzija.Size = new System.Drawing.Size(69, 13);
+            this.lverzija.TabIndex = 14;
+            this.lverzija.Text = "v 28.10.2020";
+            this.lverzija.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lbaza
+            // 
+            this.lbaza.AutoSize = true;
+            this.lbaza.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lbaza.ForeColor = System.Drawing.Color.Black;
+            this.lbaza.Location = new System.Drawing.Point(507, 24);
+            this.lbaza.Name = "lbaza";
+            this.lbaza.Size = new System.Drawing.Size(69, 13);
+            this.lbaza.TabIndex = 15;
+            this.lbaza.Text = "v 28.10.2020";
+            this.lbaza.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // frmMain
             // 
@@ -835,6 +982,10 @@
             this.tp_sifranti.PerformLayout();
             this.tp_nastavitve.ResumeLayout(false);
             this.tp_nastavitve.PerformLayout();
+            this.tp_delovni.ResumeLayout(false);
+            this.tp_delovni.PerformLayout();
+            this.tp_telefonija.ResumeLayout(false);
+            this.tp_telefonija.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -843,7 +994,7 @@
         #endregion
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button bm_nastavitve;
+        private System.Windows.Forms.Button bm_telefonija;
         private System.Windows.Forms.Button bm_šifranti;
         private System.Windows.Forms.Button bm_ijsvo;
         private System.Windows.Forms.Button bm_izhod;
@@ -890,6 +1041,16 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button bm_delovni_nalog;
+        private System.Windows.Forms.TabPage tp_delovni;
+        private System.Windows.Forms.Label cr_delovni;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage tp_telefonija;
+        private System.Windows.Forms.Label cr_telefonija;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button11;
     }
 }
 

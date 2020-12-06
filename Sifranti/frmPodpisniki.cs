@@ -55,13 +55,6 @@ namespace Komunala
             btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
-            //btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
-            //btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
-            //btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
-            //btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
-            //btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
-            //btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
-
             tb1.BackColor = frmMain.bela;
             tb2.BackColor = frmMain.bela;
 
@@ -145,17 +138,32 @@ namespace Komunala
             //Zacetek();
         }
 
+        private void Gumbi_2() // dodajanje, urejanje
+        {
+            btnShrani.Enabled = true; btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true; btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false; btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false; btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false; btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false; btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
+        }
+
+        private void Gumbi_1()  // začetek
+        {
+            btnShrani.Enabled = false; btnShrani.BackColor = frmMain.barva_gumb2_disabled;
+            btnPreklici.Enabled = false; btnPreklici.BackColor = frmMain.barva_gumb2_disabled;
+            btnDodaj.Enabled = true; btnDodaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnBrisi.Enabled = true; btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
+            btnSpremeni.Enabled = true; btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+            btnNazaj.Enabled = true; btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
+        }
+
         private void Zacetek()
         {
             dodaj = 0;
             izprazni_tb();
             onemogoci_tb();
-            btnShrani.Enabled = false;
-            btnPreklici.Enabled = false;
-            btnDodaj.Enabled = true;
-            btnBrisi.Enabled = true;
-            btnSpremeni.Enabled = true;
-            btnNazaj.Enabled = true;
+            Gumbi_1();
             dgv1.Focus();
         }
 
@@ -251,12 +259,7 @@ namespace Komunala
             dodaj = 1;
             omogoci_tb();
             izprazni_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            Gumbi_2();
             tb1.Focus();
         }
 
@@ -264,12 +267,7 @@ namespace Komunala
         {
             dodaj = 0;
             omogoci_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            Gumbi_2();
             tb1.Focus();
         }
         private void Preklici()

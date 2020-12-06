@@ -84,6 +84,26 @@ namespace Komunala
 
         }
 
+        private void Gumbi_2() // dodajanje, urejanje
+        {
+            btnShrani.Enabled = true; btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true; btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false; btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false; btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false; btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false; btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
+        }
+
+        private void Gumbi_1()  // začetek
+        {
+            btnShrani.Enabled = false; btnShrani.BackColor = frmMain.barva_gumb2_disabled;
+            btnPreklici.Enabled = false; btnPreklici.BackColor = frmMain.barva_gumb2_disabled;
+            btnDodaj.Enabled = true; btnDodaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnBrisi.Enabled = true; btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
+            btnSpremeni.Enabled = true; btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
+            btnNazaj.Enabled = true; btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
+        }
+
         private void Izprazni_dgv()
         {
             dgv1.Rows.Clear();
@@ -99,16 +119,10 @@ namespace Komunala
             cbed1.Enabled = false;
             cb2.Enabled = false;
             cb3.Enabled = false;
-            //cb1e.Enabled = false;
-            //chb1.Enabled = false;
-            //chb2.Enabled = false;
-            //dis = true;
         }
 
         private void omogoci_tb()
         {
-            //chb1.Enabled = true;
-            //chb2.Enabled = true;
             tb1.Enabled = true;
             cbed1.Enabled = true;
             cbed1.DropDownStyle = ComboBoxStyle.DropDown;
@@ -124,13 +138,10 @@ namespace Komunala
             cbed1.Text = "";
             cb2.Text = "";
             cb3.Text = "";
-            //chb1.Checked = false;
-            //chb2.Checked = false;
         }
 
         private void Display()
         {
-            //SqlConnection con = new SqlConnection(constr);
             bool boolt, boolo;
             dgv1.ColumnHeadersVisible = true;
             Izprazni_dgv();
@@ -140,17 +151,13 @@ namespace Komunala
                 q=  "SELECT TblStoritve.Id,TblStoritve.Storitev, tbl_DDV.Stopnja, tbl_Enote.em AS Expr3, tblSkupinestoritev.Skupina AS Expr5 "+
                     "FROM TblStoritve INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id INNER JOIN "+
                     "tbl_DDV ON TblStoritve.Ddv = tbl_DDV.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id order by " + sort;
-
-                // q = "select * from tblStoritve order by " + sort;  ///             ***********  spremeni SQL ***********
                 prvic = 0;
             }
             else
             {
-                //q = "select * from tblStoritve order by " + sort;
                 q = "SELECT TblStoritve.Id,TblStoritve.Storitev, tbl_DDV.Stopnja, tbl_Enote.em AS Expr3, tblSkupinestoritev.Skupina AS Expr5 " +
                     "FROM TblStoritve INNER JOIN tblSkupinestoritev ON TblStoritve.Skupina = tblSkupinestoritev.Id INNER JOIN " +
                     "tbl_DDV ON TblStoritve.Ddv = tbl_DDV.Id INNER JOIN tbl_Enote ON TblStoritve.Em = tbl_Enote.Id order by " + sort;
-
             }
             try
             {
@@ -162,43 +169,11 @@ namespace Komunala
                 {
                     tid = (int)rdr["Id"];
                     string tstoritev = (string)rdr["storitev"]; // Opis
-                    //int tenota = (int)rdr["em"];
-                    //int tskupina = (int)rdr["skupina"];
-                    //int tceniko = (int)rdr["ceniko"];
-                    //int tcenikt = (int)rdr["cenikt"];
-                    //int tempddv = (int)rdr["ddv"];
                     string strid = Convert.ToString(tid);
 
                     string stem = (string)rdr["Expr3"];
                     string stskupina = (string)rdr["Expr5"];
                     double temp_ddv_double = (Double)rdr["Stopnja"];
-
-                    //// poišči enoto mere
-                    //q2 = "select em from tbl_enote where id = @tid";  // če sta indexa iz ulic enaka
-                    //cmd2 = new SqlCommand(q2, con2);
-                    //con2.Open();
-                    //cmd2.Parameters.AddWithValue("@tid", tenota);
-                    //cmd2.ExecuteNonQuery();
-                    //string stem = (string)cmd2.ExecuteScalar();
-                    //con2.Close();
-
-                    //// poišči skupino
-                    //q2 = "select skupina from tblskupinestoritev where id = @tid";  // če sta indexa iz ulic enaka
-                    //cmd2 = new SqlCommand(q2, con2);
-                    //con2.Open();
-                    //cmd2.Parameters.AddWithValue("@tid", tskupina);
-                    //cmd2.ExecuteNonQuery();
-                    //string stskupina = (string)cmd2.ExecuteScalar();
-                    //con2.Close();
-
-                    //// poišči ddv
-                    //q2 = "select stopnja from tbl_ddv where id = @tempddv";  // če sta indexa iz ulic enaka
-                    //cmd2 = new SqlCommand(q2, con2);
-                    //con2.Open();
-                    //cmd2.Parameters.AddWithValue("@tempddv", tempddv);
-                    //cmd2.ExecuteNonQuery();
-                    //double temp_ddv_double = Convert.ToDouble(cmd2.ExecuteScalar());
-                    //con2.Close();
 
                     if (tceniko == 1)
                     {
@@ -366,12 +341,7 @@ namespace Komunala
                 }
             }
 
-            btnShrani.Enabled = false;
-            btnPreklici.Enabled = false;
-            btnDodaj.Enabled = true;
-            btnBrisi.Enabled = true;
-            btnSpremeni.Enabled = true;
-            btnNazaj.Enabled = true;
+            Gumbi_1();
             dgv1.Focus();
         }
 
@@ -426,14 +396,6 @@ namespace Komunala
                 stem = cb2.Text;
                 stddv = cb3.Text;
                 tddv = Convert.ToDouble(stddv);
-                //if (chb1.Checked == true)
-                //{
-                //    tceniko = 1;
-                //}
-                //if (chb2.Checked == true)
-                //{
-                //    tcenikt = 1;
-                //}
                 // poišči index od enote
                 q2 = "select Id from tbl_enote where @tenota=em";
                 try
@@ -574,12 +536,7 @@ namespace Komunala
             dodaj = 1;
             omogoci_tb();
             izprazni_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            Gumbi_2();
             cbed1.Focus();
         }
 
@@ -594,12 +551,7 @@ namespace Komunala
             tb1.Text = dgv1.SelectedCells[1].Value.ToString();
             cb2.Text = dgv1.SelectedCells[2].Value.ToString();
             cb3.Text = dgv1.SelectedCells[3].Value.ToString();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            Gumbi_2();
             cbed1.Focus();
         }
         private void Preklici()
@@ -630,10 +582,6 @@ namespace Komunala
         {
             if (e.KeyCode == Keys.Enter)
                 tb1.Focus();
-            //{
-            //    Shrani();
-            //}
-            // prekliči
             if (e.KeyCode == Keys.Escape)
             {
                 Preklici();
@@ -659,9 +607,6 @@ namespace Komunala
         {
             if (e.KeyCode == Keys.Enter)
                 tb1.Focus();
-            //{
-            //    Shrani();
-            //}
             // prekliči
             if (e.KeyCode == Keys.Escape)
             {
@@ -734,7 +679,6 @@ namespace Komunala
             if (e.KeyCode == Keys.Enter)
             {
                 tb1.Text = dgv1.SelectedCells[1].Value.ToString();
-                //tb2.Text = dgv1.SelectedCells[2].Value.ToString();
                 tid = Convert.ToInt32(index);
                 Spremeni();
             }
@@ -748,7 +692,6 @@ namespace Komunala
         private void btnBrisi_Click_1(object sender, EventArgs e)
         {
             index = dgv1.SelectedCells[0].Value.ToString();
-            //MessageBox.Show(index);
             tid = Convert.ToInt32(index);
             Brisi();
         }
@@ -784,7 +727,6 @@ namespace Komunala
                 if (btnDodaj.Enabled == true)
                 {
                     tb1.Text = dgv1.SelectedCells[1].Value.ToString();
-                    //tb2.Text = dgv1.SelectedCells[2].Value.ToString();
                     tid = Convert.ToInt32(index);
                     Spremeni();
                 }

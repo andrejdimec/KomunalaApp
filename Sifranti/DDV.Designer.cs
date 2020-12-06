@@ -66,6 +66,7 @@
             // 
             // btnNazaj
             // 
+            this.btnNazaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnNazaj.FlatAppearance.BorderSize = 0;
             this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNazaj.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -75,11 +76,12 @@
             this.btnNazaj.Size = new System.Drawing.Size(100, 32);
             this.btnNazaj.TabIndex = 31;
             this.btnNazaj.Text = "Izhod";
-            this.btnNazaj.UseVisualStyleBackColor = true;
+            this.btnNazaj.UseVisualStyleBackColor = false;
             this.btnNazaj.Click += new System.EventHandler(this.btnNazaj_Click_1);
             // 
             // btnPreklici
             // 
+            this.btnPreklici.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnPreklici.FlatAppearance.BorderSize = 0;
             this.btnPreklici.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreklici.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -89,11 +91,12 @@
             this.btnPreklici.Size = new System.Drawing.Size(100, 32);
             this.btnPreklici.TabIndex = 30;
             this.btnPreklici.Text = "Prekliči";
-            this.btnPreklici.UseVisualStyleBackColor = true;
+            this.btnPreklici.UseVisualStyleBackColor = false;
             this.btnPreklici.Click += new System.EventHandler(this.btnPreklici_Click_1);
             // 
             // btnBrisi
             // 
+            this.btnBrisi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnBrisi.FlatAppearance.BorderSize = 0;
             this.btnBrisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrisi.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -103,11 +106,12 @@
             this.btnBrisi.Size = new System.Drawing.Size(100, 32);
             this.btnBrisi.TabIndex = 28;
             this.btnBrisi.Text = "Briši";
-            this.btnBrisi.UseVisualStyleBackColor = true;
+            this.btnBrisi.UseVisualStyleBackColor = false;
             this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click_1);
             // 
             // btnSpremeni
             // 
+            this.btnSpremeni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnSpremeni.FlatAppearance.BorderSize = 0;
             this.btnSpremeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpremeni.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -117,11 +121,12 @@
             this.btnSpremeni.Size = new System.Drawing.Size(100, 32);
             this.btnSpremeni.TabIndex = 27;
             this.btnSpremeni.Text = "Spremeni";
-            this.btnSpremeni.UseVisualStyleBackColor = true;
+            this.btnSpremeni.UseVisualStyleBackColor = false;
             this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click_1);
             // 
             // btnDodaj
             // 
+            this.btnDodaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnDodaj.FlatAppearance.BorderSize = 0;
             this.btnDodaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDodaj.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -131,7 +136,7 @@
             this.btnDodaj.Size = new System.Drawing.Size(100, 32);
             this.btnDodaj.TabIndex = 26;
             this.btnDodaj.Text = "Dodaj";
-            this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.UseVisualStyleBackColor = false;
             this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click_1);
             // 
             // dgv1
@@ -164,6 +169,7 @@
             // 
             // btnShrani
             // 
+            this.btnShrani.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnShrani.FlatAppearance.BorderSize = 0;
             this.btnShrani.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShrani.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -173,7 +179,7 @@
             this.btnShrani.Size = new System.Drawing.Size(100, 32);
             this.btnShrani.TabIndex = 29;
             this.btnShrani.Text = "Shrani";
-            this.btnShrani.UseVisualStyleBackColor = true;
+            this.btnShrani.UseVisualStyleBackColor = false;
             this.btnShrani.Click += new System.EventHandler(this.btnShrani_Click_1);
             // 
             // tb1
@@ -234,7 +240,7 @@
             this.Controls.Add(this.crtal);
             this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DDV";
             this.Text = "DDV";
             this.Load += new System.EventHandler(this.DDV_Load);

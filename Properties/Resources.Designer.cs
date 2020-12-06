@@ -63,6 +63,26 @@ namespace Komunala.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bm_baze {
+            get {
+                object obj = ResourceManager.GetObject("bm_baze", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bm_baze1 {
+            get {
+                object obj = ResourceManager.GetObject("bm_baze1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_alt_regular {
             get {
                 object obj = ResourceManager.GetObject("file-alt-regular", resourceCulture);
@@ -116,6 +136,16 @@ namespace Komunala.Properties {
         internal static System.Drawing.Bitmap gumbi_dnevnik_01 {
             get {
                 object obj = ResourceManager.GetObject("gumbi-dnevnik-01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gumbi_manjši_nastavitve {
+            get {
+                object obj = ResourceManager.GetObject("gumbi-manjši-nastavitve", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -251,12 +251,19 @@ namespace Komunala
             izprazni_tb();
             onemogoci_tb();
             btnShrani.Enabled = false;
+            btnShrani.BackColor = frmMain.barva_gumb2_disabled;
             btnPreklici.Enabled = false;
+            btnPreklici.BackColor = frmMain.barva_gumb2_disabled;
             btnDodaj.Enabled = true;
+            btnDodaj.BackColor = frmMain.barva_gumb2_neakt;
             btnBrisi.Enabled = true;
+            btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
             btnSpremeni.Enabled = true;
+            btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
             btnNazaj.Enabled = true;
+            btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
             dgv1.Focus();
+
         }
 
         public int Sm_id (string sm_koda)  // najdi id in opis stroškovnega mesta
@@ -521,12 +528,12 @@ namespace Komunala
             dodajanje = true;
             omogoci_tb();
             izprazni_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            btnShrani.Enabled = true;btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true;btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false;btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false;btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false;btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false;btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
             tbIme.Focus();
         }
 
@@ -534,12 +541,12 @@ namespace Komunala
         {
             dodajanje = false;
             omogoci_tb();
-            btnShrani.Enabled = true;
-            btnPreklici.Enabled = true;
-            btnDodaj.Enabled = false;
-            btnBrisi.Enabled = false;
-            btnSpremeni.Enabled = false;
-            btnNazaj.Enabled = false;
+            btnShrani.Enabled = true;btnShrani.BackColor = frmMain.barva_gumb2_neakt;
+            btnPreklici.Enabled = true;btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
+            btnDodaj.Enabled = false;btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
+            btnBrisi.Enabled = false;btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnSpremeni.Enabled = false;btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
+            btnNazaj.Enabled = false;btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
             tbIme.Focus();
         }
 

@@ -63,6 +63,7 @@
             this.Cena_o = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cenao_22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cenao95 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnStoritve = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,7 +169,7 @@
             this.btnNazaj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnNazaj.FlatAppearance.BorderSize = 0;
             this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNazaj.Location = new System.Drawing.Point(289, 774);
+            this.btnNazaj.Location = new System.Drawing.Point(420, 774);
             this.btnNazaj.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNazaj.Name = "btnNazaj";
             this.btnNazaj.Size = new System.Drawing.Size(110, 36);
@@ -280,7 +281,9 @@
             this.cb1.Name = "cb1";
             this.cb1.Size = new System.Drawing.Size(303, 26);
             this.cb1.TabIndex = 15;
+            this.cb1.DropDownClosed += new System.EventHandler(this.cb1_DropDownClosed);
             this.cb1.SelectedValueChanged += new System.EventHandler(this.cb1_SelectedValueChanged);
+            this.cb1.Enter += new System.EventHandler(this.cb1_Enter);
             this.cb1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cb1_MouseClick);
             // 
             // label1
@@ -296,7 +299,7 @@
             // 
             this.crtal.Location = new System.Drawing.Point(27, 55);
             this.crtal.Name = "crtal";
-            this.crtal.Size = new System.Drawing.Size(593, 18);
+            this.crtal.Size = new System.Drawing.Size(503, 18);
             this.crtal.TabIndex = 21;
             this.crtal.Text = "Vrsta storitev";
             // 
@@ -404,11 +407,26 @@
             this.Cenao95.Name = "Cenao95";
             this.Cenao95.ReadOnly = true;
             // 
+            // btnStoritve
+            // 
+            this.btnStoritve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btnStoritve.FlatAppearance.BorderSize = 0;
+            this.btnStoritve.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStoritve.Location = new System.Drawing.Point(289, 774);
+            this.btnStoritve.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnStoritve.Name = "btnStoritve";
+            this.btnStoritve.Size = new System.Drawing.Size(110, 36);
+            this.btnStoritve.TabIndex = 24;
+            this.btnStoritve.Text = "Storitve";
+            this.btnStoritve.UseVisualStyleBackColor = false;
+            this.btnStoritve.Click += new System.EventHandler(this.btnStoritve_Click);
+            // 
             // frmObcinaCenik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1327, 860);
+            this.Controls.Add(this.btnStoritve);
             this.Controls.Add(this.dgv1);
             this.Controls.Add(this.crtal);
             this.Controls.Add(this.label4);
@@ -473,5 +491,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cena_o;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cenao_22;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cenao95;
+        private System.Windows.Forms.Button btnStoritve;
     }
 }

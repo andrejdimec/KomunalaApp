@@ -118,10 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="gumbi-manjši-skupine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-manjši-skupine.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bm_baze1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bm_baze2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bm_dnevnik-01-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="gumbi-tel-imenik" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gumbi-tel-imenik.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bm_dnevnik-01-011" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_dnevnik-01-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bm_baze" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -130,26 +133,38 @@
   <data name="bm_gjs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_gjs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gumbi-manjši-ddv" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-manjši-ddv.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gumbi-manjši-skupine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-manjši-skupine.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bm_situacije" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_situacije.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gumbi-cenik" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-cenik.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="bm_baze2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bm_baze3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gumbi-manjši-ddv" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-manjši-ddv.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bm_pregled_dnevnikov" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_pregled_dnevnikov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bm_dnevnik-01-011" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\bm_dnevnik-01-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gumbi-cenik" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-cenik.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gumbibaza-stevilk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gumbibaza-stevilk.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="gumbi-enote" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\gumbi-enote.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gumbi-manjsi-sodelavci" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-manjsi-sodelavci.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gumbi-podpisniki" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\gumbi-podpisniki.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gumbi-170x200-dnevnik" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-170x200-dnevnik.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GUMB-DNEVNIK" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\GUMB-DNEVNIK.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,13 +172,13 @@
   <data name="bm_dnevnik-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_dnevnik-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bm_dnevnik-01-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\bm_dnevnik-01-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bm_storitve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_storitve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gumbi-170x200-dnevnik" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-170x200-dnevnik.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gumbi-manjsi-sodelavci" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-manjsi-sodelavci.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gumbi-tel-imenik1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\gumbi-tel-imenik1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

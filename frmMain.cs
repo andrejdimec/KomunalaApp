@@ -75,7 +75,7 @@ namespace Komunala
         public static Color barva_crta = Color.FromArgb(140, 140, 140);
         public static Color barva_form_back = Color.FromArgb(242, 242, 242);
 
-        bool akt_dnevnik, akt_storitve, akt_nalog, akt_ponudba, akt_ijsvo, akt_nastavitve, akt_sifranti;  // kateri zavihek je aktiven
+        bool akt_delovni, akt_telefonija, akt_dnevnik, akt_storitve, akt_nalog, akt_ponudba, akt_ijsvo, akt_nastavitve, akt_sifranti;  // kateri zavihek je aktiven
 
         SqlConnection con = frmMain.c;
 
@@ -111,7 +111,10 @@ namespace Komunala
             ////Environment.Exit(0);
             ////frmStoritve secondForm = new frmStoritve();
             ////secondForm.ShowDialog();
-            //Environment.Exit(0);
+            frmTelBaza sec = new frmTelBaza();
+            sec.ShowDialog();
+
+            Environment.Exit(0);
         }
 
 
@@ -187,10 +190,12 @@ namespace Komunala
             bm_dnevnik.BackColor = barva_gumb_neakt;
             bm_ijsvo.BackColor = barva_gumb_neakt;
             bm_nalogi.BackColor = barva_gumb_neakt;
-            bm_nastavitve.BackColor = barva_gumb_neakt;
+            bm_telefonija.BackColor = barva_gumb_neakt;
             bm_ponudbe.BackColor = barva_gumb_neakt;
             bm_storitve.BackColor = barva_gumb_neakt;
             bm_šifranti.BackColor = barva_gumb_neakt;
+            bm_delovni_nalog.BackColor = barva_gumb_neakt;
+            bm_izhod.BackColor = barva_gumb_neakt;
         }
 
         private void Vsi_neaktivni()  // naredi vse zavihke neaktivne
@@ -202,6 +207,8 @@ namespace Komunala
             akt_ijsvo = false;
             akt_sifranti = false;
             akt_storitve = false;
+            akt_delovni = false;
+            akt_telefonija = false;
         }
 
 
@@ -279,19 +286,6 @@ namespace Komunala
 
         }
 
-        private void bm_nastavitve_Click(object sender, EventArgs e)
-        {
-            Vsi_neaktivni();
-            akt_nastavitve = true;
-            Razbarvaj_gumbe();
-            bm_nastavitve.BackColor = barva_gumb_akt;
-            this.tc.SelectedTab = this.tp_nastavitve;
-            cr_nastavitve.AutoSize = false;
-            cr_nastavitve.Height = 1;
-            cr_nastavitve.BorderStyle = BorderStyle.Fixed3D;
-
-        }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             frmSituacije secondForm = new frmSituacije();
@@ -336,7 +330,7 @@ namespace Komunala
 
         private void bm_nastavitve_MouseEnter(object sender, EventArgs e)
         {
-            bm_nastavitve.BackColor = barva_gumb_akt;
+            bm_telefonija.BackColor = barva_gumb_akt;
         }
 
         private void bm_dnevnik_MouseLeave(object sender, EventArgs e)
@@ -372,7 +366,7 @@ namespace Komunala
         private void bm_nastavitve_MouseLeave(object sender, EventArgs e)
         {
             if (akt_nastavitve != true)
-                bm_nastavitve.BackColor = barva_gumb_neakt;
+                bm_telefonija.BackColor = barva_gumb_neakt;
         }
 
         private void bm_izhod_MouseLeave(object sender, EventArgs e)
@@ -467,6 +461,55 @@ namespace Komunala
         DateTime v_noc;
         string tmp_mesec, tmp_dan, tmp_leto, tmp_skupaj;
         DateTime tmp_datum;
+
+        private void bm_delovni_nalog_Click(object sender, EventArgs e)
+        {
+            Vsi_neaktivni();
+            akt_delovni = true;
+            Razbarvaj_gumbe();
+            this.tc.SelectedTab = this.tp_delovni;
+            bm_delovni_nalog.BackColor = barva_gumb_akt;
+            cr_delovni.AutoSize = false;
+            cr_delovni.Height = 1;
+            cr_delovni.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void bm_delovni_nalog_MouseLeave(object sender, EventArgs e)
+        {
+            if (akt_delovni != true)
+                bm_delovni_nalog.BackColor = barva_gumb_neakt;
+        }
+
+        private void bm_delovni_nalog_MouseEnter(object sender, EventArgs e)
+        {
+            bm_delovni_nalog.BackColor = barva_gumb_akt;
+        }
+
+        private void button9_Click_1(object sender, EventArgs e)
+        {
+            frmTelBaza sec = new frmTelBaza();
+            sec.ShowDialog();
+        }
+
+        private void bm_telefonija_Click(object sender, EventArgs e)
+        {
+            Vsi_neaktivni();
+            akt_telefonija = true;
+            Razbarvaj_gumbe();
+            bm_telefonija.BackColor = barva_gumb_akt;
+            this.tc.SelectedTab = this.tp_telefonija;
+            cr_telefonija.AutoSize = false;
+            cr_telefonija.Height = 1;
+            cr_telefonija.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            frmNastavitve secondForm = new frmNastavitve();
+            secondForm.ShowDialog();
+            Nastavitve();  // še enkrat preberi
+        }
+
         int ii, xx; // števci
         bool tmp_jepraznik;
 

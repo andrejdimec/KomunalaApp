@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -845,6 +845,7 @@
             this.tb1.Size = new System.Drawing.Size(113, 26);
             this.tb1.TabIndex = 7;
             this.tb1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb1.Leave += new System.EventHandler(this.tb1_Leave_1);
             // 
             // tbv3
             // 
@@ -896,6 +897,7 @@
             this.tb14.Size = new System.Drawing.Size(113, 26);
             this.tb14.TabIndex = 23;
             this.tb14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb14.Leave += new System.EventHandler(this.tb14_Leave);
             // 
             // tb15
             // 
@@ -906,6 +908,7 @@
             this.tb15.Size = new System.Drawing.Size(113, 26);
             this.tb15.TabIndex = 24;
             this.tb15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb15.Leave += new System.EventHandler(this.tb15_Leave);
             // 
             // tbv1
             // 
@@ -947,6 +950,7 @@
             this.tb13.Size = new System.Drawing.Size(113, 26);
             this.tb13.TabIndex = 22;
             this.tb13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb13.Leave += new System.EventHandler(this.tb13_Leave);
             // 
             // tb27
             // 
@@ -966,6 +970,7 @@
             this.tb16.Size = new System.Drawing.Size(113, 26);
             this.tb16.TabIndex = 25;
             this.tb16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb16.Leave += new System.EventHandler(this.tb16_Leave);
             // 
             // label21
             // 
@@ -1007,6 +1012,7 @@
             this.tb17.Size = new System.Drawing.Size(113, 26);
             this.tb17.TabIndex = 26;
             this.tb17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb17.Leave += new System.EventHandler(this.tb17_Leave);
             // 
             // tb29
             // 
@@ -1037,6 +1043,7 @@
             this.tb11.Size = new System.Drawing.Size(113, 26);
             this.tb11.TabIndex = 20;
             this.tb11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb11.Leave += new System.EventHandler(this.tb11_Leave);
             // 
             // tb30
             // 
@@ -1067,6 +1074,7 @@
             this.tb2.Size = new System.Drawing.Size(113, 26);
             this.tb2.TabIndex = 8;
             this.tb2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb2.Leave += new System.EventHandler(this.tb2_Leave_1);
             // 
             // tb10
             // 
@@ -1077,6 +1085,7 @@
             this.tb10.Size = new System.Drawing.Size(113, 26);
             this.tb10.TabIndex = 19;
             this.tb10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb10.Leave += new System.EventHandler(this.tb10_Leave);
             // 
             // tb9
             // 
@@ -1087,6 +1096,7 @@
             this.tb9.Size = new System.Drawing.Size(113, 26);
             this.tb9.TabIndex = 18;
             this.tb9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb9.Leave += new System.EventHandler(this.tb9_Leave);
             // 
             // tb3
             // 
@@ -1097,6 +1107,7 @@
             this.tb3.Size = new System.Drawing.Size(113, 26);
             this.tb3.TabIndex = 12;
             this.tb3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb3.Leave += new System.EventHandler(this.tb3_Leave);
             // 
             // tb8
             // 
@@ -1107,6 +1118,7 @@
             this.tb8.Size = new System.Drawing.Size(113, 26);
             this.tb8.TabIndex = 17;
             this.tb8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb8.Leave += new System.EventHandler(this.tb8_Leave);
             // 
             // tb7
             // 
@@ -1117,6 +1129,7 @@
             this.tb7.Size = new System.Drawing.Size(113, 26);
             this.tb7.TabIndex = 16;
             this.tb7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb7.Leave += new System.EventHandler(this.tb7_Leave);
             // 
             // tb4
             // 
@@ -1127,6 +1140,7 @@
             this.tb4.Size = new System.Drawing.Size(113, 26);
             this.tb4.TabIndex = 13;
             this.tb4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb4.Leave += new System.EventHandler(this.tb4_Leave_1);
             // 
             // tb6
             // 
@@ -1148,6 +1162,7 @@
             this.tb5.Size = new System.Drawing.Size(113, 26);
             this.tb5.TabIndex = 14;
             this.tb5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb5.Leave += new System.EventHandler(this.tb5_Leave);
             // 
             // tb100
             // 
@@ -1319,14 +1334,14 @@
             this.dgv1.AllowUserToResizeColumns = false;
             this.dgv1.AllowUserToResizeRows = false;
             this.dgv1.BackgroundColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_dnevnika,
@@ -1336,14 +1351,14 @@
             this.em,
             this.kol,
             this.znesek});
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv1.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle40.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle40.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv1.DefaultCellStyle = dataGridViewCellStyle40;
             this.dgv1.EnableHeadersVisualStyles = false;
             this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgv1.Location = new System.Drawing.Point(18, 48);
@@ -1390,8 +1405,8 @@
             // 
             // em
             // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.em.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.em.DefaultCellStyle = dataGridViewCellStyle37;
             this.em.HeaderText = "EM";
             this.em.Name = "em";
             this.em.ReadOnly = true;
@@ -1399,11 +1414,11 @@
             // 
             // kol
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle23.Format = "N2";
-            dataGridViewCellStyle23.NullValue = null;
-            dataGridViewCellStyle23.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.kol.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.Format = "N2";
+            dataGridViewCellStyle38.NullValue = null;
+            dataGridViewCellStyle38.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.kol.DefaultCellStyle = dataGridViewCellStyle38;
             this.kol.HeaderText = "Količina";
             this.kol.Name = "kol";
             this.kol.ReadOnly = true;
@@ -1411,11 +1426,11 @@
             // 
             // znesek
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle24.Format = "N2";
-            dataGridViewCellStyle24.NullValue = null;
-            dataGridViewCellStyle24.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.znesek.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle39.Format = "N2";
+            dataGridViewCellStyle39.NullValue = null;
+            dataGridViewCellStyle39.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.znesek.DefaultCellStyle = dataGridViewCellStyle39;
             this.znesek.HeaderText = "Znesek";
             this.znesek.Name = "znesek";
             this.znesek.ReadOnly = true;
