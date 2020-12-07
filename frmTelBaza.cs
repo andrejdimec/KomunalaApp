@@ -24,11 +24,12 @@ namespace Komunala
         string index;
         int tid;
         bool dodajanje, osnovno, spreminjanje;
+        Dictionary<int, string> OsebeDict = new Dictionary<int, string>();
+        Dictionary<int, string> ObjektiDict = new Dictionary<int, string>();
 
 
         private void Osebe_v_cb()
         {
-            Dictionary<int, string> OsebeDict = new Dictionary<int, string>();
 
             q2 = "select * from tbl_sodelavci order by priimek";
             try
@@ -42,9 +43,7 @@ namespace Komunala
                     string tPriimek = (string)rdr2["Priimek"];
                     string tIme = (string)rdr2["Ime"];
                     int tIndeks = (int)rdr2["Id"];
-                    OsebeDict.Add(tIndeks, tPriimek+" "+tIme);
-
-                    //cbOseba.Items.Add(stor_zac);
+                    OsebeDict.Add(tIndeks, tPriimek + " " + tIme);
                 }
             }
             catch (Exception ex)
@@ -69,7 +68,6 @@ namespace Komunala
 
         private void Objekti_v_cb()
         {
-            Dictionary<int, string> ObjektiDict = new Dictionary<int, string>();
 
             q2 = "select * from tbl_objekti order by naziv";
             try
@@ -129,15 +127,13 @@ namespace Komunala
             Objekti_v_cb(); 
             Osebe_v_cb();
             Skupine_v_cb();
-            Design();
-            izprazni_tb();
-            onemogoci_tb();
             
+            Design();
             Grid();
             Display();
             Gumbi_1();
-
-            //Zacetek();
+            izprazni_tb();
+            onemogoci_tb();
             dgv1.Focus();
         }
 
@@ -149,6 +145,7 @@ namespace Komunala
         private void Design()
         {
             this.BackColor = frmMain.barva_form_back;
+            this.Text = frmMain.nazivPrograma; // Form tekst
 
             crtal.AutoSize = false;
             crtal.Height = 1;
@@ -168,7 +165,15 @@ namespace Komunala
             btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
             btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
 
-            //tbIme.BackColor = frmMain.bela;
+            tbStevilka.BackColor = frmMain.bela;
+            tbMpo.BackColor = frmMain.bela;
+            tbOpis.BackColor = frmMain.bela;
+            tbOpombe.BackColor = frmMain.bela;
+            tbIskanje.BackColor = frmMain.bela;
+            cbObjekt.BackColor = frmMain.bela;
+            cbOseba.BackColor = frmMain.bela;
+            cbSkupina.BackColor = frmMain.bela;
+
             //tbPriimek.BackColor = frmMain.bela;
             //tbIme2.BackColor = frmMain.bela;
             //tbPriimek2.BackColor = frmMain.bela;
@@ -222,32 +227,43 @@ namespace Komunala
 
         private void onemogoci_tb()
         {
+
+            cbObjekt.Enabled = false;
+            cbOseba.Enabled = false;
+            cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
+            //this.cbOseba.SelectedValue = 0;
+            //this.cbObjekt.SelectedValue = 0;
+            cbSkupina.DropDownStyle = ComboBoxStyle.DropDown;
             tbStevilka.Enabled = false;
             tbOpis.Enabled = false;
             tbOpombe.Enabled = false;
             tbMpo.Enabled = false;
-            cbObjekt.Enabled = false;
-            cbOseba.Enabled = true;
-            cbOseba.Enabled = false;
             chbAktivna.Enabled = false;
             chbImenik.Enabled = false;
             p1.Enabled = false;
             p2.Enabled = false;
             tbIskanje.Enabled = true;
             cbSkupina.Enabled = true;
-            dgv1.Enabled = false;
+            //dgv1.Enabled = false;
         }
 
         private void Preklici()
         {
-            spreminjanje = false; // ni cb1 on change
-            dodajanje = false; // ni cb1 on change
-            izprazni_tb();
+            if (dodajanje)
+            {
+                MessageBox.Show("dodajanje - prekliči");
+                izprazni_tb();
+            }
+            spreminjanje = false;
+            dodajanje = false;
             onemogoci_tb();
             Gumbi_1();
-            Display();
+            //Display();
         }
-            private void btnNazaj_Click(object sender, EventArgs e)
+            
+        
+        private void btnNazaj_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
@@ -382,7 +398,52 @@ namespace Komunala
         {
             index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
             tid = Convert.ToInt32(index);
+            //izprazni_tb();
             Nalozi(tid);
+        }
+
+        private void rbOseba_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dodajanje || spreminjanje)
+            { 
+                if (rbOseba.Checked == true)
+                {
+                    cbOseba.DropDownStyle = ComboBoxStyle.DropDown;
+                    cbOseba.Enabled = true;
+                }
+                else
+                {
+                    cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbOseba.Enabled = false;
+                }
+            }
+        }
+
+        private void rbTelemetrija_CheckedChanged(object sender, EventArgs e)
+        {
+            if (dodajanje || spreminjanje)
+            {
+                if (rbTelemetrija.Checked == true)
+                {
+                    cbObjekt.DropDownStyle = ComboBoxStyle.DropDown;
+                    cbObjekt.Enabled = true;
+                }
+                else
+                {
+                    cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbObjekt.Enabled = false;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //izprazni_tb();
+            this.cbOseba.SelectedValue = 2;
+            //cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
+            //cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
@@ -392,6 +453,9 @@ namespace Komunala
 
         private void omogoci_tb()
         {
+            cbSkupina.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOseba.DropDownStyle = ComboBoxStyle.DropDown;
+            cbObjekt.DropDownStyle = ComboBoxStyle.DropDown;
             tbStevilka.Enabled = true;
             tbOpis.Enabled = true;
             tbOpombe.Enabled = true;
@@ -425,23 +489,25 @@ namespace Komunala
             rbTelemetrija.Checked = false;
             tbIskanje.Text = "";
             cbSkupina.Text = "";
+            this.cbOseba.SelectedValue = 0;
+            this.cbObjekt.SelectedValue = 0;
         }
 
         private void Grid()
         {
-            dgv1.ColumnHeadersVisible = false;
+            //dgv1.ColumnHeadersVisible = false;
             dgv1.RowHeadersVisible = false;
             dgv1.ColumnCount = 4;
-            dgv1.Columns[0].Width = 1;
+            dgv1.Columns[0].Width = 20;
             dgv1.Columns[1].Width = 120;
             dgv1.Columns[2].Width = 120;
             dgv1.Columns[3].Width = 190;
 
             dgv1.Columns[0].Name = "Id";
-            dgv1.Columns[1].Name = "Priimek";
-            dgv1.Columns[2].Name = "Ime";
-            dgv1.Columns[3].Name = "Delovno mesto";
-            dgv1.Columns["Id"].Visible = false;
+            dgv1.Columns[1].Name = "Stevilka";
+            dgv1.Columns[2].Name = "Oseba";
+            dgv1.Columns[3].Name = "Objekt";
+            //dgv1.Columns["Id"].Visible = false;
             this.dgv1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -461,11 +527,13 @@ namespace Komunala
                 {
                     tid = (int)rdr["Id"];
                     string tstevilka = (string)rdr["stevilka"]; // Opis
-                    //tpriimek = (string)rdr["priimek"];  // določi id v katerega boš pisal
+                    string toseba = "Oseba";
+                    string tobjekt = "Objekt";
+                    //string toseba = (string)rdr["priimek"]+" "+ (string)rdr["priimek"];  // določi id v katerega boš pisal
                     //tdelovnomesto = (string)rdr["del_mesto"];
 
                     string strid = Convert.ToString(tid);
-                    string[] row1 = new string[] { strid, tstevilka };
+                    string[] row1 = new string[] {strid, tstevilka,toseba,tobjekt };
                     dgv1.Rows.Add(row1);
                 }
             }
@@ -499,12 +567,52 @@ namespace Komunala
                 while (rdr2.Read())
                 {
                     string tstevilka = (string)rdr2["stevilka"]; tbStevilka.Text = tstevilka;
+                    string topis = (string)rdr2["opis"]; tbOpis.Text = topis;
+                    string topomba = (string)rdr2["opomba"]; tbOpombe.Text = topomba;
                     int trb_mobilna = (int)rdr2["rb_mobilna"];
                     if (trb_mobilna == 1)
                         rbMobilna.Checked = true;
                     else if (trb_mobilna == 2)
                         rbStacionarna.Checked = true;
-                    string tmpo = (string)rdr2["stevilka"]; tbMpo.Text = tmpo;
+                    string tmpo = (string)rdr2["mpo"]; tbMpo.Text = tmpo;
+                    
+                    bool taktivna = (bool)rdr2["aktivna"];
+                    if (taktivna)
+                        chbAktivna.Checked = true;
+                    else
+                        chbAktivna.Checked = false;
+                    bool timenik = (bool)rdr2["imenik"];
+                    if (timenik)
+                        chbImenik.Checked = true;
+                    else
+                        chbImenik.Checked = false;
+
+                    int trb_oseba = (int)rdr2["rb_oseba"];
+                    if (trb_oseba == 1)
+                        rbOseba.Checked = true;
+                    else if (trb_oseba == 2)
+                        rbTelemetrija.Checked = true;
+                    else if (trb_oseba == 3)
+                        rbInternet.Checked = true;
+                    else if (trb_oseba == 4)
+                        rbDrugo.Checked = true;
+
+                    // oseba
+                    int cb_index = (int)rdr2["oseba"];
+                    if (OsebeDict.Keys.Contains(cb_index))
+                        this.cbOseba.SelectedValue = cb_index;
+                    else
+                        cbOseba.Text = "Neznana oseba";
+
+                    // objekt
+                    int cb_index_objekt = (int)rdr2["objekt"];
+                    if (ObjektiDict.Keys.Contains(cb_index_objekt))
+                        this.cbObjekt.SelectedValue = cb_index_objekt;
+                    else
+                        cbObjekt.Text = "Neznan objekt";
+
+
+
                 }
             }
             catch (Exception ex)
@@ -555,6 +663,7 @@ namespace Komunala
             chbAktivna.Checked = true;
             rbOseba.Checked = true;
             rbMobilna.Checked = true;
+            cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
             cbObjekt.Enabled = false;
             chbImenik.Checked = true;
             tbStevilka.Focus();

@@ -52,10 +52,10 @@ namespace Komunala
             this.chbImenik = new System.Windows.Forms.CheckBox();
             this.rbOseba = new System.Windows.Forms.RadioButton();
             this.p2 = new System.Windows.Forms.Panel();
-            this.rbTelemetrija = new System.Windows.Forms.RadioButton();
-            this.rbDrugo = new System.Windows.Forms.RadioButton();
-            this.chbAktivna = new System.Windows.Forms.CheckBox();
             this.rbInternet = new System.Windows.Forms.RadioButton();
+            this.rbDrugo = new System.Windows.Forms.RadioButton();
+            this.rbTelemetrija = new System.Windows.Forms.RadioButton();
+            this.chbAktivna = new System.Windows.Forms.CheckBox();
             this.lOseba = new System.Windows.Forms.Label();
             this.cbOseba = new System.Windows.Forms.ComboBox();
             this.cbObjekt = new System.Windows.Forms.ComboBox();
@@ -76,8 +76,8 @@ namespace Komunala
             this.btnPreklici.FlatAppearance.BorderSize = 0;
             this.btnPreklici.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreklici.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnPreklici.Location = new System.Drawing.Point(581, 670);
-            this.btnPreklici.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPreklici.Location = new System.Drawing.Point(758, 676);
+            this.btnPreklici.Margin = new System.Windows.Forms.Padding(4);
             this.btnPreklici.Name = "btnPreklici";
             this.btnPreklici.Size = new System.Drawing.Size(120, 36);
             this.btnPreklici.TabIndex = 46;
@@ -91,8 +91,8 @@ namespace Komunala
             this.btnShrani.FlatAppearance.BorderSize = 0;
             this.btnShrani.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShrani.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnShrani.Location = new System.Drawing.Point(444, 670);
-            this.btnShrani.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnShrani.Location = new System.Drawing.Point(621, 676);
+            this.btnShrani.Margin = new System.Windows.Forms.Padding(4);
             this.btnShrani.Name = "btnShrani";
             this.btnShrani.Size = new System.Drawing.Size(120, 36);
             this.btnShrani.TabIndex = 45;
@@ -106,8 +106,8 @@ namespace Komunala
             this.btnBrisi.FlatAppearance.BorderSize = 0;
             this.btnBrisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrisi.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnBrisi.Location = new System.Drawing.Point(718, 626);
-            this.btnBrisi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrisi.Location = new System.Drawing.Point(895, 632);
+            this.btnBrisi.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrisi.Name = "btnBrisi";
             this.btnBrisi.Size = new System.Drawing.Size(120, 36);
             this.btnBrisi.TabIndex = 44;
@@ -120,8 +120,8 @@ namespace Komunala
             this.btnSpremeni.FlatAppearance.BorderSize = 0;
             this.btnSpremeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpremeni.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnSpremeni.Location = new System.Drawing.Point(581, 626);
-            this.btnSpremeni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSpremeni.Location = new System.Drawing.Point(758, 632);
+            this.btnSpremeni.Margin = new System.Windows.Forms.Padding(4);
             this.btnSpremeni.Name = "btnSpremeni";
             this.btnSpremeni.Size = new System.Drawing.Size(120, 36);
             this.btnSpremeni.TabIndex = 43;
@@ -134,8 +134,8 @@ namespace Komunala
             this.btnDodaj.FlatAppearance.BorderSize = 0;
             this.btnDodaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDodaj.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnDodaj.Location = new System.Drawing.Point(444, 626);
-            this.btnDodaj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDodaj.Location = new System.Drawing.Point(621, 632);
+            this.btnDodaj.Margin = new System.Windows.Forms.Padding(4);
             this.btnDodaj.Name = "btnDodaj";
             this.btnDodaj.Size = new System.Drawing.Size(120, 36);
             this.btnDodaj.TabIndex = 42;
@@ -149,8 +149,8 @@ namespace Komunala
             this.btnNazaj.FlatAppearance.BorderSize = 0;
             this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNazaj.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnNazaj.Location = new System.Drawing.Point(718, 670);
-            this.btnNazaj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNazaj.Location = new System.Drawing.Point(895, 676);
+            this.btnNazaj.Margin = new System.Windows.Forms.Padding(4);
             this.btnNazaj.Name = "btnNazaj";
             this.btnNazaj.Size = new System.Drawing.Size(120, 36);
             this.btnNazaj.TabIndex = 41;
@@ -195,7 +195,7 @@ namespace Komunala
             this.dgv1.Location = new System.Drawing.Point(24, 147);
             this.dgv1.Name = "dgv1";
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv1.Size = new System.Drawing.Size(394, 572);
+            this.dgv1.Size = new System.Drawing.Size(572, 572);
             this.dgv1.TabIndex = 49;
             this.dgv1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_RowEnter);
             // 
@@ -234,21 +234,21 @@ namespace Komunala
             // 
             // tbStevilka
             // 
-            this.tbStevilka.Location = new System.Drawing.Point(444, 176);
+            this.tbStevilka.Location = new System.Drawing.Point(621, 182);
             this.tbStevilka.Name = "tbStevilka";
             this.tbStevilka.Size = new System.Drawing.Size(165, 26);
             this.tbStevilka.TabIndex = 54;
             // 
             // tbMpo
             // 
-            this.tbMpo.Location = new System.Drawing.Point(636, 176);
+            this.tbMpo.Location = new System.Drawing.Point(813, 182);
             this.tbMpo.Name = "tbMpo";
             this.tbMpo.Size = new System.Drawing.Size(56, 26);
             this.tbMpo.TabIndex = 55;
             // 
             // tbOpis
             // 
-            this.tbOpis.Location = new System.Drawing.Point(444, 242);
+            this.tbOpis.Location = new System.Drawing.Point(621, 248);
             this.tbOpis.Name = "tbOpis";
             this.tbOpis.Size = new System.Drawing.Size(394, 26);
             this.tbOpis.TabIndex = 56;
@@ -256,7 +256,7 @@ namespace Komunala
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(444, 155);
+            this.label4.Location = new System.Drawing.Point(621, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(126, 18);
             this.label4.TabIndex = 57;
@@ -265,7 +265,7 @@ namespace Komunala
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(636, 155);
+            this.label5.Location = new System.Drawing.Point(813, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 18);
             this.label5.TabIndex = 58;
@@ -274,7 +274,7 @@ namespace Komunala
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(446, 221);
+            this.label6.Location = new System.Drawing.Point(623, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 18);
             this.label6.TabIndex = 59;
@@ -283,7 +283,7 @@ namespace Komunala
             // chbImenik
             // 
             this.chbImenik.AutoSize = true;
-            this.chbImenik.Location = new System.Drawing.Point(444, 581);
+            this.chbImenik.Location = new System.Drawing.Point(621, 587);
             this.chbImenik.Name = "chbImenik";
             this.chbImenik.Size = new System.Drawing.Size(210, 22);
             this.chbImenik.TabIndex = 60;
@@ -300,6 +300,7 @@ namespace Komunala
             this.rbOseba.TabStop = true;
             this.rbOseba.Text = "Oseba";
             this.rbOseba.UseVisualStyleBackColor = true;
+            this.rbOseba.CheckedChanged += new System.EventHandler(this.rbOseba_CheckedChanged);
             // 
             // p2
             // 
@@ -307,42 +308,10 @@ namespace Komunala
             this.p2.Controls.Add(this.rbDrugo);
             this.p2.Controls.Add(this.rbTelemetrija);
             this.p2.Controls.Add(this.rbOseba);
-            this.p2.Location = new System.Drawing.Point(444, 289);
+            this.p2.Location = new System.Drawing.Point(621, 295);
             this.p2.Name = "p2";
             this.p2.Size = new System.Drawing.Size(394, 43);
             this.p2.TabIndex = 62;
-            // 
-            // rbTelemetrija
-            // 
-            this.rbTelemetrija.AutoSize = true;
-            this.rbTelemetrija.Location = new System.Drawing.Point(86, 12);
-            this.rbTelemetrija.Name = "rbTelemetrija";
-            this.rbTelemetrija.Size = new System.Drawing.Size(97, 22);
-            this.rbTelemetrija.TabIndex = 62;
-            this.rbTelemetrija.TabStop = true;
-            this.rbTelemetrija.Text = "Telemetrija";
-            this.rbTelemetrija.UseVisualStyleBackColor = true;
-            // 
-            // rbDrugo
-            // 
-            this.rbDrugo.AutoSize = true;
-            this.rbDrugo.Location = new System.Drawing.Point(305, 12);
-            this.rbDrugo.Name = "rbDrugo";
-            this.rbDrugo.Size = new System.Drawing.Size(63, 22);
-            this.rbDrugo.TabIndex = 63;
-            this.rbDrugo.TabStop = true;
-            this.rbDrugo.Text = "Drugo";
-            this.rbDrugo.UseVisualStyleBackColor = true;
-            // 
-            // chbAktivna
-            // 
-            this.chbAktivna.AutoSize = true;
-            this.chbAktivna.Location = new System.Drawing.Point(718, 178);
-            this.chbAktivna.Name = "chbAktivna";
-            this.chbAktivna.Size = new System.Drawing.Size(124, 22);
-            this.chbAktivna.TabIndex = 64;
-            this.chbAktivna.Text = "Aktivna številka";
-            this.chbAktivna.UseVisualStyleBackColor = true;
             // 
             // rbInternet
             // 
@@ -355,10 +324,43 @@ namespace Komunala
             this.rbInternet.Text = "Internet";
             this.rbInternet.UseVisualStyleBackColor = true;
             // 
+            // rbDrugo
+            // 
+            this.rbDrugo.AutoSize = true;
+            this.rbDrugo.Location = new System.Drawing.Point(305, 12);
+            this.rbDrugo.Name = "rbDrugo";
+            this.rbDrugo.Size = new System.Drawing.Size(63, 22);
+            this.rbDrugo.TabIndex = 63;
+            this.rbDrugo.TabStop = true;
+            this.rbDrugo.Text = "Drugo";
+            this.rbDrugo.UseVisualStyleBackColor = true;
+            // 
+            // rbTelemetrija
+            // 
+            this.rbTelemetrija.AutoSize = true;
+            this.rbTelemetrija.Location = new System.Drawing.Point(86, 12);
+            this.rbTelemetrija.Name = "rbTelemetrija";
+            this.rbTelemetrija.Size = new System.Drawing.Size(97, 22);
+            this.rbTelemetrija.TabIndex = 62;
+            this.rbTelemetrija.TabStop = true;
+            this.rbTelemetrija.Text = "Telemetrija";
+            this.rbTelemetrija.UseVisualStyleBackColor = true;
+            this.rbTelemetrija.CheckedChanged += new System.EventHandler(this.rbTelemetrija_CheckedChanged);
+            // 
+            // chbAktivna
+            // 
+            this.chbAktivna.AutoSize = true;
+            this.chbAktivna.Location = new System.Drawing.Point(895, 184);
+            this.chbAktivna.Name = "chbAktivna";
+            this.chbAktivna.Size = new System.Drawing.Size(124, 22);
+            this.chbAktivna.TabIndex = 64;
+            this.chbAktivna.Text = "Aktivna številka";
+            this.chbAktivna.UseVisualStyleBackColor = true;
+            // 
             // lOseba
             // 
             this.lOseba.AutoSize = true;
-            this.lOseba.Location = new System.Drawing.Point(442, 357);
+            this.lOseba.Location = new System.Drawing.Point(619, 363);
             this.lOseba.Name = "lOseba";
             this.lOseba.Size = new System.Drawing.Size(47, 18);
             this.lOseba.TabIndex = 68;
@@ -367,7 +369,7 @@ namespace Komunala
             // cbOseba
             // 
             this.cbOseba.FormattingEnabled = true;
-            this.cbOseba.Location = new System.Drawing.Point(443, 378);
+            this.cbOseba.Location = new System.Drawing.Point(620, 384);
             this.cbOseba.Name = "cbOseba";
             this.cbOseba.Size = new System.Drawing.Size(395, 26);
             this.cbOseba.TabIndex = 69;
@@ -375,7 +377,7 @@ namespace Komunala
             // cbObjekt
             // 
             this.cbObjekt.FormattingEnabled = true;
-            this.cbObjekt.Location = new System.Drawing.Point(443, 447);
+            this.cbObjekt.Location = new System.Drawing.Point(620, 453);
             this.cbObjekt.Name = "cbObjekt";
             this.cbObjekt.Size = new System.Drawing.Size(395, 26);
             this.cbObjekt.TabIndex = 71;
@@ -383,7 +385,7 @@ namespace Komunala
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(442, 426);
+            this.label7.Location = new System.Drawing.Point(619, 432);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(133, 18);
             this.label7.TabIndex = 70;
@@ -391,7 +393,7 @@ namespace Komunala
             // 
             // tbOpombe
             // 
-            this.tbOpombe.Location = new System.Drawing.Point(443, 516);
+            this.tbOpombe.Location = new System.Drawing.Point(620, 522);
             this.tbOpombe.Multiline = true;
             this.tbOpombe.Name = "tbOpombe";
             this.tbOpombe.Size = new System.Drawing.Size(395, 45);
@@ -400,7 +402,7 @@ namespace Komunala
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(444, 495);
+            this.label8.Location = new System.Drawing.Point(621, 501);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 18);
             this.label8.TabIndex = 73;
@@ -410,7 +412,7 @@ namespace Komunala
             // 
             this.p1.Controls.Add(this.rbStacionarna);
             this.p1.Controls.Add(this.rbMobilna);
-            this.p1.Location = new System.Drawing.Point(443, 94);
+            this.p1.Location = new System.Drawing.Point(620, 100);
             this.p1.Name = "p1";
             this.p1.Size = new System.Drawing.Size(192, 43);
             this.p1.TabIndex = 65;
@@ -441,7 +443,7 @@ namespace Komunala
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(863, 745);
+            this.ClientSize = new System.Drawing.Size(1110, 745);
             this.Controls.Add(this.p1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbOpombe);
@@ -472,7 +474,7 @@ namespace Komunala
             this.Controls.Add(this.btnDodaj);
             this.Controls.Add(this.btnNazaj);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTelBaza";
             this.Text = "frmTelBaza";
             this.Load += new System.EventHandler(this.frmTelBaza_Load);
