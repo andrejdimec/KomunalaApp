@@ -16,14 +16,13 @@ namespace Komunala
         SqlConnection con = frmMain.c;
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
-
         SqlCommand cmd, cmd2, cmd3;
         SqlDataReader rdr, rdr2, rdr3 = null;
 
         string q, q2, q3;
         string index;
-        int tid;
-        bool dodajanje, osnovno, spreminjanje;
+        int tid,prvi_id;
+        bool dodajanje, osnovno, spreminjanje,prvic;
         Dictionary<int, string> OsebeDict = new Dictionary<int, string>();
         Dictionary<int, string> ObjektiDict = new Dictionary<int, string>();
 
@@ -81,8 +80,6 @@ namespace Komunala
                     string tNaziv = (string)rdr2["naziv"];
                     int tIndeks = (int)rdr2["Id"];
                     ObjektiDict.Add(tIndeks, tNaziv);
-
-                    //cbOseba.Items.Add(stor_zac);
                 }
             }
             catch (Exception ex)
@@ -116,12 +113,16 @@ namespace Komunala
             SkupineDict.Add(5, "Mobilne številke");
             SkupineDict.Add(6, "Stacionarne številke");
             SkupineDict.Add(7, "Neaktivne številke");
-
             cbSkupina.DataSource = SkupineDict.ToArray();
             cbSkupina.DisplayMember = "Value";
             cbSkupina.ValueMember = "Key";
         }
 
+        private void Nalozi_prvega()
+        {
+            int idx = OsebeDict.Keys.First();
+            Nalozi(idx);
+        }
         private void frmTelBaza_Load(object sender, EventArgs e)
         {
             Objekti_v_cb(); 
@@ -134,6 +135,7 @@ namespace Komunala
             Gumbi_1();
             izprazni_tb();
             onemogoci_tb();
+            Nalozi_prvega();
             dgv1.Focus();
         }
 
@@ -164,7 +166,6 @@ namespace Komunala
             btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
             btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
             btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
-
             tbStevilka.BackColor = frmMain.bela;
             tbMpo.BackColor = frmMain.bela;
             tbOpis.BackColor = frmMain.bela;
@@ -173,29 +174,6 @@ namespace Komunala
             cbObjekt.BackColor = frmMain.bela;
             cbOseba.BackColor = frmMain.bela;
             cbSkupina.BackColor = frmMain.bela;
-
-            //tbPriimek.BackColor = frmMain.bela;
-            //tbIme2.BackColor = frmMain.bela;
-            //tbPriimek2.BackColor = frmMain.bela;
-            //tbDelovnoMesto.BackColor = frmMain.bela;
-            //tbSm.BackColor = frmMain.bela;
-            //tbPosta.BackColor = frmMain.bela;
-            //tbNazivPoste.BackColor = frmMain.bela;
-            //tbHs.BackColor = frmMain.bela;
-            //tbUlica.BackColor = frmMain.bela;
-            //tbPrivatMail.BackColor = frmMain.bela;
-            //tbSluzbeniMail.BackColor = frmMain.bela;
-            //tbSluzbeniMob.BackColor = frmMain.bela;
-            //tbSluzbeniStac.BackColor = frmMain.bela;
-            //tbPrivatMob.BackColor = frmMain.bela;
-            //tbMpo.BackColor = frmMain.bela;
-            //tbIzobrazba.BackColor = frmMain.bela;
-            //tbEmso.BackColor = frmMain.bela;
-            //tbDs.BackColor = frmMain.bela;
-            //tbTrr.BackColor = frmMain.bela;
-            //tbBanka.BackColor = frmMain.bela;
-            //tbOddelek.BackColor = frmMain.bela;
-
         }
 
         private void Gumbi_2() // dodajanje, urejanje
@@ -218,7 +196,6 @@ namespace Komunala
             btnNazaj.Enabled = true; btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
         }
 
-
         private void Izprazni_dgv()
         {
             dgv1.Rows.Clear();
@@ -228,12 +205,10 @@ namespace Komunala
         private void onemogoci_tb()
         {
 
-            cbObjekt.Enabled = false;
-            cbOseba.Enabled = false;
             cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
             cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
-            //this.cbOseba.SelectedValue = 0;
-            //this.cbObjekt.SelectedValue = 0;
+            cbObjekt.Enabled = false;
+            cbOseba.Enabled = false;
             cbSkupina.DropDownStyle = ComboBoxStyle.DropDown;
             tbStevilka.Enabled = false;
             tbOpis.Enabled = false;
@@ -245,21 +220,19 @@ namespace Komunala
             p2.Enabled = false;
             tbIskanje.Enabled = true;
             cbSkupina.Enabled = true;
-            //dgv1.Enabled = false;
         }
 
         private void Preklici()
         {
             if (dodajanje)
             {
-                MessageBox.Show("dodajanje - prekliči");
+                
                 izprazni_tb();
             }
             spreminjanje = false;
             dodajanje = false;
             onemogoci_tb();
             Gumbi_1();
-            //Display();
         }
             
         
@@ -272,6 +245,8 @@ namespace Komunala
         {
             int taktivna = 0;
             int timenik = 0;
+            int toseba = -99;
+            int tobjekt = -99;
             string q;
             
             if (tbStevilka.Text != "")
@@ -299,11 +274,20 @@ namespace Komunala
                 else if (rbDrugo.Checked)
                     trb_oseba = 4;
 
-                int toseba = ((KeyValuePair<int, string>)cbOseba.SelectedItem).Key;
-                int tobjekt = ((KeyValuePair<int, string>)cbObjekt.SelectedItem).Key;
+                if (cbOseba.Text != "")
+                {
+                    toseba = ((KeyValuePair<int, string>)cbOseba.SelectedItem).Key;
+                }
+                if (cbObjekt.Text != "")
+                {
+                    tobjekt = ((KeyValuePair<int, string>)cbObjekt.SelectedItem).Key;
+                }
                 string topomba = tbOpombe.Text;
+                
                 if (chbImenik.Checked)
                     timenik = 1;
+                else
+                    timenik = 0;
 
 
                 try
@@ -381,8 +365,6 @@ namespace Komunala
                 MessageBox.Show("Napaka: Vnesti moraš vsaj telefonsko številko!");
                 tbStevilka.Focus();
             }
-            Display();
-
         }
         private void btnShrani_Click(object sender, EventArgs e)
         {
@@ -398,7 +380,7 @@ namespace Komunala
         {
             index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
             tid = Convert.ToInt32(index);
-            //izprazni_tb();
+            izprazni_tb();
             Nalozi(tid);
         }
 
@@ -410,12 +392,35 @@ namespace Komunala
                 {
                     cbOseba.DropDownStyle = ComboBoxStyle.DropDown;
                     cbOseba.Enabled = true;
+                    cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbObjekt.Enabled = false;
+                    this.cbObjekt.SelectedValue = 0;
                 }
                 else
                 {
-                    cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cbOseba.Enabled = false;
                 }
+            }
+        }
+
+        private void rbInternet_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbInternet.Checked == true)
+            {
+                cbOseba.DropDownStyle = ComboBoxStyle.DropDown;
+                cbOseba.Enabled = true;
+                cbObjekt.DropDownStyle = ComboBoxStyle.DropDown;
+                cbObjekt.Enabled = true;
+            }
+        }
+
+        private void rbDrugo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbDrugo.Checked == true)
+            {
+                cbOseba.DropDownStyle = ComboBoxStyle.DropDown;
+                cbOseba.Enabled = true;
+                cbObjekt.DropDownStyle = ComboBoxStyle.DropDown;
+                cbObjekt.Enabled = true;
             }
         }
 
@@ -427,23 +432,14 @@ namespace Komunala
                 {
                     cbObjekt.DropDownStyle = ComboBoxStyle.DropDown;
                     cbObjekt.Enabled = true;
+                    cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
+                    cbOseba.Enabled = false;
+                    this.cbOseba.SelectedValue = 0;
                 }
                 else
                 {
-                    cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
-                    cbObjekt.Enabled = false;
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //izprazni_tb();
-            this.cbOseba.SelectedValue = 2;
-            //cbOseba.DropDownStyle = ComboBoxStyle.DropDownList;
-            //cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
-
-
         }
 
         private void btnDodaj_Click(object sender, EventArgs e)
@@ -477,8 +473,6 @@ namespace Komunala
             tbOpis.Text = "";
             tbOpombe.Text = "";
             tbMpo.Text = "";
-            cbObjekt.Text = "";
-            cbOseba.Text = "";
             chbAktivna.Checked = false;
             chbImenik.Checked = false;
             rbDrugo.Checked = false;
@@ -495,19 +489,19 @@ namespace Komunala
 
         private void Grid()
         {
-            //dgv1.ColumnHeadersVisible = false;
             dgv1.RowHeadersVisible = false;
-            dgv1.ColumnCount = 4;
+            dgv1.ColumnCount = 5;
             dgv1.Columns[0].Width = 20;
             dgv1.Columns[1].Width = 120;
-            dgv1.Columns[2].Width = 120;
-            dgv1.Columns[3].Width = 190;
-
+            dgv1.Columns[2].Width = 308;
+            dgv1.Columns[3].Width = 140;
             dgv1.Columns[0].Name = "Id";
-            dgv1.Columns[1].Name = "Stevilka";
-            dgv1.Columns[2].Name = "Oseba";
-            dgv1.Columns[3].Name = "Objekt";
-            //dgv1.Columns["Id"].Visible = false;
+            dgv1.Columns[1].Name = "Številka";
+            dgv1.Columns[2].Name = "Opis";
+            dgv1.Columns[3].Name = "Oseba";
+            dgv1.Columns[4].Name = "Objekt";
+            dgv1.Columns["Id"].Visible = false;
+            dgv1.Columns["Objekt"].Visible = false;
             this.dgv1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             this.dgv1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -516,8 +510,19 @@ namespace Komunala
 
         private void Display()
         {
+            string tepriimek, teime, teobjekt;
+            prvic = true;
             Izprazni_dgv();
-            string q = "select * from tbl_Telefonske order by stevilka";
+            string q = "SELECT Tbl_Telefonske.Id, Tbl_Telefonske.rb_mobilna AS Expr13, Tbl_Telefonske.Stevilka AS Expr14, Tbl_Telefonske.Mpo AS Expr15, " +
+                "Tbl_Telefonske.Aktivna AS Expr16, Tbl_Telefonske.Opis AS Expr17, Tbl_Telefonske.rb_oseba AS Expr18,  Tbl_Telefonske.Oseba " +
+                "AS Expr19, Tbl_Telefonske.Objekt AS Expr20, Tbl_Telefonske.Opomba AS Expr21, Tbl_Telefonske.Imenik AS Expr22, Tbl_Telefonske.Objekt " +
+                "AS Expr1, Tbl_Telefonske.rb_mobilna AS Expr2,  Tbl_Telefonske.Stevilka AS Expr3, Tbl_Telefonske.Mpo AS Expr4, Tbl_Telefonske.Aktivna " +
+                "AS Expr5, Tbl_Telefonske.Opis AS Expr6, Tbl_Telefonske.rb_oseba AS Expr7, Tbl_Telefonske.Oseba AS Expr8,  Tbl_Telefonske.Opomba " +
+                "AS Expr9, Tbl_Telefonske.Imenik AS Expr10, Tbl_Objekti.Naziv AS eobjekt, Tbl_sodelavci.Ime AS eime, Tbl_sodelavci.Priimek " +
+                "AS epriimek FROM Tbl_Telefonske " +
+                "LEFT OUTER JOIN Tbl_Objekti ON Tbl_Telefonske.Objekt = Tbl_Objekti.Id " +
+                "LEFT OUTER JOIN Tbl_sodelavci ON Tbl_Telefonske.Oseba = Tbl_sodelavci.Id";
+
             try
             {
                 cmd = new SqlCommand(q, con);
@@ -526,14 +531,34 @@ namespace Komunala
                 while (rdr.Read())
                 {
                     tid = (int)rdr["Id"];
-                    string tstevilka = (string)rdr["stevilka"]; // Opis
-                    string toseba = "Oseba";
-                    string tobjekt = "Objekt";
-                    //string toseba = (string)rdr["priimek"]+" "+ (string)rdr["priimek"];  // določi id v katerega boš pisal
-                    //tdelovnomesto = (string)rdr["del_mesto"];
+                    if (prvic)
+                        prvi_id = tid;
+                    prvic = false;
+                    string tstevilka = (string)rdr["expr14"]; // Opis
+                    
+                    tepriimek = "";
+                    teime = "";
+                    teobjekt = "";
+                    
+                    if (rdr["epriimek"] != DBNull.Value)
+                    {
+                        tepriimek = (string)rdr["epriimek"];
+                    }
+                    if (rdr["eime"] != DBNull.Value)
+                    {
+                        teime = (string)rdr["eime"];
+                    }
+                    string toseba = tepriimek+" " + teime;
 
+                    if (rdr["eobjekt"] != DBNull.Value)
+                    {
+                        teobjekt = (string)rdr["eobjekt"];
+                    }
+                    string tobjekt = teobjekt;
+                    
+                    string topis = (string)rdr["expr17"];
                     string strid = Convert.ToString(tid);
-                    string[] row1 = new string[] {strid, tstevilka,toseba,tobjekt };
+                    string[] row1 = new string[] {strid, tstevilka,topis,toseba,tobjekt };
                     dgv1.Rows.Add(row1);
                 }
             }
@@ -552,7 +577,6 @@ namespace Komunala
                     con.Close();
                 }
             }
-            //Zacetek();
         }
 
         void Nalozi(int idx) // naloži podatke v polja
@@ -610,9 +634,6 @@ namespace Komunala
                         this.cbObjekt.SelectedValue = cb_index_objekt;
                     else
                         cbObjekt.Text = "Neznan objekt";
-
-
-
                 }
             }
             catch (Exception ex)
@@ -651,7 +672,6 @@ namespace Komunala
             btnNazaj.Enabled = true;
             btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
             dgv1.Focus();
-
         }
 
         private void Dodaj()

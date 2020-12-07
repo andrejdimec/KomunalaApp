@@ -181,6 +181,11 @@ namespace Komunala
             // 
             // dgv1
             // 
+            this.dgv1.AllowUserToAddRows = false;
+            this.dgv1.AllowUserToDeleteRows = false;
+            this.dgv1.AllowUserToOrderColumns = true;
+            this.dgv1.AllowUserToResizeColumns = false;
+            this.dgv1.AllowUserToResizeRows = false;
             this.dgv1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -194,6 +199,7 @@ namespace Komunala
             this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgv1.Location = new System.Drawing.Point(24, 147);
             this.dgv1.Name = "dgv1";
+            this.dgv1.ReadOnly = true;
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv1.Size = new System.Drawing.Size(572, 572);
             this.dgv1.TabIndex = 49;
@@ -201,6 +207,7 @@ namespace Komunala
             // 
             // cbSkupina
             // 
+            this.cbSkupina.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbSkupina.FormattingEnabled = true;
             this.cbSkupina.Location = new System.Drawing.Point(24, 105);
             this.cbSkupina.Name = "cbSkupina";
@@ -323,6 +330,7 @@ namespace Komunala
             this.rbInternet.TabStop = true;
             this.rbInternet.Text = "Internet";
             this.rbInternet.UseVisualStyleBackColor = true;
+            this.rbInternet.CheckedChanged += new System.EventHandler(this.rbInternet_CheckedChanged);
             // 
             // rbDrugo
             // 
@@ -334,6 +342,7 @@ namespace Komunala
             this.rbDrugo.TabStop = true;
             this.rbDrugo.Text = "Drugo";
             this.rbDrugo.UseVisualStyleBackColor = true;
+            this.rbDrugo.CheckedChanged += new System.EventHandler(this.rbDrugo_CheckedChanged);
             // 
             // rbTelemetrija
             // 
@@ -368,6 +377,7 @@ namespace Komunala
             // 
             // cbOseba
             // 
+            this.cbOseba.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbOseba.FormattingEnabled = true;
             this.cbOseba.Location = new System.Drawing.Point(620, 384);
             this.cbOseba.Name = "cbOseba";
@@ -376,6 +386,7 @@ namespace Komunala
             // 
             // cbObjekt
             // 
+            this.cbObjekt.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbObjekt.FormattingEnabled = true;
             this.cbObjekt.Location = new System.Drawing.Point(620, 453);
             this.cbObjekt.Name = "cbObjekt";
