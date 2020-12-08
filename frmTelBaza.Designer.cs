@@ -29,7 +29,7 @@ namespace Komunala
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPreklici = new System.Windows.Forms.Button();
             this.btnShrani = new System.Windows.Forms.Button();
             this.btnBrisi = new System.Windows.Forms.Button();
@@ -76,7 +76,7 @@ namespace Komunala
             this.btnPreklici.FlatAppearance.BorderSize = 0;
             this.btnPreklici.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPreklici.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnPreklici.Location = new System.Drawing.Point(758, 676);
+            this.btnPreklici.Location = new System.Drawing.Point(758, 774);
             this.btnPreklici.Margin = new System.Windows.Forms.Padding(4);
             this.btnPreklici.Name = "btnPreklici";
             this.btnPreklici.Size = new System.Drawing.Size(120, 36);
@@ -91,7 +91,7 @@ namespace Komunala
             this.btnShrani.FlatAppearance.BorderSize = 0;
             this.btnShrani.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShrani.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnShrani.Location = new System.Drawing.Point(621, 676);
+            this.btnShrani.Location = new System.Drawing.Point(621, 774);
             this.btnShrani.Margin = new System.Windows.Forms.Padding(4);
             this.btnShrani.Name = "btnShrani";
             this.btnShrani.Size = new System.Drawing.Size(120, 36);
@@ -106,13 +106,14 @@ namespace Komunala
             this.btnBrisi.FlatAppearance.BorderSize = 0;
             this.btnBrisi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrisi.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnBrisi.Location = new System.Drawing.Point(895, 632);
+            this.btnBrisi.Location = new System.Drawing.Point(895, 730);
             this.btnBrisi.Margin = new System.Windows.Forms.Padding(4);
             this.btnBrisi.Name = "btnBrisi";
             this.btnBrisi.Size = new System.Drawing.Size(120, 36);
             this.btnBrisi.TabIndex = 44;
             this.btnBrisi.Text = "Briši";
             this.btnBrisi.UseVisualStyleBackColor = false;
+            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click);
             // 
             // btnSpremeni
             // 
@@ -120,13 +121,14 @@ namespace Komunala
             this.btnSpremeni.FlatAppearance.BorderSize = 0;
             this.btnSpremeni.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpremeni.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnSpremeni.Location = new System.Drawing.Point(758, 632);
+            this.btnSpremeni.Location = new System.Drawing.Point(758, 730);
             this.btnSpremeni.Margin = new System.Windows.Forms.Padding(4);
             this.btnSpremeni.Name = "btnSpremeni";
             this.btnSpremeni.Size = new System.Drawing.Size(120, 36);
             this.btnSpremeni.TabIndex = 43;
             this.btnSpremeni.Text = "Spremeni";
             this.btnSpremeni.UseVisualStyleBackColor = false;
+            this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click);
             // 
             // btnDodaj
             // 
@@ -134,7 +136,7 @@ namespace Komunala
             this.btnDodaj.FlatAppearance.BorderSize = 0;
             this.btnDodaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDodaj.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnDodaj.Location = new System.Drawing.Point(621, 632);
+            this.btnDodaj.Location = new System.Drawing.Point(621, 730);
             this.btnDodaj.Margin = new System.Windows.Forms.Padding(4);
             this.btnDodaj.Name = "btnDodaj";
             this.btnDodaj.Size = new System.Drawing.Size(120, 36);
@@ -149,7 +151,7 @@ namespace Komunala
             this.btnNazaj.FlatAppearance.BorderSize = 0;
             this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNazaj.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnNazaj.Location = new System.Drawing.Point(895, 676);
+            this.btnNazaj.Location = new System.Drawing.Point(895, 774);
             this.btnNazaj.Margin = new System.Windows.Forms.Padding(4);
             this.btnNazaj.Name = "btnNazaj";
             this.btnNazaj.Size = new System.Drawing.Size(120, 36);
@@ -164,7 +166,7 @@ namespace Komunala
             this.crtal.Location = new System.Drawing.Point(15, 49);
             this.crtal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.crtal.Name = "crtal";
-            this.crtal.Size = new System.Drawing.Size(835, 25);
+            this.crtal.Size = new System.Drawing.Size(1004, 25);
             this.crtal.TabIndex = 48;
             this.crtal.Text = "label2";
             // 
@@ -188,20 +190,20 @@ namespace Komunala
             this.dgv1.AllowUserToResizeRows = false;
             this.dgv1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv1.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgv1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.dgv1.Location = new System.Drawing.Point(24, 147);
             this.dgv1.Name = "dgv1";
             this.dgv1.ReadOnly = true;
             this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv1.Size = new System.Drawing.Size(572, 572);
+            this.dgv1.Size = new System.Drawing.Size(572, 663);
             this.dgv1.TabIndex = 49;
             this.dgv1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_RowEnter);
             // 
@@ -211,14 +213,15 @@ namespace Komunala
             this.cbSkupina.FormattingEnabled = true;
             this.cbSkupina.Location = new System.Drawing.Point(24, 105);
             this.cbSkupina.Name = "cbSkupina";
-            this.cbSkupina.Size = new System.Drawing.Size(240, 26);
+            this.cbSkupina.Size = new System.Drawing.Size(273, 26);
             this.cbSkupina.TabIndex = 50;
+            this.cbSkupina.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbSkupina_MouseClick);
             // 
             // tbIskanje
             // 
-            this.tbIskanje.Location = new System.Drawing.Point(282, 105);
+            this.tbIskanje.Location = new System.Drawing.Point(314, 105);
             this.tbIskanje.Name = "tbIskanje";
-            this.tbIskanje.Size = new System.Drawing.Size(136, 26);
+            this.tbIskanje.Size = new System.Drawing.Size(282, 26);
             this.tbIskanje.TabIndex = 51;
             // 
             // label2
@@ -233,7 +236,7 @@ namespace Komunala
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(285, 82);
+            this.label3.Location = new System.Drawing.Point(316, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 18);
             this.label3.TabIndex = 53;
@@ -290,12 +293,13 @@ namespace Komunala
             // chbImenik
             // 
             this.chbImenik.AutoSize = true;
-            this.chbImenik.Location = new System.Drawing.Point(621, 587);
+            this.chbImenik.Location = new System.Drawing.Point(620, 508);
             this.chbImenik.Name = "chbImenik";
             this.chbImenik.Size = new System.Drawing.Size(210, 22);
             this.chbImenik.TabIndex = 60;
             this.chbImenik.Text = "Prikaz v telefonskem imeniku";
             this.chbImenik.UseVisualStyleBackColor = true;
+            this.chbImenik.CheckedChanged += new System.EventHandler(this.chbImenik_CheckedChanged);
             // 
             // rbOseba
             // 
@@ -383,6 +387,8 @@ namespace Komunala
             this.cbOseba.Name = "cbOseba";
             this.cbOseba.Size = new System.Drawing.Size(395, 26);
             this.cbOseba.TabIndex = 69;
+            this.cbOseba.SelectedIndexChanged += new System.EventHandler(this.cbOseba_SelectedIndexChanged);
+            this.cbOseba.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbOseba_MouseClick);
             // 
             // cbObjekt
             // 
@@ -392,6 +398,8 @@ namespace Komunala
             this.cbObjekt.Name = "cbObjekt";
             this.cbObjekt.Size = new System.Drawing.Size(395, 26);
             this.cbObjekt.TabIndex = 71;
+            this.cbObjekt.SelectedIndexChanged += new System.EventHandler(this.cbObjekt_SelectedIndexChanged);
+            this.cbObjekt.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbObjekt_MouseClick);
             // 
             // label7
             // 
@@ -404,16 +412,16 @@ namespace Komunala
             // 
             // tbOpombe
             // 
-            this.tbOpombe.Location = new System.Drawing.Point(620, 522);
+            this.tbOpombe.Location = new System.Drawing.Point(620, 568);
             this.tbOpombe.Multiline = true;
             this.tbOpombe.Name = "tbOpombe";
-            this.tbOpombe.Size = new System.Drawing.Size(395, 45);
+            this.tbOpombe.Size = new System.Drawing.Size(395, 141);
             this.tbOpombe.TabIndex = 72;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(621, 501);
+            this.label8.Location = new System.Drawing.Point(621, 547);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(62, 18);
             this.label8.TabIndex = 73;
@@ -454,7 +462,7 @@ namespace Komunala
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 745);
+            this.ClientSize = new System.Drawing.Size(1043, 843);
             this.Controls.Add(this.p1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbOpombe);
