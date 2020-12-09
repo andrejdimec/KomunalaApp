@@ -30,74 +30,55 @@ namespace Komunala
         int stevec;
         string fnamept, vrstica, tel_1, tel_2;
         string filter_1, filter_2;
+        string sm_koda, sm_opis, tsm, tsm_opis;
 
-
-        private void IzprazniBazo_pt()  // izprazni tabelo tbl_pt
+        private void Prestej() // koliko je katerih številk
         {
-            string query = "delete from tbl_pt";
-            cmd = new SqlCommand(query, con);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-        private void Izprazni_pt() // izprazni variable za tabelo tbl_na
-        {
-            tel_1 = ""; tel_2 = "";
-        }
+            int vseh,aktivnih, odjavljenih, mobilnih, stacionarnih, telemetrije, drugih, internetnih, zaposlenih;
 
-        private void Obdelaj_pt()
-        {
-            //if (npt == 0)
-            //{
-            // začni prenos
-            fnamept = "c:\\tel.txt";
-            stevec = 0;
-                IzprazniBazo_pt();
-                try
-                {
-                    System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnamept, ASCIIEncoding.UTF8);
-                    do
-                    {
-                        vrstica = "";
-                        Izprazni_pt();
-                        vrstica = vrstica + objReader.ReadLine() + "\r\n";
+            //q2 = "select count(*) from tbl_telefonske where aktivna=0";
+            //cmd2 = new SqlCommand(q2, con2);
+            //con2.Open();
+            //odjavljenih = (Int32)cmd.ExecuteScalar();
+           // con2.Close();
+            q2 = "select count(*) from tbl_telefonske where aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            aktivnih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_oseba=1 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            zaposlenih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_oseba=2 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            telemetrije = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_oseba=3 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            internetnih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_oseba=4 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            drugih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_mobilna=1 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            mobilnih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
+            q2 = "select count(*) from tbl_telefonske where rb_mobilna=2 and aktivna=1";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            stacionarnih = (Int32)cmd2.ExecuteScalar();
+            con2.Close();
 
-                        // razdeli vrstico ločeno s ;
-                        string[] polje = vrstica.Split(';');
-                        tel_1 = polje[0];
-                        tel_2 = polje[1];
-                        try
-                        {
-                            if (stevec > 0)
-                            {
-                                // napiši prebrano v tabelo pt
-                                string query = "insert into tbl_telefonske (skupina,rb_mobilna,stevilka,mpo,aktivna,opis,rb_oseba,oseba,objekt,opomba,imenik) values(0,1,@tel_1,'',1,@tel_2,1,0,0,'',0)";
-                                cmd = new SqlCommand(query, con);
-                                con.Open();
-                                cmd.Parameters.AddWithValue("@tel_1", tel_1);
-                                cmd.Parameters.AddWithValue("@tel_2", tel_2);
-                                cmd.ExecuteNonQuery();
-                                con.Close();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Napaka: " + ex.Message);
-                        }
-                        stevec = ++stevec;
-                        vrstica = "";
-                    } while (objReader.Peek() != -1);
-                    objReader.Close();
-                    stevec--;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Napaka: " + ex.Message);
-                }
-                finally
-                {
-                }
+            stevilke.Text = "Aktivnih: " + Convert.ToString(aktivnih) + "     Osebnih: " + Convert.ToString(zaposlenih) + "     Telemetrija: " + Convert.ToString(telemetrije) 
+                + "     Mob. internet: " + Convert.ToString(internetnih) + "     Drugo: " + Convert.ToString(drugih) + "     Mobilnih: " + Convert.ToString(mobilnih) + "     Stacionarnih: " + Convert.ToString(stacionarnih);
         }
 
         private void Osebe_v_cb()
@@ -203,6 +184,7 @@ namespace Komunala
             Objekti_v_cb(); 
             Osebe_v_cb();
             Skupine_v_cb();
+            Prestej();
             Design();
             Grid();
             Displayf(0);
@@ -234,12 +216,14 @@ namespace Komunala
             btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
-            btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
-            btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
-            btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
-            btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
-            btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
-            btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
+            btnIzpis.BackColor = frmMain.barva_gumb2_neakt; btnIzpis.ForeColor = frmMain.barva_gumb2_pis_akt;
+            btnRacun.BackColor = frmMain.barva_gumb2_neakt; btnRacun.ForeColor = frmMain.barva_gumb2_pis_akt;
+            //btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
+            //btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
+            //btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
+            //btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
+            //btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
+            //btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
             tbStevilka.BackColor = frmMain.bela;
             tbMpo.BackColor = frmMain.bela;
             tbOpis.BackColor = frmMain.bela;
@@ -256,6 +240,8 @@ namespace Komunala
             btnPreklici.Enabled = true; btnPreklici.BackColor = frmMain.barva_gumb2_neakt;
             btnDodaj.Enabled = false; btnDodaj.BackColor = frmMain.barva_gumb2_disabled;
             btnBrisi.Enabled = false; btnBrisi.BackColor = frmMain.barva_gumb2_disabled;
+            btnIzpis.Enabled = false; btnIzpis.BackColor = frmMain.barva_gumb2_disabled;
+            btnRacun.Enabled = false; btnRacun.BackColor = frmMain.barva_gumb2_disabled;
             btnSpremeni.Enabled = false; btnSpremeni.BackColor = frmMain.barva_gumb2_disabled;
             btnNazaj.Enabled = false; btnNazaj.BackColor = frmMain.barva_gumb2_disabled;
         }
@@ -268,6 +254,8 @@ namespace Komunala
             btnBrisi.Enabled = true; btnBrisi.BackColor = frmMain.barva_gumb2_neakt;
             btnSpremeni.Enabled = true; btnSpremeni.BackColor = frmMain.barva_gumb2_neakt;
             btnNazaj.Enabled = true; btnNazaj.BackColor = frmMain.barva_gumb2_neakt;
+            btnIzpis.Enabled = true; btnIzpis.BackColor = frmMain.barva_gumb2_neakt;
+            btnRacun.Enabled = true; btnRacun.BackColor = frmMain.barva_gumb2_neakt;
         }
 
         private void Izprazni_dgv()
@@ -296,17 +284,88 @@ namespace Komunala
             cbSkupina.Enabled = true;
         }
 
+        public int Sm_id(string sm_koda)  // najdi id in opis stroškovnega mesta
+        {
+            //sm_koda = "";
+            int tsm_id = -99;
+
+            q3 = "select * from tbl_sm where koda_sm=@idx";
+            try
+            {
+                cmd3 = new SqlCommand(q3, con3);
+                cmd3.Parameters.AddWithValue("@idx", sm_koda);
+                con3.Open();
+                rdr3 = cmd3.ExecuteReader();
+                while (rdr3.Read())
+                {
+                    tsm_id = (Int32)rdr3["id"];
+                    tsm_opis = (string)rdr3["opis_sm"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka reader (Najdi SM id): " + ex.Message);
+            }
+            finally
+            {
+                if (rdr3 != null)
+                {
+                    rdr3.Close();
+                }
+                if (con3 != null)
+                {
+                    con3.Close();
+                }
+            }
+            return tsm_id;
+        }
+
+        public String Najdi_sm(int id) // najdi kodo in opis stroškovnega mesta
+        {
+            sm_koda = "";
+            sm_opis = "Neznano stroškovno mesto.";
+            q3 = "select * from tbl_sm where id=@idx";
+            try
+            {
+                cmd3 = new SqlCommand(q3, con3);
+                cmd3.Parameters.AddWithValue("@idx", id);
+                con3.Open();
+                rdr3 = cmd3.ExecuteReader();
+                while (rdr3.Read())
+                {
+                    sm_koda = (string)rdr3["koda_sm"];
+                    sm_opis = (string)rdr3["opis_sm"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka reader (Najdi SM): " + ex.Message);
+            }
+            finally
+            {
+                if (rdr3 != null)
+                {
+                    rdr3.Close();
+                }
+                if (con3 != null)
+                {
+                    con3.Close();
+                }
+            }
+            return tsm;
+        }
+
         private void Preklici()
         {
             if (dodajanje)
             {
-                
                 izprazni_tb();
             }
             spreminjanje = false;
             dodajanje = false;
             onemogoci_tb();
             Gumbi_1();
+            dgv1.Enabled = true;
         }
             
         
@@ -326,6 +385,9 @@ namespace Komunala
             if (tbStevilka.Text != "")
             {
                 // določi vrednosti
+                
+                int tmpsm_id = Sm_id(tbSm.Text);
+
                 int trb_mobilna=0;
                 int trb_oseba = 0;
 
@@ -369,8 +431,8 @@ namespace Komunala
                     if (dodajanje)
                     {
                         // dodaj
-                        q = "insert into tbl_Telefonske (skupina,rb_mobilna,stevilka,mpo,aktivna,opis,rb_oseba,oseba,objekt,opomba,imenik) " +
-                            "values(@skupina,@rb_mobilna,@stevilka,@mpo,@aktivna,@opis,@rb_oseba,@oseba,@objekt,@opomba,@imenik)";
+                        q = "insert into tbl_Telefonske (skupina,rb_mobilna,stevilka,mpo,aktivna,opis,rb_oseba,oseba,objekt,opomba,imenik,sm) " +
+                            "values(@skupina,@rb_mobilna,@stevilka,@mpo,@aktivna,@opis,@rb_oseba,@oseba,@objekt,@opomba,@imenik,@sm)";
                         cmd = new SqlCommand(q, con);
                         con.Open();
                         cmd.Parameters.AddWithValue("@skupina", tskupina);
@@ -384,6 +446,7 @@ namespace Komunala
                         cmd.Parameters.AddWithValue("@objekt", tobjekt);
                         cmd.Parameters.AddWithValue("@opomba", topomba);
                         cmd.Parameters.AddWithValue("@imenik", timenik);
+                        cmd.Parameters.AddWithValue("@sm", tmpsm_id);
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -391,7 +454,7 @@ namespace Komunala
 
                         // spremeni
                         q = "update tbl_Telefonske set skupina=@skupina,rb_mobilna=@rb_mobilna,stevilka = @stevilka,mpo = @mpo,aktivna = @aktivna,opis = @opis," +
-                            "rb_oseba = @rb_oseba,oseba = @oseba,objekt = @objekt,opomba = @opomba,imenik = @imenik where id=@tid";
+                            "rb_oseba = @rb_oseba,oseba = @oseba,objekt = @objekt,opomba = @opomba,imenik = @imenik, sm=@sm where id=@tid";
                         cmd = new SqlCommand(q, con);
                         con.Open();
                         cmd.Parameters.AddWithValue("@tid", tid);
@@ -406,6 +469,7 @@ namespace Komunala
                         cmd.Parameters.AddWithValue("@objekt", tobjekt);
                         cmd.Parameters.AddWithValue("@opomba", topomba);
                         cmd.Parameters.AddWithValue("@imenik", timenik);
+                        cmd.Parameters.AddWithValue("@sm", tmpsm_id);
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -423,6 +487,7 @@ namespace Komunala
                 }
                 int zacasni_tid = tid;
                 Displayf(izbrana_skupina);
+                dgv1.Enabled = true;
                 //tid = zacasni_tid;
                 Nalozi(prvi_id);
 
@@ -508,6 +573,14 @@ namespace Komunala
         {
             Spremeni();
             
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            // najdi opis in kodo sm 
+            tsm_opis = "Neznano stroškovno mesto.";
+            int tmpid = Sm_id(tbSm.Text);
+            lsm.Text = tsm_opis;
         }
 
         private void rbDrugo_CheckedChanged(object sender, EventArgs e)
@@ -700,23 +773,22 @@ namespace Komunala
 
         private void Grid()
         {
-            dgv1.RowHeadersVisible = false;
-            dgv1.ColumnCount = 5;
-            dgv1.Columns[0].Width = 20;
-            dgv1.Columns[1].Width = 120;
-            dgv1.Columns[2].Width = 308;
-            dgv1.Columns[3].Width = 140;
-            dgv1.Columns[0].Name = "Id";
-            dgv1.Columns[1].Name = "Številka";
-            dgv1.Columns[2].Name = "Opis";
-            dgv1.Columns[3].Name = "Oseba";
-            dgv1.Columns[4].Name = "Objekt";
-            dgv1.Columns["Id"].Visible = false;
-            dgv1.Columns["Objekt"].Visible = false;
-            this.dgv1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            this.dgv1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgv1.Focus();
+            //dgv1.RowHeadersVisible = false;
+            //dgv1.ColumnCount = 4;
+            //dgv1.Columns[0].Width = 20;
+            //dgv1.Columns[1].Width = 120;
+            //dgv1.Columns[2].Width = 308;
+            //dgv1.Columns[3].Width = 140;
+            //dgv1.Columns[0].Name = "Id";
+            //dgv1.Columns[1].Name = "Stevilka";
+            //dgv1.Columns[2].Name = "Opis";
+            //dgv1.Columns[3].Name = "Imenik";
+            //dgv1.Columns["Id"].Visible = false;
+            ////dgv1.Columns["Objekt"].Visible = false;
+            //this.dgv1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //this.dgv1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //this.dgv1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            //dgv1.Focus();
         }
 
         private void Display() // prikaži vse številke
@@ -747,7 +819,7 @@ namespace Komunala
                         prvi_id = tid;
                     prvic = false;
                     string tstevilka = (string)rdr["expr14"]; // Opis
-                    
+
                     tepriimek = "";
                     teime = "";
                     teobjekt = "";
@@ -770,8 +842,42 @@ namespace Komunala
                     
                     string topis = (string)rdr["expr17"];
                     string strid = Convert.ToString(tid);
-                    string[] row1 = new string[] {strid, tstevilka,topis,toseba,tobjekt };
-                    dgv1.Rows.Add(row1);
+
+                    int timenik = (Int32)rdr["expr10"];
+                    string strimenik = Convert.ToString(timenik);
+
+                    DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
+                    DataGridViewTextBoxCell Stevilka = new DataGridViewTextBoxCell();
+                    DataGridViewTextBoxCell Opis = new DataGridViewTextBoxCell();
+                    DataGridViewCheckBoxCell Imenik = new DataGridViewCheckBoxCell();
+
+                    Id.Value = tid;
+                    Stevilka.Value = tstevilka;
+                    Opis.Value = topis;
+                    Imenik.Value = timenik;
+
+                    DataGridViewColumn kolid = dgv1.Columns[0];
+                    kolid.Width = 1;
+                    DataGridViewColumn kolstevilka = dgv1.Columns[1];
+                    kolstevilka.Width = 120;
+                    DataGridViewColumn kolopis = dgv1.Columns[2];
+                    kolopis.Width = 380;
+                    DataGridViewColumn kolimenik = dgv1.Columns[3];
+                    kolimenik.Width = 140;
+
+                    //kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    //kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    //kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+                    DataGridViewRow row = new DataGridViewRow();
+
+                    row.Cells.Add(Id);
+                    row.Cells.Add(Stevilka);
+                    row.Cells.Add(Opis);
+                    row.Cells.Add(Imenik);
+
+                    dgv1.Rows.Add(row);  // dodaj vrstico
                 }
             }
             catch (Exception ex)
@@ -891,8 +997,43 @@ namespace Komunala
 
                         string topis = (string)rdr["expr17"];
                         string strid = Convert.ToString(tid);
-                        string[] row1 = new string[] { strid, tstevilka, topis, toseba, tobjekt };
-                        dgv1.Rows.Add(row1);
+
+                        bool timenik = (bool)rdr["expr10"];
+                        string strimenik = Convert.ToString(timenik);
+
+                        DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
+                        DataGridViewTextBoxCell Stevilka = new DataGridViewTextBoxCell();
+                        DataGridViewTextBoxCell Opis = new DataGridViewTextBoxCell();
+                        DataGridViewCheckBoxCell Imenik = new DataGridViewCheckBoxCell();
+
+                        Id.Value = tid;
+                        Stevilka.Value = tstevilka;
+                        Opis.Value = topis;
+                        Imenik.Value = timenik;
+
+                        DataGridViewColumn kolid = dgv1.Columns[0];
+                        kolid.Width = 1;
+                        DataGridViewColumn kolstevilka = dgv1.Columns[1];
+                        kolstevilka.Width = 120;
+                        DataGridViewColumn kolopis = dgv1.Columns[2];
+                        kolopis.Width = 355;
+                        DataGridViewColumn kolimenik = dgv1.Columns[3];
+                        kolimenik.Width = 80;
+
+                        //kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                        //kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        //kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        //kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+                        DataGridViewRow row = new DataGridViewRow();
+
+                        row.Cells.Add(Id);
+                        row.Cells.Add(Stevilka);
+                        row.Cells.Add(Opis);
+                        row.Cells.Add(Imenik);
+
+                        dgv1.Rows.Add(row);  // dodaj vrstico
+
                     }
                 }
                 catch (Exception ex)
@@ -927,6 +1068,9 @@ namespace Komunala
                     string tstevilka = (string)rdr2["stevilka"]; tbStevilka.Text = tstevilka;
                     string topis = (string)rdr2["opis"]; tbOpis.Text = topis;
                     string topomba = (string)rdr2["opomba"]; tbOpombe.Text = topomba;
+                    tbSm.Text = Najdi_sm((Int32)rdr2["sm"]); // poišči sm
+                    lsm.Text = sm_opis;
+                    tbSm.Text = sm_koda;
                     int trb_mobilna = (int)rdr2["rb_mobilna"];
                     if (trb_mobilna == 1)
                         rbMobilna.Checked = true;
@@ -1023,6 +1167,7 @@ namespace Komunala
             cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
             cbObjekt.Enabled = false;
             chbImenik.Checked = true;
+            dgv1.Enabled = false;
             tbOpis.Text = "";
             tbStevilka.Focus();
         }
@@ -1033,11 +1178,85 @@ namespace Komunala
             spreminjanje = true;
             omogoci_tb();
             Gumbi_2();
+            dgv1.Enabled = false;
             Preveri_rb();
             cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
             cbObjekt.Enabled = false;
             tbStevilka.Focus();
             
         }
+        
+        ////////////////////////////////////////////////////////////////////////
+        ///////////    to je samo za prenos iz baze txt    /////////////////////
+        ////////////////////////////////////////////////////////////////////////
+        
+        //private void IzprazniBazo_pt()  // izprazni tabelo tbl_pt
+        //{
+        //    string query = "delete from tbl_pt";
+        //    cmd = new SqlCommand(query, con);
+        //    con.Open();
+        //    cmd.ExecuteNonQuery();
+        //    con.Close();
+        //}
+        //private void Izprazni_pt() // izprazni variable za tabelo tbl_na
+        //{
+        //    tel_1 = ""; tel_2 = "";
+        //}
+
+        //private void Obdelaj_pt()
+        //{
+        //    //if (npt == 0)
+        //    //{
+        //    // začni prenos
+        //    fnamept = "c:\\tel.txt";
+        //    stevec = 0;
+        //    IzprazniBazo_pt();
+        //    try
+        //    {
+        //        System.IO.StreamReader objReader;
+        //        objReader = new System.IO.StreamReader(fnamept, ASCIIEncoding.UTF8);
+        //        do
+        //        {
+        //            vrstica = "";
+        //            Izprazni_pt();
+        //            vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+        //            // razdeli vrstico ločeno s ;
+        //            string[] polje = vrstica.Split(';');
+        //            tel_1 = polje[0];
+        //            tel_2 = polje[1];
+        //            try
+        //            {
+        //                if (stevec > 0)
+        //                {
+        //                    // napiši prebrano v tabelo pt
+        //                    string query = "insert into tbl_telefonske (skupina,rb_mobilna,stevilka,mpo,aktivna,opis,rb_oseba,oseba,objekt,opomba,imenik) values(0,1,@tel_1,'',1,@tel_2,1,0,0,'',0)";
+        //                    cmd = new SqlCommand(query, con);
+        //                    con.Open();
+        //                    cmd.Parameters.AddWithValue("@tel_1", tel_1);
+        //                    cmd.Parameters.AddWithValue("@tel_2", tel_2);
+        //                    cmd.ExecuteNonQuery();
+        //                    con.Close();
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show("Napaka: " + ex.Message);
+        //            }
+        //            stevec = ++stevec;
+        //            vrstica = "";
+        //        } while (objReader.Peek() != -1);
+        //        objReader.Close();
+        //        stevec--;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Napaka: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //    }
+        //}
+
     }
 }

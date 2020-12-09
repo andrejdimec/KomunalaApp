@@ -491,6 +491,12 @@ namespace Komunala
             sec.ShowDialog();
         }
 
+        private void button12_Click_1(object sender, EventArgs e)
+        {
+            frmPogodbeTel sec = new frmPogodbeTel();
+            sec.ShowDialog();
+        }
+
         private void bm_telefonija_Click(object sender, EventArgs e)
         {
             Vsi_neaktivni();

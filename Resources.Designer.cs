@@ -243,6 +243,16 @@ namespace Komunala {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gumbi_pogodbe {
+            get {
+                object obj = ResourceManager.GetObject("gumbi-pogodbe", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gumbi_tel_imenik {
             get {
                 object obj = ResourceManager.GetObject("gumbi-tel-imenik", resourceCulture);

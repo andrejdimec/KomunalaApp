@@ -111,6 +111,12 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmPogodbeTel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPogodbeTel.Designer.cs">
+      <DependentUpon>frmPogodbeTel.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTelBaza.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +332,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crCeniko.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmPogodbeTel.resx">
+      <DependentUpon>frmPogodbeTel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTelBaza.resx">
       <DependentUpon>frmTelBaza.cs</DependentUpon>
     </EmbeddedResource>
@@ -505,6 +514,7 @@
     <None Include="ikone\gumbi-cenik.jpg" />
     <None Include="ikone\gumbi-enote.jpg" />
     <None Include="ikone\gumbi-manjsi-sodelavci.jpg" />
+    <None Include="ikone\gumbi-pogodbe.jpg" />
     <Content Include="on.jpg" />
     <Content Include="ona.jpg" />
     <Content Include="Opombe.txt" />
@@ -520,6 +530,25 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
