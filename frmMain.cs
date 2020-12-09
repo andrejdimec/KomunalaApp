@@ -111,10 +111,10 @@ namespace Komunala
             ////Environment.Exit(0);
             ////frmStoritve secondForm = new frmStoritve();
             ////secondForm.ShowDialog();
-            frmTelBaza sec = new frmTelBaza();
-            sec.ShowDialog();
+            //frmTelBaza sec = new frmTelBaza();
+            //sec.ShowDialog();
 
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 

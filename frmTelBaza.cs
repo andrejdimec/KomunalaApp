@@ -21,13 +21,15 @@ namespace Komunala
 
         string q, q2, q3;
         string index;
-        int tid,prvi_id;
-        bool dodajanje, osnovno, spreminjanje,prvic;
+        int izbrana_skupina, trenutni, tid, prvi_id;
+        bool dodajanje, osnovno, spreminjanje,prvic, poslano;
         Dictionary<int, string> OsebeDict = new Dictionary<int, string>();
         Dictionary<int, string> ObjektiDict = new Dictionary<int, string>();
+        Dictionary<int, string> SkupineDict = new Dictionary<int, string>();
 
         int stevec;
         string fnamept, vrstica, tel_1, tel_2;
+        string filter_1, filter_2;
 
 
         private void IzprazniBazo_pt()  // izprazni tabelo tbl_pt
@@ -48,7 +50,7 @@ namespace Komunala
             //if (npt == 0)
             //{
             // začni prenos
-            fnamept = "c:\tel.txt";
+            fnamept = "c:\\tel.txt";
             stevec = 0;
                 IzprazniBazo_pt();
                 try
@@ -96,11 +98,7 @@ namespace Komunala
                 finally
                 {
                 }
-
-
         }
-
-
 
         private void Osebe_v_cb()
         {
@@ -179,7 +177,7 @@ namespace Komunala
 
         private void Skupine_v_cb()
         {
-            Dictionary<int, string> SkupineDict = new Dictionary<int, string>();
+            
             SkupineDict.Add(0, "Vse telefonske številke");
             SkupineDict.Add(1, "Zaposleni");
             SkupineDict.Add(2, "Telemetrija na objektih");
@@ -191,6 +189,7 @@ namespace Komunala
             cbSkupina.DataSource = SkupineDict.ToArray();
             cbSkupina.DisplayMember = "Value";
             cbSkupina.ValueMember = "Key";
+            poslano = true;
         }
 
         private void Nalozi_prvega()
@@ -200,17 +199,17 @@ namespace Komunala
         }
         private void frmTelBaza_Load(object sender, EventArgs e)
         {
+            poslano = false;
             Objekti_v_cb(); 
             Osebe_v_cb();
             Skupine_v_cb();
-            
             Design();
             Grid();
-            Display();
+            Displayf(0);
             Gumbi_1();
             izprazni_tb();
             onemogoci_tb();
-            Nalozi_prvega();
+            Nalozi(prvi_id);
             dgv1.Focus();
         }
 
@@ -391,32 +390,22 @@ namespace Komunala
                     {
 
                         // spremeni
-                        q = "update tbl_Sodelavci set emso=@emso, ime=@ime, priimek=@priimek ,ulica=@ulica,hs=@hs,posta=@posta,posta_ime=@posta_ime,ds=@ds,tel_privat=@tel_privat,tel_sluzba_1=@tel_sluzba_1,tel_sluzba_2=tel_sluzba_2," +
-                            "email_privat=@email_privat,email_sluzba=@email_sluzba,trr=@trr,banka=@banka,izobrazba=@izobrazba,del_mesto=@del_mesto,oddelek=@oddelek,sm=@sm,mpo=@mpo " +
-                            "where id=@tid";
+                        q = "update tbl_Telefonske set skupina=@skupina,rb_mobilna=@rb_mobilna,stevilka = @stevilka,mpo = @mpo,aktivna = @aktivna,opis = @opis," +
+                            "rb_oseba = @rb_oseba,oseba = @oseba,objekt = @objekt,opomba = @opomba,imenik = @imenik where id=@tid";
                         cmd = new SqlCommand(q, con);
                         con.Open();
-                        //cmd.Parameters.AddWithValue("@tid", tid);
-                        //cmd.Parameters.AddWithValue("@emso", tbEmso.Text);
-                        //cmd.Parameters.AddWithValue("@ime", tbIme.Text);
-                        //cmd.Parameters.AddWithValue("@priimek", tbPriimek.Text);
-                        //cmd.Parameters.AddWithValue("@ulica", tbUlica.Text);
-                        //cmd.Parameters.AddWithValue("@hs", tbHs.Text);
-                        //cmd.Parameters.AddWithValue("@posta", tbPosta.Text);
-                        //cmd.Parameters.AddWithValue("@posta_ime", tbNazivPoste.Text);
-                        //cmd.Parameters.AddWithValue("@ds", tbDs.Text);
-                        //cmd.Parameters.AddWithValue("@tel_privat", tbPrivatMob.Text);
-                        //cmd.Parameters.AddWithValue("@tel_sluzba_1", tbSluzbeniMob.Text);
-                        //cmd.Parameters.AddWithValue("@tel_sluzba_2", tbSluzbeniStac.Text);
-                        //cmd.Parameters.AddWithValue("@email_privat", tbPrivatMail.Text);
-                        //cmd.Parameters.AddWithValue("@email_sluzba", tbSluzbeniMail.Text);
-                        //cmd.Parameters.AddWithValue("@trr", tbTrr.Text);
-                        //cmd.Parameters.AddWithValue("@banka", tbBanka.Text);
-                        //cmd.Parameters.AddWithValue("@izobrazba", tbIzobrazba.Text);
-                        //cmd.Parameters.AddWithValue("@del_mesto", tbDelovnoMesto.Text);
-                        //cmd.Parameters.AddWithValue("@oddelek", tbOddelek.Text);
-                        //cmd.Parameters.AddWithValue("@sm", tmpsm_id);
-                        //cmd.Parameters.AddWithValue("@mpo", tbMpo.Text);
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.Parameters.AddWithValue("@skupina", tskupina);
+                        cmd.Parameters.AddWithValue("@rb_mobilna", trb_mobilna);
+                        cmd.Parameters.AddWithValue("@stevilka", tstevilka);
+                        cmd.Parameters.AddWithValue("@mpo", tmpo);
+                        cmd.Parameters.AddWithValue("@aktivna", taktivna);
+                        cmd.Parameters.AddWithValue("@opis", topis);
+                        cmd.Parameters.AddWithValue("@rb_oseba", trb_oseba);
+                        cmd.Parameters.AddWithValue("@oseba", toseba);
+                        cmd.Parameters.AddWithValue("@objekt", tobjekt);
+                        cmd.Parameters.AddWithValue("@opomba", topomba);
+                        cmd.Parameters.AddWithValue("@imenik", timenik);
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -432,8 +421,12 @@ namespace Komunala
                         con.Close();
                     }
                 }
-                Zacetek();
+                int zacasni_tid = tid;
+                Displayf(izbrana_skupina);
+                //tid = zacasni_tid;
+                Nalozi(prvi_id);
 
+                Zacetek();
             }
             else
             {
@@ -455,6 +448,7 @@ namespace Komunala
         {
             index = dgv1.Rows[e.RowIndex].Cells[0].Value.ToString();
             tid = Convert.ToInt32(index);
+            trenutni = tid;
             izprazni_tb();
             Nalozi(tid);
         }
@@ -553,9 +547,62 @@ namespace Komunala
             }
         }
 
-        private void btnBrisi_Click(object sender, EventArgs e)
+        private void Brisi()
         {
-            Obdelaj_pt();
+            
+                DialogResult result = MessageBox.Show("Izbrišem zapis " + tbOpis.Text + "?", "Potrdi brisanje", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string q = "delete from tbl_Telefonske where id = @tid";
+                        cmd = new SqlCommand(q, con);
+                        con.Open();
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka pri brisanju: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if (con != null)
+                        {
+                            con.Close();
+                            Displayf(izbrana_skupina);
+                        }
+                    }
+
+                    Zacetek();
+                }
+                else if (result == DialogResult.No)
+                {
+                    Zacetek();
+                }
+
+            }
+
+            private void btnBrisi_Click(object sender, EventArgs e)
+        {
+            Brisi();
+        }
+
+        private void cbSkupina_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /* prefitriraj in prikaži
+             0 - vse številke
+             1 - osebe
+             2 - telemetrija
+             3 - neomejeni internet
+             4 - druge številke
+             5 - mobilne številke
+             6 - stacionarne številke
+             7 - neaktivne številke
+            */
+            izbrana_skupina = ((KeyValuePair<int, string>)cbSkupina.SelectedItem).Key;
+            Displayf(izbrana_skupina);
+            dgv1.Focus();
         }
 
         private void cbSkupina_MouseClick(object sender, MouseEventArgs e)
@@ -646,7 +693,7 @@ namespace Komunala
             rbStacionarna.Checked = false;
             rbTelemetrija.Checked = false;
             tbIskanje.Text = "";
-            cbSkupina.Text = "";
+            //cbSkupina.Text = "";
             this.cbOseba.SelectedValue = 0;
             this.cbObjekt.SelectedValue = 0;
         }
@@ -672,7 +719,7 @@ namespace Komunala
             dgv1.Focus();
         }
 
-        private void Display()
+        private void Display() // prikaži vse številke
         {
             string tepriimek, teime, teobjekt;
             prvic = true;
@@ -686,6 +733,7 @@ namespace Komunala
                 "AS epriimek FROM Tbl_Telefonske " +
                 "LEFT OUTER JOIN Tbl_Objekti ON Tbl_Telefonske.Objekt = Tbl_Objekti.Id " +
                 "LEFT OUTER JOIN Tbl_sodelavci ON Tbl_Telefonske.Oseba = Tbl_sodelavci.Id";
+
 
             try
             {
@@ -739,6 +787,128 @@ namespace Komunala
                 if (con != null)
                 {
                     con.Close();
+                }
+            }
+        }
+
+        private void Displayf(int Filter )  // prikaži filtriran dgv1
+        {
+            /* prefitriraj in prikaži
+             0 - vse številke
+             1 - osebe
+             2 - telemetrija
+             3 - neomejeni internet
+             4 - druge številke
+             5 - mobilne številke
+             6 - stacionarne številke
+             7 - neaktivne številke
+            */
+            string tepriimek, teime, teobjekt;
+
+            if (poslano)  // če si poslal iz combobox-a
+            {
+                switch (Filter)
+                {
+                    case 0: // Vse aktivne
+                        filter_1 = "WHERE "+ "(Tbl_Telefonske.Aktivna = 1)";
+                        filter_2 = "";
+                        break;
+                    case 1:  // samo osebe
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_oseba = 1)";
+                        break;
+                    case 2:  // telemetrija
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_oseba = 2)";
+                        break;
+                    case 3:  // neomejeni internet
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_oseba = 3)";
+                        break;
+                    case 4:  // druge številke
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_oseba = 4)";
+                        break;
+                    case 5:  // mobilne številke
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_mobilna = 1)";
+                        break;
+                    case 6:  // stacionarne številke
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 1) ";
+                        filter_2 = "AND " + "(Tbl_Telefonske.rb_mobilna = 2)";
+                        break;
+                    case 7:  // neaktivne
+                        filter_1 = "WHERE " + "(Tbl_Telefonske.Aktivna = 0)";
+                        filter_2 = "";
+                        break;
+                }
+
+                //"WHERE (Tbl_Telefonske.rb_oseba = 3) AND "+filter_2+
+                prvic = true;
+                Izprazni_dgv();
+                string q = "SELECT Tbl_Telefonske.Id, Tbl_Telefonske.rb_mobilna AS Expr13, Tbl_Telefonske.Stevilka AS Expr14, Tbl_Telefonske.Mpo AS Expr15, " +
+                    "Tbl_Telefonske.Aktivna AS Expr16, Tbl_Telefonske.Opis AS Expr17, Tbl_Telefonske.rb_oseba AS Expr18,  Tbl_Telefonske.Oseba " +
+                    "AS Expr19, Tbl_Telefonske.Objekt AS Expr20, Tbl_Telefonske.Opomba AS Expr21, Tbl_Telefonske.Imenik AS Expr22, Tbl_Telefonske.Objekt " +
+                    "AS Expr1, Tbl_Telefonske.rb_mobilna AS Expr2,  Tbl_Telefonske.Stevilka AS Expr3, Tbl_Telefonske.Mpo AS Expr4, Tbl_Telefonske.Aktivna " +
+                    "AS Expr5, Tbl_Telefonske.Opis AS Expr6, Tbl_Telefonske.rb_oseba AS Expr7, Tbl_Telefonske.Oseba AS Expr8,  Tbl_Telefonske.Opomba " +
+                    "AS Expr9, Tbl_Telefonske.Imenik AS Expr10, Tbl_Objekti.Naziv AS eobjekt, Tbl_sodelavci.Ime AS eime, Tbl_sodelavci.Priimek " +
+                    "AS epriimek FROM Tbl_Telefonske " +
+                    "LEFT OUTER JOIN Tbl_Objekti ON Tbl_Telefonske.Objekt = Tbl_Objekti.Id " +
+                    "LEFT OUTER JOIN Tbl_sodelavci ON Tbl_Telefonske.Oseba = Tbl_sodelavci.Id " + filter_1+filter_2+" ORDER BY Expr17";
+
+                try
+                {
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        tid = (int)rdr["Id"];
+                        if (prvic)
+                            prvi_id = tid;
+                        prvic = false;
+                        string tstevilka = (string)rdr["expr14"]; // Opis
+
+                        tepriimek = "";
+                        teime = "";
+                        teobjekt = "";
+
+                        if (rdr["epriimek"] != DBNull.Value)
+                        {
+                            tepriimek = (string)rdr["epriimek"];
+                        }
+                        if (rdr["eime"] != DBNull.Value)
+                        {
+                            teime = (string)rdr["eime"];
+                        }
+                        string toseba = tepriimek + " " + teime;
+
+                        if (rdr["eobjekt"] != DBNull.Value)
+                        {
+                            teobjekt = (string)rdr["eobjekt"];
+                        }
+                        string tobjekt = teobjekt;
+
+                        string topis = (string)rdr["expr17"];
+                        string strid = Convert.ToString(tid);
+                        string[] row1 = new string[] { strid, tstevilka, topis, toseba, tobjekt };
+                        dgv1.Rows.Add(row1);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
                 }
             }
         }
@@ -867,6 +1037,7 @@ namespace Komunala
             cbObjekt.DropDownStyle = ComboBoxStyle.DropDownList;
             cbObjekt.Enabled = false;
             tbStevilka.Focus();
+            
         }
     }
 }
