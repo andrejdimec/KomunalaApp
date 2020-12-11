@@ -791,111 +791,111 @@ namespace Komunala
             //dgv1.Focus();
         }
 
-        private void Display() // prikaži vse številke
-        {
-            string tepriimek, teime, teobjekt;
-            prvic = true;
-            Izprazni_dgv();
-            string q = "SELECT Tbl_Telefonske.Id, Tbl_Telefonske.rb_mobilna AS Expr13, Tbl_Telefonske.Stevilka AS Expr14, Tbl_Telefonske.Mpo AS Expr15, " +
-                "Tbl_Telefonske.Aktivna AS Expr16, Tbl_Telefonske.Opis AS Expr17, Tbl_Telefonske.rb_oseba AS Expr18,  Tbl_Telefonske.Oseba " +
-                "AS Expr19, Tbl_Telefonske.Objekt AS Expr20, Tbl_Telefonske.Opomba AS Expr21, Tbl_Telefonske.Imenik AS Expr22, Tbl_Telefonske.Objekt " +
-                "AS Expr1, Tbl_Telefonske.rb_mobilna AS Expr2,  Tbl_Telefonske.Stevilka AS Expr3, Tbl_Telefonske.Mpo AS Expr4, Tbl_Telefonske.Aktivna " +
-                "AS Expr5, Tbl_Telefonske.Opis AS Expr6, Tbl_Telefonske.rb_oseba AS Expr7, Tbl_Telefonske.Oseba AS Expr8,  Tbl_Telefonske.Opomba " +
-                "AS Expr9, Tbl_Telefonske.Imenik AS Expr10, Tbl_Objekti.Naziv AS eobjekt, Tbl_sodelavci.Ime AS eime, Tbl_sodelavci.Priimek " +
-                "AS epriimek FROM Tbl_Telefonske " +
-                "LEFT OUTER JOIN Tbl_Objekti ON Tbl_Telefonske.Objekt = Tbl_Objekti.Id " +
-                "LEFT OUTER JOIN Tbl_sodelavci ON Tbl_Telefonske.Oseba = Tbl_sodelavci.Id";
+        //private void Display() // prikaži vse številke
+        //{
+        //    string tepriimek, teime, teobjekt;
+        //    prvic = true;
+        //    Izprazni_dgv();
+        //    string q = "SELECT Tbl_Telefonske.Id, Tbl_Telefonske.rb_mobilna AS Expr13, Tbl_Telefonske.Stevilka AS Expr14, Tbl_Telefonske.Mpo AS Expr15, " +
+        //        "Tbl_Telefonske.Aktivna AS Expr16, Tbl_Telefonske.Opis AS Expr17, Tbl_Telefonske.rb_oseba AS Expr18,  Tbl_Telefonske.Oseba " +
+        //        "AS Expr19, Tbl_Telefonske.Objekt AS Expr20, Tbl_Telefonske.Opomba AS Expr21, Tbl_Telefonske.Imenik AS Expr22, Tbl_Telefonske.Objekt " +
+        //        "AS Expr1, Tbl_Telefonske.rb_mobilna AS Expr2,  Tbl_Telefonske.Stevilka AS Expr3, Tbl_Telefonske.Mpo AS Expr4, Tbl_Telefonske.Aktivna " +
+        //        "AS Expr5, Tbl_Telefonske.Opis AS Expr6, Tbl_Telefonske.rb_oseba AS Expr7, Tbl_Telefonske.Oseba AS Expr8,  Tbl_Telefonske.Opomba " +
+        //        "AS Expr9, Tbl_Telefonske.Imenik AS Expr10, Tbl_Objekti.Naziv AS eobjekt, Tbl_sodelavci.Ime AS eime, Tbl_sodelavci.Priimek " +
+        //        "AS epriimek FROM Tbl_Telefonske " +
+        //        "LEFT OUTER JOIN Tbl_Objekti ON Tbl_Telefonske.Objekt = Tbl_Objekti.Id " +
+        //        "LEFT OUTER JOIN Tbl_sodelavci ON Tbl_Telefonske.Oseba = Tbl_sodelavci.Id";
 
 
-            try
-            {
-                cmd = new SqlCommand(q, con);
-                con.Open();
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    tid = (int)rdr["Id"];
-                    if (prvic)
-                        prvi_id = tid;
-                    prvic = false;
-                    string tstevilka = (string)rdr["expr14"]; // Opis
+        //    try
+        //    {
+        //        cmd = new SqlCommand(q, con);
+        //        con.Open();
+        //        rdr = cmd.ExecuteReader();
+        //        while (rdr.Read())
+        //        {
+        //            tid = (int)rdr["Id"];
+        //            if (prvic)
+        //                prvi_id = tid;
+        //            prvic = false;
+        //            string tstevilka = (string)rdr["expr14"]; // Opis
 
-                    tepriimek = "";
-                    teime = "";
-                    teobjekt = "";
+        //            tepriimek = "";
+        //            teime = "";
+        //            teobjekt = "";
                     
-                    if (rdr["epriimek"] != DBNull.Value)
-                    {
-                        tepriimek = (string)rdr["epriimek"];
-                    }
-                    if (rdr["eime"] != DBNull.Value)
-                    {
-                        teime = (string)rdr["eime"];
-                    }
-                    string toseba = tepriimek+" " + teime;
+        //            if (rdr["epriimek"] != DBNull.Value)
+        //            {
+        //                tepriimek = (string)rdr["epriimek"];
+        //            }
+        //            if (rdr["eime"] != DBNull.Value)
+        //            {
+        //                teime = (string)rdr["eime"];
+        //            }
+        //            string toseba = tepriimek+" " + teime;
 
-                    if (rdr["eobjekt"] != DBNull.Value)
-                    {
-                        teobjekt = (string)rdr["eobjekt"];
-                    }
-                    string tobjekt = teobjekt;
+        //            if (rdr["eobjekt"] != DBNull.Value)
+        //            {
+        //                teobjekt = (string)rdr["eobjekt"];
+        //            }
+        //            string tobjekt = teobjekt;
                     
-                    string topis = (string)rdr["expr17"];
-                    string strid = Convert.ToString(tid);
+        //            string topis = (string)rdr["expr17"];
+        //            string strid = Convert.ToString(tid);
 
-                    int timenik = (Int32)rdr["expr10"];
-                    string strimenik = Convert.ToString(timenik);
+        //            int timenik = (Int32)rdr["expr10"];
+        //            string strimenik = Convert.ToString(timenik);
 
-                    DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
-                    DataGridViewTextBoxCell Stevilka = new DataGridViewTextBoxCell();
-                    DataGridViewTextBoxCell Opis = new DataGridViewTextBoxCell();
-                    DataGridViewCheckBoxCell Imenik = new DataGridViewCheckBoxCell();
+        //            DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
+        //            DataGridViewTextBoxCell Stevilka = new DataGridViewTextBoxCell();
+        //            DataGridViewTextBoxCell Opis = new DataGridViewTextBoxCell();
+        //            DataGridViewCheckBoxCell Imenik = new DataGridViewCheckBoxCell();
 
-                    Id.Value = tid;
-                    Stevilka.Value = tstevilka;
-                    Opis.Value = topis;
-                    Imenik.Value = timenik;
+        //            Id.Value = tid;
+        //            Stevilka.Value = tstevilka;
+        //            Opis.Value = topis;
+        //            Imenik.Value = timenik;
 
-                    DataGridViewColumn kolid = dgv1.Columns[0];
-                    kolid.Width = 1;
-                    DataGridViewColumn kolstevilka = dgv1.Columns[1];
-                    kolstevilka.Width = 120;
-                    DataGridViewColumn kolopis = dgv1.Columns[2];
-                    kolopis.Width = 380;
-                    DataGridViewColumn kolimenik = dgv1.Columns[3];
-                    kolimenik.Width = 140;
+        //            DataGridViewColumn kolid = dgv1.Columns[0];
+        //            kolid.Width = 1;
+        //            DataGridViewColumn kolstevilka = dgv1.Columns[1];
+        //            kolstevilka.Width = 120;
+        //            DataGridViewColumn kolopis = dgv1.Columns[2];
+        //            kolopis.Width = 380;
+        //            DataGridViewColumn kolimenik = dgv1.Columns[3];
+        //            kolimenik.Width = 140;
 
-                    //kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                    //kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    //kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        //            //kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        //            //kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        //            //kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        //            //kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-                    DataGridViewRow row = new DataGridViewRow();
+        //            DataGridViewRow row = new DataGridViewRow();
 
-                    row.Cells.Add(Id);
-                    row.Cells.Add(Stevilka);
-                    row.Cells.Add(Opis);
-                    row.Cells.Add(Imenik);
+        //            row.Cells.Add(Id);
+        //            row.Cells.Add(Stevilka);
+        //            row.Cells.Add(Opis);
+        //            row.Cells.Add(Imenik);
 
-                    dgv1.Rows.Add(row);  // dodaj vrstico
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Napaka: " + ex.Message);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (con != null)
-                {
-                    con.Close();
-                }
-            }
-        }
+        //            dgv1.Rows.Add(row);  // dodaj vrstico
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Napaka: " + ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        if (rdr != null)
+        //        {
+        //            rdr.Close();
+        //        }
+        //        if (con != null)
+        //        {
+        //            con.Close();
+        //        }
+        //    }
+        //}
 
         private void Displayf(int Filter )  // prikaži filtriran dgv1
         {
@@ -1019,11 +1019,6 @@ namespace Komunala
                         kolopis.Width = 355;
                         DataGridViewColumn kolimenik = dgv1.Columns[3];
                         kolimenik.Width = 80;
-
-                        //kolstoritev.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                        //kolem.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        //kolddv.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        //kolskupina.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
                         DataGridViewRow row = new DataGridViewRow();
 
