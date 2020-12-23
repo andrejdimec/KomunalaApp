@@ -29,13 +29,10 @@ namespace Komunala
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPogodbeTel));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
-            this.button1 = new System.Windows.Forms.Button();
             this.tbStevilka = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbVrsta = new System.Windows.Forms.ComboBox();
@@ -59,31 +56,9 @@ namespace Komunala
             this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VrstaDokumenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Opis = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Odpri = new System.Windows.Forms.DataGridViewLinkColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
+            this.Odpri = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // axAcroPDF1
-            // 
-            this.axAcroPDF1.Enabled = true;
-            this.axAcroPDF1.Location = new System.Drawing.Point(995, 338);
-            this.axAcroPDF1.Margin = new System.Windows.Forms.Padding(4);
-            this.axAcroPDF1.Name = "axAcroPDF1";
-            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(227, 350);
-            this.axAcroPDF1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1029, 282);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 32);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tbStevilka
             // 
@@ -103,6 +78,7 @@ namespace Komunala
             // 
             // cbVrsta
             // 
+            this.cbVrsta.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbVrsta.FormattingEnabled = true;
             this.cbVrsta.Location = new System.Drawing.Point(272, 619);
             this.cbVrsta.Name = "cbVrsta";
@@ -116,7 +92,6 @@ namespace Komunala
             this.crtal.Size = new System.Drawing.Size(923, 18);
             this.crtal.TabIndex = 5;
             this.crtal.Text = "Crta";
-            this.crtal.Click += new System.EventHandler(this.crtal_Click);
             // 
             // label3
             // 
@@ -214,9 +189,13 @@ namespace Komunala
             this.dgv1.Name = "dgv1";
             this.dgv1.ReadOnly = true;
             this.dgv1.RowHeadersVisible = false;
+            this.dgv1.RowTemplate.Height = 32;
             this.dgv1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv1.Size = new System.Drawing.Size(920, 459);
             this.dgv1.TabIndex = 13;
+            this.dgv1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv1_CellContentClick);
+            this.dgv1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgv1_RowsAdded);
             // 
             // btnPreklici
             // 
@@ -230,6 +209,7 @@ namespace Komunala
             this.btnPreklici.TabIndex = 46;
             this.btnPreklici.Text = "Prekliči";
             this.btnPreklici.UseVisualStyleBackColor = false;
+            this.btnPreklici.Click += new System.EventHandler(this.btnPreklici_Click);
             // 
             // btnShrani
             // 
@@ -243,6 +223,7 @@ namespace Komunala
             this.btnShrani.TabIndex = 45;
             this.btnShrani.Text = "Shrani";
             this.btnShrani.UseVisualStyleBackColor = false;
+            this.btnShrani.Click += new System.EventHandler(this.btnShrani_Click);
             // 
             // btnBrisi
             // 
@@ -256,6 +237,7 @@ namespace Komunala
             this.btnBrisi.TabIndex = 44;
             this.btnBrisi.Text = "Briši";
             this.btnBrisi.UseVisualStyleBackColor = false;
+            this.btnBrisi.Click += new System.EventHandler(this.btnBrisi_Click);
             // 
             // btnSpremeni
             // 
@@ -269,6 +251,7 @@ namespace Komunala
             this.btnSpremeni.TabIndex = 43;
             this.btnSpremeni.Text = "Uredi";
             this.btnSpremeni.UseVisualStyleBackColor = false;
+            this.btnSpremeni.Click += new System.EventHandler(this.btnSpremeni_Click);
             // 
             // btnDodaj
             // 
@@ -282,6 +265,7 @@ namespace Komunala
             this.btnDodaj.TabIndex = 42;
             this.btnDodaj.Text = "Nov dokument";
             this.btnDodaj.UseVisualStyleBackColor = false;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
             // 
             // btnNazaj
             // 
@@ -295,6 +279,7 @@ namespace Komunala
             this.btnNazaj.TabIndex = 41;
             this.btnNazaj.Text = "Izhod";
             this.btnNazaj.UseVisualStyleBackColor = false;
+            this.btnNazaj.Click += new System.EventHandler(this.btnNazaj_Click);
             // 
             // Id
             // 
@@ -314,7 +299,7 @@ namespace Komunala
             // 
             // Datum
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.Format = "d";
             dataGridViewCellStyle3.NullValue = null;
             this.Datum.DefaultCellStyle = dataGridViewCellStyle3;
@@ -340,15 +325,17 @@ namespace Komunala
             // Odpri
             // 
             this.Odpri.HeaderText = "";
-            this.Odpri.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.Odpri.Name = "Odpri";
             this.Odpri.ReadOnly = true;
+            this.Odpri.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Odpri.Text = "Odpri";
+            this.Odpri.UseColumnTextForButtonValue = true;
             // 
             // frmPogodbeTel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 735);
+            this.ClientSize = new System.Drawing.Size(1011, 735);
             this.Controls.Add(this.btnPreklici);
             this.Controls.Add(this.btnShrani);
             this.Controls.Add(this.btnBrisi);
@@ -367,14 +354,11 @@ namespace Komunala
             this.Controls.Add(this.cbVrsta);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbStevilka);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.axAcroPDF1);
             this.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmPogodbeTel";
             this.Text = "frmPogodbeTel";
             this.Load += new System.EventHandler(this.frmPogodbeTel_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -382,9 +366,6 @@ namespace Komunala
         }
 
         #endregion
-
-        private AxAcroPDFLib.AxAcroPDF axAcroPDF1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox tbStevilka;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbVrsta;
@@ -408,6 +389,6 @@ namespace Komunala
         private System.Windows.Forms.DataGridViewTextBoxColumn Datum;
         private System.Windows.Forms.DataGridViewTextBoxColumn VrstaDokumenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Opis;
-        private System.Windows.Forms.DataGridViewLinkColumn Odpri;
+        private System.Windows.Forms.DataGridViewButtonColumn Odpri;
     }
 }

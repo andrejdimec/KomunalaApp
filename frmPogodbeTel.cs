@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
+using System.Configuration;
 
 
 namespace Komunala
@@ -15,11 +17,14 @@ namespace Komunala
     public partial class frmPogodbeTel : Form
     {
 
+        public static string datoteka,pdf_datoteka;
+        
         int tid;
         string tstevilka;
         DateTime tdatum;
         string ttip;
         string topis, tlink;
+
         SqlConnection con = frmMain.c;
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
@@ -27,10 +32,322 @@ namespace Komunala
         SqlDataReader rdr, rdr2, rdr3 = null;
 
         string q, q2, q3;
+        string izbrana_datoteka;
         string index;
         int izbrana_skupina, trenutni, prvi_id;
         bool dodajanje, osnovno, spreminjanje, prvic, poslano;
         Dictionary<int, string> TipPogodbeDict = new Dictionary<int, string>();
+        string imenik, pot, pot_dok;
+        bool je_datoteka_izbrana;
+        int najvecja;  // največja številka dokumenta
+
+        private void btnNazaj_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            Dodaj();
+        }
+
+        private void btnSpremeni_Click(object sender, EventArgs e)
+        {
+            Spremeni();
+        }
+
+        private void btnBrisi_Click(object sender, EventArgs e)
+        {
+            Brisi();
+        }
+        private void Brisi()
+        {
+
+            DialogResult result = MessageBox.Show("Izbrišem zapis " + tbOpis.Text + "?", "Potrdi brisanje", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    string q = "delete from tbl_Pogodbe_tel where id = @tid";
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@tid", tid);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka pri brisanju dokumenta: " + ex.Message);
+                }
+                finally
+                {
+                    if (con != null)
+                    {
+                        con.Close();
+                        Displayf(0);
+                    }
+                }
+
+                //Zacetek();
+            }
+            else if (result == DialogResult.No)
+            {
+                //Zacetek();
+            }
+
+        }
+        private void Preklici()
+        {
+            if (dodajanje)
+            {
+                izprazni_tb();
+            }
+            spreminjanje = false;
+            dodajanje = false;
+            onemogoci_tb();
+            Gumbi_1();
+            dgv1.Enabled = true;
+        }
+
+        private void btnPreklici_Click(object sender, EventArgs e)
+        {
+            Preklici();
+        }
+
+        private void Shrani()
+        {
+            int tmpvrsta = -99;
+            string q;
+            bool vse_v_redu = false;
+
+            if (tbOpis.Text != "")
+                vse_v_redu = true;
+            else
+            {
+                vse_v_redu = false;
+                MessageBox.Show("Manjka opis.");
+            }
+            if (vse_v_redu)
+            {
+                if (tbStevilka.Text != "")
+                    vse_v_redu = true;
+                else
+                {
+                    vse_v_redu = false;
+                    MessageBox.Show("Manjka številka dokumenta.");
+                }
+            }
+            if (vse_v_redu)
+            {
+                if (cbVrsta.Text != "")
+                    vse_v_redu = true;
+                else
+                {
+                    vse_v_redu = false;
+                    MessageBox.Show("Izberi vrsto dokumenta.");
+                }
+            }
+
+            if (vse_v_redu)
+            {
+                // določi vrednosti
+                
+                DateTime tmpdatum = dtDatum.Value.Date;
+                int tmpzaporedna = Convert.ToInt32(tbStevilka.Text);
+                if (cbVrsta.Text != "")
+                {
+                    tmpvrsta = ((KeyValuePair<int, string>)cbVrsta.SelectedItem).Key;
+                }
+                string tmpopis = tbOpis.Text;
+                izbrana_datoteka = "Ime datoteke";
+                string tmpfname = izbrana_datoteka;
+
+
+                try
+                {
+                    if (dodajanje)
+                    {
+                        // dodaj
+                        q = "insert into tbl_Pogodbe_tel (Zaporedna,Datum,TipDokumenta,Opis,Fname) " +
+                            "values(@Zaporedna,@Datum,@TipDokumenta,@Opis,@Fname)";
+                        
+                        cmd = new SqlCommand(q, con);
+                        con.Open();
+                        
+                        cmd.Parameters.AddWithValue("@Zaporedna", tmpzaporedna);
+                        cmd.Parameters.AddWithValue("@Datum", tmpdatum);
+                        cmd.Parameters.AddWithValue("@TipDokumenta", tmpvrsta);
+                        cmd.Parameters.AddWithValue("@Opis", tmpopis);
+                        cmd.Parameters.AddWithValue("@Fname", tmpfname);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+
+                        // spremeni
+                        q = "update tbl_Telefonske set skupina=@skupina,rb_mobilna=@rb_mobilna,stevilka = @stevilka,mpo = @mpo,aktivna = @aktivna,opis = @opis," +
+                            "rb_oseba = @rb_oseba,oseba = @oseba,objekt = @objekt,opomba = @opomba,imenik = @imenik, sm=@sm where id=@tid";
+                        cmd = new SqlCommand(q, con);
+                        con.Open();
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        //cmd.Parameters.AddWithValue("@skupina", tskupina);
+                        //cmd.Parameters.AddWithValue("@rb_mobilna", trb_mobilna);
+                        //cmd.Parameters.AddWithValue("@stevilka", tstevilka);
+                        //cmd.Parameters.AddWithValue("@mpo", tmpo);
+                        //cmd.Parameters.AddWithValue("@aktivna", taktivna);
+                        //cmd.Parameters.AddWithValue("@opis", topis);
+                        //cmd.Parameters.AddWithValue("@rb_oseba", trb_oseba);
+                        //cmd.Parameters.AddWithValue("@oseba", toseba);
+                        //cmd.Parameters.AddWithValue("@objekt", tobjekt);
+                        //cmd.Parameters.AddWithValue("@opomba", topomba);
+                        //cmd.Parameters.AddWithValue("@imenik", timenik);
+                        //cmd.Parameters.AddWithValue("@sm", tmpsm_id);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka pri shranjevanju zapisa: " + ex.Message);
+                }
+                finally
+                {
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                }
+                int zacasni_tid = tid;
+                Displayf(izbrana_skupina);
+                dgv1.Enabled = true;
+                //tid = zacasni_tid;
+                //Nalozi(prvi_id);
+
+                //Zacetek();
+            }
+            else
+            {
+                tbStevilka.Focus();
+            }
+        }
+
+
+        private void btnShrani_Click(object sender, EventArgs e)
+        {
+            Shrani();
+        }
+
+        private void dgv1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            dgv1.Rows[e.RowIndex].Height = 30;
+        }
+
+        private void Dodaj()
+        {
+            je_datoteka_izbrana = false;
+            dodajanje = true;
+            spreminjanje = false;
+            omogoci_tb();
+            izprazni_tb();
+            Gumbi_2();
+            cbVrsta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbVrsta.Enabled = true;
+            dgv1.Enabled = false;
+            tbOpis.Text = "";
+            tbStevilka.Text = Convert.ToString(najvecja+1);
+            tbStevilka.Focus();
+        }
+
+        private void Spremeni()
+        {
+            dodajanje = false;
+            spreminjanje = true;
+            omogoci_tb();
+            Gumbi_2();
+            dgv1.Enabled = false;
+            cbVrsta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbVrsta.Enabled = true;
+            tbStevilka.Focus();
+
+        }
+
+
+        private void Nastavitve()
+        {
+            try
+            {
+                q = "select * from tblNastavitve"; //+ sort;
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    imenik = (string)rdr["imenik"];
+                    pot = (string)rdr["mapa_pogodbe_tel"];
+                }
+                //MessageBox.Show(imenik);
+                pot_dok = imenik + pot;
+                //MessageBox.Show(pot_dok);
+                //imenik = Path.GetDirectoryName(Application.ExecutablePath);  // začasno??
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka rdr nastavitve: " + ex.Message);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (con != null)
+                {
+                    con.Close();
+                }
+            }
+        }
+
+        private void OdpriDatoteko(string ime)
+        {
+            if (File.Exists(@ime))
+            {
+                //MessageBox.Show(ime);
+                FileInfo fi = new FileInfo(ime);
+                string ext = fi.Extension;
+                //MessageBox.Show(ext);
+                switch (ext)
+                {
+                    case ".pdf":
+                        {
+                            //MessageBox.Show("PDF datoteka.");
+                            pdf_datoteka = ime;
+                            frmViewPDF sec = new frmViewPDF();
+                            sec.Show();
+                            break;
+                        }
+                    case "jpg":
+                        {
+                            break;
+                        }
+                    case "png":
+                        {
+                            break;
+                        }
+                }
+
+                //axAcroPDF1.LoadFile(ime);
+                //MessageBox.Show(ime + "Obstaja.");
+            }
+            else
+                MessageBox.Show("Datoteka ne obstaja.");
+        }
+
+        private void dgv1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string tmplink = dgv1.Rows[e.RowIndex].Cells[5].Value.ToString();
+            tmplink = pot_dok + tmplink;
+            OdpriDatoteko(tmplink);
+        }
 
         public frmPogodbeTel()
         {
@@ -76,6 +393,7 @@ namespace Komunala
 
         private void frmPogodbeTel_Load(object sender, EventArgs e)
         {
+            Nastavitve();
             Vrste_dokumentov_v_cb();
             //Prestej();
             Design();
@@ -109,6 +427,7 @@ namespace Komunala
 
         private void onemogoci_tb()
         {
+            cbVrsta.BackColor = frmMain.bela;
             cbVrsta.DropDownStyle = ComboBoxStyle.DropDownList;
             cbVrsta.Enabled = false;
             tbStevilka.Enabled = false;
@@ -140,12 +459,13 @@ namespace Komunala
         private void Displayf(int filter)
         {
             string filter_1;
+            najvecja = 0;
             filter_1 = "";
             prvic = true;
             Izprazni_dgv();
-            string q = "SELECT tbl_Pogodbe.Id, tbl_Pogodbe.TipDokumenta, Tbl_TipPogodbe.TipPogodbe AS eTip, tbl_Pogodbe.Zaporedna AS eZap, " +
-                "tbl_Pogodbe.Datum AS eDat, tbl_Pogodbe.Opis AS eOpi, tbl_Pogodbe.Fname AS eFna, tbl_Pogodbe.VrstaDatoteke " +
-                "FROM tbl_Pogodbe INNER JOIN  Tbl_TipPogodbe ON tbl_Pogodbe.TipDokumenta = Tbl_TipPogodbe.Id";
+            string q = "SELECT tbl_Pogodbe_tel.Id, tbl_Pogodbe_tel.TipDokumenta, Tbl_TipPogodbe.TipPogodbe AS eTip, tbl_Pogodbe_tel.Zaporedna AS eZap, " +
+                "tbl_Pogodbe_tel.Datum AS eDat, tbl_Pogodbe_tel.Opis AS eOpi, tbl_Pogodbe_tel.Fname AS eFna " +
+                "FROM tbl_Pogodbe_tel INNER JOIN  Tbl_TipPogodbe ON tbl_Pogodbe_tel.TipDokumenta = Tbl_TipPogodbe.Id";
 
             try
             {
@@ -159,46 +479,31 @@ namespace Komunala
                         prvi_id = tid;
                     prvic = false;
                     int intstevilka = (Int32)rdr["eZap"];
+                    if (intstevilka > najvecja)
+                        najvecja = intstevilka;
                     tstevilka = intstevilka.ToString().PadLeft(4, '0'); // Opis
-                    DateTime tDatum = (DateTime)rdr["eDat"];
+                    DateTime tmpdat = (DateTime)rdr["eDat"];
+                    string tdatum = tmpdat.ToString("dd.MM.yyyy");
                     ttip = (string)rdr["eTip"];
                     topis = (string)rdr["eOpi"];
-                    
+                    tlink = (string)rdr["eFna"];
+
                     DataGridViewTextBoxCell Id = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Stevilka = new DataGridViewTextBoxCell();
                     
                     DataGridViewTextBoxCell Datum = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Tip = new DataGridViewTextBoxCell();
                     DataGridViewTextBoxCell Opis = new DataGridViewTextBoxCell();
-                    DataGridViewLinkCell Link = new DataGridViewLinkCell();
+                    DataGridViewButtonCell Link = new DataGridViewButtonCell();
 
-                    //DataGridViewCheckBoxCell Imenik = new DataGridViewCheckBoxCell();
-                    //Id.Visible = false;
                     Id.Value = tid;
                     Stevilka.Value = tstevilka;
                     Datum.Value = tdatum;
                     Tip.Value = ttip;
                     Opis.Value = topis;
                     Link.Value = tlink;
-            
 
-                    // to naredi v grid edit columns
-                    //DataGridViewColumn kolid = dgv1.Columns[0];
-                    ////kolid.Width = 1;
-                    //kolid.Visible = false;
-                    //DataGridViewColumn kolstevilka = dgv1.Columns[1];
-                    //kolstevilka.Width = 70;
-                    //kolstevilka.Visible = true;
-                    //kolstevilka.HeaderText = "Številka";
-                    //DataGridViewColumn koldatum = dgv1.Columns[2];
-                    //koldatum.Width = 90;
-                    //DataGridViewColumn koltip = dgv1.Columns[3];
-                    //koltip.Width = 280;
-                    //DataGridViewColumn kolopis = dgv1.Columns[4];
-                    //kolopis.Width = 396;
-                    //DataGridViewColumn kollink = dgv1.Columns[5];
-                    //kollink.Width = 100;
-
+                    dgv1.RowTemplate.MinimumHeight = 35;
 
                     DataGridViewRow row = new DataGridViewRow();
 
@@ -210,6 +515,7 @@ namespace Komunala
                     row.Cells.Add(Link);
 
                     dgv1.Rows.Add(row);  // dodaj vrstico
+                    
                 }
             }
             catch (Exception ex)
@@ -232,6 +538,9 @@ namespace Komunala
 
         private void Design()
         {
+            this.BackColor = frmMain.barva_form_back;
+            this.Text = frmMain.nazivPrograma; // Form tekst
+
             crtal.AutoSize = false;
             crtal.Height = 1;
             crtal.BorderStyle = BorderStyle.Fixed3D;
@@ -243,43 +552,10 @@ namespace Komunala
             btnPreklici.BackColor = frmMain.barva_gumb2_neakt; btnPreklici.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnShrani.BackColor = frmMain.barva_gumb2_neakt; btnShrani.ForeColor = frmMain.barva_gumb2_pis_akt;
             btnSpremeni.BackColor = frmMain.barva_gumb2_neakt; btnSpremeni.ForeColor = frmMain.barva_gumb2_pis_akt;
-            //btnBrisi.Width = frmMain.gumb2_sirina; btnBrisi.Height = frmMain.gumb2_visina;
-            //btnDodaj.Width = frmMain.gumb2_sirina; btnDodaj.Height = frmMain.gumb2_visina;
-            //btnNazaj.Width = frmMain.gumb2_sirina; btnNazaj.Height = frmMain.gumb2_visina;
-            //btnPreklici.Width = frmMain.gumb2_sirina; btnPreklici.Height = frmMain.gumb2_visina;
-            //btnShrani.Width = frmMain.gumb2_sirina; btnShrani.Height = frmMain.gumb2_visina;
-            //btnSpremeni.Width = frmMain.gumb2_sirina; btnSpremeni.Height = frmMain.gumb2_visina;
 
-            //tbIme.BackColor = frmMain.bela;
-            //tbPriimek.BackColor = frmMain.bela;
-            //tbIme2.BackColor = frmMain.bela;
-            //tbPriimek2.BackColor = frmMain.bela;
-            //tbDelovnoMesto.BackColor = frmMain.bela;
-            //tbSm.BackColor = frmMain.bela;
-            //tbPosta.BackColor = frmMain.bela;
-            //tbNazivPoste.BackColor = frmMain.bela;
+            tbOpis.BackColor = frmMain.bela;
+            tbStevilka.BackColor = frmMain.bela;
+            //tdatum.BackColor = frmMain.bela;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Create object of Open file dialog class  
-            {
-                OpenFileDialog dlg = new OpenFileDialog();
-                // set file filter of dialog   
-                dlg.Filter = "pdf files (*.pdf) |*.pdf;";
-                dlg.ShowDialog();
-                if (dlg.FileName != null)
-                {
-                    // use the LoadFile(ByVal fileName As String) function for open the pdf in control  
-                    axAcroPDF1.LoadFile(dlg.FileName);
-                }
-            }
-        }
-
-        private void crtal_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
