@@ -113,10 +113,10 @@ namespace Komunala
             ////secondForm.ShowDialog();
             //frmTelBaza sec = new frmTelBaza();
             //sec.ShowDialog();
-            frmPogodbeTel sec = new frmPogodbeTel();
-            sec.ShowDialog();
+            //frmPogodbeTel sec = new frmPogodbeTel();
+            //sec.ShowDialog();
 
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 
