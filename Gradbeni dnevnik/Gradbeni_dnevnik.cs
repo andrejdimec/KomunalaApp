@@ -253,6 +253,12 @@ namespace Komunala
 
         private void cb1_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (dodajanje == true)
+            {
+                Nova_stevilka_dnevnika();
+               // MessageBox.Show("Poišči novo številko");
+            }
+            
             shranjeno = false;
         }
 
@@ -560,6 +566,7 @@ namespace Komunala
             Gumbi_dodaj();
             btnNovo.Enabled = false;
             omogoci_tb();
+            //cb1.Text = "";
             cb1.Focus();
         }
 
@@ -991,8 +998,10 @@ namespace Komunala
 
         private void Zacetek()
         {
-            
 
+
+            // novo 5.1.2021
+            dodajanje = false;
             prvic = true;
             dodaj = true;
             odprt = false;
@@ -1106,49 +1115,62 @@ namespace Komunala
             btnNovo.Focus();
         }
 
-
-        private void Novi_dnevnik()
+        // novo 5.1.2021
+        private void Nova_stevilka_dnevnika()
         {
-            Gumbi_dodaj();
-            omogoci_tb();
-            // preštej stevilo zapisov v bazi dnevniki
-            q2 = "SELECT COUNT(*) FROM tbl_dnevnik";
-            cmd2 = new SqlCommand(q2, con2);
-            con2.Open();
-            cmd2.ExecuteNonQuery();
-            sqlstevec = (int)cmd2.ExecuteScalar();
-            con2.Close();
+            // poišči katero delovišče je izbrano
+            
+            int id_delovisca = 1;  // če nič ne najde
+            tdatum = dt1.Value;
+            string tmp_leto = tdatum.ToString("yyyy");  // za katero leto naj išče dnevnike
+            int int_leto = Convert.ToInt32(tmp_leto);
 
-            if (sqlstevec > 0)
-            {
-                q2 = "select max(id) from tbl_dnevnik";  // če sta indexa iz ulic enaka
-                cmd2 = new SqlCommand(q2, con2);
-                con2.Open();
-                cmd2.ExecuteNonQuery();
-                max_id = (int)cmd2.ExecuteScalar();
-                con2.Close();
-            }
-            else
-            {
-                max_id = sqlstevec;
-            }
-            novi_id = max_id+1;
-            vpisi0 = false;
-            izprazni_tb();
-            //omogoci_tb();
-            dodajanje = true;
 
-            // polje za datum
-            dt1.Format = DateTimePickerFormat.Custom;
-            dt1.CustomFormat = "dd. MM. yyyy";
-            dt1.Value = DateTime.Now;
 
-            // vpiši zadnjo številko dnevnika v tb50
-            q2 = "select stevilka from tbl_dnevnik";
+            // poišči id objekta - delovišča
+            string tmpo_objekt = cb1.Text;
+
+            q2 = "select id_delovisca from tbl_delovisca where naziv = @naziv";
             try
             {
                 cmd2 = new SqlCommand(q2, con2);
                 con2.Open();
+                cmd2.Parameters.AddWithValue("@naziv", tmpo_objekt);
+
+                rdr2 = cmd2.ExecuteReader();
+                while (rdr2.Read())
+                {
+                    id_delovisca = (int)rdr2["id_delovisca"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: poišči id objekta - delovišča  " + ex.Message);
+            }
+            finally
+            {
+                if (rdr2 != null)
+                {
+                    rdr2.Close();
+                }
+                if (con2 != null)
+                {
+                    con2.Close();
+                }
+            }
+
+
+            // poišči dnevnike z izbranim deloviščem za letošnje leto
+
+            zap_dnevnika.Clear();
+
+            q2 = "select stevilka from tbl_dnevnik where leto = @letos and objekt_id=@objekt_id";
+            try
+            {
+                cmd2 = new SqlCommand(q2, con2);
+                con2.Open();
+                cmd2.Parameters.AddWithValue("@letos", int_leto);
+                cmd2.Parameters.AddWithValue("@objekt_id", id_delovisca);
                 rdr2 = cmd2.ExecuteReader();
                 while (rdr2.Read())
                 {
@@ -1182,13 +1204,110 @@ namespace Komunala
                 }
             }
             nova_zaporedna = maks + 1;
-            
-            if (sqlstevec==0) // če je baza z dnevniki prazna
+
+            if (sqlstevec == 0) // če je baza z dnevniki prazna
             {
                 nova_zaporedna = 1;
             }
             // napolni polja
             tb50.Text = Convert.ToString(nova_zaporedna);
+
+           // MessageBox.Show("Nova številka");
+        }
+
+        private void Novi_dnevnik()
+        {
+            Gumbi_dodaj();
+            omogoci_tb();
+            
+            // novo 5.1.2021  - poišči naslednjo številko dnevnika na podlagi na podlagi leta in skupine
+            
+            // preštej stevilo zapisov v bazi dnevniki
+            
+            
+            q2 = "SELECT COUNT(*) FROM tbl_dnevnik";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            sqlstevec = (int)cmd2.ExecuteScalar();
+            con2.Close();
+
+
+
+            if (sqlstevec > 0)
+            {
+                q2 = "select max(id) from tbl_dnevnik";  // če sta indexa iz ulic enaka
+                cmd2 = new SqlCommand(q2, con2);
+                con2.Open();
+                cmd2.ExecuteNonQuery();
+                max_id = (int)cmd2.ExecuteScalar();
+                con2.Close();
+            }
+            else
+            {
+                max_id = sqlstevec;
+            }
+            novi_id = max_id+1;
+            vpisi0 = false;
+            izprazni_tb();
+            //omogoci_tb();
+            dodajanje = true;
+
+            // polje za datum
+            dt1.Format = DateTimePickerFormat.Custom;
+            dt1.CustomFormat = "dd. MM. yyyy";
+            dt1.Value = DateTime.Now;
+
+            // vpiši zadnjo številko dnevnika v tb50
+            //q2 = "select stevilka from tbl_dnevnik";
+            //try
+            //{
+            //    cmd2 = new SqlCommand(q2, con2);
+            //    con2.Open();
+            //    rdr2 = cmd2.ExecuteReader();
+            //    while (rdr2.Read())
+            //    {
+            //        int tstevilka = (int)rdr2["stevilka"];
+            //        zap_dnevnika.Add(tstevilka);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Napaka: Dodaj objekte cb1  " + ex.Message);
+            //}
+            //finally
+            //{
+            //    if (rdr2 != null)
+            //    {
+            //        rdr2.Close();
+            //    }
+            //    if (con2 != null)
+            //    {
+            //        con2.Close();
+            //    }
+            //}
+
+            //// najdi največjo vrednost
+            //int maks = 0;
+            //foreach (int stevilka in zap_dnevnika)
+            //{
+            //    if (stevilka > maks)
+            //    {
+            //        maks = stevilka;
+            //    }
+            //}
+            //nova_zaporedna = maks + 1;
+
+            //if (sqlstevec==0) // če je baza z dnevniki prazna
+            //{
+            //    nova_zaporedna = 1;
+            //}
+            // napolni polja
+            // tb50.Text = Convert.ToString(nova_zaporedna);
+            
+            if (cb1.Text!="")
+                Nova_stevilka_dnevnika();
+
             tb51.Text = "7";
             tb52.Text = "15";
 
@@ -1660,11 +1779,17 @@ namespace Komunala
                                     con2.Close();
                                 }
                             }
+
+                            
+                            string tmp_leto = tdatum.ToString("yyyy");
+                            int int_leto = Convert.ToInt32(tmp_leto);
+
+                            // dodano polje leto zaradi sortiranje - 5.1.2021
                             tobjekt_id = id_objekta;
-                            q = "insert into tbl_Dnevnik (objekt,objekt_id,dnevnik_id,stevilka,datum,ura_od,ura_do,delavci_iz_vo,delavci_iz_gr,delavci_iz_ob,delavci_iz_in,delavci_iz_dr" +
+                            q = "insert into tbl_Dnevnik (objekt,objekt_id,dnevnik_id,stevilka,leto,datum,ura_od,ura_do,delavci_iz_vo,delavci_iz_gr,delavci_iz_ob,delavci_iz_in,delavci_iz_dr" +
                             ",delavci_na_vo,delavci_na_gr,delavci_na_ob,delavci_na_in,delavci_na_dr,delavci_po_vo,delavci_po_gr,delavci_po_ob,delavci_po_in,delavci_po_dr,delavci_iz_sk,delavci_po_sk,delavci_na_sk," +
                             "stroji_iz_1,stroji_iz_2,stroji_iz_3,stroji_iz_4,stroji_iz_5,stroji_iz_6,stroji_na_1,stroji_na_2,stroji_na_3,stroji_na_4,stroji_na_5,stroji_na_6,vreme_6, vreme_12,vreme_18,vreme_24,temp_6,temp_12,temp_18,temp_24,sestavil,nadzornik,vodja)" +
-                            "values (@objekt,@objekt_id,@dnevnik_id,@stevilka,@datum,@ura_od,@ura_do, @delavci_iz_vo,@delavci_iz_gr,@delavci_iz_ob,@delavci_iz_in,@delavci_iz_dr,@delavci_na_vo," +
+                            "values (@objekt,@objekt_id,@dnevnik_id,@stevilka,@leto,@datum,@ura_od,@ura_do, @delavci_iz_vo,@delavci_iz_gr,@delavci_iz_ob,@delavci_iz_in,@delavci_iz_dr,@delavci_na_vo," +
                             "@delavci_na_gr,@delavci_na_ob,@delavci_na_in,@delavci_na_dr,@delavci_po_vo,@delavci_po_gr,@delavci_po_ob,@delavci_po_in,@delavci_po_dr,@delavci_iz_sk,@delavci_po_sk,@delavci_na_sk," +
                             "@stroji_iz_1,@stroji_iz_2,@stroji_iz_3,@stroji_iz_4,@stroji_iz_5,@stroji_iz_6,@stroji_na_1,@stroji_na_2,@stroji_na_3,@stroji_na_4,@stroji_na_5,@stroji_na_6,@tvreme_1, @tvreme_2, @tvreme_3, @tvreme_4, @ttemp_1, @ttemp_2, @ttemp_3, @ttemp_4, @sestavil,@nadzornik,@vodja);SELECT SCOPE_IDENTITY();";
 
@@ -1673,6 +1798,7 @@ namespace Komunala
                             cmd.Parameters.AddWithValue("@objekt_id", tobjekt_id);
                             cmd.Parameters.AddWithValue("@dnevnik_id", novi_id);
                             cmd.Parameters.AddWithValue("@stevilka", tstevilka);
+                            cmd.Parameters.AddWithValue("@leto", int_leto);
                             cmd.Parameters.AddWithValue("@objekt", tobjekt);
                             cmd.Parameters.AddWithValue("@datum", tdatum);
                             cmd.Parameters.AddWithValue("@ura_od", tura_od);
@@ -2606,7 +2732,6 @@ namespace Komunala
                     cb1.Focus();
                 }
             }
-    
         }
 
         private void btnIzpis_Click(object sender, EventArgs e)

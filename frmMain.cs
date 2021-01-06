@@ -21,7 +21,7 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "4.12.2020";
+        string verzija = "6.1.2021";
         public static string nazivPrograma = "Komunala Radgona";
 
         SqlCommand cmd;

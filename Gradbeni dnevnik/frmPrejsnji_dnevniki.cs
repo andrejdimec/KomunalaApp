@@ -250,7 +250,7 @@ namespace Komunala
 
                 if (cb1.Text != "")
                 {
-                    q2 = "select * from tbl_dnevnik where objekt=@tmp_objekt order by stevilka desc";
+                    q2 = "select * from tbl_dnevnik where objekt=@tmp_objekt order by leto desc, stevilka desc";
                     try
                     {
                         cmd2 = new SqlCommand(q2, con2);
