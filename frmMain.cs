@@ -21,16 +21,17 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "5.2.2021";
+        string verzija = "9.2.2021";
         public static string nazivPrograma = "Komunala Radgona";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
 
         public static string disk = "g:\\";
+        public static string lokalni_disk = "c:\\";
         public static string app_path = disk+"\\KomunalaApp\\";
         public static string app_path_data = app_path + "data\\";
-        
+        public static string pot_podatki=lokalni_disk+ "\\Podatki\\";
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
 
@@ -127,7 +128,9 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            //Environment.Exit(0);
+            frmBaze_ZK sec = new frmBaze_ZK();
+            sec.ShowDialog();
+            Environment.Exit(0);
         }
 
 
