@@ -45,6 +45,9 @@ namespace Komunala
         // string mapa = "C:\\KatApp\\Kataster\\data\\";
         string mapa = frmMain.app_path_data;
         string m1 = "data\\";
+        
+       // MessageBox.Show(mapa);
+            
         string fnamecrp;
         string fnamecad;
         string fnamecad2;
@@ -221,7 +224,7 @@ namespace Komunala
 
             try
             {
-                string path = "c:\\hise.csv";
+                string path = "c:\\Kataster\\hise.csv";
 
                 File.Create(path).Close();
                 
@@ -1021,14 +1024,14 @@ namespace Komunala
             if (ncrp == 0 && nhs == 0 && nul == 0 && nna == 0 && npt==0 && ncad==0)
             {
                 Obdelaj_pt();
-                //Obdelaj_na();
-                //Obdelaj_ul();
-                //Obdelaj_hs();
-                //Obdelaj_crp();
-                //Prenesi_cadis();
-                Obdelaj_aglo();
+                Obdelaj_na();
+                Obdelaj_ul();
+                Obdelaj_hs();
+                Obdelaj_crp();
+                Prenesi_cadis();
+                //Obdelaj_aglo();
 
-                //Obdelaj_sql();
+                Obdelaj_sql();
                 MessageBox.Show("Končano! Podatki so pripravljeni.");
             }
             else
@@ -1046,6 +1049,7 @@ namespace Komunala
 
         private void frmBaze_Load(object sender, EventArgs e)
         {
+            //MessageBox.Show(mapa);
             // TODO: This line of code loads data into the 'dskat2.tbl_ul' table. You can move, or remove it, as needed.
             label8.Text = ""; // zapisov crp
             label51.Text = ""; label52.Text = ""; label24.Text = ""; label23.Text = ""; label22.Text = ""; label21.Text = "";label4.Text = "";label17.Text = "";

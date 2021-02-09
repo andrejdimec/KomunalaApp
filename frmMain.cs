@@ -21,14 +21,15 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "6.1.2021";
+        string verzija = "5.2.2021";
         public static string nazivPrograma = "Komunala Radgona";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
 
-        public static string app_path = ConfigurationManager.AppSettings["app_path"];
-        public static string app_path_data = ConfigurationManager.AppSettings["app_path_data"];
+        public static string disk = "g:\\";
+        public static string app_path = disk+"\\KomunalaApp\\";
+        public static string app_path_data = app_path + "data\\";
         
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
@@ -46,6 +47,8 @@ namespace Komunala
         public static SqlConnection c2 = new SqlConnection(cs);
         public static SqlConnection c3 = new SqlConnection(cs);
         public static SqlConnection c9 = new SqlConnection(cs);
+
+        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cs);
 
         DateTime datum;
         string leto = "2020"; // začasno - dobi ga iz combobox
@@ -86,9 +89,15 @@ namespace Komunala
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string database = builder.InitialCatalog;
+            string server = builder.DataSource;
+            string path = Directory.GetCurrentDirectory();
+            //app_path = path;
+            //app_path_data = app_path + "data";
+
             string[] baza = cs.Split(';');
-            lbaza.Text = "Podatki: " + baza[0];
-            lverzija.Text = "v " + verzija;
+            lbaza.Text = "Podatki: " +server+ database;
+            lverzija.Text = "Verzija: " + verzija;
             Nastavitve();
             akt_dnevnik = true;
             Razbarvaj_gumbe();
@@ -114,6 +123,8 @@ namespace Komunala
             //frmTelBaza sec = new frmTelBaza();
             //sec.ShowDialog();
             //frmPogodbeTel sec = new frmPogodbeTel();
+            //sec.ShowDialog();
+            //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
             //Environment.Exit(0);
