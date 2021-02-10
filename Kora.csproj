@@ -135,6 +135,12 @@
     <Compile Include="frmViewPDF.Designer.cs">
       <DependentUpon>frmViewPDF.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmZK_REN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmZK_REN.Designer.cs">
+      <DependentUpon>frmZK_REN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sifranti\frmSodelavci.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -355,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewPDF.resx">
       <DependentUpon>frmViewPDF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmZK_REN.resx">
+      <DependentUpon>frmZK_REN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sifranti\frmSodelavci.resx">
       <DependentUpon>frmSodelavci.cs</DependentUpon>

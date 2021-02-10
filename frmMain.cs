@@ -128,7 +128,7 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            frmBaze_ZK sec = new frmBaze_ZK();
+            frmZK_REN sec = new frmZK_REN();
             sec.ShowDialog();
             Environment.Exit(0);
         }
@@ -510,6 +510,12 @@ namespace Komunala
         private void button12_Click_1(object sender, EventArgs e)
         {
             frmPogodbeTel sec = new frmPogodbeTel();
+            sec.ShowDialog();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            frmBaze_ZK sec = new frmBaze_ZK();
             sec.ShowDialog();
         }
 

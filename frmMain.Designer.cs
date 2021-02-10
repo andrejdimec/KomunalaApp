@@ -59,6 +59,8 @@
             this.cr_nalogi = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tp_ijsvo = new System.Windows.Forms.TabPage();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
             this.cr_ijsvo = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.tp_sifranti = new System.Windows.Forms.TabPage();
@@ -88,13 +90,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lverzija = new System.Windows.Forms.Label();
             this.lbaza = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -587,13 +584,10 @@
             // tp_ijsvo
             // 
             this.tp_ijsvo.BackColor = System.Drawing.Color.AliceBlue;
-            this.tp_ijsvo.Controls.Add(this.label1);
+            this.tp_ijsvo.Controls.Add(this.button25);
+            this.tp_ijsvo.Controls.Add(this.button24);
             this.tp_ijsvo.Controls.Add(this.button20);
-            this.tp_ijsvo.Controls.Add(this.button21);
             this.tp_ijsvo.Controls.Add(this.button23);
-            this.tp_ijsvo.Controls.Add(this.button17);
-            this.tp_ijsvo.Controls.Add(this.button18);
-            this.tp_ijsvo.Controls.Add(this.button19);
             this.tp_ijsvo.Controls.Add(this.cr_ijsvo);
             this.tp_ijsvo.Controls.Add(this.label15);
             this.tp_ijsvo.Location = new System.Drawing.Point(4, 22);
@@ -601,6 +595,38 @@
             this.tp_ijsvo.Size = new System.Drawing.Size(734, 514);
             this.tp_ijsvo.TabIndex = 4;
             this.tp_ijsvo.Text = "ZK in REN";
+            // 
+            // button20
+            // 
+            this.button20.BackColor = System.Drawing.Color.Transparent;
+            this.button20.BackgroundImage = global::Komunala.Resources.gumbi_manjsi_sodelavci;
+            this.button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button20.FlatAppearance.BorderSize = 0;
+            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button20.Location = new System.Drawing.Point(379, 304);
+            this.button20.Margin = new System.Windows.Forms.Padding(0);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(126, 148);
+            this.button20.TabIndex = 38;
+            this.button20.UseVisualStyleBackColor = false;
+            // 
+            // button23
+            // 
+            this.button23.BackColor = System.Drawing.Color.Transparent;
+            this.button23.BackgroundImage = global::Komunala.Resources.bm_storitve;
+            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button23.FlatAppearance.BorderSize = 0;
+            this.button23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button23.Location = new System.Drawing.Point(225, 304);
+            this.button23.Margin = new System.Windows.Forms.Padding(0);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(126, 148);
+            this.button23.TabIndex = 36;
+            this.button23.UseVisualStyleBackColor = false;
             // 
             // cr_ijsvo
             // 
@@ -980,110 +1006,24 @@
             this.lbaza.Text = "v 28.10.2020";
             this.lbaza.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // button17
+            // button24
             // 
-            this.button17.BackColor = System.Drawing.Color.Transparent;
-            this.button17.BackgroundImage = global::Komunala.Resources.gumbi_manjsi_sodelavci;
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button17.FlatAppearance.BorderSize = 0;
-            this.button17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(379, 122);
-            this.button17.Margin = new System.Windows.Forms.Padding(0);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(126, 148);
-            this.button17.TabIndex = 35;
-            this.button17.UseVisualStyleBackColor = false;
+            this.button24.Location = new System.Drawing.Point(54, 143);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(114, 39);
+            this.button24.TabIndex = 40;
+            this.button24.Text = "Pripravi podatke";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
-            // button18
+            // button25
             // 
-            this.button18.BackColor = System.Drawing.Color.Transparent;
-            this.button18.BackgroundImage = global::Komunala.Resources.gumbi_cenik;
-            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button18.FlatAppearance.BorderSize = 0;
-            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Location = new System.Drawing.Point(216, 122);
-            this.button18.Margin = new System.Windows.Forms.Padding(0);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(126, 148);
-            this.button18.TabIndex = 34;
-            this.button18.UseVisualStyleBackColor = false;
-            // 
-            // button19
-            // 
-            this.button19.BackColor = System.Drawing.Color.Transparent;
-            this.button19.BackgroundImage = global::Komunala.Resources.bm_storitve;
-            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button19.FlatAppearance.BorderSize = 0;
-            this.button19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Location = new System.Drawing.Point(54, 122);
-            this.button19.Margin = new System.Windows.Forms.Padding(0);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(126, 148);
-            this.button19.TabIndex = 33;
-            this.button19.UseVisualStyleBackColor = false;
-            // 
-            // button20
-            // 
-            this.button20.BackColor = System.Drawing.Color.Transparent;
-            this.button20.BackgroundImage = global::Komunala.Resources.gumbi_manjsi_sodelavci;
-            this.button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button20.FlatAppearance.BorderSize = 0;
-            this.button20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Location = new System.Drawing.Point(379, 304);
-            this.button20.Margin = new System.Windows.Forms.Padding(0);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(126, 148);
-            this.button20.TabIndex = 38;
-            this.button20.UseVisualStyleBackColor = false;
-            // 
-            // button21
-            // 
-            this.button21.BackColor = System.Drawing.Color.Transparent;
-            this.button21.BackgroundImage = global::Komunala.Resources.gumbi_cenik;
-            this.button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button21.FlatAppearance.BorderSize = 0;
-            this.button21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.Location = new System.Drawing.Point(216, 304);
-            this.button21.Margin = new System.Windows.Forms.Padding(0);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(126, 148);
-            this.button21.TabIndex = 37;
-            this.button21.UseVisualStyleBackColor = false;
-            // 
-            // button23
-            // 
-            this.button23.BackColor = System.Drawing.Color.Transparent;
-            this.button23.BackgroundImage = global::Komunala.Resources.bm_storitve;
-            this.button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button23.FlatAppearance.BorderSize = 0;
-            this.button23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button23.Location = new System.Drawing.Point(54, 304);
-            this.button23.Margin = new System.Windows.Forms.Padding(0);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(126, 148);
-            this.button23.TabIndex = 36;
-            this.button23.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(226, 274);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 39;
-            this.label1.Text = "Prenesi baze";
+            this.button25.Location = new System.Drawing.Point(54, 222);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(114, 39);
+            this.button25.TabIndex = 41;
+            this.button25.Text = "Pozvedbe";
+            this.button25.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -1190,13 +1130,10 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button25;
     }
 }
 
