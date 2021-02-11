@@ -44,14 +44,14 @@ namespace Komunala
             try
             {
                 string q = "select * from tbl_ko where ko_id=@idx";
-                cmd = new SqlCommand(q, con);
-                con.Open();
-                cmd.Parameters.AddWithValue("@idx", vhod);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+                cmd2 = new SqlCommand(q, con2);
+                con2.Open();
+                cmd2.Parameters.AddWithValue("@idx", vhod);
+                rdr2 = cmd2.ExecuteReader();
+                while (rdr2.Read())
                 {
-                    izbr_ko_id = (string)rdr["ko_id"];
-                    izbr_ko = (string)rdr["ko_ime"];
+                    izbr_ko_id = (string)rdr2["ko_id"];
+                    izbr_ko = (string)rdr2["ko_ime"];
                 }  // while read
             }
             catch (Exception ex)
@@ -60,39 +60,26 @@ namespace Komunala
             }
             finally
             {
-                rdr.Close();
-                con.Close();
-                if (izbr_ko_id == "-99")
-                {
-                    l1.Text = "KO s številko " + izbr_ko_id + " ne obstaja!";
-                    tb1.Text = "";
-                    tb1.Focus();
-                }
-                else
-                {
-                    l1.Text = "KO " + izbr_ko_id + " - " + izbr_ko;
-                    Omogoci();
-                    tb2.Focus();
-                }
+                rdr2.Close();
+                con2.Close();
             }
-
         }
 
         private void Vpisi_dgv()
         {
-            tb1.Text = "";
-            dgv5.ColumnHeadersVisible = false;
+            //tb1.Text = "";
+            //dgv5.ColumnHeadersVisible = false;
             dgv5.RowHeadersVisible = false;
 
-            string q = "select sif_ko,parcela from tbl_vk6_zk_parcele order by parcela"; 
+            string q = "select id,sif_ko,parcela,povrsina from tbl_vk6_zk_parcele where sif_ko=@idx order by parcela asc, povrsina desc"; 
 
-            var da = new SqlDataAdapter(q, con);
-
+            var da = new SqlDataAdapter(q, con3);
+            da.SelectCommand.Parameters.Add("@idx", izbr_ko_id);
             dt = new DataTable();
             da.Fill(dt);
             dgv5.DataSource = dt;
-
             dgv5.ReadOnly = true;
+
             //dgv5.Columns[0].Visible = false;
             //dgv5.Columns[1].Visible = false;
             //dgv5.Columns["priimek1"].Width = 170;
@@ -100,14 +87,13 @@ namespace Komunala
             //dgv5.Columns["priimek2"].Visible = false;
             //dgv5.Columns["ime1"].Width = 100;
             //dgv5.Columns["ime2"].Width = 100;
-            //dgv5.Columns["ime2"].Visible = false;
-            dgv5.Columns["hsmid"].Visible = false;
-            dgv5.Columns["hs"].Visible = false;
-            dgv5.Columns["hd"].Visible = false;
-            dgv5.Columns["naslov"].Width = 150;
-            dgv5.Columns["labela"].Width = 60;
+            dgv5.Columns["id"].Visible = false;
+            dgv5.Columns["sif_ko"].Visible = false;
+            dgv5.Columns["parcela"].Width = 200;
+            dgv5.Columns["povrsina"].Width = 80;
+            // dgv5.Columns["labela"].Width = 60;
 
-            this.dgv5.Columns["labela"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //this.dgv5.Columns["labela"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             tb1.Focus();
         }
@@ -127,18 +113,79 @@ namespace Komunala
 
         private void frmIsci_parc_Load(object sender, EventArgs e)
         {
+            frmMain.id_parcele = -99;
+            frmMain.id_ko = -99;
             Pocisti();
+        }
+
+        private void frmIsci_parc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
+
+        }
+
+        private void tb2_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "parcela LIKE '" + tb2.Text + "%'";
+            dgv5.DataSource = dv;
+        }
+
+        private void tb2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+                dgv5.Focus();
+        }
+
+        private void dgv5_DoubleClick(object sender, EventArgs e)
+        {
+            frmMain.id_parcele = Convert.ToInt32(dgv5.SelectedCells[0].Value.ToString());
+            frmMain.id_ko = Convert.ToInt32(dgv5.SelectedCells[1].Value.ToString());
+            frmMain.ime_ko = izbr_ko;
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void dgv5_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                frmMain.id_parcele = Convert.ToInt32(dgv5.SelectedCells[0].Value.ToString());
+                frmMain.id_ko = Convert.ToInt32(dgv5.SelectedCells[1].Value.ToString());
+                frmMain.ime_ko = izbr_ko;
+                //e.SuppressKeyPress = true;
+                this.DialogResult = DialogResult.Cancel;
+            }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void tb1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter | e.KeyCode == Keys.Tab)
             {
                 string ko_temp;
                 ko_temp = tb1.Text;
-                if (ko_temp.Length < 4)
-                    ko_temp = "0" + ko_temp;
                 Preveri_KO(ko_temp);
+                if (izbr_ko_id == "-99")
+                {
+                    l1.Text = "KO s to številko ne obstaja!";
+                    //tb1.Text = "";
+                    tb1.Focus();
+                }
+                else
+                {
+                    l1.Text = "KO " + izbr_ko_id + " - " + izbr_ko;
+                    Omogoci();
+                    tb2.Focus();
+                }
+
             }
 
         }

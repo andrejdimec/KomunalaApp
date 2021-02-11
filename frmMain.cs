@@ -37,6 +37,8 @@ namespace Komunala
 
         public static string direktor, imenik, datum_o_1, datum_o_2, tekst_o_1, tekst_o_2, datum_t_1, datum_t_2, tekst_t_1, tekst_t_2;
         public static string fname;
+        public static int id_parcele, id_ko;
+        public static string ime_ko;
 
         public static string sit_pripravil = "Franc Kovačič"; // privzeti podpisniki za situacije
         public static string sit_odobril = "Andrej Subašič";
@@ -128,9 +130,9 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            //frmZK_REN sec = new frmZK_REN();
-            //sec.ShowDialog();
-            //Environment.Exit(0);
+            frmZK_REN sec = new frmZK_REN();
+            sec.ShowDialog();
+            Environment.Exit(0);
         }
 
 

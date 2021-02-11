@@ -111,19 +111,14 @@ namespace Komunala
                         string mid_naslova = vrstica.Substring(96, 8);
                         string mid_hs = vrstica.Substring(104, 8);
                         string ostanek = vrstica.Substring(112);
-                       if (mid_hs!="00000000" || mid_naslova != "00000000") // domači naslov
-                        {
-                            string ostanek2 = ostanek.Substring(ostanek.IndexOf(",")+2);
-                            kraj= ostanek2.Substring(0,ostanek2.IndexOf(";"));  // pred podpicjem
-                            posta=ostanek2.Substring(ostanek2.IndexOf(";") + 2); // za podpicjem
-                            posta = posta.TrimEnd();
-                        }
-                        if (mid_hs != "00000000" && mid_naslova != "00000000")
+                        hs = hs.TrimStart('0');
+
+                        if (mid_hs == "00000000" && mid_naslova == "00000000")
                         // tuji naslov
                         {
-                            //string ostanek3 = ostanek.Substring(ostanek.IndexOf("+") + 2);
                             if (ostanek.Contains('+'))
                             {
+                                ostanek = ostanek.TrimEnd();
                                 kraj = ostanek.Substring(0, ostanek.IndexOf("+"));  // pred podpicjem
                                 posta = ostanek.Substring(ostanek.IndexOf("+") + 2); // za podpicjem
                                 posta = posta.TrimEnd();
@@ -135,7 +130,23 @@ namespace Komunala
                                 kraj = ostanek;
                                 posta = "";
                                 naslov_tujina = ostanek;
-                                MessageBox.Show("--" + ostanek + "--");
+                            }
+                        }
+                        else // domači naslov
+                        {
+                            if (ostanek.Contains(';'))
+                            {
+                                ostanek = ostanek.TrimEnd();
+                                string ostanek2 = ostanek.Substring(ostanek.IndexOf(",") + 2);
+                                kraj = ostanek2.Substring(0, ostanek2.IndexOf(";"));  // pred podpicjem
+                                posta = ostanek2.Substring(ostanek2.IndexOf(";") + 2); // za podpicjem
+                                posta = posta.TrimEnd();
+                            }
+                            else
+                            {
+                                ostanek = ostanek.TrimEnd();
+                                kraj = ostanek;
+                                posta = "";
                             }
                         }
                         try
