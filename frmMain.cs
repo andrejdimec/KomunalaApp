@@ -128,9 +128,9 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            frmZK_REN sec = new frmZK_REN();
-            sec.ShowDialog();
-            Environment.Exit(0);
+            //frmZK_REN sec = new frmZK_REN();
+            //sec.ShowDialog();
+            //Environment.Exit(0);
         }
 
 

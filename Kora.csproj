@@ -117,6 +117,12 @@
       <DependentUpon>crCeniko.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="frmIsci_parc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmIsci_parc.Designer.cs">
+      <DependentUpon>frmIsci_parc.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPogodbeTel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -352,6 +358,9 @@
     <EmbeddedResource Include="crCeniko.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crCeniko.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmIsci_parc.resx">
+      <DependentUpon>frmIsci_parc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPogodbeTel.resx">
       <DependentUpon>frmPogodbeTel.cs</DependentUpon>

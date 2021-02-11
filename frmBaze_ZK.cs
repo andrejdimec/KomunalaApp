@@ -28,7 +28,7 @@ namespace Komunala
         SqlCommand cmd3;
         SqlDataReader rdr3 = null;
 
-        string fname_vk1 = frmMain.pot_podatki + "zk\\" + "ob_vk1.dat";  // baza z osebami
+        string fname_vk1 = frmMain.pot_podatki + "zk\\" + "ob_vk1_n.dat";  // baza z osebami in naslovi
         int n_vk1;
         string fname_vk5 = frmMain.pot_podatki + "zk\\" + "ob_vk5.dat";  // baza z osebami
         int n_vk5;
@@ -36,6 +36,7 @@ namespace Komunala
         int n_vk6;
         int stevec;
         string vrstica;
+        string naslov_tujina,kraj,posta;
 
         public frmBaze_ZK()
         {
@@ -86,14 +87,16 @@ namespace Komunala
             {
                 stevec = 0;
                 IzprazniBazo_vk1();
-                // preberi HS - CSV
+                
                 try
                 {
                     System.IO.StreamReader objReader;
                     objReader = new System.IO.StreamReader(fname_vk1);
                     do
                     {
+                        
                         vrstica = "";
+                        naslov_tujina = ""; kraj = ""; posta = "";
                         vrstica = objReader.ReadLine() + "\r\n";
                         string emso = vrstica.Substring(1, 13);
                         string sif_obcine = vrstica.Substring(14, 3);
@@ -107,12 +110,40 @@ namespace Komunala
                         string status_osebe = vrstica.Substring(95, 1);
                         string mid_naslova = vrstica.Substring(96, 8);
                         string mid_hs = vrstica.Substring(104, 8);
+                        string ostanek = vrstica.Substring(112);
+                       if (mid_hs!="00000000" || mid_naslova != "00000000") // domači naslov
+                        {
+                            string ostanek2 = ostanek.Substring(ostanek.IndexOf(",")+2);
+                            kraj= ostanek2.Substring(0,ostanek2.IndexOf(";"));  // pred podpicjem
+                            posta=ostanek2.Substring(ostanek2.IndexOf(";") + 2); // za podpicjem
+                            posta = posta.TrimEnd();
+                        }
+                        if (mid_hs != "00000000" && mid_naslova != "00000000")
+                        // tuji naslov
+                        {
+                            //string ostanek3 = ostanek.Substring(ostanek.IndexOf("+") + 2);
+                            if (ostanek.Contains('+'))
+                            {
+                                kraj = ostanek.Substring(0, ostanek.IndexOf("+"));  // pred podpicjem
+                                posta = ostanek.Substring(ostanek.IndexOf("+") + 2); // za podpicjem
+                                posta = posta.TrimEnd();
+                                naslov_tujina = kraj + " " + posta;
+                            }
+                            else
+                            {
+                                ostanek = ostanek.TrimEnd();
+                                kraj = ostanek;
+                                posta = "";
+                                naslov_tujina = ostanek;
+                                MessageBox.Show("--" + ostanek + "--");
+                            }
+                        }
                         try
                         {
                             if (stevec > 0)
                             {
-                                string query = "insert into tbl_vk1_zk_osebe (emso, sif_obcine,sif_naselja,sif_ulice,hs,hsd,st_poste,priimek_ime,status_osebe,mid_naslova,mid_hs) " +
-                                    "values(@emso,@sif_obcine,@sif_naselja,@sif_ulice,@hs,@hd,@st_poste,@priimek_ime,@status_osebe,@mid_naslova,@mid_hs)";
+                                string query = "insert into tbl_vk1_zk_osebe (emso, sif_obcine,sif_naselja,sif_ulice,hs,hsd,st_poste,priimek_ime,status_osebe,mid_naslova,mid_hs,kraj,posta,naslov_tujina) " +
+                                    "values(@emso,@sif_obcine,@sif_naselja,@sif_ulice,@hs,@hd,@st_poste,@priimek_ime,@status_osebe,@mid_naslova,@mid_hs,@kraj,@posta,@naslov_tujina)";
                                 cmd = new SqlCommand(query, con);
                                 con.Open();
                                 cmd.Parameters.AddWithValue("@emso", emso);
@@ -126,6 +157,9 @@ namespace Komunala
                                 cmd.Parameters.AddWithValue("@status_osebe", status_osebe);
                                 cmd.Parameters.AddWithValue("@mid_naslova", mid_naslova);
                                 cmd.Parameters.AddWithValue("@mid_hs", mid_hs);
+                                cmd.Parameters.AddWithValue("@kraj", kraj);
+                                cmd.Parameters.AddWithValue("@posta", posta);
+                                cmd.Parameters.AddWithValue("@naslov_tujina",naslov_tujina);
                                 cmd.ExecuteNonQuery();
                                 con.Close();
                             }
@@ -138,7 +172,7 @@ namespace Komunala
                         stevec = ++stevec;
                         label9.Text = stevec.ToString();
                         label9.Refresh();
-                    } while (objReader.Peek() != -1);
+                    } while (objReader.Peek() != -1); //(stevec != 104);  //
                     objReader.Close();
                     stevec--;
                     label9.Text = stevec.ToString();
@@ -246,51 +280,62 @@ namespace Komunala
                     {
                         vrstica = "";
                         vrstica = objReader.ReadLine() + "\r\n";
+                        string parcela;
                         string sif_ko = vrstica.Substring(1, 4);
+                        sif_ko = sif_ko.TrimStart('0');
                         string oznaka_parc = vrstica.Substring(5, 1);
-                        string  stev_parc = vrstica.Substring(6, 4);
-                        string  imen_parc = vrstica.Substring(10, 4);
-                        string  pos_list = vrstica.Substring(14, 5);
-                        string  letnica = vrstica.Substring(26, 4);
-                        string  stevilka = vrstica.Substring(30, 3);
-                        string  ozn_nac = vrstica.Substring(33, 1);
-                        string  povrsina = vrstica.Substring(34, 8);
-                        string  boniteta = vrstica.Substring(42, 3);
-                        string  raba_zemljisca = vrstica.Substring(45, 3);
-                        string  ob_id = vrstica.Substring(49, 4);
-                        string  id_postopka = vrstica.Substring(53, 8);
-                        string  urejenost = vrstica.Substring(61, 1);
-                        string  stev_stavbe = vrstica.Substring(62, 5);
-                        string  y = vrstica.Substring(67, 9);
-                        string  x = vrstica.Substring(76, 9);
-                        string  ob_mid = vrstica.Substring(85, 8);
+                        string stev_parc = vrstica.Substring(6, 4);
+                        string imen_parc = vrstica.Substring(10, 4);
+                        stev_parc = stev_parc.TrimStart('0');
+                        imen_parc = imen_parc.TrimStart('0');
+
+                        if (imen_parc != "")
+                            parcela = stev_parc + "/" + imen_parc;
+                        else
+                            parcela = stev_parc;
+
+                        string pos_list = vrstica.Substring(14, 5);
+                        string letnica = vrstica.Substring(26, 4);
+                        string stevilka = vrstica.Substring(30, 3);
+                        string ozn_nac = vrstica.Substring(33, 1);
+                        string povrsina = vrstica.Substring(34, 8);
+                        string boniteta = vrstica.Substring(42, 3);
+                        string raba_zemljisca = vrstica.Substring(45, 3);
+                        string ob_id = vrstica.Substring(49, 4);
+                        string id_postopka = vrstica.Substring(53, 8);
+                        string urejenost = vrstica.Substring(61, 1);
+                        string stev_stavbe = vrstica.Substring(62, 5);
+                        string y = vrstica.Substring(67, 9);
+                        string x = vrstica.Substring(76, 9);
+                        string ob_mid = vrstica.Substring(85, 8);
                         try
                         {
                             if (stevec > 0)
                             {
-                                string query = "insert into tbl_vk6_zk_parcele (sif_ko,oznaka_parc,stev_parc,imen_parc,pos_list,letnica,stevilka,ozn_nac,povrsina,boniteta,raba_zemljisca,ob_id," +
+                                string query = "insert into tbl_vk6_zk_parcele (sif_ko,oznaka_parc,stev_parc,imen_parc,parcela,pos_list,letnica,stevilka,ozn_nac,povrsina,boniteta,raba_zemljisca,ob_id," +
                                     "id_postopka,urejenost,stev_stavbe,y,x,ob_mid) " +
-                                    "values(@sif_ko,@oznaka_parc,@stev_parc,@imen_parc,@pos_list,@letnica,@stevilka,@ozn_nac,@povrsina,@boniteta,@raba_zemljisca,@ob_id,@id_postopka,@urejenost,@stev_stavbe,@y,@x,@ob_mid)";
+                                    "values(@sif_ko,@oznaka_parc,@stev_parc,@imen_parc,@parcela,@pos_list,@letnica,@stevilka,@ozn_nac,@povrsina,@boniteta,@raba_zemljisca,@ob_id,@id_postopka,@urejenost,@stev_stavbe,@y,@x,@ob_mid)";
                                 cmd = new SqlCommand(query, con);
                                 con.Open();
-                                cmd.Parameters.AddWithValue("@sif_ko",sif_ko);
-                                cmd.Parameters.AddWithValue("@oznaka_parc",oznaka_parc);
-                                cmd.Parameters.AddWithValue("@stev_parc",stev_parc);
-                                cmd.Parameters.AddWithValue("@imen_parc",imen_parc);
-                                cmd.Parameters.AddWithValue("@pos_list",pos_list);
-                                cmd.Parameters.AddWithValue("@letnica",letnica);
-                                cmd.Parameters.AddWithValue("@stevilka",stevilka);
-                                cmd.Parameters.AddWithValue("@ozn_nac",ozn_nac);
-                                cmd.Parameters.AddWithValue("@povrsina",povrsina);
-                                cmd.Parameters.AddWithValue("@boniteta",boniteta);
-                                cmd.Parameters.AddWithValue("@raba_zemljisca",raba_zemljisca);
-                                cmd.Parameters.AddWithValue("@ob_id",ob_id);
-                                cmd.Parameters.AddWithValue("@id_postopka",id_postopka);
-                                cmd.Parameters.AddWithValue("@urejenost",urejenost);
-                                cmd.Parameters.AddWithValue("@stev_stavbe",stev_stavbe);
-                                cmd.Parameters.AddWithValue("@y",y);
-                                cmd.Parameters.AddWithValue("@x",x);
-                                cmd.Parameters.AddWithValue("@ob_mid",ob_mid);
+                                cmd.Parameters.AddWithValue("@sif_ko", sif_ko);
+                                cmd.Parameters.AddWithValue("@oznaka_parc", oznaka_parc);
+                                cmd.Parameters.AddWithValue("@stev_parc", stev_parc);
+                                cmd.Parameters.AddWithValue("@imen_parc", imen_parc);
+                                cmd.Parameters.AddWithValue("@parcela", parcela);
+                                cmd.Parameters.AddWithValue("@pos_list", pos_list);
+                                cmd.Parameters.AddWithValue("@letnica", letnica);
+                                cmd.Parameters.AddWithValue("@stevilka", stevilka);
+                                cmd.Parameters.AddWithValue("@ozn_nac", ozn_nac);
+                                cmd.Parameters.AddWithValue("@povrsina", povrsina);
+                                cmd.Parameters.AddWithValue("@boniteta", boniteta);
+                                cmd.Parameters.AddWithValue("@raba_zemljisca", raba_zemljisca);
+                                cmd.Parameters.AddWithValue("@ob_id", ob_id);
+                                cmd.Parameters.AddWithValue("@id_postopka", id_postopka);
+                                cmd.Parameters.AddWithValue("@urejenost", urejenost);
+                                cmd.Parameters.AddWithValue("@stev_stavbe", stev_stavbe);
+                                cmd.Parameters.AddWithValue("@y", y);
+                                cmd.Parameters.AddWithValue("@x", x);
+                                cmd.Parameters.AddWithValue("@ob_mid", ob_mid);
                                 cmd.ExecuteNonQuery();
                                 con.Close();
                             }
@@ -303,7 +348,7 @@ namespace Komunala
                         stevec = ++stevec;
                         label6.Text = stevec.ToString();
                         label6.Refresh();
-                    } while (objReader.Peek() != -1);
+                    } while (objReader.Peek() != -1); //(stevec != 100); 
                     objReader.Close();
                     stevec--;
                     label6.Text = stevec.ToString();
