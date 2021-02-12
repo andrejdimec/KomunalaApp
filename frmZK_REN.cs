@@ -33,6 +33,13 @@ namespace Komunala
         string izbr_ko_id, izbr_ko;
 
         string parc_st, ko_st, oznaka_parc, pos_list, letnica, stevilka, ozn_nac, povrsina, boniteta, raba_zemljisca, id_postopka, urejenost, stev_stavbe;
+        int aktivni_tab;
+
+        private void tb2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         string emso, delez_ste, delez_ime,pos_list2,delez_parcele;
         int idelez_ste, idelez_ime;
         
@@ -41,14 +48,58 @@ namespace Komunala
             InitializeComponent();
         }
 
+        private void Cb_ko()  // napolni cb_ko
+        {
+            q2 = "select * from tblskupinestoritev order by skupina";
+            try
+            {
+                cmd2 = new SqlCommand(q2, con2);
+                con2.Open();
+                rdr2 = cmd2.ExecuteReader();
+                cb1.Items.Clear();
+                while (rdr2.Read())
+                {
+                    string zacasna_skupina = (string)rdr2["Skupina"];
+                    int tindeks = (int)rdr2["Indeks"];
+                    int tid_indeks = (int)rdr2["Id"];
+                    cb1.Items.Add(zacasna_skupina);
+                }
+                cb1.Items.Add(vse_skupine_storitev);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: dodaj vse skupine v cb1  " + ex.Message);
+            }
+            finally
+            {
+                if (rdr2 != null)
+                {
+                    rdr2.Close();
+                }
+                if (con2 != null)
+                {
+                    con2.Close();
+                }
+            }
+
+        }
+
         private void Pocisti()
         {
             l5.Text = ""; l6.Text = "";
         }
 
+        private void Pripravi(int vhod)
+        {
+            panParcela.Visible = true;
+        }
+
         private void frmZK_REN_Load(object sender, EventArgs e)
         {
+            aktivni_tab = 4; // po parcelah
+            Pripravi(aktivni_tab); // pripravi za po parcelah
             Pocisti();
+
         }
         
         private void Posestni_list()
