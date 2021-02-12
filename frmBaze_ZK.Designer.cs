@@ -45,6 +45,12 @@ namespace Komunala
             this.label10 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -198,11 +204,74 @@ namespace Komunala
             this.label11.TabIndex = 41;
             this.label11.Text = "Zemljiški kataster";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label12.Location = new System.Drawing.Point(41, 244);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(219, 23);
+            this.label12.TabIndex = 47;
+            this.label12.Text = "Register nepremičnin (REN)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(125, 353);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(46, 18);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "label2";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(42, 380);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(46, 18);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "label3";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(42, 353);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(46, 18);
+            this.label15.TabIndex = 44;
+            this.label15.Text = "label2";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(42, 280);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 18);
+            this.label16.TabIndex = 43;
+            this.label16.Text = "Lastniki";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(45, 302);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(99, 32);
+            this.button4.TabIndex = 42;
+            this.button4.Text = "Prenos";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // frmBaze_ZK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 624);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
@@ -247,5 +316,11 @@ namespace Komunala
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button4;
     }
 }

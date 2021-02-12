@@ -67,34 +67,19 @@ namespace Komunala
 
         private void Vpisi_dgv()
         {
-            //tb1.Text = "";
-            //dgv5.ColumnHeadersVisible = false;
             dgv5.RowHeadersVisible = false;
-
             string q = "select id,sif_ko,parcela,povrsina from tbl_vk6_zk_parcele where sif_ko=@idx order by parcela asc, povrsina desc"; 
-
             var da = new SqlDataAdapter(q, con3);
             da.SelectCommand.Parameters.Add("@idx", izbr_ko_id);
             dt = new DataTable();
             da.Fill(dt);
             dgv5.DataSource = dt;
             dgv5.ReadOnly = true;
-
-            //dgv5.Columns[0].Visible = false;
-            //dgv5.Columns[1].Visible = false;
-            //dgv5.Columns["priimek1"].Width = 170;
-            //dgv5.Columns["priimek2"].Width = 100;
-            //dgv5.Columns["priimek2"].Visible = false;
-            //dgv5.Columns["ime1"].Width = 100;
-            //dgv5.Columns["ime2"].Width = 100;
             dgv5.Columns["id"].Visible = false;
             dgv5.Columns["sif_ko"].Visible = false;
             dgv5.Columns["parcela"].Width = 200;
             dgv5.Columns["povrsina"].Width = 80;
-            // dgv5.Columns["labela"].Width = 60;
-
             //this.dgv5.Columns["labela"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             tb1.Focus();
         }
 

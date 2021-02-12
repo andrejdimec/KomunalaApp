@@ -34,6 +34,12 @@ namespace Komunala
         int n_vk5;
         string fname_vk6 = frmMain.pot_podatki + "zk\\" + "ob_vk6.dat";  // baza z osebami
         int n_vk6;
+        string fname_ren_lastniki = frmMain.pot_podatki + "ren\\" + "ren_lastniki.csv";  // baza z osebami
+        int n_renl;
+        string nen_id, emso_ms, ime, naslov, leto, status;
+        int delez_stev_izr, delez_imen_izr;
+        float delez_proc;
+
         int stevec;
         string vrstica;
         string naslov_tujina,kraj,posta;
@@ -75,6 +81,15 @@ namespace Komunala
         private void IzprazniBazo_vk6()  // izprazni tabelo tbl_pt
         {
             string query = "delete from tbl_vk6_zk_parcele";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void IzprazniBazo_ren_lastniki()  // izprazni tabelo tbl_pt
+        {
+            string query = "delete from tbl_ren_lastniki";
             cmd = new SqlCommand(query, con);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -219,6 +234,7 @@ namespace Komunala
                         vrstica = "";
                         vrstica = objReader.ReadLine() + "\r\n";
                         string sif_ko = vrstica.Substring(1, 4);
+                        sif_ko = sif_ko.TrimStart('0');
                         string pos_list = vrstica.Substring(5, 5);
                         string lastnistvo = vrstica.Substring(10, 1);
                         string let_sprememb = vrstica.Substring(11, 4);
@@ -380,6 +396,87 @@ namespace Komunala
         }
 
 
+        private void Obdelaj_ren_lastniki()
+        {
+            if (n_renl == 0)
+            {
+                // začni prenos
+                stevec = 0;
+                IzprazniBazo_ren_lastniki();
+                // preberi ul - CSV
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(fname_ren_lastniki);
+                    // število vrstic v CSV
+                    // ++stevec; // preskoči prvo vrstico
+                    do
+                    {
+                        vrstica = "";
+                        vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                        // razdeli vrstico ločeno s ;
+                        string[] polje = vrstica.Split(';');
+                        nen_id = polje[0];
+                        emso_ms = polje[1];
+                        ime = polje[2];
+                        naslov = polje[3];
+                        leto = polje[4];
+                        delez_stev_izr = Convert.ToInt32(polje[5]);
+                        delez_imen_izr = Convert.ToInt32(polje[6]);
+                        delez_proc = (delez_stev_izr/delez_imen_izr)*100;
+                        if (emso_ms.Length < 10)
+                            status = "Pod";
+                        else
+                            status = "Fiz";
+
+                            try
+                            {
+                                if (stevec > 0)
+                                {
+                                    // napiši prebrano v tabelo ul
+                                    string query = "Insert into tbl_ul (ul_mid, ob_uime, na_uime, ul_uime) values (@ul_mid, @ob_uime, @na_uime, @ul_uime)";
+                                    cmd = new SqlCommand(query, con);
+                                    con.Open();
+                                    //cmd.Parameters.AddWithValue("@ul_mid", ul_mid);
+                                    //cmd.Parameters.AddWithValue("@ob_uime", ob_uime);
+                                    //cmd.Parameters.AddWithValue("@na_uime", na_uime);
+                                    //cmd.Parameters.AddWithValue("@ul_uime", ul_uime);
+                                    cmd.ExecuteNonQuery();
+                                    con.Close();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Napaka: " + ex.Message);
+                            }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        label10.Text = stevec.ToString();
+                        label10.Refresh();
+                    } while (objReader.Peek() != -1);
+                    objReader.Close();
+                    stevec--;
+                    label10.Text = stevec.ToString();
+                    label10.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    DisplayData_ul();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnameul);
+            }
+
+        }
+
+
 
         private void Preveri_baze()
         {
@@ -433,12 +530,34 @@ namespace Komunala
                 label8.Text = "Zap: " + "0";
                 n_vk6 = 1;
             }
+
+            // ren lastniki
+            try
+            {
+                var lineCount = File.ReadAllLines(fname_ren_lastniki).Length;
+                lineCount--;
+                //label2.Text = fnamecrp2;
+                label15.Text = "Zap: " + lineCount.ToString();
+                label14.Text = "";
+                n_ren_l = 0;
+            }
+            catch (Exception ex)
+            {
+                label14.Text = "Datoteka " + fname_vk6 + " ne obstaja!";
+                label15.Text = "Zap: " + "0";
+                n_vk6 = 1;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Obdelaj_vk1();
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Obdelaj_ren_lastniki();
         }
 
         private void button2_Click(object sender, EventArgs e)
