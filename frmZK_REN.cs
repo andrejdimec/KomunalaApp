@@ -18,6 +18,7 @@ namespace Komunala
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
         SqlConnection con9 = frmMain.c9;
+        SqlConnection con6 = frmMain.c6;
         SqlDataAdapter adapt;
 
         SqlCommand cmd;
@@ -31,6 +32,9 @@ namespace Komunala
 
         SqlDataReader rdr9 = null;
         SqlCommand cmd9;
+
+        SqlDataReader rdr6 = null;
+        SqlCommand cmd6;
 
         static DataTable dt,dt2,dt3,dt4;
         
@@ -50,13 +54,25 @@ namespace Komunala
         int idx_sta;
         string naslov_stavbe,idx_hise;
         int stalno, zacasno, voda, kanalizacija, greznica, odpadki;
+        string idx_dela_stavbe, st_nen;
+
+        private void dgvd_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            idx_dela_stavbe = dgvd.Rows[e.RowIndex].Cells[0].Value.ToString();
+            string idx_nam_raba = dgvd.Rows[e.RowIndex].Cells[1].Value.ToString();
+            Nalozi_del_stavbe(idx_dela_stavbe,idx_nam_raba);
+        }
+
+        private void dgvld_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            idx_last = Convert.ToInt32(dgvld.Rows[e.RowIndex].Cells[0].Value.ToString());
+            Nalozi_lastnika_dela_stavbe(idx_last);
+        }
 
         private void dgvn_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             idx_hise = dgvn.Rows[e.RowIndex].Cells[3].Value.ToString();
-            //idx_hsmid = dgv3.Rows[e.RowIndex].Cells[3].Value.ToString();
             Nalozi_naslov(idx_hise);
-
         }
 
         private void tpParcele_Click(object sender, EventArgs e)
@@ -234,6 +250,38 @@ namespace Komunala
             return res;
         }
 
+        private string st_nen_id(string vhod)
+        // najdi nen_id za del stavbe
+        {
+            string q9;
+            string res = "NA";
+
+            try
+            {
+                q9 = "select * from tbl_ren_sestavine where dst_sid = @idx";
+                cmd9 = new SqlCommand(q9, con9);
+                con9.Open();
+                cmd9.Parameters.AddWithValue("@idx", vhod);
+                rdr9 = cmd9.ExecuteReader();
+                while (rdr9.Read())
+                {
+                    st_nen = (String)rdr9["nen_id"];  // določi namid stalnega
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader: " + ex2.Message);
+            }
+            finally
+            {
+                rdr9.Close();
+                con9.Close();
+            }
+            if (st_nen != null)
+                res = st_nen;
+            return res;
+        }
+
         //private string Stavba_p(string vhod)
         //{
 
@@ -376,6 +424,7 @@ namespace Komunala
             var da = new SqlDataAdapter(q, con3);
             dt = new DataTable();
             da.Fill(dt);
+            con3.Close();
             dgv3.DataSource = dt;
             dgv3.ReadOnly = true;
             dgv3.Columns[0].Visible = false;
@@ -406,6 +455,7 @@ namespace Komunala
                 var da = new SqlDataAdapter(q, con3);
                 dt = new DataTable();
                 da.Fill(dt);
+                con3.Close();
                 dgv1.DataSource = dt;
                 dgv1.ReadOnly = true;
                 dgv1.Columns["id"].Visible = false;
@@ -424,6 +474,7 @@ namespace Komunala
                 da.SelectCommand.Parameters.Add("@idx", izbr_ko_id);
                 dt = new DataTable();
                 da.Fill(dt);
+                con3.Close();
                 dgv1.DataSource = dt;
                 dgv1.ReadOnly = true;
                 dgv1.Columns["id"].Visible = false;
@@ -499,6 +550,7 @@ namespace Komunala
             da2.SelectCommand.Parameters.Add("@idx", vhod);
             dt2 = new DataTable();
             da2.Fill(dt2);
+            con2.Close();
             dgv2.DataSource = dt2;
             dgv2.ReadOnly = true;
             dgv2.Columns["nen_id"].Visible = false;
@@ -525,56 +577,70 @@ namespace Komunala
             da2.SelectCommand.Parameters.Add("@idx", vhod);
             dt2 = new DataTable();
             da2.Fill(dt2);
+            con2.Close();
             dgvn.DataSource = dt2;
             dgvn.ReadOnly = true;
             dgvn.Columns[2].Visible = false;
             dgvn.Columns[3].Visible = false;
-            dgvn.Columns[0].Width = 230;
+            dgvn.Columns[0].Width = 295;
             dgvn.Columns[1].Width = 80;
             dgvn.Columns[0].HeaderText = "Naslov";
             dgvn.Columns[1].HeaderText = "      HŠ";
             this.dgvn.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        private void Poisci_dele_stavb(string vhod)
+        private void Poisci_dele_stavbe(string vhod)  // con2
         {
             // naloži naslove stavbe v mrežo
             dgvd.RowHeadersVisible = false;
-            string q2 = "SELECT tbl_hise.naslov AS nas, tbl_hise.labela AS lab, tbl_ren_stavba_naslovi.sta_sid AS stasid, tbl_ren_stavba_naslovi.hs_mid " +
-                "AS hsmid FROM tbl_ren_stavba_naslovi INNER JOIN tbl_hise ON tbl_ren_stavba_naslovi.hs_mid = tbl_hise.hsmid WHERE(tbl_ren_stavba_naslovi.sta_sid = @idx)";
-            var da3 = new SqlDataAdapter(q2, con2);
+
+            string q3 = "SELECT tbl_ren_deli_stavb.id, ren_Sifranti.ime as ime, tbl_ren_stavbe.sta_sid AS Expr1, tbl_ren_deli_stavb.stevstan AS Expr3, tbl_ren_deli_stavb.stevstan AS st_stan, " +
+                "tbl_ren_deli_stavb.dejanska_raba, tbl_ren_deli_stavb.st_etaze, tbl_ren_deli_stavb.st_nadstropja FROM tbl_ren_stavbe INNER JOIN " +
+                "tbl_ren_deli_stavb ON tbl_ren_stavbe.sta_sid = tbl_ren_deli_stavb.sta_sid INNER JOIN ren_Sifranti ON tbl_ren_deli_stavb.dejanska_raba = ren_Sifranti.idsif " +
+                "WHERE(tbl_ren_stavbe.sta_sid = @idx) order by ime desc, st_stan asc";
+            //string q2 = "SELECT tbl_hise.naslov AS nas, tbl_hise.labela AS lab, tbl_ren_stavba_naslovi.sta_sid AS stasid, tbl_ren_stavba_naslovi.hs_mid " +
+            //    "AS hsmid FROM tbl_ren_stavba_naslovi INNER JOIN tbl_hise ON tbl_ren_stavba_naslovi.hs_mid = tbl_hise.hsmid WHERE(tbl_ren_stavba_naslovi.sta_sid = @idx)";
+            var da3 = new SqlDataAdapter(q3, con6);
             da3.SelectCommand.Parameters.Add("@idx", vhod);
             dt3 = new DataTable();
             da3.Fill(dt3);
+            con6.Close();
             dgvd.DataSource = dt3;
             dgvd.ReadOnly = true;
+            //dgvd.Columns[].Visible = false;
+            dgvd.Columns[0].Visible = false;
             dgvd.Columns[2].Visible = false;
             dgvd.Columns[3].Visible = false;
-            dgvd.Columns[0].Width = 230;
-            dgvd.Columns[1].Width = 80;
-            dgvd.Columns[0].HeaderText = "Naslov";
-            dgvd.Columns[1].HeaderText = "      HŠ";
-            this.dgvd.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //dgvd.Columns[3].Visible = false;
+            dgvd.Columns[1].Width = 295;
+            dgvd.Columns[2].Width = 80;
+            dgvd.Columns[1].HeaderText = "Dejanska raba dela stavbe";
+            dgvd.Columns[4].HeaderText = "   Št. stan.";
+            this.dgvd.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
-        private void Poisci_lastnike_delov(string vhod)
+        private void Poisci_lastnike_delov(string vhod)  // vhod = nen_id
         {
             // naloži naslove stavbe v mrežo
-            dgvn.RowHeadersVisible = false;
-            string q2 = "SELECT tbl_hise.naslov AS nas, tbl_hise.labela AS lab, tbl_ren_stavba_naslovi.sta_sid AS stasid, tbl_ren_stavba_naslovi.hs_mid " +
-                "AS hsmid FROM tbl_ren_stavba_naslovi INNER JOIN tbl_hise ON tbl_ren_stavba_naslovi.hs_mid = tbl_hise.hsmid WHERE(tbl_ren_stavba_naslovi.sta_sid = @idx)";
-            var da2 = new SqlDataAdapter(q2, con2);
-            da2.SelectCommand.Parameters.Add("@idx", vhod);
-            dt2 = new DataTable();
-            da2.Fill(dt2);
-            dgvn.DataSource = dt2;
-            dgvn.ReadOnly = true;
-            dgvn.Columns[2].Visible = false;
-            dgvn.Columns[3].Visible = false;
-            dgvn.Columns[0].Width = 230;
-            dgvn.Columns[1].Width = 80;
-            dgvn.Columns[0].HeaderText = "Naslov";
-            dgvn.Columns[1].HeaderText = "      HŠ";
-            this.dgvn.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvld.RowHeadersVisible = false;
+            string q2 = "select id,nen_id,ime, naslov,delez_str  from tbl_ren_lastniki where nen_id = @idx order by delez_proc desc, leto asc";
+            var da4 = new SqlDataAdapter(q2, con2);
+            da4.SelectCommand.Parameters.Add("@idx", vhod);
+            dt4 = new DataTable();
+            da4.Fill(dt4);
+            con2.Close();
+            dgvld.DataSource = dt4;
+            dgvld.ReadOnly = true;
+            dgvld.ReadOnly = true;
+            dgvld.Columns["nen_id"].Visible = false;
+            dgvld.Columns["ime"].Width = 295;
+            dgvld.Columns["delez_str"].Width = 80;
+            dgvld.Columns["ime"].HeaderText = "Priimek in ime / podjetje";
+            dgvld.Columns["delez_str"].HeaderText = "   Del.";
+            //dgv2.Columns["delez_str"].
+            dgvld.Columns["naslov"].Visible = false;
+            dgvld.Columns["id"].Visible = false;
+            this.dgvld.Columns["delez_str"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvld.Columns["delez_str"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
 
@@ -584,20 +650,76 @@ namespace Komunala
             try
             {
                 //MessageBox.Show(vhod.ToString());
+                cmd6 = new SqlCommand(q, con6);
+                cmd6.Parameters.AddWithValue("@idx", vhod);
+                con6.Open();
+                rdr6 = cmd6.ExecuteReader();
+                while (rdr6.Read())
+                {
+                    sta_sid = (string)rdr6["sta_sid"];
+                    stev = (string)rdr6["stev"];
+                    st_etaz=Convert.ToString((int)rdr6["st_etaz"]);
+                    st_stanovanj= Convert.ToString((int)rdr6["st_stanovanj"]);
+                    st_poslovnih_prostorov = Convert.ToString((int)rdr6["st_poslovnih_prostorov"]);
+                    leto_izg_sta = (string)rdr6["leto_izg_sta"];
+                    leto_obn_fasade = (string)rdr6["leto_obn_fasade"];
+                    leto_obn_strehe = (string)rdr6["leto_obn_strehe"];
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka rdr: " + ex.Message);
+            }
+            finally
+            {
+                rdr6.Close();
+                con6.Close();
+            }
+
+            // najdi naslov
+            label13.Text = sta_sid;
+            label36.Text = stev;
+            label20.Text = st_etaz;
+            label21.Text = st_stanovanj;
+            label18.Text = st_poslovnih_prostorov;
+            label70.Text = leto_izg_sta;
+            label38.Text = leto_obn_strehe;
+            label42.Text = leto_obn_fasade;
+            label39.Text = "";
+            Poisci_naslove(sta_sid);
+            Poisci_dele_stavbe(sta_sid);
+        }
+        private void Nalozi_del_stavbe(string id_dela, string nam_raba )
+        {
+            string st_stanovanja = "";
+            string st_etaze = ""; 
+            string st_nadstropja = "";
+            double upor_povrsina = 0;
+            double tloris = 0;
+            double visina = 0;
+            string okna = "";
+            string inštalacije = "";
+            string dst_sid = "";
+
+            string q = "select * from tbl_ren_deli_stavb where id = @idx"; //+ sort;
+            try
+            {
+                //MessageBox.Show(vhod.ToString());
                 cmd = new SqlCommand(q, con);
-                cmd.Parameters.AddWithValue("@idx", vhod);
+                cmd.Parameters.AddWithValue("@idx", id_dela);
                 con.Open();
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    sta_sid = (string)rdr["sta_sid"];
-                    stev = (string)rdr["stev"];
-                    st_etaz=Convert.ToString((int)rdr["st_etaz"]);
-                    st_stanovanj= Convert.ToString((int)rdr["st_stanovanj"]);
-                    st_poslovnih_prostorov = Convert.ToString((int)rdr["st_poslovnih_prostorov"]);
-                    leto_izg_sta = (string)rdr["leto_izg_sta"];
-                    leto_obn_fasade = (string)rdr["leto_obn_fasade"];
-                    leto_obn_strehe = (string)rdr["leto_obn_strehe"];
+                    st_stanovanja = (string)rdr["stevstan"];
+                    st_etaze=(string)rdr["st_etaze"];
+                    st_nadstropja= (string)rdr["st_nadstropja"];
+                    upor_povrsina= (double)rdr["upor_pov_stan"];
+                    tloris= (double)rdr["neto_tloris_pov_dst"];
+                    visina= (double)rdr["svetla_visina_etaze"];
+                    okna= (string)rdr["leto_obn_oken"];
+                    inštalacije= (string)rdr["leto_obn_inst"];
+                    dst_sid= (string)rdr["dst_sid"];
                 }
             }
             catch (Exception ex)
@@ -611,16 +733,16 @@ namespace Komunala
             }
 
             // najdi naslov
-            label13.Text = sta_sid;
-            label36.Text = stev;
-            label20.Text = st_etaz;
-            label21.Text = st_stanovanj;
-            label18.Text = st_poslovnih_prostorov;
-            label39.Text = leto_izg_sta;
-            label38.Text = leto_obn_strehe;
-            label42.Text = leto_obn_fasade;
-            Poisci_naslove(sta_sid);
-            Poisci_dele_stavbe(sta_sid);
+            label65.Text = nam_raba;
+            label55.Text = st_stanovanja;
+            label61.Text = st_etaze;
+            label62.Text = st_nadstropja;
+            label68.Text = okna;
+            label57.Text = tloris.ToString("N2")+" m2";
+            label58.Text = upor_povrsina.ToString("N2") + " m2";
+            label66.Text = inštalacije;
+            string nen_id_s = st_nen_id(dst_sid);
+            Poisci_lastnike_delov(nen_id_s);
         }
 
 
@@ -706,6 +828,43 @@ namespace Komunala
             label19.Text = leto_last;
             label15.Text = delez;
         }
+
+        private void Nalozi_lastnika_dela_stavbe(int vhod)
+        {
+            string delez = "";
+            string q = "select * from tbl_ren_lastniki where id = @idx"; //+ sort;
+            try
+            {
+                cmd9 = new SqlCommand(q, con9);
+                cmd9.Parameters.AddWithValue("@idx", vhod);
+                con9.Open();
+                rdr9 = cmd9.ExecuteReader();
+                while (rdr9.Read())
+                {
+                    ime_last = (string)rdr9["ime"];
+                    naslov_last = (string)rdr9["naslov"];
+                    leto_last = (string)rdr9["leto"];
+                    delez_str_last = (string)rdr9["delez_str"];
+                    delez_proc_last = string.Format("{0:F2}", (double)rdr9["delez_proc"]);
+                    delez_proc_last = delez_proc_last + " %";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka rdr: " + ex.Message);
+            }
+            finally
+            {
+                rdr9.Close();
+                con9.Close();
+            }
+            delez = delez_str_last + "     (" + delez_proc_last + ")";
+            label74.Text = ime_last;
+            label56.Text = naslov_last;
+            label71.Text = leto_last;
+            label53.Text = delez;
+        }
+
 
         private void button3_Click(object sender, EventArgs e)
         {

@@ -81,6 +81,11 @@ namespace Komunala
             this.label39 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -573,11 +578,63 @@ namespace Komunala
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(113, 589);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(46, 18);
+            this.label41.TabIndex = 82;
+            this.label41.Text = "label2";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(40, 616);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(46, 18);
+            this.label42.TabIndex = 81;
+            this.label42.Text = "label3";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(40, 589);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(46, 18);
+            this.label43.TabIndex = 80;
+            this.label43.Text = "label2";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(46, 516);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(52, 18);
+            this.label44.TabIndex = 79;
+            this.label44.Text = "Šifranti";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(43, 538);
+            this.button11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(99, 32);
+            this.button11.TabIndex = 78;
+            this.button11.Text = "Prenos";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // frmBaze_ZK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1118, 624);
+            this.ClientSize = new System.Drawing.Size(1118, 681);
+            this.Controls.Add(this.label41);
+            this.Controls.Add(this.label42);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.label44);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.label37);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.label39);
@@ -694,5 +751,10 @@ namespace Komunala
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Button button11;
     }
 }

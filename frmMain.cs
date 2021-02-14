@@ -50,6 +50,7 @@ namespace Komunala
         public static SqlConnection c2 = new SqlConnection(cs);
         public static SqlConnection c3 = new SqlConnection(cs);
         public static SqlConnection c9 = new SqlConnection(cs);
+        public static SqlConnection c6 = new SqlConnection(cs);
 
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cs);
 

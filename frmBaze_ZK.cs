@@ -41,7 +41,8 @@ namespace Komunala
         string fname_ren_stavbe = frmMain.pot_podatki + "ren\\" + "ren_stavbe.csv";  // baza z osebami
         string fname_ren_stavba_naslovi = frmMain.pot_podatki + "ren\\" + "ren_stavba_naslovi.csv";  // baza z osebami
         string fname_ren_deli_stavb = frmMain.pot_podatki + "ren\\" + "ren_delistavb.csv";  // baza z osebami
-        int n_renl, n_rens,n_renp,n_rends,n_renns,n_rensn,n_rensp,n_renst;
+        string fname_ren_sifranti = frmMain.pot_podatki + "ren\\" + "ren_sifranti.csv";  // baza z osebami
+        int n_renl, n_rens,n_renp,n_rends,n_renns,n_rensn,n_rensp,n_renst,n_rensif;
         
         string nen_id, emso_ms, ime, naslov, leto, status;
         int delez_stev_izr, delez_imen_izr;
@@ -54,6 +55,8 @@ namespace Komunala
         string ob_mid, ko_sifko, parcela, boniteta,hs_mid;
         double povrsina, x, y;
 
+        // šifranti
+        string idsif, tabela, opis_tabele, polje_pk, ime_sif, vrednost_n, vrednost_c, opis;
         public frmBaze_ZK()
         {
             InitializeComponent();
@@ -71,6 +74,8 @@ namespace Komunala
             label29.Text = "";
             label33.Text = "";
             label37.Text = "";
+            label41.Text = "";
+
         }
 
         private void Baze_ZK_Load(object sender, EventArgs e)
@@ -124,9 +129,22 @@ namespace Komunala
             Obdelaj_ren_deli_stavb();
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Obdelaj_ren_sifranti();
+        }
+
         private void IzprazniBazo_ren_lastniki()  // izprazni tabelo tbl_pt
         {
             string query = "delete from tbl_ren_lastniki";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        private void IzprazniBazo_ren_sifranti()  // izprazni tabelo tbl_pt
+        {
+            string query = "delete from ren_sifranti";
             cmd = new SqlCommand(query, con);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -660,6 +678,82 @@ namespace Komunala
             else
             {
                 MessageBox.Show("Napaka! Datoteka ne obstaja: " + fname_ren_lastniki);
+            }
+
+        }
+
+        private void Obdelaj_ren_sifranti()
+        {
+            if (n_rensif == 0)
+            {
+                // začni prenos
+
+                IzprazniBazo_ren_sifranti();
+                // preberi ul - CSV
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(fname_ren_sifranti);
+                    // število vrstic v CSV
+                    //++stevec; // preskoči prvo vrstico
+                    stevec = 0;
+                    do
+                    {
+                        vrstica = "";
+                        vrstica = vrstica + objReader.ReadLine();
+
+                        // razdeli vrstico ločeno s ;
+                        string[] polje = vrstica.Split(';');
+                        idsif = polje[0];
+                        tabela = polje[1];
+                        opis_tabele = polje[2];
+                        polje_pk = polje[3];
+                        ime_sif = polje[4];
+                        vrednost_n = polje[5];
+                        vrednost_c = polje[6];
+                        opis = polje[7];
+                        try
+                        {
+                            string query = "Insert into ren_sifranti (idsif,tabela,opis_tabele,polje_pk,ime,vrednost_n,vrednost_c,opis) values (@idsif,@tabela,@opis_tabele,@polje_pk,@ime_sif,@vrednost_n,@vrednost_c,@opis)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+                            cmd.Parameters.AddWithValue("@idsif",idsif);
+                            cmd.Parameters.AddWithValue("@tabela",tabela);
+                            cmd.Parameters.AddWithValue("@opis_tabele",opis_tabele);
+                            cmd.Parameters.AddWithValue("@polje_pk",polje_pk);
+                            cmd.Parameters.AddWithValue("@ime_sif",ime_sif);
+                            cmd.Parameters.AddWithValue("@vrednost_n",vrednost_n);
+                            cmd.Parameters.AddWithValue("@vrednost_c",vrednost_c);
+                            cmd.Parameters.AddWithValue("@opis",opis);
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka: " + ex.Message);
+                        }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        label41.Text = stevec.ToString();
+                        label41.Refresh();
+                    } while (objReader.Peek() != -1); //while (stevec < 100);//
+                    objReader.Close();
+                    stevec--;
+                    label41.Text = stevec.ToString();
+                    label41.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    // DisplayData_ul();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fname_ren_sifranti);
             }
 
         }
@@ -1305,6 +1399,22 @@ namespace Komunala
                 label38.Text = "Datoteka " + fname_ren_deli_stavb + " ne obstaja!";
                 label39.Text = "Zap: " + "0";
                 n_rends = 1;
+            }
+            // ren deli sifranti
+            try
+            {
+                var lineCount = File.ReadAllLines(fname_ren_sifranti).Length;
+                lineCount--;
+                //label2.Text = fnamecrp2;
+                label43.Text = "Zap: " + lineCount.ToString();
+                label42.Text = "";
+                n_rensif = 0;
+            }
+            catch (Exception ex)
+            {
+                label42.Text = "Datoteka " + fname_ren_sifranti + " ne obstaja!";
+                label43.Text = "Zap: " + "0";
+                n_rensif = 1;
             }
 
         }
