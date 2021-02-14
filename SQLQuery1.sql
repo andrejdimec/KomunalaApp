@@ -1,0 +1,1 @@
+﻿select * from tbl_ren_stavbe where sta_sid = 23260842
