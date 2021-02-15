@@ -42,7 +42,8 @@ namespace Komunala
         string fname_ren_stavba_naslovi = frmMain.pot_podatki + "ren\\" + "ren_stavba_naslovi.csv";  // baza z osebami
         string fname_ren_deli_stavb = frmMain.pot_podatki + "ren\\" + "ren_delistavb.csv";  // baza z osebami
         string fname_ren_sifranti = frmMain.pot_podatki + "ren\\" + "ren_sifranti.csv";  // baza z osebami
-        int n_renl, n_rens,n_renp,n_rends,n_renns,n_rensn,n_rensp,n_renst,n_rensif;
+        string fname_strehe = frmMain.pot_podatki + "ren\\" + "strehe-izvoz.csv";  // baza z osebami
+        int n_renl, n_rens,n_renp,n_rends,n_renns,n_rensn,n_rensp,n_renst,n_rensif,n_renstr;
         
         string nen_id, emso_ms, ime, naslov, leto, status;
         int delez_stev_izr, delez_imen_izr;
@@ -57,6 +58,10 @@ namespace Komunala
 
         // šifranti
         string idsif, tabela, opis_tabele, polje_pk, ime_sif, vrednost_n, vrednost_c, opis;
+
+        // strehe
+        string om_ime, kan, nas,hs,pt,imept;
+
         public frmBaze_ZK()
         {
             InitializeComponent();
@@ -75,6 +80,7 @@ namespace Komunala
             label33.Text = "";
             label37.Text = "";
             label41.Text = "";
+            label46.Text = "";
 
         }
 
@@ -98,6 +104,11 @@ namespace Komunala
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            Obdelaj_strehe();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -193,6 +204,14 @@ namespace Komunala
         private void IzprazniBazo_ren_deli_stavb()  // izprazni tabelo tbl_pt
         {
             string query = "delete from tbl_ren_deli_stavb";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        private void IzprazniBazo_strehe()  // izprazni tabelo tbl_pt
+        {
+            string query = "delete from ren_strehe";
             cmd = new SqlCommand(query, con);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -678,6 +697,135 @@ namespace Komunala
             else
             {
                 MessageBox.Show("Napaka! Datoteka ne obstaja: " + fname_ren_lastniki);
+            }
+
+        }
+        private void Obdelaj_strehe()
+        {
+            if (n_renstr == 0)
+            {
+                // začni prenos
+                string objectid = "";
+                string sid = "";
+                string hsmid = "";
+                string hsmid_gl = "";
+                string glavna_streha = "";
+                double povrsina = 0;
+                string opomba = "";
+                string emso_last_ren = "";
+                string om_kora = "";
+
+                IzprazniBazo_strehe();
+                // preberi ul - CSV
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(fname_strehe);
+                    // število vrstic v CSV
+                    //++stevec; // preskoči prvo vrstico
+                    stevec = 0;
+                    do
+                    {
+                        vrstica = "";
+                        vrstica = vrstica + objReader.ReadLine();
+
+                        // razdeli vrstico ločeno s ;
+                        string[] polje = vrstica.Split(';');
+                        objectid = polje[0];
+                        sid = polje[1];
+                        hsmid = polje[4];
+                        hsmid_gl = polje[6];
+                        glavna_streha = polje[5];
+                        povrsina = Convert.ToDouble(polje[2]);
+                        opomba = polje[3];
+
+                        om_ime = "";
+                        kan = "";
+                        nas = "";
+                        hs = "";
+                        pt = "";
+                        imept = "";
+
+                        // poišči OM
+                        if (hsmid.TrimEnd().Length==8)  // samo za tiste, ki imajo glavni hsmid
+                        {
+                        try
+                            { 
+                            string q = "select * from tbl_cad where hsmid = @idx";
+                            cmd = new SqlCommand(q, con);
+                            cmd.Parameters.AddWithValue("@idx", hsmid);
+                            con.Open();
+                            rdr = cmd.ExecuteReader();
+                            while (rdr.Read())
+                            {
+                                    om_ime = (String)rdr["naziv"];  // določi namid stalnega
+                                    kan = Convert.ToString((int)rdr["kanalizacija"]);
+                                    nas = (String)rdr["ulica"];
+                                    hs = (String)rdr["hs"];
+                                    pt = (String)rdr["posta"];
+                                    imept = (String)rdr["ime_poste"];
+                            }
+                        }
+                        catch (Exception ex2)
+                        {
+                            MessageBox.Show("Napaka reader: " + ex2.Message);
+                        }
+                        finally
+                        {
+                            rdr.Close();
+                            con.Close();
+                        }
+    
+                     }
+
+                        emso_last_ren = "";
+                        try
+                        {
+                            string query = "Insert into ren_strehe (objectid,sid,hsmid,hsmid_gl,glavna_streha,povrsina,opomba,kanalizacija,emso_last_ren,om_ime,om_naslov,om_posta) values (@objectid,@sid,@hsmid,@hsmid_gl,@glavna_streha,@povrsina,@opomba,@kanalizacija,@emso_last_ren,@om_ime,@om_naslov,@om_posta)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+
+                            cmd.Parameters.AddWithValue("@objectid",objectid);
+                            cmd.Parameters.AddWithValue("@sid",sid);
+                            cmd.Parameters.AddWithValue("@hsmid",hsmid);
+                            cmd.Parameters.AddWithValue("@hsmid_gl",hsmid_gl);
+                            cmd.Parameters.AddWithValue("@glavna_streha",glavna_streha);
+                            cmd.Parameters.AddWithValue("@povrsina",povrsina);
+                            cmd.Parameters.AddWithValue("@opomba",opomba);
+                            cmd.Parameters.AddWithValue("@kanalizacija", kan);
+                            cmd.Parameters.AddWithValue("@emso_last_ren",emso_last_ren);
+                            cmd.Parameters.AddWithValue("@om_ime",om_ime);
+                            cmd.Parameters.AddWithValue("@om_naslov", nas+" "+hs);
+                            cmd.Parameters.AddWithValue("@om_posta", pt+" "+imept);
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka: " + ex.Message+" "+om_ime);
+                        }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        label46.Text = stevec.ToString();
+                        label46.Refresh();
+                    } while (objReader.Peek() != -1); //while (stevec < 100);//
+                    objReader.Close();
+                    stevec--;
+                    label46.Text = stevec.ToString();
+                    label46.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    // DisplayData_ul();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fname_strehe);
             }
 
         }
@@ -1415,6 +1563,22 @@ namespace Komunala
                 label42.Text = "Datoteka " + fname_ren_sifranti + " ne obstaja!";
                 label43.Text = "Zap: " + "0";
                 n_rensif = 1;
+            }
+            // strehe
+            try
+            {
+                var lineCount = File.ReadAllLines(fname_strehe).Length;
+                lineCount--;
+                //label2.Text = fnamecrp2;
+                label48.Text = "Zap: " + lineCount.ToString();
+                label47.Text = "";
+                n_renstr = 0;
+            }
+            catch (Exception ex)
+            {
+                label47.Text = "Datoteka " + fname_strehe + " ne obstaja!";
+                label48.Text = "Zap: " + "0";
+                n_renstr = 1;
             }
 
         }

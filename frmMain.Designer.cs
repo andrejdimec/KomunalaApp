@@ -48,21 +48,24 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.tp_storitve = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
             this.cr_storitve = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.tp_ponudbe = new System.Windows.Forms.TabPage();
             this.cr_ponudbe = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.tp_nalogi = new System.Windows.Forms.TabPage();
+            this.tp_baze = new System.Windows.Forms.TabPage();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
             this.cr_nalogi = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tp_ijsvo = new System.Windows.Forms.TabPage();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
             this.cr_ijsvo = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
             this.tp_sifranti = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -90,8 +93,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lverzija = new System.Windows.Forms.Label();
             this.lbaza = new System.Windows.Forms.Label();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -105,7 +106,7 @@
             this.tp_dnevnik.SuspendLayout();
             this.tp_storitve.SuspendLayout();
             this.tp_ponudbe.SuspendLayout();
-            this.tp_nalogi.SuspendLayout();
+            this.tp_baze.SuspendLayout();
             this.tp_ijsvo.SuspendLayout();
             this.tp_sifranti.SuspendLayout();
             this.tp_nastavitve.SuspendLayout();
@@ -167,7 +168,6 @@
             this.bm_delovni_nalog.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_delovni_nalog.Size = new System.Drawing.Size(220, 57);
             this.bm_delovni_nalog.TabIndex = 19;
-            this.bm_delovni_nalog.Text = "Delovni nalog";
             this.bm_delovni_nalog.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_delovni_nalog.UseVisualStyleBackColor = false;
             this.bm_delovni_nalog.Click += new System.EventHandler(this.bm_delovni_nalog_Click);
@@ -186,7 +186,7 @@
             this.bm_telefonija.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_telefonija.Size = new System.Drawing.Size(220, 57);
             this.bm_telefonija.TabIndex = 18;
-            this.bm_telefonija.Text = "Telefonija";
+            this.bm_telefonija.Text = "Telefoni";
             this.bm_telefonija.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_telefonija.UseVisualStyleBackColor = false;
             this.bm_telefonija.Click += new System.EventHandler(this.bm_telefonija_Click);
@@ -205,7 +205,7 @@
             this.bm_šifranti.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_šifranti.Size = new System.Drawing.Size(220, 57);
             this.bm_šifranti.TabIndex = 17;
-            this.bm_šifranti.Text = "Šifranti";
+            this.bm_šifranti.Text = "Podatki";
             this.bm_šifranti.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_šifranti.UseVisualStyleBackColor = false;
             this.bm_šifranti.Click += new System.EventHandler(this.bm_šifranti_Click);
@@ -224,7 +224,7 @@
             this.bm_ijsvo.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_ijsvo.Size = new System.Drawing.Size(220, 57);
             this.bm_ijsvo.TabIndex = 16;
-            this.bm_ijsvo.Text = "ZK in REN";
+            this.bm_ijsvo.Text = "Šifranti";
             this.bm_ijsvo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_ijsvo.UseVisualStyleBackColor = false;
             this.bm_ijsvo.Click += new System.EventHandler(this.bm_ijsvo_Click);
@@ -283,7 +283,7 @@
             this.bm_ponudbe.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_ponudbe.Size = new System.Drawing.Size(220, 57);
             this.bm_ponudbe.TabIndex = 2;
-            this.bm_ponudbe.Text = "Ponudba";
+            this.bm_ponudbe.Text = "REN";
             this.bm_ponudbe.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_ponudbe.UseVisualStyleBackColor = false;
             this.bm_ponudbe.Click += new System.EventHandler(this.bm_ponudbe_Click);
@@ -302,7 +302,7 @@
             this.bm_nalogi.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.bm_nalogi.Size = new System.Drawing.Size(220, 57);
             this.bm_nalogi.TabIndex = 1;
-            this.bm_nalogi.Text = "Potni nalog";
+            this.bm_nalogi.Text = "Kataster streh";
             this.bm_nalogi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.bm_nalogi.UseVisualStyleBackColor = false;
             this.bm_nalogi.Click += new System.EventHandler(this.bm_nalogi_Click);
@@ -356,7 +356,7 @@
             this.tc.Controls.Add(this.tp_dnevnik);
             this.tc.Controls.Add(this.tp_storitve);
             this.tc.Controls.Add(this.tp_ponudbe);
-            this.tc.Controls.Add(this.tp_nalogi);
+            this.tc.Controls.Add(this.tp_baze);
             this.tc.Controls.Add(this.tp_ijsvo);
             this.tc.Controls.Add(this.tp_sifranti);
             this.tc.Controls.Add(this.tp_nastavitve);
@@ -460,7 +460,6 @@
             // tp_storitve
             // 
             this.tp_storitve.BackColor = System.Drawing.Color.AliceBlue;
-            this.tp_storitve.Controls.Add(this.button5);
             this.tp_storitve.Controls.Add(this.cr_storitve);
             this.tp_storitve.Controls.Add(this.label11);
             this.tp_storitve.Controls.Add(this.button10);
@@ -470,23 +469,6 @@
             this.tp_storitve.Size = new System.Drawing.Size(734, 514);
             this.tp_storitve.TabIndex = 1;
             this.tp_storitve.Text = "Storitve";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.BackgroundImage = global::Komunala.Resources.bm_baze2;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(276, 189);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(176, 206);
-            this.button5.TabIndex = 22;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // cr_storitve
             // 
@@ -552,16 +534,52 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "Ponudbe";
             // 
-            // tp_nalogi
+            // tp_baze
             // 
-            this.tp_nalogi.BackColor = System.Drawing.Color.AliceBlue;
-            this.tp_nalogi.Controls.Add(this.cr_nalogi);
-            this.tp_nalogi.Controls.Add(this.label13);
-            this.tp_nalogi.Location = new System.Drawing.Point(4, 22);
-            this.tp_nalogi.Name = "tp_nalogi";
-            this.tp_nalogi.Size = new System.Drawing.Size(734, 514);
-            this.tp_nalogi.TabIndex = 3;
-            this.tp_nalogi.Text = "Potni nalog";
+            this.tp_baze.BackColor = System.Drawing.Color.AliceBlue;
+            this.tp_baze.Controls.Add(this.button19);
+            this.tp_baze.Controls.Add(this.button18);
+            this.tp_baze.Controls.Add(this.cr_nalogi);
+            this.tp_baze.Controls.Add(this.label13);
+            this.tp_baze.Location = new System.Drawing.Point(4, 22);
+            this.tp_baze.Name = "tp_baze";
+            this.tp_baze.Size = new System.Drawing.Size(734, 514);
+            this.tp_baze.TabIndex = 3;
+            this.tp_baze.Text = "Baze";
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.Transparent;
+            this.button19.BackgroundImage = global::Komunala.Resources.gumb_gjs_baze;
+            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button19.FlatAppearance.BorderSize = 0;
+            this.button19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Location = new System.Drawing.Point(54, 155);
+            this.button19.Margin = new System.Windows.Forms.Padding(0);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(176, 206);
+            this.button19.TabIndex = 28;
+            this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click_1);
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.Transparent;
+            this.button18.BackgroundImage = global::Komunala.Resources.gumb_ren_baze;
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Gainsboro;
+            this.button18.FlatAppearance.BorderSize = 0;
+            this.button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Navy;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Location = new System.Drawing.Point(292, 155);
+            this.button18.Margin = new System.Windows.Forms.Padding(0);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(176, 206);
+            this.button18.TabIndex = 27;
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // cr_nalogi
             // 
@@ -577,24 +595,61 @@
             this.label13.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label13.Location = new System.Drawing.Point(48, 29);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(143, 33);
+            this.label13.Size = new System.Drawing.Size(211, 33);
             this.label13.TabIndex = 24;
-            this.label13.Text = "Potni nalogi";
+            this.label13.Text = "Priprava podatkov";
             // 
             // tp_ijsvo
             // 
             this.tp_ijsvo.BackColor = System.Drawing.Color.AliceBlue;
             this.tp_ijsvo.Controls.Add(this.button25);
             this.tp_ijsvo.Controls.Add(this.button24);
-            this.tp_ijsvo.Controls.Add(this.button20);
-            this.tp_ijsvo.Controls.Add(this.button23);
             this.tp_ijsvo.Controls.Add(this.cr_ijsvo);
             this.tp_ijsvo.Controls.Add(this.label15);
+            this.tp_ijsvo.Controls.Add(this.button20);
+            this.tp_ijsvo.Controls.Add(this.button23);
             this.tp_ijsvo.Location = new System.Drawing.Point(4, 22);
             this.tp_ijsvo.Name = "tp_ijsvo";
             this.tp_ijsvo.Size = new System.Drawing.Size(734, 514);
             this.tp_ijsvo.TabIndex = 4;
             this.tp_ijsvo.Text = "ZK in REN";
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(54, 222);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(114, 39);
+            this.button25.TabIndex = 41;
+            this.button25.Text = "Pozvedbe";
+            this.button25.UseVisualStyleBackColor = true;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(54, 143);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(114, 39);
+            this.button24.TabIndex = 40;
+            this.button24.Text = "Pripravi podatke";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // cr_ijsvo
+            // 
+            this.cr_ijsvo.Location = new System.Drawing.Point(35, 64);
+            this.cr_ijsvo.Name = "cr_ijsvo";
+            this.cr_ijsvo.Size = new System.Drawing.Size(654, 12);
+            this.cr_ijsvo.TabIndex = 25;
+            this.cr_ijsvo.Text = "label8";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label15.Location = new System.Drawing.Point(48, 29);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(462, 33);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Zemljiški kataster in register nepremičnin";
             // 
             // button20
             // 
@@ -627,24 +682,6 @@
             this.button23.Size = new System.Drawing.Size(126, 148);
             this.button23.TabIndex = 36;
             this.button23.UseVisualStyleBackColor = false;
-            // 
-            // cr_ijsvo
-            // 
-            this.cr_ijsvo.Location = new System.Drawing.Point(35, 64);
-            this.cr_ijsvo.Name = "cr_ijsvo";
-            this.cr_ijsvo.Size = new System.Drawing.Size(654, 12);
-            this.cr_ijsvo.TabIndex = 25;
-            this.cr_ijsvo.Text = "label8";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(48, 29);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(462, 33);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "Zemljiški kataster in register nepremičnin";
             // 
             // tp_sifranti
             // 
@@ -1006,25 +1043,6 @@
             this.lbaza.Text = "v 28.10.2020";
             this.lbaza.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // button24
-            // 
-            this.button24.Location = new System.Drawing.Point(54, 143);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(114, 39);
-            this.button24.TabIndex = 40;
-            this.button24.Text = "Pripravi podatke";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button25
-            // 
-            this.button25.Location = new System.Drawing.Point(54, 222);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(114, 39);
-            this.button25.TabIndex = 41;
-            this.button25.Text = "Pozvedbe";
-            this.button25.UseVisualStyleBackColor = true;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1052,8 +1070,8 @@
             this.tp_storitve.PerformLayout();
             this.tp_ponudbe.ResumeLayout(false);
             this.tp_ponudbe.PerformLayout();
-            this.tp_nalogi.ResumeLayout(false);
-            this.tp_nalogi.PerformLayout();
+            this.tp_baze.ResumeLayout(false);
+            this.tp_baze.PerformLayout();
             this.tp_ijsvo.ResumeLayout(false);
             this.tp_ijsvo.PerformLayout();
             this.tp_sifranti.ResumeLayout(false);
@@ -1086,7 +1104,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button10;
         private TablessControl tc;
         private System.Windows.Forms.TabPage tp_dnevnik;
@@ -1096,7 +1113,7 @@
         private System.Windows.Forms.Label cr_storitve;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tp_ponudbe;
-        private System.Windows.Forms.TabPage tp_nalogi;
+        private System.Windows.Forms.TabPage tp_baze;
         private System.Windows.Forms.TabPage tp_ijsvo;
         private System.Windows.Forms.TabPage tp_sifranti;
         private System.Windows.Forms.TabPage tp_nastavitve;
@@ -1134,6 +1151,8 @@
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button18;
     }
 }
 

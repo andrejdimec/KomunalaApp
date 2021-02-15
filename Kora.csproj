@@ -129,6 +129,12 @@
     <Compile Include="frmPogodbeTel.Designer.cs">
       <DependentUpon>frmPogodbeTel.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmStrehe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStrehe.Designer.cs">
+      <DependentUpon>frmStrehe.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTelBaza.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +371,9 @@
     <EmbeddedResource Include="frmPogodbeTel.resx">
       <DependentUpon>frmPogodbeTel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmStrehe.resx">
+      <DependentUpon>frmStrehe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTelBaza.resx">
       <DependentUpon>frmTelBaza.cs</DependentUpon>
     </EmbeddedResource>
@@ -551,6 +560,8 @@
     <None Include="ikone\gumbi-enote.jpg" />
     <None Include="ikone\gumbi-manjsi-sodelavci.jpg" />
     <None Include="ikone\gumbi-pogodbe.jpg" />
+    <None Include="ikone\gumb-gjs-baze.jpg" />
+    <None Include="ikone\gumb-ren-baze.jpg" />
     <Content Include="on.jpg" />
     <Content Include="ona.jpg" />
     <Content Include="Opombe.txt" />

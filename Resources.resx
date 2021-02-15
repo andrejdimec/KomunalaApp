@@ -154,6 +154,9 @@
   <data name="gumbibaza-stevilk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\gumbibaza-stevilk.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gumbi-pogodbe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumbi-pogodbe.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="gumbi-tel-imenik1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\gumbi-tel-imenik1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -165,6 +168,9 @@
   </data>
   <data name="gumbi-podpisniki" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\gumbi-podpisniki.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gumb-gjs-baze" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumb-gjs-baze.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GUMB-DNEVNIK" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\GUMB-DNEVNIK.wmf;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,7 +187,7 @@
   <data name="bm_storitve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>ikone\bm_storitve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gumbi-pogodbe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>ikone\gumbi-pogodbe.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gumb-ren-baze" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>ikone\gumb-ren-baze.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

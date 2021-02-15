@@ -69,6 +69,11 @@ namespace Komunala
             Nalozi_lastnika_dela_stavbe(idx_last);
         }
 
+        private void tpNaslovi_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void dgvn_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             idx_hise = dgvn.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -374,10 +379,22 @@ namespace Komunala
             string preb_temp = preb.ToString() + "  (" + zacasno.ToString() + ")";
             label17.Text = preb_temp;
             label35.Text = naslov_stavbe;
-            if (voda == 1) label6.Text = "da";
-            if (kanalizacija == 1) label2.Text = "da";
-            if (odpadki == 1) label50.Text = "da";
-            if (greznica == 1) label48.Text = "da";
+            if (voda == 1) 
+                label6.Text = "da";
+                    else 
+                label6.Text ="";
+            if (kanalizacija == 1) 
+                label2.Text = "da";
+            else
+                label2.Text = "";
+            if (odpadki == 1) 
+                label50.Text = "da";
+            else
+                label50.Text = "";
+            if (greznica == 1) 
+                label48.Text = "da";
+            else
+                label48.Text = "";
         }
 
         private string ko_ime(string vhod)

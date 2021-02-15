@@ -86,6 +86,22 @@ namespace Komunala
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label56 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.button14 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -625,11 +641,176 @@ namespace Komunala
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label45.Location = new System.Drawing.Point(39, 678);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(58, 23);
+            this.label45.TabIndex = 88;
+            this.label45.Text = "Drugo";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(113, 796);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(46, 18);
+            this.label46.TabIndex = 87;
+            this.label46.Text = "label2";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(40, 823);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(46, 18);
+            this.label47.TabIndex = 86;
+            this.label47.Text = "label3";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(40, 796);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(46, 18);
+            this.label48.TabIndex = 85;
+            this.label48.Text = "label2";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(46, 723);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(117, 18);
+            this.label49.TabIndex = 84;
+            this.label49.Text = "Kataster -> strehe";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(43, 745);
+            this.button12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(99, 32);
+            this.button12.TabIndex = 83;
+            this.button12.Text = "Prenos";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(285, 796);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(46, 18);
+            this.label50.TabIndex = 93;
+            this.label50.Text = "label2";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(212, 823);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(46, 18);
+            this.label53.TabIndex = 92;
+            this.label53.Text = "label3";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(212, 796);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(46, 18);
+            this.label54.TabIndex = 91;
+            this.label54.Text = "label2";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(218, 723);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(88, 18);
+            this.label55.TabIndex = 90;
+            this.label55.Text = "OM -> strehe";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(215, 745);
+            this.button13.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(99, 32);
+            this.button13.TabIndex = 89;
+            this.button13.Text = "Prenos";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(464, 796);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(46, 18);
+            this.label56.TabIndex = 98;
+            this.label56.Text = "label2";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(391, 823);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(46, 18);
+            this.label57.TabIndex = 97;
+            this.label57.Text = "label3";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(391, 796);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(46, 18);
+            this.label58.TabIndex = 96;
+            this.label58.Text = "label2";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(397, 723);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(113, 18);
+            this.label59.TabIndex = 95;
+            this.label59.Text = "Lastniki -> strehe";
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(394, 745);
+            this.button14.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(99, 32);
+            this.button14.TabIndex = 94;
+            this.button14.Text = "Prenos";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
             // frmBaze_ZK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1118, 681);
+            this.ClientSize = new System.Drawing.Size(1118, 895);
+            this.Controls.Add(this.label56);
+            this.Controls.Add(this.label57);
+            this.Controls.Add(this.label58);
+            this.Controls.Add(this.label59);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.label54);
+            this.Controls.Add(this.label55);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.label45);
+            this.Controls.Add(this.label46);
+            this.Controls.Add(this.label47);
+            this.Controls.Add(this.label48);
+            this.Controls.Add(this.label49);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.label41);
             this.Controls.Add(this.label42);
             this.Controls.Add(this.label43);
@@ -756,5 +937,21 @@ namespace Komunala
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Button button14;
     }
 }

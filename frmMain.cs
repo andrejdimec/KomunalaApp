@@ -21,8 +21,10 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "9.2.2021";
+        string verzija = "15.2.2021";
         public static string nazivPrograma = "Komunala Radgona";
+        public static string podatki_ren = "Avgust 2020";
+        public static string podatki_gjs = "Januar 2021";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
@@ -131,11 +133,14 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            frmZK_REN sec = new frmZK_REN();
-            sec.ShowDialog();
-
-            //frmBaze_ZK sec = new frmBaze_ZK();
+            //frmZK_REN sec = new frmZK_REN();
             //sec.ShowDialog();
+
+            ////frmBaze_ZK sec = new frmBaze_ZK();
+            ////sec.ShowDialog();
+
+            frmStrehe sec = new frmStrehe();
+            sec.ShowDialog();
 
             Environment.Exit(0);
         }
@@ -237,14 +242,20 @@ namespace Komunala
 
         private void bm_ponudbe_Click(object sender, EventArgs e)
         {
-            Vsi_neaktivni();
-            akt_ponudba = true;
-            Razbarvaj_gumbe();
-            bm_ponudbe.BackColor = barva_gumb_akt;
-            this.tc.SelectedTab = this.tp_ponudbe;
-            cr_ponudbe.AutoSize = false;
-            cr_ponudbe.Height = 1;
-            cr_ponudbe.BorderStyle = BorderStyle.Fixed3D;
+
+            //REN
+            
+            frmZK_REN sec = new frmZK_REN();
+            sec.ShowDialog();
+
+            //Vsi_neaktivni();
+            //akt_ponudba = true;
+            //Razbarvaj_gumbe();
+            //bm_ponudbe.BackColor = barva_gumb_akt;
+            //this.tc.SelectedTab = this.tp_ponudbe;
+            //cr_ponudbe.AutoSize = false;
+            //cr_ponudbe.Height = 1;
+            //cr_ponudbe.BorderStyle = BorderStyle.Fixed3D;
 
         }
 
@@ -262,14 +273,18 @@ namespace Komunala
 
         private void bm_nalogi_Click(object sender, EventArgs e)
         {
-            Vsi_neaktivni();
-            akt_nalog = true;
-            Razbarvaj_gumbe();
-            this.tc.SelectedTab = this.tp_nalogi;
-            bm_nalogi.BackColor = barva_gumb_akt;
-            cr_nalogi.AutoSize = false;
-            cr_nalogi.Height = 1;
-            cr_nalogi.BorderStyle = BorderStyle.Fixed3D;
+
+            frmStrehe sec = new frmStrehe();
+            sec.ShowDialog();
+
+            //Vsi_neaktivni();
+            //akt_nalog = true;
+            //Razbarvaj_gumbe();
+            //this.tc.SelectedTab = this.tp_baze;
+            //bm_nalogi.BackColor = barva_gumb_akt;
+            //cr_nalogi.AutoSize = false;
+            //cr_nalogi.Height = 1;
+            //cr_nalogi.BorderStyle = BorderStyle.Fixed3D;
         }
 
         private void bm_storitve_Click(object sender, EventArgs e)
@@ -286,26 +301,50 @@ namespace Komunala
 
         private void bm_ijsvo_Click(object sender, EventArgs e)
         {
+            // Šifranti novo
             Vsi_neaktivni();
             akt_ijsvo = true;
             Razbarvaj_gumbe();
             bm_ijsvo.BackColor = barva_gumb_akt;
-            this.tc.SelectedTab = this.tp_ijsvo;
-            cr_ijsvo.AutoSize = false;
-            cr_ijsvo.Height = 1;
-            cr_ijsvo.BorderStyle = BorderStyle.Fixed3D;
-        }
-
-        private void bm_šifranti_Click(object sender, EventArgs e)
-        {
-            Vsi_neaktivni();
-            akt_sifranti = true;
-            Razbarvaj_gumbe();
-            bm_šifranti.BackColor = barva_gumb_akt;
             this.tc.SelectedTab = this.tp_sifranti;
             cr_sifranti.AutoSize = false;
             cr_sifranti.Height = 1;
             cr_sifranti.BorderStyle = BorderStyle.Fixed3D;
+
+
+            //Vsi_neaktivni();
+            //akt_ijsvo = true;
+            //Razbarvaj_gumbe();
+            //bm_ijsvo.BackColor = barva_gumb_akt;
+
+            //this.tc.SelectedTab = this.tp_ijsvo;
+            //cr_ijsvo.AutoSize = false;
+            //cr_ijsvo.Height = 1;
+            //cr_ijsvo.BorderStyle = BorderStyle.Fixed3D;
+        }
+
+        private void bm_šifranti_Click(object sender, EventArgs e)
+        {
+            // Podatki
+
+            Vsi_neaktivni();
+            akt_sifranti = true;
+            Razbarvaj_gumbe();
+            this.tc.SelectedTab = this.tp_baze;
+            bm_šifranti.BackColor = barva_gumb_akt;
+            cr_nalogi.AutoSize = false;
+            cr_nalogi.Height = 1;
+            cr_nalogi.BorderStyle = BorderStyle.Fixed3D;
+
+
+            //Vsi_neaktivni();
+            //akt_sifranti = true;
+            //Razbarvaj_gumbe();
+            //bm_šifranti.BackColor = barva_gumb_akt;
+            //this.tc.SelectedTab = this.tp_sifranti;
+            //cr_sifranti.AutoSize = false;
+            //cr_sifranti.Height = 1;
+            //cr_sifranti.BorderStyle = BorderStyle.Fixed3D;
 
         }
 
@@ -517,6 +556,21 @@ namespace Komunala
         private void button12_Click_1(object sender, EventArgs e)
         {
             frmPogodbeTel sec = new frmPogodbeTel();
+            sec.ShowDialog();
+        }
+
+        private void button19_Click_1(object sender, EventArgs e)
+        {
+            // Baze GJS
+            frmBaze sec = new frmBaze();
+            sec.ShowDialog();
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            // baze REN
+            frmBaze_ZK sec = new frmBaze_ZK();
             sec.ShowDialog();
         }
 
