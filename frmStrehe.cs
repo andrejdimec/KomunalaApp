@@ -19,6 +19,8 @@ namespace Komunala
         SqlConnection con3 = frmMain.c3;
         SqlConnection con9 = frmMain.c9;
         SqlConnection con6 = frmMain.c6;
+        SqlConnection con7 = frmMain.c6;
+
         SqlDataAdapter adapt;
 
         SqlCommand cmd;
@@ -35,15 +37,17 @@ namespace Komunala
 
         SqlDataReader rdr6 = null;
         SqlCommand cmd6;
+        SqlCommand cmd7;
 
-        static DataTable dt, dt2, dt3, dt4;
+        static DataTable dt, dt2, dt3, dt4,dt7;
         string q,q2,q3,q6,q9;
 
         string idx_sta, hsmid_gl;
         string st_nen,sta_sid, st_stanovanj, st_poslovnih_prostorov;
 
         // obračun
-        string oobjectid, osta_sid, ohs_mid, olastnik, ostanovalec, oplacnik, ocadis, onaslov_pl, ohs_pl, olabela_pl;
+        string oobjectid, osta_sid, odst_sid, ohs_mid_gl, ohs_mid_del, olastnik, ostanovalec, oplacnik, ocadis; 
+        string onaslov_pl, olabela_pl,oposta_pl,olastnik_nas,olastnik_pt,onaslov_dst,olabela_dst,oposta_dst;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -336,7 +340,7 @@ namespace Komunala
             ls.Text = "";
             Strehe();
             Vpisi_dgv_stavbe();
-
+            Nalozi_seznam();
         }
 
 
@@ -408,25 +412,29 @@ namespace Komunala
         {
             try
             {
-                string query = "Insert into strehe_za_obracun (objectid,sta_sid,hs_mid,lastnik,stanovalec,placnik,cadis,naslov_pl,hs_pl,hd_pl,labela_pl,pt_pl,ptime_pl,drzava_pl,st_prostorov,vecstanovanjska,st_stanovanja,raba_id,raba_ime,n_tloris,n_tloris_skupaj,procent,streha_skupaj,streha_delez,odobreno) " +
-                    "values (@objectid,@sta_sid,@hs_mid,@lastnik,@stanovalec,@placnik,@cadis,@naslov_pl,@hs_pl,@hd_pl,@labela_pl,@pt_pl,@ptime_pl,@drzava_pl,@st_prostorov,@vecstanovanjska,@st_stanovanja,@raba_id,@raba_ime,@n_tloris,@n_tloris_skupaj,@procent,@streha_skupaj,@streha_delez,@odobreno)";
+                string query = "Insert into strehe_za_obracun (objectid,sta_sid,dst_sid,hs_mid_gl,hs_mid_del,lastnik,lastnik_nas,lastnik_pt,stanovalec,placnik,cadis,naslov_pl,labela_pl,posta_pl,drzava_pl,naslov_dst,labela_dst,posta_dst,st_prostorov,vecstanovanjska,st_stanovanja,raba_id,raba_ime,n_tloris,n_tloris_skupaj,procent,streha_skupaj,streha_delez,odobreno) " +
+                    "values (@objectid,@sta_sid,@dst_sid,@hs_mid_gl,@hs_mid_del,@lastnik,@lastnik_nas,@lastnik_pt,@stanovalec,@placnik,@cadis,@naslov_pl,@labela_pl,@posta_pl,@drzava_pl,@naslov_dst,@labela_dst,@posta_dst,@st_prostorov,@vecstanovanjska,@st_stanovanja,@raba_id,@raba_ime,@n_tloris,@n_tloris_skupaj,@procent,@streha_skupaj,@streha_delez,@odobreno)";
                 cmd = new SqlCommand(query, con);
                 con.Open();
 
                 cmd.Parameters.AddWithValue("@objectid", oobjectid);
                 cmd.Parameters.AddWithValue("@sta_sid", osta_sid);
-                cmd.Parameters.AddWithValue("@hs_mid", ohs_mid);
+                cmd.Parameters.AddWithValue("@dst_sid", odst_sid);
+                cmd.Parameters.AddWithValue("@hs_mid_gl", ohs_mid_gl);
+                cmd.Parameters.AddWithValue("@hs_mid_del", ohs_mid_del);
                 cmd.Parameters.AddWithValue("@lastnik", olastnik);
+                cmd.Parameters.AddWithValue("@lastnik_nas", olastnik_nas);
+                cmd.Parameters.AddWithValue("@lastnik_pt", olastnik_pt);
                 cmd.Parameters.AddWithValue("@stanovalec", ostanovalec);
                 cmd.Parameters.AddWithValue("@placnik", oplacnik);
                 cmd.Parameters.AddWithValue("@cadis", ocadis);
                 cmd.Parameters.AddWithValue("@naslov_pl", onaslov_pl);
-                cmd.Parameters.AddWithValue("@hs_pl", ohs_pl);
-                cmd.Parameters.AddWithValue("@hd_pl", ohd_pl);
                 cmd.Parameters.AddWithValue("@labela_pl", olabela_pl);
-                cmd.Parameters.AddWithValue("@pt_pl", opt_pl);
-                cmd.Parameters.AddWithValue("@ptime_pl", optime_pl);
+                cmd.Parameters.AddWithValue("@posta_pl", oposta_pl);
                 cmd.Parameters.AddWithValue("@drzava_pl", odrzava_pl);
+                cmd.Parameters.AddWithValue("@naslov_dst", onaslov_dst);
+                cmd.Parameters.AddWithValue("@labela_dst", olabela_dst);
+                cmd.Parameters.AddWithValue("@posta_dst", oposta_dst);
                 cmd.Parameters.AddWithValue("@st_prostorov", ost_prostorov);
                 cmd.Parameters.AddWithValue("@vecstanovanjska", ovecstanovanjska);
                 cmd.Parameters.AddWithValue("@st_stanovanja", ost_stanovanja);
@@ -446,6 +454,33 @@ namespace Komunala
                 MessageBox.Show("Napaka pri pisanju: " + ex.Message);
             }
         }
+        private void Nalozi_seznam()
+        {
+            dgvsez.RowHeadersVisible = false;
+            //string q7 = "select dst_sid,raba_id,raba_ime,st_stanovanja,vecstanovanjska,st_prostorov,sta_sid,hs_mid_del,cadis from strehe_za_obracun";
+            string q7 = "select * from strehe_za_obracun";
+            var da7 = new SqlDataAdapter(q7, con7);
+            dt7 = new DataTable();
+            da7.Fill(dt7);
+            con7.Close();
+            dgvsez.DataSource = dt7;
+            dgvsez.ReadOnly = true;
+            //dgvs.Columns[0].Visible = false;
+            //dgvs.Columns[5].Visible = false;
+            dgvs.Columns[1].Width = 80;
+            dgvs.Columns[2].Width = 185;
+            //dgvs.Columns[3].Width = 30;
+            //dgvs.Columns[4].Width = 30;
+            //dgvs.Columns[1].HeaderText = "ID";
+            //dgvs.Columns[2].HeaderText = "Naslov";
+            //dgvs.Columns[3].HeaderText = "St";
+            //dgvs.Columns[4].HeaderText = "Po";
+            //this.dgvs.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            //this.dgvs.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            //lstavb.Text = "(" + dgvs.Rows.Count.ToString() + ")";
+
+        }
         private void Izprazni_obracun()
         {
             string query = "delete from strehe_za_obracun";
@@ -456,15 +491,25 @@ namespace Komunala
 
         }
         private void Pripravi_seznam()
-
         {
-
             Izprazni_obracun();
-            string q; int stevec=0;
+            Variable();
+            string q,q3; int stevec=0;
             //MessageBox.Show(vhod);
             try
             {
-                q = "select objectid,sid,hsmid_gl,povrsina,om_ime from ren_strehe where (glavna_streha = 1) and (id<900)";
+                //q = "select objectid,sid,hsmid_gl,povrsina,om_ime from ren_strehe where (glavna_streha = 1) and (id<900)";
+
+                q = @"
+                SELECT        TOP (100) PERCENT dbo.tbl_ren_deli_stavb.dst_sid as dst, dbo.tbl_ren_deli_stavb.hs_mid as hsmid_del,dbo.ren_Strehe.OM_ime AS ime, dbo.ren_Strehe.HSMID_GL, dbo.ren_Strehe.SID, dbo.ren_Strehe.ObjectID, dbo.ren_Strehe.Id, dbo.ren_Strehe.Povrsina, 
+                              dbo.tbl_ren_stavbe.st_stanovanj as st_stan, dbo.tbl_ren_stavbe.st_poslovnih_prostorov as st_pos, dbo.tbl_ren_deli_stavb.stevstan, dbo.tbl_ren_deli_stavb.hs_mid, dbo.tbl_ren_deli_stavb.dejanska_raba as idraba, 
+                              dbo.tbl_ren_deli_stavb.neto_tloris_pov_dst
+                FROM          dbo.ren_Strehe INNER JOIN
+                              dbo.tbl_ren_stavbe ON dbo.ren_Strehe.SID = dbo.tbl_ren_stavbe.sta_sid INNER JOIN
+                              dbo.tbl_ren_deli_stavb ON dbo.ren_Strehe.SID = dbo.tbl_ren_deli_stavb.sta_sid
+                WHERE         (dbo.ren_Strehe.Glavna_streha = N'1') AND (dbo.ren_Strehe.Id < N'1000')
+                ORDER BY      dbo.ren_Strehe.Id
+                ";
                 cmd2 = new SqlCommand(q, con2);
                 con2.Open();
                 rdr = cmd2.ExecuteReader();
@@ -475,40 +520,124 @@ namespace Komunala
                     
                     // preberi vse glavne iz tabele strehe
                     oobjectid = (String)rdr["objectid"];
-                    ohs_mid = (String)rdr["hsmid_gl"];
+                    ohs_mid_gl = (String)rdr["hsmid_gl"];
+                    ohs_mid_del = (String)rdr["hsmid_del"];
                     osta_sid = (String)rdr["sid"];
-                    ocadis = (String)rdr["om_ime"];
+                    odst_sid = (String)rdr["dst"];
+                    ocadis = (String)rdr["ime"];
                     ostreha_skupaj = (double)rdr["povrsina"];
+                    oraba_id = (String)rdr["idraba"];
 
+                    int tmp_st = (int)rdr["st_stan"];
+                    int tmp_po = (int)rdr["st_pos"];
+                    ost_prostorov = tmp_po+tmp_st;
+                    if (ost_prostorov > 1)
+                        ovecstanovanjska = 1;
+                    else
+                        ovecstanovanjska = 0;
+                    ost_stanovanja = (String)rdr["stevstan"];
+                    ocadis = (String)rdr["ime"];
+
+                    on_tloris = (double)rdr["neto_tloris_pov_dst"];
+
+                    q6 = "SELECT ime FROM ren_sifranti  where idsif = @idx"; // poišči ime rabe
+                    cmd6 = new SqlCommand(q6, con6);
+                    cmd6.Parameters.AddWithValue("@idx", oraba_id);
+                    con6.Open();
+                    oraba_ime = (string)cmd6.ExecuteScalar();
+                    con6.Close();
+
+
+                    // poišči naslov dela stavbe
                     try
                     {
-                        // poisci dele stavb in za vsak del z ustrezno rabo napiši en record
-                        string q3 = "SELECT tbl_ren_deli_stavb.dst_sid,tbl_ren_deli_stavb.id, ren_Sifranti.ime as ime, tbl_ren_stavbe.sta_sid AS Expr1, tbl_ren_deli_stavb.stevstan AS Expr3, tbl_ren_deli_stavb.stevstan AS st_stan, " +
-                        "tbl_ren_deli_stavb.dejanska_raba, tbl_ren_deli_stavb.st_etaze, tbl_ren_deli_stavb.st_nadstropja FROM tbl_ren_stavbe INNER JOIN " +
-                        "tbl_ren_deli_stavb ON tbl_ren_stavbe.sta_sid = tbl_ren_deli_stavb.sta_sid INNER JOIN ren_Sifranti ON tbl_ren_deli_stavb.dejanska_raba = ren_Sifranti.idsif " +
-                        "WHERE(tbl_ren_stavbe.sta_sid = @idx)";
-                        cmd3 = new SqlCommand(q3, con3);
-                        cmd3.Parameters.AddWithValue("@idx", osta_sid);
-                        con3.Open();
-                        rdr3 = cmd3.ExecuteReader();
-                        while (rdr3.Read())
+                        q9 = "SELECT * FROM tbl_hise  where hsmid = @idx";
+                        cmd9 = new SqlCommand(q9, con9);
+                        con9.Open();
+                        cmd9.Parameters.AddWithValue("@idx", ohs_mid_del);
+                        rdr9 = cmd9.ExecuteReader();
+                        while (rdr9.Read())
                         {
-                            //oraba_id=(String)rdr3["raba_id"];
-                            oraba_id = (String)rdr3["dejanska_raba"];
+                            onaslov_dst = (String)rdr9["naslov"];
+                            olabela_dst = (String)rdr9["labela"];
+                            oposta_dst = (String)rdr9["pt_stev"];
+                            string tmp_posta = (String)rdr9["posta"];
+                            oposta_dst = oposta_dst + " " + tmp_posta;
                         }
                     }
-                    catch (Exception ex2) // q3
+                    catch (Exception ex2)
                     {
-                        MessageBox.Show("Napaka - pripravi seznam " + ex2.Message);
+                        MessageBox.Show("Napaka reader: " + ex2.Message);
                     }
                     finally
                     {
-                        rdr3.Close();
-                        con3.Close();
+                        rdr9.Close();
+                        con9.Close();
                     }
 
 
-                }
+                    // poišči lastnika dela stavbe z največjim deležem in najstarejšega
+
+                    string nen_id_s = st_nen_id(odst_sid);
+                    try
+                    {
+                        q9 = "select id,nen_id,ime, naslov,delez_str  from tbl_ren_lastniki where nen_id = @idx order by delez_proc desc, leto asc";
+                        //q9 = "SELECT * FROM tbl_hise  where hsmid = @idx";
+                        cmd9 = new SqlCommand(q9, con9);
+                        con9.Open();
+                        cmd9.Parameters.AddWithValue("@idx", nen_id_s);
+                        rdr9 = cmd9.ExecuteReader();
+                        while (rdr9.Read())
+                        {
+                            olastnik = (String)rdr9["ime"];
+                            string poreklo = "p";
+                            string last_tmp = (String)rdr9["naslov"];
+
+                            if (last_tmp.Contains(','))
+                            // domači naslov
+                            {
+                                poreklo = "d";
+                                string[] polje = last_tmp.Split(',');
+                                polje[1] = polje[1].TrimStart();
+                                olastnik_nas = polje[0];
+                                olastnik_pt = polje[1];
+                            }
+
+                            if (last_tmp.Contains('+'))
+                            // tuji naslov
+                            {
+                                poreklo = "t";
+                                string[] polje = last_tmp.Split('+');
+                                polje[1] = polje[1].TrimStart();
+                                olastnik_nas = polje[0];
+                                olastnik_pt = polje[1];
+                            }
+
+                            if (poreklo=="p")
+                            // prazen naslov ali ga nima
+                            {
+                                olastnik_nas = last_tmp;
+                                olastnik_pt = "";
+                            }
+
+
+                        }
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show("Napaka reader - lastniki: " + ex2.Message);
+                    }
+                    finally
+                    {
+                        rdr9.Close();
+                        con9.Close();
+                    }
+
+
+                    Zapisi_OM();
+
+
+                } // while read
             }
             catch (Exception ex2)
             {
@@ -519,23 +648,38 @@ namespace Komunala
                 rdr.Close();
                 con2.Close();
             }
+            // izračunaj skupni tloris in določi procente
+            Izracunaj_deleze();
+
+
+            Nalozi_seznam();
+        }
+
+        private void Izracunaj_deleze()
+        {
+            // izračunaj skupni tloris in določi procente
+
         }
         private void Variable()
         {
             oobjectid = ""; 
-            osta_sid = ""; 
-            ohs_mid = ""; 
+            osta_sid = "";
+            odst_sid = "";
+            ohs_mid_gl = "";
+            ohs_mid_del = "";
             olastnik = "";
+            olastnik_nas = "";
+            olastnik_pt = "";
             ostanovalec = "";
             oplacnik = "";
             ocadis = "";
             onaslov_pl = "";
-            ohs_pl = "";
-            ohd_pl = "";
             olabela_pl = "";
-            opt_pl = "";
-            optime_pl = "";
+            oposta_pl = "";
             odrzava_pl = "";
+            onaslov_dst = "";
+            olabela_dst = "";
+            oposta_dst = "";
             ost_stanovanja = "";
             oraba_id = "";
             oraba_ime = "";
@@ -549,5 +693,6 @@ namespace Komunala
             oodobreno = 0;
 
         }
+
     }
 }
