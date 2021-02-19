@@ -217,6 +217,22 @@ namespace Komunala
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        private void IzprazniBazo_strehe_neto()  // izprazni tabelo tbl_pt
+        {
+            string query = "delete from strehe_neto";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+        private void IzprazniBazo_strehe_skupne()  // izprazni tabelo tbl_pt
+        {
+            string query = "delete from strehe_skupne_povrsine";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
 
         private void Obdelaj_ren_parcele()
         {
@@ -716,6 +732,8 @@ namespace Komunala
                 string om_kora = "";
 
                 IzprazniBazo_strehe();
+                IzprazniBazo_strehe_skupne();
+                IzprazniBazo_strehe_neto();
                 // preberi ul - CSV
                 try
                 {
@@ -738,6 +756,7 @@ namespace Komunala
                         glavna_streha = polje[5];
                         povrsina = Convert.ToDouble(polje[2]);
                         opomba = polje[3];
+                        hsmid_gl = hsmid_gl.TrimEnd();
 
                         om_ime = "";
                         kan = "";
@@ -779,9 +798,11 @@ namespace Komunala
                      }
 
                         emso_last_ren = "";
+                        double neto = 0;
+                        string dvojna = "";
                         try
                         {
-                            string query = "Insert into ren_strehe (objectid,sid,hsmid,hsmid_gl,glavna_streha,povrsina,opomba,kanalizacija,emso_last_ren,om_ime,om_naslov,om_posta) values (@objectid,@sid,@hsmid,@hsmid_gl,@glavna_streha,@povrsina,@opomba,@kanalizacija,@emso_last_ren,@om_ime,@om_naslov,@om_posta)";
+                            string query = "Insert into ren_strehe (objectid,sid,hsmid,hsmid_gl,glavna_streha,povrsina,opomba,kanalizacija,emso_last_ren,om_ime,om_naslov,om_labela,om_posta) values (@objectid,@sid,@hsmid,@hsmid_gl,@glavna_streha,@povrsina,@opomba,@kanalizacija,@emso_last_ren,@om_ime,@om_naslov,@om_labela,@om_posta)";
                             cmd = new SqlCommand(query, con);
                             con.Open();
 
@@ -795,7 +816,8 @@ namespace Komunala
                             cmd.Parameters.AddWithValue("@kanalizacija", kan);
                             cmd.Parameters.AddWithValue("@emso_last_ren",emso_last_ren);
                             cmd.Parameters.AddWithValue("@om_ime",om_ime);
-                            cmd.Parameters.AddWithValue("@om_naslov", nas+" "+hs);
+                            cmd.Parameters.AddWithValue("@om_naslov", nas);
+                            cmd.Parameters.AddWithValue("@om_labela", hs);
                             cmd.Parameters.AddWithValue("@om_posta", pt+" "+imept);
                             cmd.ExecuteNonQuery();
                             con.Close();
@@ -806,6 +828,46 @@ namespace Komunala
                         }
                         stevec = ++stevec;
                         vrstica = "";
+
+                        // napolni bazo za deleže strehe_neto
+                        
+                        try
+                        {
+                            string query = "Insert into strehe_neto (sid,neto,podvojena) values (@sid,@neto,@dvojna)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+
+                            cmd.Parameters.AddWithValue("@sid", sid);
+                            cmd.Parameters.AddWithValue("@neto", 0);
+                            cmd.Parameters.AddWithValue("@dvojna", "");
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka strehe_neto: " + ex.Message + " " + om_ime);
+                        }
+
+                        // IzprazniBazo_strehe_skupne();
+                        try
+                        {
+                            string query = "Insert into strehe_skupne_povrsine (sta_sid,hsmid_gl,st_streh,posamezna_povrsina,skupna_povrsina) values (@sid,@hsmid,@st,@pos,@pov)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+
+                            cmd.Parameters.AddWithValue("@sid", sid);
+                            cmd.Parameters.AddWithValue("@hsmid", hsmid_gl);
+                            cmd.Parameters.AddWithValue("@st", 0);
+                            cmd.Parameters.AddWithValue("@pos", povrsina);
+                            cmd.Parameters.AddWithValue("@pov", 0);
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka strehe skupne površine: " + ex.Message + " " + om_ime);
+                        }
+
                         label46.Text = stevec.ToString();
                         label46.Refresh();
                     } while (objReader.Peek() != -1); //while (stevec < 100);//
@@ -822,6 +884,96 @@ namespace Komunala
                 {
                     // DisplayData_ul();
                 }
+
+                // seštej površine pridruženih streh po hsmid_gl
+                double skupna_tmp = 0;
+                double sestevek = 0; ;
+                stevec = 0;
+                try
+                {
+                    string q = "select * from ren_strehe";
+                    cmd = new SqlCommand(q, con);
+                    //cmd.Parameters.AddWithValue("@idx", hsmid);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        stevec++;
+                        int id_tmp = (int)rdr["id"];
+                        string hsmid_glavni= (String)rdr["hsmid_gl"];
+                        string sid_glavni = (String)rdr["sid"];
+
+                        ////////////////  drugi sklop   ///////////////////
+                        
+                        if (hsmid_glavni.Equals("99"))
+                        {
+                            string q2 = "select * from strehe_skupne_povrsine where sta_sid=@sta_sid";
+                            cmd2 = new SqlCommand(q2, con2);
+                            cmd2.Parameters.AddWithValue("@sta_sid", sid_glavni);
+                            con2.Open();
+                            rdr2 = cmd2.ExecuteReader();
+                            while (rdr2.Read())
+                            {
+                                skupna_tmp = (double)rdr2["posamezna_povrsina"];
+                                //string glavni = (String)rdr["hsmid_gl"];
+
+                                string query = "update ren_strehe set povrsina_skupna=@pov_skup where id=@idx";
+                                cmd3 = new SqlCommand(query, con3);
+                                cmd3.Parameters.AddWithValue("@idx", id_tmp);
+                                cmd3.Parameters.AddWithValue("@pov_skup", skupna_tmp);
+                                con3.Open();
+                                cmd3.ExecuteNonQuery();
+                                con3.Close();
+
+                            }
+                            rdr2.Close();
+                            con2.Close();
+                        }
+                        else
+                        {
+                            sestevek = 0;
+                            string q2 = "select * from strehe_skupne_povrsine where hsmid_gl=@hsmid_gl";
+                            cmd2 = new SqlCommand(q2, con2);
+                            cmd2.Parameters.AddWithValue("@hsmid_gl", hsmid_glavni);
+                            con2.Open();
+                            rdr2 = cmd2.ExecuteReader();
+                            while (rdr2.Read())
+                            {
+                                skupna_tmp = (double)rdr2["posamezna_povrsina"];
+                                sestevek = sestevek + skupna_tmp;
+                                //string glavni = (String)rdr["hsmid_gl"];
+
+                                string query = "update ren_strehe set povrsina_skupna=@pov_skup where id=@idx";
+                                cmd3 = new SqlCommand(query, con3);
+                                cmd3.Parameters.AddWithValue("@idx", id_tmp);
+                                cmd3.Parameters.AddWithValue("@pov_skup", sestevek);
+                                con3.Open();
+                                cmd3.ExecuteNonQuery();
+                                con3.Close();
+
+                            }
+                            rdr2.Close();
+                            con2.Close();
+                        }
+
+
+                        ////////////////  drugi sklop   ///////////////////
+                        label46.Text = stevec.ToString();
+                        label46.Refresh();
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka reader: " + ex2.Message);
+                }
+                finally
+                {
+                    rdr.Close();
+                    con.Close();
+                }
+
+                label46.Text = "OK";
+                label46.Refresh();
             }
             else
             {
