@@ -619,7 +619,7 @@ namespace Komunala
                                 olastnik_nas = last_tmp;
                                 olastnik_pt = "";
                             }
-
+                            //
 
                         }
                     }
