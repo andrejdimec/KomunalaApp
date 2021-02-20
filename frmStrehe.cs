@@ -380,10 +380,10 @@ namespace Komunala
         {
             dgvs.RowHeadersVisible = false;
             if (cb_vec.Checked)
-                    q = "SELECT ren_Strehe.Id, ren_Strehe.SID AS sid, ren_Strehe.OM_naslov AS nasl, tbl_ren_stavbe.st_stanovanj AS stan, tbl_ren_stavbe.st_poslovnih_prostorov AS posl, tbl_ren_stavbe.sta_sid,ren_Strehe.ObjectId FROM ren_Strehe " +
+                    q = "SELECT ren_Strehe.Id, ren_Strehe.SID AS sid, ren_Strehe.OM_naslov AS nasl, ren_Strehe.OM_labela, tbl_ren_stavbe.st_stanovanj AS stan, tbl_ren_stavbe.st_poslovnih_prostorov AS posl, tbl_ren_stavbe.sta_sid,ren_Strehe.ObjectId FROM ren_Strehe " +
                         "LEFT JOIN tbl_ren_stavbe ON ren_Strehe.SID = tbl_ren_stavbe.sta_sid WHERE(tbl_ren_stavbe.st_stanovanj + tbl_ren_stavbe.st_poslovnih_prostorov > 1) AND (ren_Strehe.Glavna_streha = N'1') order by nasl";
             else
-                q = "SELECT ren_Strehe.Id, ren_Strehe.SID AS sid, ren_Strehe.OM_naslov AS nasl, tbl_ren_stavbe.st_stanovanj AS stan, tbl_ren_stavbe.st_poslovnih_prostorov AS posl, tbl_ren_stavbe.sta_sid FROM ren_Strehe " +
+                q = "SELECT ren_Strehe.Id, ren_Strehe.SID AS sid, ren_Strehe.OM_naslov AS nasl, ren_Strehe.OM_labela, tbl_ren_stavbe.st_stanovanj AS stan, tbl_ren_stavbe.st_poslovnih_prostorov AS posl, tbl_ren_stavbe.sta_sid FROM ren_Strehe " +
                     "LEFT JOIN tbl_ren_stavbe ON ren_Strehe.SID = tbl_ren_stavbe.sta_sid WHERE (ren_Strehe.Glavna_streha = N'1') order by nasl";
 
             var da = new SqlDataAdapter(q, con);
@@ -393,17 +393,20 @@ namespace Komunala
             dgvs.DataSource = dt;
             dgvs.ReadOnly = true;
             dgvs.Columns[0].Visible = false;
-            dgvs.Columns[5].Visible = false;
+            dgvs.Columns[6].Visible = false;
             dgvs.Columns[1].Width = 80;
-            dgvs.Columns[2].Width = 185;
-            dgvs.Columns[3].Width = 30;
+            dgvs.Columns[2].Width = 165;
+            dgvs.Columns[3].Width = 35;
             dgvs.Columns[4].Width = 30;
+            dgvs.Columns[5].Width = 30;
             dgvs.Columns[1].HeaderText = "ID";
             dgvs.Columns[2].HeaderText = "Naslov";
-            dgvs.Columns[3].HeaderText = "St";
-            dgvs.Columns[4].HeaderText = "Po";
+            dgvs.Columns[3].HeaderText = "Št";
+            dgvs.Columns[4].HeaderText = "St";
+            dgvs.Columns[5].HeaderText = "Po";
             this.dgvs.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             this.dgvs.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvs.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             lstavb.Text = "("+dgvs.Rows.Count.ToString()+")";
         }
