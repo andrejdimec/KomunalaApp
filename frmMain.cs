@@ -143,8 +143,8 @@ namespace Komunala
             //sec.ShowDialog();
 
             //frmStrehe sec = new frmStrehe();
-            //sec.ShowDialog();
-            frms sec = new frmStrehe();
+            ////sec.ShowDialog();
+            frmUredi_strehe sec = new frmUredi_strehe();
             sec.ShowDialog();
 
 

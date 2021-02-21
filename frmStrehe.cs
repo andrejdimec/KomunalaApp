@@ -48,6 +48,7 @@ namespace Komunala
         // obračun
         string oobjectid, osta_sid, odst_sid, ohs_mid_gl, ohs_mid_del, olastnik, ostanovalec, oplacnik, ocadis; 
         string onaslov_pl, olabela_pl,oposta_pl,olastnik_nas,olastnik_pt,onaslov_dst,olabela_dst,oposta_dst;
+        string cad_ime, cad_naslov, cad_pt, cad_ptime;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -457,12 +458,12 @@ namespace Komunala
             {
                 string query = @"
                 Insert  into strehe_za_obracun 
-                        (objectid,sta_sid,dst_sid,hs_mid_gl,hs_mid_del,lastnik,lastnik_nas,lastnik_pt,stanovalec,placnik,cadis,naslov_pl,
+                        (objectid,sta_sid,dst_sid,hs_mid_gl,hs_mid_del,lastnik,lastnik_nas,lastnik_pt,stanovalec,placnik,cadis,naslov_cad,labela_cad,posta_cad,naslov_pl,
                         labela_pl,posta_pl,drzava_pl,naslov_dst,labela_dst,posta_dst,st_prostorov,vecstanovanjska,st_stanovanja,raba_id,
                         raba_ime,n_tloris,n_tloris_skupaj,procent,streha_skupaj,streha_delez,odobreno) 
                 values
-                        (@objectid,@sta_sid,@dst_sid,@hs_mid_gl,@hs_mid_del,@lastnik,@lastnik_nas,@lastnik_pt,@stanovalec,@placnik,@cadis,
-                        @naslov_pl,@labela_pl,@posta_pl,@drzava_pl,@naslov_dst,@labela_dst,@posta_dst,@st_prostorov,@vecstanovanjska,
+                        (@objectid,@sta_sid,@dst_sid,@hs_mid_gl,@hs_mid_del,@lastnik,@lastnik_nas,@lastnik_pt,@stanovalec,@placnik,@cadis,@naslov_cad,@labela_cad,
+                        @posta_cad,@naslov_pl,@labela_pl,@posta_pl,@drzava_pl,@naslov_dst,@labela_dst,@posta_dst,@st_prostorov,@vecstanovanjska,
                         @st_stanovanja,@raba_id,@raba_ime,@n_tloris,@n_tloris_skupaj,@procent,@streha_skupaj,@streha_delez,@odobreno)
                     ";
                 cmd = new SqlCommand(query, con);
@@ -479,6 +480,9 @@ namespace Komunala
                 cmd.Parameters.AddWithValue("@stanovalec", ostanovalec);
                 cmd.Parameters.AddWithValue("@placnik", oplacnik);
                 cmd.Parameters.AddWithValue("@cadis", ocadis);
+                cmd.Parameters.AddWithValue("@naslov_cad", cad_naslov);
+                cmd.Parameters.AddWithValue("@posta_cad", cad_ptime);
+                cmd.Parameters.AddWithValue("@labela_cad", "");
                 cmd.Parameters.AddWithValue("@naslov_pl", onaslov_pl);
                 cmd.Parameters.AddWithValue("@labela_pl", olabela_pl);
                 cmd.Parameters.AddWithValue("@posta_pl", oposta_pl);
@@ -581,6 +585,7 @@ namespace Komunala
                               dbo.tbl_ren_deli_stavb.dst_sid AS dst, 
                               dbo.tbl_ren_deli_stavb.hs_mid AS hsmid_del,
                               dbo.ren_Strehe.OM_ime AS ime, 
+
                               dbo.ren_Strehe.HSMID_GL AS hsmid_glav, 
                               dbo.ren_Strehe.SID, 
                               dbo.ren_Strehe.ObjectID, 
@@ -603,6 +608,9 @@ namespace Komunala
                 SELECT        
                               dbo.tbl_ren_deli_stavb.dst_sid AS dst, 
                               dbo.tbl_ren_deli_stavb.hs_mid AS hsmid_del,
+                              dbo.ren_Strehe.OM_naslov AS cad_naslov, 
+                              dbo.ren_Strehe.OM_posta AS cad_posta, 
+                              dbo.ren_Strehe.OM_labela AS cad_labela, 
                               dbo.ren_Strehe.OM_ime AS ime, 
                               dbo.ren_Strehe.HSMID_GL AS hsmid_glav, 
                               dbo.ren_Strehe.SID, 
@@ -648,8 +656,12 @@ namespace Komunala
                     osta_sid = (String)rdr["sid"];
                     odst_sid = (String)rdr["dst"];
                     ocadis = (String)rdr["ime"];
+                    cad_naslov = (String)rdr["cad_naslov"];
+                    cad_ptime = (String)rdr["cad_posta"];
+                    string cad_labela = (String)rdr["cad_labela"];
                     ostreha_skupaj = (double)rdr["povrsina_skupna"];
                     oraba_id = (String)rdr["idraba"];
+                    cad_naslov = cad_naslov + " " + cad_labela;
 
                     int tmp_st = (int)rdr["st_stan"];
                     int tmp_po = (int)rdr["st_pos"];
@@ -660,8 +672,8 @@ namespace Komunala
                         ovecstanovanjska = 0;
                     ost_stanovanja = (String)rdr["stevstan"];
                     ocadis = (String)rdr["ime"];
-                    if (ocadis.Length>100)
-                        ocadis = ocadis.Substring(0, 98);
+                    if (ocadis.Length>1500)
+                        ocadis = ocadis.Substring(0, 1499);
                     on_tloris = (double)rdr["neto_tloris_pov_dst"];
 
                     // poišči ime rabe
@@ -700,7 +712,7 @@ namespace Komunala
                         con9.Close();
                     }
 
-
+                    onaslov_dst = onaslov_dst + " " + olabela_dst;
                     // poišči lastnika dela stavbe z največjim deležem in najstarejšega
 
                     string nen_id_s = st_nen_id(odst_sid);
