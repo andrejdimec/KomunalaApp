@@ -136,8 +136,11 @@ namespace Komunala
             //frmZK_REN sec = new frmZK_REN();
             //sec.ShowDialog();
 
-            ////frmBaze_ZK sec = new frmBaze_ZK();
-            ////sec.ShowDialog();
+            //frmBaze_ZK sec = new frmBaze_ZK();
+            //sec.ShowDialog();
+
+            //frmUredi_strehe sec = new frmUredi_strehe();
+            //sec.ShowDialog();
 
             //frmStrehe sec = new frmStrehe();
             //sec.ShowDialog();

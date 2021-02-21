@@ -77,7 +77,6 @@ namespace Komunala
             this.dgvd = new System.Windows.Forms.DataGridView();
             this.label14 = new System.Windows.Forms.Label();
             this.dgvld = new System.Windows.Forms.DataGridView();
-            this.label15 = new System.Windows.Forms.Label();
             this.dgvsez = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -85,6 +84,14 @@ namespace Komunala
             this.label19 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.ls = new System.Windows.Forms.Label();
+            this.ll = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvs)).BeginInit();
@@ -107,18 +114,18 @@ namespace Komunala
             // 
             this.label78.AutoSize = true;
             this.label78.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label78.Location = new System.Drawing.Point(855, 83);
+            this.label78.Location = new System.Drawing.Point(246, 112);
             this.label78.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(65, 18);
+            this.label78.Size = new System.Drawing.Size(28, 18);
             this.label78.TabIndex = 182;
-            this.label78.Text = "ID stavbe";
+            this.label78.Text = "SID";
             // 
             // label69
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label69.Location = new System.Drawing.Point(781, 207);
+            this.label69.Location = new System.Drawing.Point(781, 237);
             this.label69.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(113, 18);
@@ -150,7 +157,7 @@ namespace Komunala
             this.dgvn.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvn.EnableHeadersVisualStyles = false;
             this.dgvn.GridColor = System.Drawing.Color.Gainsboro;
-            this.dgvn.Location = new System.Drawing.Point(426, 238);
+            this.dgvn.Location = new System.Drawing.Point(426, 264);
             this.dgvn.Name = "dgvn";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -167,10 +174,10 @@ namespace Komunala
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(938, 80);
+            this.textBox2.Location = new System.Drawing.Point(279, 109);
             this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 26);
+            this.textBox2.Size = new System.Drawing.Size(97, 26);
             this.textBox2.TabIndex = 178;
             // 
             // dgvps
@@ -199,7 +206,7 @@ namespace Komunala
             this.dgvps.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvps.EnableHeadersVisualStyles = false;
             this.dgvps.GridColor = System.Drawing.Color.Gainsboro;
-            this.dgvps.Location = new System.Drawing.Point(784, 238);
+            this.dgvps.Location = new System.Drawing.Point(784, 264);
             this.dgvps.Name = "dgvps";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -216,7 +223,7 @@ namespace Komunala
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1007, 132);
+            this.button4.Location = new System.Drawing.Point(1019, 858);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(81, 35);
             this.button4.TabIndex = 160;
@@ -228,7 +235,7 @@ namespace Komunala
             // 
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label47.Location = new System.Drawing.Point(590, 140);
+            this.label47.Location = new System.Drawing.Point(590, 167);
             this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(87, 18);
@@ -239,7 +246,7 @@ namespace Komunala
             // 
             this.label46.AutoSize = true;
             this.label46.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label46.Location = new System.Drawing.Point(590, 165);
+            this.label46.Location = new System.Drawing.Point(590, 192);
             this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(91, 18);
@@ -251,14 +258,14 @@ namespace Komunala
             this.tbNas.Location = new System.Drawing.Point(33, 109);
             this.tbNas.Margin = new System.Windows.Forms.Padding(4);
             this.tbNas.Name = "tbNas";
-            this.tbNas.Size = new System.Drawing.Size(295, 26);
+            this.tbNas.Size = new System.Drawing.Size(205, 26);
             this.tbNas.TabIndex = 174;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(423, 141);
+            this.label5.Location = new System.Drawing.Point(423, 168);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 18);
@@ -269,7 +276,7 @@ namespace Komunala
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label13.Location = new System.Drawing.Point(496, 141);
+            this.label13.Location = new System.Drawing.Point(496, 168);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 18);
@@ -316,7 +323,7 @@ namespace Komunala
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label18.Location = new System.Drawing.Point(689, 164);
+            this.label18.Location = new System.Drawing.Point(689, 191);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(52, 18);
@@ -327,7 +334,7 @@ namespace Komunala
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label20.Location = new System.Drawing.Point(861, 140);
+            this.label20.Location = new System.Drawing.Point(861, 167);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(52, 18);
@@ -338,7 +345,7 @@ namespace Komunala
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label21.Location = new System.Drawing.Point(689, 140);
+            this.label21.Location = new System.Drawing.Point(689, 167);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(52, 18);
@@ -349,7 +356,7 @@ namespace Komunala
             // 
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label44.Location = new System.Drawing.Point(760, 140);
+            this.label44.Location = new System.Drawing.Point(760, 167);
             this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(96, 18);
@@ -392,18 +399,18 @@ namespace Komunala
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(422, 55);
+            this.label2.Location = new System.Drawing.Point(590, 117);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 18);
+            this.label2.Size = new System.Drawing.Size(84, 18);
             this.label2.TabIndex = 187;
-            this.label2.Text = "Skupaj m2 streh";
+            this.label2.Text = "Skupaj streh";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(530, 55);
+            this.label3.Location = new System.Drawing.Point(670, 117);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 18);
@@ -414,7 +421,7 @@ namespace Komunala
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(423, 80);
+            this.label6.Location = new System.Drawing.Point(760, 117);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 18);
@@ -425,7 +432,7 @@ namespace Komunala
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(531, 80);
+            this.label7.Location = new System.Drawing.Point(853, 117);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 18);
@@ -436,7 +443,7 @@ namespace Komunala
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(861, 165);
+            this.label8.Location = new System.Drawing.Point(861, 192);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 18);
@@ -447,7 +454,7 @@ namespace Komunala
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(760, 165);
+            this.label9.Location = new System.Drawing.Point(760, 192);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(86, 18);
@@ -458,7 +465,7 @@ namespace Komunala
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(423, 207);
+            this.label11.Location = new System.Drawing.Point(423, 237);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(98, 18);
@@ -469,7 +476,7 @@ namespace Komunala
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label12.Location = new System.Drawing.Point(423, 376);
+            this.label12.Location = new System.Drawing.Point(423, 382);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 18);
@@ -521,7 +528,7 @@ namespace Komunala
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label14.Location = new System.Drawing.Point(781, 376);
+            this.label14.Location = new System.Drawing.Point(781, 382);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(137, 18);
@@ -568,17 +575,6 @@ namespace Komunala
             this.dgvld.Size = new System.Drawing.Size(316, 103);
             this.dgvld.TabIndex = 196;
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(30, 542);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(193, 18);
-            this.label15.TabIndex = 199;
-            this.label15.Text = "Seznam za obvestila / obračun";
-            // 
             // dgvsez
             // 
             this.dgvsez.AllowUserToAddRows = false;
@@ -603,7 +599,7 @@ namespace Komunala
             this.dgvsez.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvsez.EnableHeadersVisualStyles = false;
             this.dgvsez.GridColor = System.Drawing.Color.Gainsboro;
-            this.dgvsez.Location = new System.Drawing.Point(33, 575);
+            this.dgvsez.Location = new System.Drawing.Point(33, 537);
             this.dgvsez.Name = "dgvsez";
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -621,7 +617,7 @@ namespace Komunala
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(423, 31);
+            this.label1.Location = new System.Drawing.Point(423, 117);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 18);
@@ -632,7 +628,7 @@ namespace Komunala
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label16.Location = new System.Drawing.Point(531, 31);
+            this.label16.Location = new System.Drawing.Point(517, 117);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(52, 18);
@@ -643,7 +639,7 @@ namespace Komunala
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label17.Location = new System.Drawing.Point(423, 165);
+            this.label17.Location = new System.Drawing.Point(423, 192);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(74, 18);
@@ -654,7 +650,7 @@ namespace Komunala
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label19.Location = new System.Drawing.Point(496, 165);
+            this.label19.Location = new System.Drawing.Point(496, 192);
             this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(52, 18);
@@ -663,7 +659,7 @@ namespace Komunala
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(247, 525);
+            this.button1.Location = new System.Drawing.Point(35, 806);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 35);
             this.button1.TabIndex = 204;
@@ -675,25 +671,113 @@ namespace Komunala
             // 
             this.ls.AutoSize = true;
             this.ls.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ls.Location = new System.Drawing.Point(396, 533);
+            this.ls.Location = new System.Drawing.Point(853, 814);
             this.ls.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ls.Name = "ls";
             this.ls.Size = new System.Drawing.Size(18, 18);
             this.ls.TabIndex = 205;
             this.ls.Text = "ls";
             // 
+            // ll
+            // 
+            this.ll.AutoSize = true;
+            this.ll.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ll.Location = new System.Drawing.Point(904, 814);
+            this.ll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ll.Name = "ll";
+            this.ll.Size = new System.Drawing.Size(16, 18);
+            this.ll.TabIndex = 206;
+            this.ll.Text = "ll";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(339, 858);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(147, 35);
+            this.button2.TabIndex = 207;
+            this.button2.Text = "Baze ZK";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(178, 858);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(147, 35);
+            this.button3.TabIndex = 208;
+            this.button3.Text = "Neto na 0";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(178, 806);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(147, 35);
+            this.button5.TabIndex = 209;
+            this.button5.Text = "Izračunaj sk. deleže";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(35, 858);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(129, 35);
+            this.button6.TabIndex = 210;
+            this.button6.Text = "Podvojene";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(339, 806);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(147, 35);
+            this.button7.TabIndex = 211;
+            this.button7.Text = "Izračunaj pos. deleže";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(500, 858);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(147, 35);
+            this.button8.TabIndex = 212;
+            this.button8.Text = "Naloži seznam";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(500, 806);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(147, 35);
+            this.button9.TabIndex = 213;
+            this.button9.Text = "Urejanje";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // frmStrehe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 853);
+            this.ClientSize = new System.Drawing.Size(1133, 905);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.ll);
             this.Controls.Add(this.ls);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
             this.Controls.Add(this.dgvsez);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.dgvld);
@@ -776,7 +860,6 @@ namespace Komunala
         private System.Windows.Forms.DataGridView dgvd;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DataGridView dgvld;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.DataGridView dgvsez;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label16;
@@ -784,5 +867,13 @@ namespace Komunala
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label ls;
+        private System.Windows.Forms.Label ll;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }

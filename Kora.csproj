@@ -141,6 +141,12 @@
     <Compile Include="frmTelBaza.Designer.cs">
       <DependentUpon>frmTelBaza.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUredi_strehe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUredi_strehe.Designer.cs">
+      <DependentUpon>frmUredi_strehe.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmViewPDF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTelBaza.resx">
       <DependentUpon>frmTelBaza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUredi_strehe.resx">
+      <DependentUpon>frmUredi_strehe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewPDF.resx">
       <DependentUpon>frmViewPDF.cs</DependentUpon>
