@@ -21,7 +21,7 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "15.2.2021";
+        string verzija = "21.2.2021";
         public static string nazivPrograma = "Komunala Radgona";
         public static string podatki_ren = "Avgust 2020";
         public static string podatki_gjs = "Januar 2021";
@@ -142,10 +142,10 @@ namespace Komunala
             //frmUredi_strehe sec = new frmUredi_strehe();
             //sec.ShowDialog();
 
-            //frmStrehe sec = new frmStrehe();
-            ////sec.ShowDialog();
-            frmUredi_strehe sec = new frmUredi_strehe();
+            frmStrehe sec = new frmStrehe();
             sec.ShowDialog();
+            //frmUredi_strehe sec = new frmUredi_strehe();
+            //sec.ShowDialog();
 
 
             Environment.Exit(0);
@@ -280,7 +280,7 @@ namespace Komunala
         private void bm_nalogi_Click(object sender, EventArgs e)
         {
 
-            frmStrehe sec = new frmStrehe();
+            frmUredi_strehe sec = new frmUredi_strehe();
             sec.ShowDialog();
 
             //Vsi_neaktivni();

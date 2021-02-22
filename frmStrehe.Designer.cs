@@ -92,6 +92,7 @@ namespace Komunala
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvs)).BeginInit();
@@ -671,7 +672,7 @@ namespace Komunala
             // 
             this.ls.AutoSize = true;
             this.ls.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ls.Location = new System.Drawing.Point(853, 814);
+            this.ls.Location = new System.Drawing.Point(670, 814);
             this.ls.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ls.Name = "ls";
             this.ls.Size = new System.Drawing.Size(18, 18);
@@ -682,7 +683,7 @@ namespace Komunala
             // 
             this.ll.AutoSize = true;
             this.ll.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ll.Location = new System.Drawing.Point(904, 814);
+            this.ll.Location = new System.Drawing.Point(703, 814);
             this.ll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ll.Name = "ll";
             this.ll.Size = new System.Drawing.Size(16, 18);
@@ -759,11 +760,22 @@ namespace Komunala
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(660, 858);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(129, 35);
+            this.button10.TabIndex = 214;
+            this.button10.Text = "Seznam 2";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // frmStrehe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 905);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -875,5 +887,6 @@ namespace Komunala
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
