@@ -96,7 +96,7 @@ namespace Komunala
             string objectid = "";
 
 
-            string q = "select * from strehe_za_obracun where id = @idx"; //+ sort;
+            string q = "select * from strehe_za_obracun_ok where id = @idx"; //+ sort;
             try
             {
                 //MessageBox.Show(vhod.ToString());
@@ -164,7 +164,7 @@ namespace Komunala
             label47.Text = streha_skupaj.ToString("N2") + " m2";
             label44.Text = streha_delez.ToString("N2") + " m2"; 
             label31.Text = st_prostorov;
-            label42.Text = opomba;
+            tbo.Text = opomba;
             if (odobreno==1)
             {
                 label39.Text = "Da";
@@ -298,7 +298,7 @@ namespace Komunala
                 odobreno = 1;
             else
                 odobreno = 0;
-            q = "update strehe_za_obracun set placnik=@placnik,naslov_pl=@naslov_pl, posta_pl=@posta_pl, odobreno=@odobreno where id=@idx";
+            q = "update strehe_za_obracun_ok set placnik=@placnik,naslov_pl=@naslov_pl, posta_pl=@posta_pl, odobreno=@odobreno, opomba=@opomba where id=@idx";
 
             try
             {
@@ -309,6 +309,7 @@ namespace Komunala
                 cmd.Parameters.AddWithValue("@naslov_pl", pn.Text);
                 cmd.Parameters.AddWithValue("@posta_pl", pp.Text);
                 cmd.Parameters.AddWithValue("@odobreno", odobreno);
+                cmd.Parameters.AddWithValue("@opomba", tbo.Text);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -319,6 +320,15 @@ namespace Komunala
             {
                 con.Close();
                 sprememba = false;
+                mb mbs = new mb();// { Size = new Size(0, 0) };
+
+                mbs.StartPosition = FormStartPosition.Manual;
+                mbs.Location = new Point(700, 300);
+
+                Task.Delay(TimeSpan.FromSeconds(0.5))
+                    .ContinueWith((t) => mbs.Close(), TaskScheduler.FromCurrentSynchronizationContext());
+                mbs.ShowDialog();
+
             }
             Osvezi();
         }
@@ -398,9 +408,18 @@ namespace Komunala
             w.Close();
         }
 
+        private void frmUredi_strehe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                Shrani(id_akt);
+                dgvs.Focus();
+            }
+        }
+
         private void Seznam_izvoz()
         {
-            string q2 = "select placnik,naslov_pl,posta_pl,streha_delez,odobreno from strehe_za_obracun where odobreno=1 order by naslov_pl";
+            string q2 = "select placnik,naslov_pl,posta_pl,streha_delez,odobreno from strehe_za_obracun_ok where odobreno=1 order by naslov_pl";
             try
             {
                 cmd2 = new SqlCommand(q2, con2);
@@ -477,13 +496,13 @@ namespace Komunala
         private void Odobrene() // informacije o celi bazi streh
         {
             // neodobrene
-            q2 = "select count(*) from strehe_za_obracun where odobreno=0";
+            q2 = "select count(*) from strehe_za_obracun_ok where odobreno=0";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int st_neodobrenih = (Int32)cmd2.ExecuteScalar();
             con2.Close();
 
-            string q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun where odobreno=0";
+            string q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
             cmd6 = new SqlCommand(q6, con6);
             con6.Open();
             double pov_neodobrenih = (double)cmd6.ExecuteScalar();
@@ -491,13 +510,13 @@ namespace Komunala
             con6.Close();
             
             // odobrene
-            q2 = "select count(*) from strehe_za_obracun where odobreno=1";
+            q2 = "select count(*) from strehe_za_obracun_ok where odobreno=1";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int st_odobrenih = (Int32)cmd2.ExecuteScalar();
             con2.Close();
 
-            //q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun where odobreno=1";
+            //q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=1";
             //cmd6 = new SqlCommand(q6, con6);
             //con6.Open();
             //double pov_odobrenih = (double)cmd6.ExecuteScalar();
@@ -514,21 +533,21 @@ namespace Komunala
             label16.Text = vseh_zapisov.ToString();
             con2.Close();
 
-            q2 = "select count(*) from strehe_za_obracun";
+            q2 = "select count(*) from strehe_za_obracun_ok";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int vseh_streh = (Int32)cmd2.ExecuteScalar();
             label3.Text = vseh_streh.ToString();
             con2.Close();
 
-            q2 = "select count(*) from strehe_za_obracun where odobreno=0";
+            q2 = "select count(*) from strehe_za_obracun_ok where odobreno=0";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int vseh_streh_n = (Int32)cmd2.ExecuteScalar();
             label54.Text = vseh_streh_n.ToString();
             con2.Close();
 
-            q2 = "select count(*) from strehe_za_obracun where odobreno=1";
+            q2 = "select count(*) from strehe_za_obracun_ok where odobreno=1";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int vseh_streh_o = (Int32)cmd2.ExecuteScalar();
@@ -542,7 +561,7 @@ namespace Komunala
             label7.Text = povrsina_vseh_streh.ToString("N2") + " m2";
             con6.Close();
 
-            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun where odobreno=0";
+            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
             cmd6 = new SqlCommand(q6, con6);
             con6.Open();
             double povrsina_neodobrenih_streh;
@@ -557,7 +576,7 @@ namespace Komunala
             //label56.Text = povrsina_neodobrenih_streh.ToString("N2") + " m2";
             con6.Close();
 
-            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun where odobreno=1";
+            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=1";
             cmd6 = new SqlCommand(q6, con6);
             con6.Open();
 
@@ -577,13 +596,13 @@ namespace Komunala
 
             con6.Close();
 
-            q2 = "select count(*) from strehe_za_obracun where odobreno=0";
+            q2 = "select count(*) from strehe_za_obracun_ok where odobreno=0";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             int st_neodobrenih = (Int32)cmd2.ExecuteScalar();
             con2.Close();
 
-            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun where odobreno=0";
+            q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
             cmd6 = new SqlCommand(q6, con6);
             con6.Open();
             double pov_neodobrenih = (double)cmd6.ExecuteScalar();
@@ -591,7 +610,7 @@ namespace Komunala
             con6.Close();
 
             // odobrene
-            //q2 = "select count(*) from strehe_za_obracun where odobreno=1";
+            //q2 = "select count(*) from strehe_za_obracun_ok where odobreno=1";
             //cmd2 = new SqlCommand(q2, con2);
             //con2.Open();
             //int st_odobrenih = (Int32)cmd2.ExecuteScalar();
@@ -603,8 +622,8 @@ namespace Komunala
         private void Vpisi_dgv_stavbe()
         {
             dgvs.RowHeadersVisible = false;
-            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun  where (odobreno=N'0') order by naslov_dst,labela_dst";
-            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun  where (odobreno=N'0')"; // začasno
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0') order by naslov_dst,labela_dst";
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0')"; // začasno
             var da = new SqlDataAdapter(q, con);
             dt = new DataTable();
             da.Fill(dt);
@@ -633,7 +652,7 @@ namespace Komunala
         private void Vpisi_dgv_stavbe_odob()
         {
             dgvso.RowHeadersVisible = false;
-            q = @"select raba_id, naslov_dst,placnik,n_tloris,odobreno,id from strehe_za_obracun  where (odobreno=N'1') order by naslov_dst,labela_dst";
+            q = @"select raba_id, naslov_dst,placnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'1') order by naslov_dst,labela_dst";
             var da = new SqlDataAdapter(q, con);
             dt = new DataTable();
             da.Fill(dt);

@@ -395,6 +395,9 @@ namespace Komunala
         private void frmStrehe_Load(object sender, EventArgs e)
         {
 
+            frmUredi_strehe sec = new frmUredi_strehe();
+            sec.ShowDialog();
+
             this.Text = frmMain.nazivPrograma;
             ls.Text = "";
             ll.Text = "";
@@ -1184,12 +1187,12 @@ namespace Komunala
             //MessageBox.Show("Del 1");
             ll.Text = "OK";
 
-            Izracunaj_deleze();
-            Izracunaj_procente();
+            //Izracunaj_deleze();
+            //Izracunaj_procente();
             
             // novo 22.2.
-            Izracunaj_deleze_ok();
-            Izracunaj_procente_ok();
+            Izracunaj_deleze3();
+            Izracunaj_procente3();
         }
 
 
@@ -1510,6 +1513,79 @@ namespace Komunala
             ll.Refresh();
 
         }
+        private void Izracunaj_procente3()
+        // delež strehe, ki pripada posameznemu delu stavbe
+        {
+            string dst_tmp = "";
+            int stevec = 0;
+            double neto_del, neto_skup, procent, streha_skup, streha_del;
+            ll.Text = "Računam posamezne deleže...";
+            ll.Refresh();
+            try
+            {
+
+                // q9 = "SELECT * FROM strehe_za_obracun";
+                q9 = @"
+                    SELECT          dbo.Strehe_za_obracun_ok.hs_mid_gl, dbo.Strehe_za_obracun_ok.sta_sid AS sid, dbo.Strehe_za_obracun_ok.dst_sid AS dst
+                                    ,dbo.Strehe_za_obracun_ok.n_tloris AS n_del, dbo.Strehe_za_obracun_ok.streha_skupaj,dbo.Strehe_neto.neto AS n_skupaj
+                    FROM            dbo.Strehe_za_obracun_ok INNER JOIN
+                                    dbo.Strehe_neto ON dbo.Strehe_za_obracun_ok.sta_sid = dbo.Strehe_neto.sid
+                    ";
+                cmd9 = new SqlCommand(q9, con9);
+                con9.Open();
+                rdr9 = cmd9.ExecuteReader();
+                while (rdr9.Read())
+                {
+                    stevec++; ls.Text = stevec.ToString(); ls.Refresh();
+                    string hsg = (string)rdr9["hs_mid_gl"];
+                    dst_tmp = (string)rdr9["dst"];
+                    neto_del = (double)rdr9["n_del"];
+                    neto_skup = (double)rdr9["n_skupaj"];
+                    streha_skup = (double)rdr9["streha_skupaj"];
+                    procent = (neto_del * 100) / neto_skup;
+                    // novo 22.2.2021
+                    if (hsg.Equals("99"))
+                        procent = 100;
+                    streha_del = (procent / 100) * streha_skup;
+                    try
+                    {
+                        //update
+                        q = "update strehe_za_obracun_ok set n_tloris_skupaj=@n_tloris_skupaj,procent=@procent, streha_delez=@streha_delez where dst_sid=@idx";
+                        cmd = new SqlCommand(q, con);
+                        con.Open();
+                        cmd.Parameters.AddWithValue("@idx", dst_tmp);
+                        cmd.Parameters.AddWithValue("@n_tloris_skupaj", neto_skup);
+                        cmd.Parameters.AddWithValue("@procent", procent);
+                        cmd.Parameters.AddWithValue("@streha_delez", streha_del);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show("Napaka reader: delež za eno stavbo " + ex2.Message);
+                    }
+                    finally
+                    {
+                        //rdr3.Close();
+                        //con3.Close();
+                    }
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader: sid pri deležih " + ex2.Message);
+            }
+            finally
+            {
+                rdr9.Close();
+                con9.Close();
+            }
+            Nalozi_seznam();
+            ll.Text = "OK";
+            ll.Refresh();
+
+        }
 
         private void Izracunaj_deleze()
         {
@@ -1583,6 +1659,78 @@ namespace Komunala
             Nalozi_seznam();
             ll.Text = "OK";
         }
+        private void Izracunaj_deleze3()
+        {
+            Izprazni_neto();
+            string sid_tmp = "", dvojna = ""; ;
+            int stevec = 0;
+            int st = 0; // števec za dvojne
+            // izračunaj skupni tloris in določi procente
+            // prištej neto površino v tabelo strehe
+            ll.Text = "Računam skupne neto površine...";
+            ll.Refresh();
+            try
+            {
+                stevec++; ls.Text = stevec.ToString(); ls.Refresh();
+                q9 = "SELECT objectid, sid, hsmid_gl FROM ren_strehe";
+                cmd9 = new SqlCommand(q9, con9);
+                con9.Open();
+                rdr9 = cmd9.ExecuteReader();
+                while (rdr9.Read())
+                {
+                    stevec++; ls.Text = stevec.ToString(); ls.Refresh();
+                    //double neto = 0;
+                    //neto = (double)rdr9["neto"];
+                    sid_tmp = (string)rdr9["sid"];
+                    gl_hsmid = (string)rdr9["hsmid_gl"];
+                    string objid_tmp = (string)rdr9["objectid"];
+                    obj_id = Convert.ToInt32(objid_tmp);
+
+                    try
+                    {
+                        st = 0; // števec za dvojne
+                        q3 = @"
+                            SELECT        dbo.Strehe_za_obracun_ok.n_tloris, dbo.ren_Strehe.SID, dbo.Strehe_za_obracun_ok.sta_sid
+                            FROM            dbo.ren_Strehe INNER JOIN
+                                                     dbo.Strehe_za_obracun_ok ON dbo.ren_Strehe.SID = dbo.Strehe_za_obracun_ok.sta_sid
+                            WHERE        dbo.Strehe_za_obracun_ok.sta_sid = @idx
+                            ";
+
+                        cmd3 = new SqlCommand(q3, con3);
+                        con3.Open();
+                        cmd3.Parameters.AddWithValue("@idx", sid_tmp);
+                        rdr3 = cmd3.ExecuteReader();
+                        while (rdr3.Read())
+                        {
+                            st++;
+                            double tmp_neto = (double)rdr3["n_tloris"];
+                            Pristej_neto3(sid_tmp, tmp_neto);
+                        }
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show("Napaka reader: delež za eno stavbo " + ex2.Message);
+                    }
+                    finally
+                    {
+                        rdr3.Close();
+                        con3.Close();
+                    }
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader: sid pri deležih " + ex2.Message);
+            }
+            finally
+            {
+                rdr9.Close();
+                con9.Close();
+            }
+
+            Nalozi_seznam();
+            ll.Text = "OK";
+        }
 
         private void Pristej_neto(string sid, double neto)
         {
@@ -1607,7 +1755,30 @@ namespace Komunala
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        
+        private void Pristej_neto3(string sid, double neto)
+        {
+            double tmp_neto = 0;
+
+            q6 = "SELECT neto FROM strehe_neto  where id_ren_strehe = @idx";
+            cmd6 = new SqlCommand(q6, con6);
+            cmd6.Parameters.AddWithValue("@idx", obj_id);
+            con6.Open();
+            tmp_neto = (double)cmd6.ExecuteScalar();
+            con6.Close();
+            neto = neto + tmp_neto;
+
+            if (gl_hsmid.Equals("99"))  // nima glavnega hs_mid
+                neto = 1;
+            // update strehe_neto - neto
+            q = "update strehe_neto set neto=@neto where id_ren_strehe=@idx";
+            cmd = new SqlCommand(q, con);
+            con.Open();
+            cmd.Parameters.AddWithValue("@idx", obj_id);
+            cmd.Parameters.AddWithValue("@neto", neto);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
         private void Poisci_podvojene_sid()
         {
             dgvsez.RowHeadersVisible = false;

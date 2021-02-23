@@ -159,6 +159,12 @@
     <Compile Include="frmZK_REN.Designer.cs">
       <DependentUpon>frmZK_REN.cs</DependentUpon>
     </Compile>
+    <Compile Include="mb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mb.Designer.cs">
+      <DependentUpon>mb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sifranti\frmSodelavci.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -391,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmZK_REN.resx">
       <DependentUpon>frmZK_REN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mb.resx">
+      <DependentUpon>mb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sifranti\frmSodelavci.resx">
       <DependentUpon>frmSodelavci.cs</DependentUpon>

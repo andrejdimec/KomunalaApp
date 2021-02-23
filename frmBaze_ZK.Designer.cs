@@ -698,6 +698,7 @@ namespace Komunala
             this.button13.TabIndex = 89;
             this.button13.Text = "Prenos3";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Visible = false;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // frmBaze_ZK
