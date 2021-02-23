@@ -1125,8 +1125,32 @@ namespace Komunala
                             Poisci_naslov_dst3();
                             Poisci_lastnika3();
                             Zapisi_OM3();
-                            Zapisi_OM3_ok();
-
+                            
+                            if (ovecstanovanjska==1)
+                                Zapisi_OM3_ok();
+                            else
+                            {
+                                try
+                                {
+                                    // če ni večstanovanjska
+                                    q9 = "select count(*) from strehe_za_obracun_ok where hs_mid_gl = @idx";
+                                    cmd9 = new SqlCommand(q9, con9);
+                                    con9.Open();
+                                    cmd9.Parameters.AddWithValue("@idx", ohs_mid_gl);
+                                    int zapisov = (Int32)cmd9.ExecuteScalar();
+                                    // če še ni zapisa s tem hsmid_gl zapiši
+                                    if (zapisov == 0)
+                                    {
+                                        oopomba = "Združeno " + oopomba;
+                                        Zapisi_OM3_ok();
+                                    }
+                                    con9.Close();
+                                }
+                                catch (Exception ex2)
+                                {
+                                    MessageBox.Show("Zapiši združeno: " + ex2.Message);
+                                }
+                            }
                         }
                     }
                     catch (Exception ex2)
@@ -1162,6 +1186,10 @@ namespace Komunala
 
             Izracunaj_deleze();
             Izracunaj_procente();
+            
+            // novo 22.2.
+            Izracunaj_deleze_ok();
+            Izracunaj_procente_ok();
         }
 
 
