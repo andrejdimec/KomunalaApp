@@ -48,7 +48,7 @@ namespace Komunala
         // za izvoz
         int stevec;
         string sp = " ";
-        string str_stevec, napisi;
+        string str_stevec, napisi,opomba;
         List<string> izvoz_vrsta = new List<string>();
         //public static string pot = frmMain_kat.a_naselje + " - podatki o naselju.csv";
         //private const char tab = '\t';
@@ -93,6 +93,7 @@ namespace Komunala
             string  placnik_pt= "";
             string  dst_nas= "";
             string  dst_pt= "";
+            string objectid = "";
 
 
             string q = "select * from strehe_za_obracun where id = @idx"; //+ sort;
@@ -132,6 +133,8 @@ namespace Komunala
                     placnik_pt = rdr["posta_pl"] as string;
                     dst_nas = (string)rdr["naslov_dst"];
                     dst_pt = (string)rdr["posta_dst"];
+                    objectid = (string)rdr["objectid"];
+                    opomba = (string)rdr["opomba"];
 
                 }
             }
@@ -155,12 +158,13 @@ namespace Komunala
             label33.Text = raba_id + " - " + raba_ime;
             label31.Text = st_prostorov;
             label38.Text = st_stanovanja;
-            label52.Text = n_tloris.ToString("N2") + " m2"; ;
-            label46.Text = n_tloris_skupaj.ToString("N2") + " m2"; ;
+            label52.Text = n_tloris.ToString("N2") + " m2"; 
+            label46.Text = n_tloris_skupaj.ToString("N2") + " m2";
             label45.Text = procent.ToString("N2") + " %";
-            label47.Text = streha_skupaj.ToString("N2") + " m2"; ;
-            label44.Text = streha_delez.ToString("N2") + " m2"; ;
+            label47.Text = streha_skupaj.ToString("N2") + " m2";
+            label44.Text = streha_delez.ToString("N2") + " m2"; 
             label31.Text = st_prostorov;
+            label42.Text = opomba;
             if (odobreno==1)
             {
                 label39.Text = "Da";
@@ -188,6 +192,7 @@ namespace Komunala
             ci.Text = cadis;
             cn.Text = cadis_nas;
             cp.Text = cadis_pt;
+            label40.Text = objectid;
 
             
 
@@ -599,6 +604,7 @@ namespace Komunala
         {
             dgvs.RowHeadersVisible = false;
             q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun  where (odobreno=N'0') order by naslov_dst,labela_dst";
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun  where (odobreno=N'0')"; // začasno
             var da = new SqlDataAdapter(q, con);
             dt = new DataTable();
             da.Fill(dt);
