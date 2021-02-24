@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace Komunala
 {
@@ -55,6 +56,14 @@ namespace Komunala
         string naslov_stavbe,idx_hise;
         int stalno, zacasno, voda, kanalizacija, greznica, odpadki;
         string idx_dela_stavbe, st_nen;
+        int stevec;
+        string sp = " ";
+        string str_stevec, napisi, opomba,lastnik;
+        List<string> izvoz_vrsta = new List<string>();
+        private const char tab = ';';
+
+
+
 
         private void dgvd_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -71,6 +80,115 @@ namespace Komunala
 
         private void tpNaslovi_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+        }
+        private void Izvoz(string datoteka)
+        {
+            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
+            stevec = 0;
+            w.WriteLine(sp);
+            w.WriteLine("Seznam za obračun odvajanja padavinske vode s streh");
+            w.WriteLine(sp);
+            izvoz_vrsta.Clear();
+            Seznam_izvoz();
+            //            izvoz_vrsta.Sort();
+            stevec = 1;
+            w.WriteLine("Zap." + tab + "PC_MID" + tab + "Lastnik");
+            foreach (string zactmp in izvoz_vrsta)
+            {
+                str_stevec = Convert.ToString(stevec);
+                napisi = str_stevec + tab + zactmp;
+                w.WriteLine(napisi);
+                stevec++;
+            }
+            w.WriteLine(sp);
+            w.Close();
+        }
+
+        // naredi seznam parcel za izvoz
+        private void Seznam_izvoz()
+        {
+            int stev = 0;
+            string q = "select pc_mid from tbl_ren_parcele";
+            try
+            {
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    stev++;
+                    lst.Text = stev.ToString();
+                    lst.Refresh();
+                    pc_mid = (string)rdr["pc_mid"];
+                    nen_id_p = pc_nen_id(pc_mid);
+
+                    // poišči lastnika z največjim deležem
+                    try
+                    {
+                        string q6 = "select ime from tbl_ren_lastniki where nen_id = @idx order by delez_proc desc, leto asc";
+                        cmd6 = new SqlCommand(q6, con6);
+                        con6.Open();
+                        cmd6.Parameters.AddWithValue("@idx", nen_id_p);
+                        rdr6 = cmd6.ExecuteReader();
+                        int prvi = 0;
+                        while (rdr6.Read())
+                        {
+                            string temp_lastnik = (String)rdr6["ime"];
+                            if (prvi == 0)
+                                lastnik = temp_lastnik;
+                            prvi++;
+                        }
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show("Napaka reader: " + ex2.Message);
+                    }
+                    finally
+                    {
+                        rdr6.Close();
+                        con6.Close();
+                    }
+                    string vrsta = pc_mid + tab + lastnik;
+                    izvoz_vrsta.Add(vrsta);
+                    stevec++;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka rdr: " + ex.Message);
+            }
+            finally
+            {
+                rdr.Close();
+                con.Close();
+            }
+            lst.Text = "OK";
+        }
+
+
+
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            // izvoz za kataster
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Seznam parcel z lastniki.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+                Izvoz(save.FileName);
 
         }
 
@@ -231,7 +349,7 @@ namespace Komunala
 
             try
             {
-                q9 = "select * from tbl_ren_sestavine where pc_mid = @idx";
+                q9 = "select nen_id from tbl_ren_sestavine where pc_mid = @idx";
                 cmd9 = new SqlCommand(q9, con9);
                 con9.Open();
                 cmd9.Parameters.AddWithValue("@idx", vhod);
@@ -550,6 +668,9 @@ namespace Komunala
         private void frmZK_REN_Load(object sender, EventArgs e)
         {
             //aktivni_tab = 4; // po parcelah
+            this.BackColor = frmMain.barva_form_back; // Form ozadje
+            this.Text = frmMain.nazivPrograma; // Form tekst
+            lpodatki.Text = "Podatki: "+frmMain.podatki_ren;
             Cb_ko();
             Zacetek_naslovi();
             aktivni_tab = 1;

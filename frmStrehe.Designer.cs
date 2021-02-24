@@ -225,7 +225,7 @@ namespace Komunala
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1019, 858);
+            this.button4.Location = new System.Drawing.Point(1019, 814);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(81, 35);
             this.button4.TabIndex = 160;
@@ -661,19 +661,20 @@ namespace Komunala
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(35, 806);
+            this.button1.Location = new System.Drawing.Point(520, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 35);
             this.button1.TabIndex = 204;
-            this.button1.Text = "Pripravi seznam";
+            this.button1.Text = "Seznam - staro";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ls
             // 
             this.ls.AutoSize = true;
             this.ls.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ls.Location = new System.Drawing.Point(670, 814);
+            this.ls.Location = new System.Drawing.Point(336, 822);
             this.ls.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ls.Name = "ls";
             this.ls.Size = new System.Drawing.Size(18, 18);
@@ -684,7 +685,7 @@ namespace Komunala
             // 
             this.ll.AutoSize = true;
             this.ll.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.ll.Location = new System.Drawing.Point(703, 814);
+            this.ll.Location = new System.Drawing.Point(369, 822);
             this.ll.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ll.Name = "ll";
             this.ll.Size = new System.Drawing.Size(16, 18);
@@ -693,9 +694,9 @@ namespace Komunala
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(339, 858);
+            this.button2.Location = new System.Drawing.Point(912, 814);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 35);
+            this.button2.Size = new System.Drawing.Size(91, 35);
             this.button2.TabIndex = 207;
             this.button2.Text = "Baze ZK";
             this.button2.UseVisualStyleBackColor = true;
@@ -703,57 +704,62 @@ namespace Komunala
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(178, 858);
+            this.button3.Location = new System.Drawing.Point(367, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 35);
             this.button3.TabIndex = 208;
             this.button3.Text = "Neto na 0";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(178, 806);
+            this.button5.Location = new System.Drawing.Point(652, 3);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(147, 35);
             this.button5.TabIndex = 209;
             this.button5.Text = "Izračunaj sk. deleže";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(35, 858);
+            this.button6.Location = new System.Drawing.Point(805, 3);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(129, 35);
             this.button6.TabIndex = 210;
             this.button6.Text = "Podvojene";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(339, 806);
+            this.button7.Location = new System.Drawing.Point(634, 44);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(147, 35);
             this.button7.TabIndex = 211;
             this.button7.Text = "Izračunaj pos. deleže";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(500, 858);
+            this.button8.Location = new System.Drawing.Point(341, 44);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(147, 35);
             this.button8.TabIndex = 212;
-            this.button8.Text = "Naloži seznam";
+            this.button8.Text = "Posodobi seznam";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Visible = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(500, 806);
+            this.button9.Location = new System.Drawing.Point(178, 814);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(147, 35);
             this.button9.TabIndex = 213;
@@ -763,21 +769,22 @@ namespace Komunala
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(660, 858);
+            this.button10.Location = new System.Drawing.Point(499, 44);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(129, 35);
             this.button10.TabIndex = 214;
             this.button10.Text = "Seznam 2";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Visible = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(801, 858);
+            this.button11.Location = new System.Drawing.Point(35, 814);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(129, 35);
             this.button11.TabIndex = 215;
-            this.button11.Text = "Seznam 3";
+            this.button11.Text = "Pripravi seznam";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -785,7 +792,7 @@ namespace Komunala
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 905);
+            this.ClientSize = new System.Drawing.Size(1133, 871);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);

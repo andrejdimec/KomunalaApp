@@ -384,10 +384,10 @@ namespace Komunala
 
             //}
         }
-        private void Izvoz()
+        private void Izvoz(string datoteka)
         {
-            string Filename = "Seznam za obračun odvajanja padavinske vode s streh.csv";
-            StreamWriter w = new StreamWriter(new FileStream(Filename, FileMode.Create, FileAccess.Write));
+            //string Filename = "Seznam za obračun odvajanja padavinske vode s streh.csv";
+            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
             stevec = 0;
             w.WriteLine(sp);
             w.WriteLine("Seznam za obračun odvajanja padavinske vode s streh");
@@ -396,7 +396,7 @@ namespace Komunala
             Seznam_izvoz();
 //            izvoz_vrsta.Sort();
             stevec = 1;
-            w.WriteLine("Zap." + tab + "Plačnik" + tab + "Naslov" + tab + "Pošta" + tab + "Površina");
+            w.WriteLine("Zap." + tab + "Plačnik" + tab + "Naslov" + tab + "Pošta" + tab + "Površina" + tab + "Opomba");
             foreach (string zactmp in izvoz_vrsta)
             {
                 str_stevec = Convert.ToString(stevec);
@@ -419,7 +419,7 @@ namespace Komunala
 
         private void Seznam_izvoz()
         {
-            string q2 = "select placnik,naslov_pl,posta_pl,streha_delez,odobreno from strehe_za_obracun_ok where odobreno=1 order by naslov_pl";
+            string q2 = "select placnik,naslov_pl,posta_pl,streha_delez,opomba,odobreno from strehe_za_obracun_ok where odobreno=1 order by naslov_pl";
             try
             {
                 cmd2 = new SqlCommand(q2, con2);
@@ -432,7 +432,8 @@ namespace Komunala
                     string posta_pl = (string)rdr2["posta_pl"];
                     double delez = (double)rdr2["streha_delez"];
                     string delst = delez.ToString("N2");
-                    string vrsta = pl_ime + tab +naslov_pl+tab+posta_pl+tab+delst;
+                    string opomba = (string)rdr2["opomba"];
+                    string vrsta = pl_ime + tab +naslov_pl+tab+posta_pl+tab+delst+tab+opomba;
                     izvoz_vrsta.Add(vrsta);
                     stevec++;
                 }  // while read
@@ -451,8 +452,14 @@ namespace Komunala
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Izvoz();
-            MessageBox.Show("Končano.");
+            //string Filename = "Seznam za obračun odvajanja padavinske vode s streh.csv";
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Seznam za obračun odvajanja padavinske vode s streh.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+                Izvoz(save.FileName);
         }
 
         private void bo_Click(object sender, EventArgs e)

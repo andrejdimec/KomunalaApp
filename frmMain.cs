@@ -142,13 +142,13 @@ namespace Komunala
             //frmUredi_strehe sec = new frmUredi_strehe();
             //sec.ShowDialog();
 
-            frmStrehe sec = new frmStrehe();
-            sec.ShowDialog();
-            //frmUredi_strehe sec = new frmUredi_strehe();
+            //frmStrehe sec = new frmStrehe();
             //sec.ShowDialog();
+            ////frmUredi_strehe sec = new frmUredi_strehe();
+            ////sec.ShowDialog();
 
 
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 

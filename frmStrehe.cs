@@ -395,8 +395,8 @@ namespace Komunala
         private void frmStrehe_Load(object sender, EventArgs e)
         {
 
-            frmUredi_strehe sec = new frmUredi_strehe();
-            sec.ShowDialog();
+            //frmUredi_strehe sec = new frmUredi_strehe();
+            //sec.ShowDialog();
 
             this.Text = frmMain.nazivPrograma;
             ls.Text = "";
