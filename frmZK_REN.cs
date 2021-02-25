@@ -92,6 +92,28 @@ namespace Komunala
         {
             this.DialogResult = DialogResult.Cancel;
         }
+        private void Izvoz2(string datoteka)
+        {
+            
+            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
+            stevec = 0;
+            w.WriteLine(sp);
+            w.WriteLine("Parcele z lastniki za kataster");
+            w.WriteLine(sp);
+            izvoz_vrsta.Clear();
+            Seznam_izvoz2();
+            stevec = 1;
+            w.WriteLine("PC_MID" + tab + "Lastnik");
+            foreach (string zactmp in izvoz_vrsta)
+            {
+                //str_stevec = Convert.ToString(stevec);
+                //napisi = str_stevec + tab + zactmp;
+                w.WriteLine(zactmp);
+                //stevec++;
+            }
+            w.WriteLine(sp);
+            w.Close();
+        }
         private void Izvoz(string datoteka)
         {
             StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
@@ -113,6 +135,18 @@ namespace Komunala
             }
             w.WriteLine(sp);
             w.Close();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // izvoz za kataster
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Seznam parcel z lastniki.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+                Izvoz2(save.FileName);
         }
 
         // naredi seznam parcel za izvoz
@@ -159,6 +193,45 @@ namespace Komunala
                         rdr6.Close();
                         con6.Close();
                     }
+                    string vrsta = pc_mid + tab + lastnik;
+                    izvoz_vrsta.Add(vrsta);
+                    stevec++;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka rdr: " + ex.Message);
+            }
+            finally
+            {
+                rdr.Close();
+                con.Close();
+            }
+            lst.Text = "OK";
+        }
+        // naredi seznam parcel za izvoz
+        private void Seznam_izvoz2()
+        {
+            int stev = 0;
+
+            string q = @"SELECT         dbo.tbl_ren_parcele.pc_mid, dbo.tbl_ren_lastniki.ime
+                        FROM            dbo.tbl_ren_parcele INNER JOIN
+                                        dbo.tbl_ren_sestavine ON dbo.tbl_ren_parcele.pc_mid = dbo.tbl_ren_sestavine.pc_mid INNER JOIN
+                                        dbo.tbl_ren_lastniki ON dbo.tbl_ren_sestavine.nen_id = dbo.tbl_ren_lastniki.nen_id
+                        ORDER BY        delez_proc desc, leto asc";
+            try
+            {
+                
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    stev++;
+                    lst.Text = stev.ToString();
+                    lst.Refresh();
+                    pc_mid = (string)rdr["pc_mid"];
+                    lastnik = (string)rdr["ime"];
                     string vrsta = pc_mid + tab + lastnik;
                     izvoz_vrsta.Add(vrsta);
                     stevec++;
