@@ -1110,7 +1110,11 @@ namespace Komunala
                     // poišči DST
                     try
                     {
-                        q3 = "SELECT sta_sid,dst_sid,hs_mid,dejanska_raba,stevstan,neto_tloris_pov_dst from tbl_ren_deli_stavb  where sta_sid = @idx";
+                        q3 = @"SELECT sta_sid,dst_sid,hs_mid,dejanska_raba,stevstan,neto_tloris_pov_dst from tbl_ren_deli_stavb  where sta_sid = @idx
+                            AND NOT (dejanska_raba='5036')
+                        ";
+                        //q3 = @"SELECT sta_sid,dst_sid,hs_mid,dejanska_raba,stevstan,neto_tloris_pov_dst from tbl_ren_deli_stavb  where sta_sid = @idx
+                        //";
                         cmd3 = new SqlCommand(q3, con3);
                         con3.Open();
                         cmd3.Parameters.AddWithValue("@idx", osta_sid);

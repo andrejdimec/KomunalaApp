@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.IO;
+using System.Collections;
+using System.CodeDom;
 
 namespace Komunala
 {
@@ -94,8 +96,9 @@ namespace Komunala
         }
         private void Izvoz2(string datoteka)
         {
-            
-            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
+
+            //System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(new FileStream(dlg.FileName, FileMode.Open), Encoding.UTF8);
+            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write),Encoding.UTF8);
             stevec = 0;
             w.WriteLine(sp);
             w.WriteLine("Parcele z lastniki za kataster");
@@ -103,7 +106,7 @@ namespace Komunala
             izvoz_vrsta.Clear();
             Seznam_izvoz2();
             stevec = 1;
-            w.WriteLine("PC_MID" + tab + "Lastnik");
+            w.WriteLine("PC_MID" + tab + "Lastnik"+tab+"Delez");
             foreach (string zactmp in izvoz_vrsta)
             {
                 //str_stevec = Convert.ToString(stevec);
@@ -214,7 +217,7 @@ namespace Komunala
         {
             int stev = 0;
 
-            string q = @"SELECT         dbo.tbl_ren_parcele.pc_mid, dbo.tbl_ren_lastniki.ime
+            string q = @"SELECT         dbo.tbl_ren_parcele.pc_mid, dbo.tbl_ren_lastniki.ime, dbo.tbl_ren_lastniki.delez_str
                         FROM            dbo.tbl_ren_parcele INNER JOIN
                                         dbo.tbl_ren_sestavine ON dbo.tbl_ren_parcele.pc_mid = dbo.tbl_ren_sestavine.pc_mid INNER JOIN
                                         dbo.tbl_ren_lastniki ON dbo.tbl_ren_sestavine.nen_id = dbo.tbl_ren_lastniki.nen_id
@@ -225,6 +228,7 @@ namespace Komunala
                 cmd = new SqlCommand(q, con);
                 con.Open();
                 rdr = cmd.ExecuteReader();
+                stev = 0;
                 while (rdr.Read())
                 {
                     stev++;
@@ -232,7 +236,8 @@ namespace Komunala
                     lst.Refresh();
                     pc_mid = (string)rdr["pc_mid"];
                     lastnik = (string)rdr["ime"];
-                    string vrsta = pc_mid + tab + lastnik;
+                    delez_parcele = (string)rdr["delez_str"];
+                    string vrsta = pc_mid + tab + lastnik + tab + "del."+delez_parcele;
                     izvoz_vrsta.Add(vrsta);
                     stevec++;
                 }
