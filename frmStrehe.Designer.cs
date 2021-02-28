@@ -715,13 +715,12 @@ namespace Komunala
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(652, 3);
+            this.button5.Location = new System.Drawing.Point(584, 814);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(147, 35);
             this.button5.TabIndex = 209;
-            this.button5.Text = "Izračunaj sk. deleže";
+            this.button5.Text = "Deleži 3";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
@@ -737,13 +736,12 @@ namespace Komunala
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(634, 44);
+            this.button7.Location = new System.Drawing.Point(747, 814);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(147, 35);
             this.button7.TabIndex = 211;
-            this.button7.Text = "Izračunaj pos. deleže";
+            this.button7.Text = "Procenti 3";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8

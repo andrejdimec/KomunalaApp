@@ -172,6 +172,7 @@ namespace Komunala
                 cb.Text = "Odobren";
                 cb.ForeColor = Color.Green;
                 cb.Checked = true;
+                cb2.Checked = false;
             }
             else
             {
@@ -180,7 +181,19 @@ namespace Komunala
                 cb.Text = "Neodobren";
                 cb.ForeColor = Color.Red;
                 cb.Checked = false;
+                cb2.Checked = false;
             }
+
+            if (odobreno == 9)
+            {
+                cb2.Checked = true;
+            }
+            else
+            {
+                cb2.Checked = false;
+            }
+
+
             li.Text = lastnik;
             ln.Text = lastnik_nas;
             lp.Text = lastnik_pt;
@@ -245,6 +258,7 @@ namespace Komunala
             Strehe();
             Vpisi_dgv_stavbe();
             Vpisi_dgv_stavbe_odob();
+            Vpisi_dgv_stavbe_ne();
             Odobrene();
         }
 
@@ -298,6 +312,10 @@ namespace Komunala
                 odobreno = 1;
             else
                 odobreno = 0;
+            
+            if (cb2.Checked)
+                odobreno = 9;
+
             q = "update strehe_za_obracun_ok set placnik=@placnik,naslov_pl=@naslov_pl, posta_pl=@posta_pl, odobreno=@odobreno, opomba=@opomba where id=@idx";
 
             try
@@ -462,6 +480,24 @@ namespace Komunala
                 Izvoz(save.FileName);
         }
 
+        private void dgvsn_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            string idx_dst = dgvsn.Rows[e.RowIndex].Cells[5].Value.ToString();
+            id_akt = Convert.ToInt32(dgvsn.Rows[e.RowIndex].Cells[5].Value.ToString());
+            Nalozi_dst(idx_dst); ;
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+            sprememba = true;
+            if (cb2.Checked)
+            {
+                cb.Checked = false;
+            }
+        }
+
         private void bo_Click(object sender, EventArgs e)
         {
             // prenesi v odobrene
@@ -486,17 +522,23 @@ namespace Komunala
             InitializeComponent();
         }
 
+        public void Prikaz()
+        {
+            Strehe();
+            Vpisi_dgv_stavbe();
+            Vpisi_dgv_stavbe_ne();
+            Vpisi_dgv_stavbe_odob();
+            Odobrene();
+
+        }
+
         private void frmUredi_strehe_Load(object sender, EventArgs e)
         {
             this.Text = frmMain.nazivPrograma;
             sprememba = false;
             //ls.Text = "";
             //ll.Text = "";
-        
-            Strehe();
-            Vpisi_dgv_stavbe();
-            Vpisi_dgv_stavbe_odob();
-            Odobrene();
+            Prikaz();        
 
 
         }
@@ -630,7 +672,7 @@ namespace Komunala
         {
             dgvs.RowHeadersVisible = false;
             q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0') order by naslov_dst,labela_dst";
-            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0')"; // začasno
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0') order by naslov_dst desc,labela_dst"; // začasno
             var da = new SqlDataAdapter(q, con);
             dt = new DataTable();
             da.Fill(dt);
@@ -682,6 +724,32 @@ namespace Komunala
             this.dgvso.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             this.dgvso.Columns[3].DefaultCellStyle.Format = "0.0";
             //lstavbo.Text = "(" + dgvso.Rows.Count.ToString() + ")";
+        }
+        private void Vpisi_dgv_stavbe_ne()
+        {
+            dgvsn.RowHeadersVisible = false;
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'0') order by naslov_dst,labela_dst";
+            q = @"select raba_id, naslov_dst,lastnik,n_tloris,odobreno,id from strehe_za_obracun_ok  where (odobreno=N'9') order by naslov_dst desc,labela_dst"; // začasno
+            var da = new SqlDataAdapter(q, con);
+            dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            dgvsn.DataSource = dt;
+            dgvsn.ReadOnly = true;
+            dgvsn.Columns[0].Width = 60;
+            dgvsn.Columns[1].Width = 190;
+            dgvsn.Columns[2].Width = 248;
+            dgvsn.Columns[3].Width = 60;
+            dgvsn.Columns[0].HeaderText = " Raba";
+            dgvsn.Columns[1].HeaderText = "Naslov";
+            dgvsn.Columns[2].HeaderText = "Lastnik";
+            dgvsn.Columns[3].HeaderText = "Tloris";
+            dgvsn.Columns[3].Visible = false;
+            dgvsn.Columns[4].Visible = false;
+            dgvsn.Columns[5].Visible = false;
+
+            this.dgvsn.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            lstavb.Text = "(" + dgvsn.Rows.Count.ToString() + ")";
         }
 
 

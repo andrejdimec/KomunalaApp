@@ -139,16 +139,16 @@ namespace Komunala
             //frmBaze_ZK sec = new frmBaze_ZK();
             //sec.ShowDialog();
 
-            //frmUredi_strehe sec = new frmUredi_strehe();
-            //sec.ShowDialog();
+
 
             //frmStrehe sec = new frmStrehe();
             //sec.ShowDialog();
             ////frmUredi_strehe sec = new frmUredi_strehe();
             ////sec.ShowDialog();
 
-
-            //Environment.Exit(0);
+            frmUredi_strehe sec = new frmUredi_strehe();
+            sec.ShowDialog();
+            Environment.Exit(0);
         }
 
 

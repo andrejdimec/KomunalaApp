@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvs = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -121,10 +123,14 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.cb = new System.Windows.Forms.CheckBox();
+            this.cb2 = new System.Windows.Forms.CheckBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.dgvsn = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvso)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvsn)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvs
@@ -159,7 +165,7 @@
             this.dgvs.ReadOnly = true;
             this.dgvs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvs.Size = new System.Drawing.Size(498, 394);
+            this.dgvs.Size = new System.Drawing.Size(498, 306);
             this.dgvs.TabIndex = 214;
             this.dgvs.VirtualMode = true;
             this.dgvs.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvs_RowEnter);
@@ -299,13 +305,13 @@
             this.dgvso.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvso.EnableHeadersVisualStyles = false;
             this.dgvso.GridColor = System.Drawing.Color.Gainsboro;
-            this.dgvso.Location = new System.Drawing.Point(23, 479);
+            this.dgvso.Location = new System.Drawing.Point(23, 397);
             this.dgvso.Margin = new System.Windows.Forms.Padding(4);
             this.dgvso.Name = "dgvso";
             this.dgvso.ReadOnly = true;
             this.dgvso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvso.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvso.Size = new System.Drawing.Size(498, 366);
+            this.dgvso.Size = new System.Drawing.Size(498, 225);
             this.dgvso.TabIndex = 225;
             this.dgvso.VirtualMode = true;
             this.dgvso.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvso_RowEnter);
@@ -315,7 +321,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(20, 452);
+            this.label5.Location = new System.Drawing.Point(20, 370);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 18);
@@ -570,7 +576,7 @@
             // 
             this.lstavbo.AutoSize = true;
             this.lstavbo.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lstavbo.Location = new System.Drawing.Point(101, 452);
+            this.lstavbo.Location = new System.Drawing.Point(101, 370);
             this.lstavbo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lstavbo.Name = "lstavbo";
             this.lstavbo.Size = new System.Drawing.Size(52, 18);
@@ -1134,9 +1140,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(825, 345);
+            this.button8.Location = new System.Drawing.Point(865, 345);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(99, 35);
+            this.button8.Size = new System.Drawing.Size(75, 35);
             this.button8.TabIndex = 273;
             this.button8.Text = "Izprazni";
             this.button8.UseVisualStyleBackColor = true;
@@ -1146,7 +1152,7 @@
             // 
             this.cb.AutoSize = true;
             this.cb.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cb.Location = new System.Drawing.Point(708, 351);
+            this.cb.Location = new System.Drawing.Point(687, 351);
             this.cb.Name = "cb";
             this.cb.Size = new System.Drawing.Size(82, 22);
             this.cb.TabIndex = 275;
@@ -1154,11 +1160,74 @@
             this.cb.UseVisualStyleBackColor = true;
             this.cb.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             // 
+            // cb2
+            // 
+            this.cb2.AutoSize = true;
+            this.cb2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cb2.Location = new System.Drawing.Point(784, 350);
+            this.cb2.Name = "cb2";
+            this.cb2.Size = new System.Drawing.Size(75, 22);
+            this.cb2.TabIndex = 276;
+            this.cb2.Text = "Nerazp.";
+            this.cb2.UseVisualStyleBackColor = true;
+            this.cb2.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label62.Location = new System.Drawing.Point(20, 638);
+            this.label62.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(101, 18);
+            this.label62.TabIndex = 278;
+            this.label62.Text = "Nerazporejeno";
+            // 
+            // dgvsn
+            // 
+            this.dgvsn.AllowUserToAddRows = false;
+            this.dgvsn.AllowUserToDeleteRows = false;
+            this.dgvsn.AllowUserToResizeColumns = false;
+            this.dgvsn.AllowUserToResizeRows = false;
+            this.dgvsn.BackgroundColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvsn.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvsn.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvsn.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvsn.EnableHeadersVisualStyles = false;
+            this.dgvsn.GridColor = System.Drawing.Color.Gainsboro;
+            this.dgvsn.Location = new System.Drawing.Point(23, 665);
+            this.dgvsn.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvsn.Name = "dgvsn";
+            this.dgvsn.ReadOnly = true;
+            this.dgvsn.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvsn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvsn.Size = new System.Drawing.Size(498, 225);
+            this.dgvsn.TabIndex = 277;
+            this.dgvsn.VirtualMode = true;
+            this.dgvsn.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvsn_RowEnter);
+            // 
             // frmUredi_strehe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1362, 877);
+            this.ClientSize = new System.Drawing.Size(1362, 914);
+            this.Controls.Add(this.label62);
+            this.Controls.Add(this.dgvsn);
+            this.Controls.Add(this.cb2);
             this.Controls.Add(this.label42);
             this.Controls.Add(this.cb);
             this.Controls.Add(this.button8);
@@ -1217,6 +1286,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvsn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1313,5 +1383,8 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.TextBox tbo;
+        private System.Windows.Forms.CheckBox cb2;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.DataGridView dgvsn;
     }
 }

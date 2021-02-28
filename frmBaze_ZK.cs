@@ -1604,7 +1604,8 @@ namespace Komunala
                         string stev = polje[2];
                         string ob_mid = polje[3];
                         string katas_vpis = polje[4];
-                        
+                        string tmp_etaz= polje[5];
+
                         int st_etaz;
                         if (polje[5] == "")
                             st_etaz = -99;

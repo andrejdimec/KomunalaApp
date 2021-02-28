@@ -72,7 +72,7 @@ namespace Komunala
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Izracunaj_deleze();
+            Izracunaj_deleze3();
         }
 
         string ohd_pl, opt_pl, optime_pl, odrzava_pl, ost_stanovanja, oraba_id, oraba_ime;
@@ -105,7 +105,7 @@ namespace Komunala
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Izracunaj_procente();
+            Izracunaj_procente3();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -990,6 +990,10 @@ namespace Komunala
                 con9.Open();
                 cmd9.Parameters.AddWithValue("@idx", ohs_mid_del);
                 rdr9 = cmd9.ExecuteReader();
+                olabela_dst = "";
+                onaslov_dst = "";
+                oposta_dst = "";
+
                 while (rdr9.Read())
                 {
                     onaslov_dst = (String)rdr9["naslov"];
@@ -1018,6 +1022,9 @@ namespace Komunala
             string nen_id_s = st_nen_id(odst_sid);
             try
             {
+                olastnik = "";
+                olastnik_nas = "";
+                olastnik_pt = "";
                 q9 = "select id,nen_id,ime, naslov,delez_str  from tbl_ren_lastniki where nen_id = @idx order by delez_proc desc, leto asc";
                 //q9 = "SELECT * FROM tbl_hise  where hsmid = @idx";
                 cmd9 = new SqlCommand(q9, con9);
@@ -1148,7 +1155,7 @@ namespace Komunala
                                     // če še ni zapisa s tem hsmid_gl zapiši
                                     if (zapisov == 0)
                                     {
-                                        oopomba = "Združeno " + oopomba;
+                                        //oopomba = "Združeno " + oopomba;
                                         Zapisi_OM3_ok();
                                     }
                                     con9.Close();
@@ -1195,8 +1202,8 @@ namespace Komunala
             //Izracunaj_procente();
             
             // novo 22.2.
-            Izracunaj_deleze3();
-            Izracunaj_procente3();
+            //Izracunaj_deleze3();
+            //Izracunaj_procente3();
         }
 
 
