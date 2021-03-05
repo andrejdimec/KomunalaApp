@@ -1092,6 +1092,7 @@ namespace Komunala
             {
 
                 q = @" select * from ren_strehe where glavna_streha = 1";
+                q = @" select * from ren_strehe";
 
                 cmd2 = new SqlCommand(q, con2);
                 con2.Open();

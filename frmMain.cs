@@ -146,9 +146,9 @@ namespace Komunala
             ////frmUredi_strehe sec = new frmUredi_strehe();
             ////sec.ShowDialog();
 
-            frmUredi_strehe sec = new frmUredi_strehe();
-            sec.ShowDialog();
-            Environment.Exit(0);
+            //frmUredi_strehe sec = new frmUredi_strehe();
+            //sec.ShowDialog();
+            //Environment.Exit(0);
         }
 
 

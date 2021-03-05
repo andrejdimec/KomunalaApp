@@ -221,68 +221,78 @@ namespace Komunala
         {
             // izvozi datoteko stavbe v CSV
 
+            //string path = "c:\\Kataster\\hise.csv";
 
-            try
+            //File.Create(path).Close();
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "hise.sql za prenos v kataster.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+                // Izvoz2(save.FileName);
             {
-                string path = "c:\\Kataster\\hise.csv";
-
-                File.Create(path).Close();
-                
-                string q = "select * from tbl_hise"; // preberi vse zapise iz tbl_hise
-
-                cmd = new SqlCommand(q, con);
-                con.Open();
-                rdr = cmd.ExecuteReader();
-                //string hsmid_hs;
-                //nivcadis = 0;
-                using (StreamWriter writetext = new StreamWriter(path))
+                try
                 {
-                    // glava
-                    str_zapisi = "HSMID" + csv + "ULICA" + csv + "LABELA" + csv + "NASLOV" + csv + "STALNO" + csv + "ZACASNO" + csv + "VODA" + csv + "KAN." + csv + "SMETI" + csv + "GREZNICA" + csv + "CADIS";
-                    writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
-                    while (rdr.Read())
+
+                    string q = "select * from tbl_hise"; // preberi vse zapise iz tbl_hise
+
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    //string hsmid_hs;
+                    //nivcadis = 0;
+                    using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
-                        str_zapisi = "";
-                        c_hsmid = (string)rdr["hsmid"];
-                        c_ulica = (string)rdr["naslov"];
-                        c_labela = (string)rdr["labela"];
-                        c_naslov = c_ulica + " " + c_labela;
-                        c_stalno = Convert.ToString((int)rdr["stalno"]);
-                        c_zacasno = Convert.ToString((int)rdr["zacasno"]);
-                        c_voda = Convert.ToString((int)rdr["zacasno"]);
-                        c_kanalizacija = Convert.ToString((int)rdr["zacasno"]);
-                        c_smeti = Convert.ToString((int)rdr["zacasno"]);
-                        c_greznica = Convert.ToString((int)rdr["zacasno"]);
-                        c_cadis = Convert.ToString((int)rdr["zacasno"]);
+                        // glava
+                        str_zapisi = "HSMID" + csv + "ULICA" + csv + "LABELA" + csv + "NASLOV" + csv + "STALNO" + csv + "ZACASNO" + csv + "VODA" + csv + "KAN." + csv + "SMETI" + csv + "GREZNICA" + csv + "CADIS";
+                        writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
-                        // string za zapis
-                        str_zapisi = c_hsmid + csv + c_ulica + csv + c_labela + csv + c_naslov + csv + c_stalno + csv + c_zacasno + csv + c_voda + csv + c_kanalizacija + csv + c_smeti + csv + c_greznica + csv + c_cadis;
-                        writetext.WriteLine(str_zapisi,Encoding.ASCII);
+                        while (rdr.Read())
+                        {
+                            str_zapisi = "";
+                            c_hsmid = (string)rdr["hsmid"];
+                            c_ulica = (string)rdr["naslov"];
+                            c_labela = (string)rdr["labela"];
+                            c_naslov = c_ulica + " " + c_labela;
+                            c_stalno = Convert.ToString((int)rdr["stalno"]);
+                            c_zacasno = Convert.ToString((int)rdr["zacasno"]);
+                            c_voda = Convert.ToString((int)rdr["voda"]);
+                            c_kanalizacija = Convert.ToString((int)rdr["kanalizacija"]);
+                            c_smeti = Convert.ToString((int)rdr["greznica"]);
+                            c_greznica = Convert.ToString((int)rdr["smeti"]);
+                            c_cadis = Convert.ToString((int)rdr["cadis"]);
+
+                            // string za zapis
+                            str_zapisi = c_hsmid + csv + c_ulica + csv + c_labela + csv + c_naslov + csv + c_stalno + csv + c_zacasno + csv + c_voda + csv + c_kanalizacija + csv + c_smeti + csv + c_greznica + csv + c_cadis;
+                            writetext.WriteLine(str_zapisi, Encoding.UTF8);
+                        }
                     }
                 }
-            }
-            catch (Exception ex2)
-            {
-                MessageBox.Show("Napaka reader: " + ex2.Message);
-            }
-
-            finally
-            {
-                // MessageBox.Show("finnaly");
-                if (rdr != null)
+                catch (Exception ex2)
                 {
-                    rdr.Close();
+                    MessageBox.Show("Napaka reader: " + ex2.Message);
                 }
-                if (con != null)
+
+                finally
                 {
-                    con.Close();
+                    // MessageBox.Show("finnaly");
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                    MessageBox.Show("Zapis v CSV končan!");
+                    //Display_hise();
                 }
-                MessageBox.Show("Zapis v CSV končan!");
-                //Display_hise();
+
             }
-
-
         }
 
         private void Manjkavcadis()

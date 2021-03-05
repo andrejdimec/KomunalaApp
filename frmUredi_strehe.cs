@@ -404,17 +404,31 @@ namespace Komunala
         }
         private void Izvoz(string datoteka)
         {
-            //string Filename = "Seznam za obračun odvajanja padavinske vode s streh.csv";
             StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write));
             stevec = 0;
-            w.WriteLine(sp);
-            w.WriteLine("Seznam za obračun odvajanja padavinske vode s streh");
-            w.WriteLine(sp);
             izvoz_vrsta.Clear();
             Seznam_izvoz();
-//            izvoz_vrsta.Sort();
             stevec = 1;
-            w.WriteLine("Zap." + tab + "Plačnik" + tab + "Naslov" + tab + "Pošta" + tab + "Površina" + tab + "Opomba");
+            w.WriteLine("Zap." + tab + "Plačnik" + tab + "Naslov" + tab + "Pošta" + tab + "Št. prostorov" + tab+ "Raba ID" + tab+ "Dejanska raba" + tab+ "% strehe" + tab+ "Površina del" + tab + "Površina skupaj" + tab+ "Opomba");
+            foreach (string zactmp in izvoz_vrsta)
+            {
+                str_stevec = Convert.ToString(stevec);
+                napisi = str_stevec + tab + zactmp;
+                w.WriteLine(napisi);
+                stevec++;
+            }
+            w.WriteLine(sp);
+            w.Close();
+        }
+
+        private void Izvoz2(string datoteka)
+        {
+            StreamWriter w = new StreamWriter(new FileStream(datoteka, FileMode.Create, FileAccess.Write),Encoding.UTF8);
+            stevec = 0;
+            izvoz_vrsta.Clear();
+            Seznam_izvoz_podrobno();
+            stevec = 1;
+            w.WriteLine("Zap." + tab + "Opomba" + tab + "Lokacija"+tab+"Plačnik" + tab + "Naslov" + tab + "Pošta" + tab + "Št. prostorov" + tab + "Stan"+tab+"Raba ID" + tab + "Dejanska raba" + tab + "% strehe" + tab + "Površina del" + tab + "Površina skupaj" + tab + "Opomba" + tab + "ID"+tab+"ObjectID"+tab+"sta_sid" + tab + "dst_sid" + tab + "hsmid_dst" + tab + "hsmid_gl");
             foreach (string zactmp in izvoz_vrsta)
             {
                 str_stevec = Convert.ToString(stevec);
@@ -467,6 +481,54 @@ namespace Komunala
             }
         }
 
+        private void Seznam_izvoz_podrobno()
+        {
+            string q2 = "select * from strehe_za_obracun_ok where odobreno=1 order by naslov_pl";
+            try
+            {
+                cmd2 = new SqlCommand(q2, con2);
+                con2.Open();
+                rdr2 = cmd2.ExecuteReader();
+                while (rdr2.Read())
+                {
+                    string pl_ime = (string)rdr2["placnik"];
+                    string naslov_pl = (string)rdr2["naslov_pl"];
+                    string lokacija = (string)rdr2["naslov_dst"];
+                    string posta_pl = (string)rdr2["posta_pl"];
+                    double delez = (double)rdr2["streha_delez"];
+                    string delst = delez.ToString("N2");
+                    string opomba = (string)rdr2["opomba"];
+                    string raba_id = (string)rdr2["raba_id"];
+                    string raba_ime = (string)rdr2["raba_ime"];
+                    int st_prostorov = (int)rdr2["st_prostorov"];
+                    string prostorov = st_prostorov.ToString();
+                    double procent = (double)rdr2["procent"];
+                    string procentst = procent.ToString("N2");
+                    double skupaj = (double)rdr2["streha_skupaj"];
+                    string skupajst = skupaj.ToString("N2");
+                    string objectid = (string)rdr2["objectid"];
+                    string sta_sid = (string)rdr2["sta_sid"];
+                    string dst_sid = (string)rdr2["dst_sid"];
+                    string hsmid_dst = (string)rdr2["hs_mid_del"];
+                    string hsmid_gl = (string)rdr2["hs_mid_gl"];
+                    string id = Convert.ToString((int)rdr2["id"]);
+                    string stanovanje = (string)rdr2["st_stanovanja"];
+
+                    string vrsta = opomba+tab+ lokacija+tab+pl_ime + tab + naslov_pl + tab + posta_pl + tab + prostorov + tab + stanovanje+tab+ raba_id + tab+ raba_ime + tab+ procentst + tab+ delst + tab + skupajst + tab + opomba + tab + id+tab+objectid + tab + sta_sid + tab + dst_sid + tab + hsmid_dst + tab + hsmid_gl;
+                    izvoz_vrsta.Add(vrsta);
+                    stevec++;
+                }  // while read
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka reader2: " + ex.Message);
+            }
+            finally
+            {
+                rdr2.Close();
+                con2.Close();
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -478,6 +540,7 @@ namespace Komunala
 
             if (save.ShowDialog() == DialogResult.OK)
                 Izvoz(save.FileName);
+            MessageBox.Show("Končano.");
         }
 
         private void dgvsn_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -496,6 +559,19 @@ namespace Komunala
             {
                 cb.Checked = false;
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //string Filename = "Seznam za obračun odvajanja padavinske vode s streh.csv";
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Seznam za obračun odvajanja padavinske vode s streh - podrobno.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+                Izvoz2(save.FileName);
+            MessageBox.Show("Končano.");
         }
 
         private void bo_Click(object sender, EventArgs e)
@@ -551,12 +627,12 @@ namespace Komunala
             int st_neodobrenih = (Int32)cmd2.ExecuteScalar();
             con2.Close();
 
-            string q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
-            cmd6 = new SqlCommand(q6, con6);
-            con6.Open();
-            double pov_neodobrenih = (double)cmd6.ExecuteScalar();
-            lstavb.Text= "Zapisov: "+st_neodobrenih.ToString()+"    Površina: "+pov_neodobrenih.ToString("N2")+" m2";
-            con6.Close();
+            //string q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
+            //cmd6 = new SqlCommand(q6, con6);
+            //con6.Open();
+            //double pov_neodobrenih = (double)cmd6.ExecuteScalar();
+            //lstavb.Text= "Zapisov: "+st_neodobrenih.ToString()+"    Površina: "+pov_neodobrenih.ToString("N2")+" m2";
+            //con6.Close();
             
             // odobrene
             q2 = "select count(*) from strehe_za_obracun_ok where odobreno=1";
@@ -636,7 +712,7 @@ namespace Komunala
                 label58.Text = povrsina_odobrenih_streh.ToString("N2") + " m2";
             }
             else
-                label58.Text = "Null";
+                label58.Text = "0";
 
 
             //double povrsina_odobrenih_streh = (double)cmd6.ExecuteScalar();
@@ -654,9 +730,20 @@ namespace Komunala
             q6 = "SELECT SUM (streha_delez) FROM strehe_za_obracun_ok where odobreno=0";
             cmd6 = new SqlCommand(q6, con6);
             con6.Open();
-            double pov_neodobrenih = (double)cmd6.ExecuteScalar();
-            lstavb.Text = "Delov: " + st_neodobrenih.ToString() + "    Površina: " + pov_neodobrenih.ToString("N2") + " m2";
+            
+            double pov_neodobrenih=0; // = (double)cmd6.ExecuteScalar();
+            //lstavb.Text = "Delov: " + st_neodobrenih.ToString() + "    Površina: " + pov_neodobrenih.ToString("N2") + " m2";
+            //con6.Close();
+
+            var tmp_doublen = cmd6.ExecuteScalar();
+            if (tmp_doublen != null && tmp_doublen != DBNull.Value && double.TryParse(tmp_doublen.ToString(), out pov_neodobrenih))
+            {
+                lstavb.Text = "Delov: " + st_neodobrenih.ToString() + "    Površina: " + pov_neodobrenih.ToString("N2") + " m2";
+            }
+            else
+                lstavb.Text = "Delov: " + st_neodobrenih.ToString() + "    Površina: 0,00" + " m2";
             con6.Close();
+
 
             // odobrene
             //q2 = "select count(*) from strehe_za_obracun_ok where odobreno=1";
