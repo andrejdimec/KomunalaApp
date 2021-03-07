@@ -1039,7 +1039,7 @@ namespace Komunala
                 Obdelaj_hs();
                 Obdelaj_crp();
                 Prenesi_cadis();
-                //Obdelaj_aglo();
+                Obdelaj_aglo();
 
                 Obdelaj_sql();
                 MessageBox.Show("Končano! Podatki so pripravljeni.");

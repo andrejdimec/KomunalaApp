@@ -741,7 +741,7 @@ namespace Komunala
                 double povrsina = 0;
                 string opomba = "";
                 string emso_last_ren = "";
-                string om_kora = "";
+                //string om_kora = "";
 
                 IzprazniBazo_strehe();
                 IzprazniBazo_strehe_skupne();
@@ -1010,7 +1010,7 @@ namespace Komunala
                 double povrsina = 0;
                 string opomba = "";
                 string emso_last_ren = "";
-                string om_kora = "";
+                //string om_kora = "";
                 int vecstan = 0;
 
                 IzprazniBazo_strehe();

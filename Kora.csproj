@@ -354,6 +354,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TablessControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmBaze_ZK.resx">
       <DependentUpon>frmBaze_ZK.cs</DependentUpon>
     </EmbeddedResource>
