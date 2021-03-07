@@ -101,6 +101,32 @@ namespace Komunala
 
         string idxtemp, natemp, ultemp, idxtempz;
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo(open.FileName);
+                ls.Text = "Ok";
+            }
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button16_Click_1(object sender, EventArgs e)
         {
             //frmBaze_last secondForm = new frmBaze_last();
@@ -112,12 +138,17 @@ namespace Komunala
 
         }
 
-        private void Obdelaj_aglo()
+        private void Obdelaj_aglo(string fnameag)
         {
-            
+
+            string pisi_idaglo_vod = "";
+            string pisi_imeaglo_vod = "";
+            string pisi_idaglo_kan = "";
+            string pisi_imeaglo_kan = "";
+
             // začni prenos
             stevec = 0;
-            IzprazniBazo_ag();
+            //IzprazniBazo_ag();
             try
             {
                 System.IO.StreamReader objReader;
@@ -125,27 +156,66 @@ namespace Komunala
                 do
                 {
                     vrstica = "";
-                    Izprazni_ag();
+                    //Izprazni_ag();
                     vrstica = vrstica + objReader.ReadLine() + "\r\n";
 
                     // razdeli vrstico ločeno s ;
                     string[] polje = vrstica.Split(';');
-                    ag_id = polje[1];
-                    ag_ime = polje[2];
+                    string idaglo_kan = polje[16];
+                    string imeaglo_kan = polje[17];
+                    string idaglo_vod = polje[18];
+                    string imeaglo_vod = polje[19];
+                    string hsmid_aglo = polje[2];
+                    
                     //pt_mid = polje[2];
                     try
                     {
                         if (stevec > 0)
                         {
-                            // napiši prebrano v tabelo pt
-                            string query = "insert into tbl_aglo (id_aglo,ime_aglo) values(@ag_id, @ag_ime)";
-                            cmd = new SqlCommand(query, con);
-                            con.Open();
-                            cmd.Parameters.AddWithValue("@ag_id", ag_id);
-                            cmd.Parameters.AddWithValue("@ag_ime", ag_ime);
-                            //cmd.Parameters.AddWithValue("@pt_mid", pt_mid);
-                            cmd.ExecuteNonQuery();
-                            con.Close();
+
+                            // napiši aglomeracije v tabelo hise
+                            try
+                            {
+
+                                // ali obstaja hs_mid v tabeli hise?
+                                string q2 = "select hsmid from tbl_hise where hsmid = @idx"; 
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_aglo);
+                                cmd2.ExecuteNonQuery();
+                                string ok_hsmid = (string)cmd2.ExecuteScalar(); 
+                                if (ok_hsmid == null)
+                                {
+                                    pisi_idaglo_vod = "-99";
+                                    pisi_imeaglo_vod = "";
+                                    pisi_idaglo_kan = "-99";
+                                    pisi_imeaglo_kan = "";
+                                }
+                                else
+                                {
+                                    pisi_idaglo_vod = idaglo_vod;
+                                    pisi_imeaglo_vod = imeaglo_vod;
+                                    pisi_idaglo_kan = idaglo_kan;
+                                    pisi_imeaglo_kan = imeaglo_kan;
+                                }
+                                con2.Close();
+
+                                q2 = "update tbl_hise set idaglo_vod = @idaglo_vod, imeaglo_vod = @imeaglo_vod,idaglo_kan = @idaglo_kan, imeaglo_kan = @imeaglo_kan where hsmid=@idx";
+                                // MessageBox.Show("Ta hsmid bo zapisal v tbl_hs " + ok_hsmid);
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idaglo_kan", pisi_idaglo_kan);
+                                cmd2.Parameters.AddWithValue("@imeaglo_kan", pisi_imeaglo_kan);
+                                cmd2.Parameters.AddWithValue("@idaglo_vod", pisi_idaglo_vod);
+                                cmd2.Parameters.AddWithValue("@imeaglo_vod", pisi_imeaglo_vod);
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_aglo);
+                                cmd2.ExecuteNonQuery();
+                                con2.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Napakaupdate aglomeracija: " + ex.Message);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -154,13 +224,13 @@ namespace Komunala
                     }
                     stevec = ++stevec;
                     vrstica = "";
-                    label52.Text = stevec.ToString();
-                    label52.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 } while (objReader.Peek() != -1);
                 objReader.Close();
                 stevec--;
-                label52.Text = stevec.ToString();
-                label52.Refresh();
+                //label52.Text = stevec.ToString();
+                //label52.Refresh();
             }
             catch (Exception ex)
             {
@@ -175,35 +245,35 @@ namespace Komunala
 
         private void button16_Click(object sender, EventArgs e)
         {
-            // zapiši Aglomeracije v tbl_hise
-            fd.Title = "Izberi datoteko s podatki o aglomeracijah";
-            fd.InitialDirectory = frmMain.app_path_data;  // "C:\\KatApp\\Kataster\\data";
-            fd.FileName = "aglo.csv";
+            //// zapiši Aglomeracije v tbl_hise
+            //fd.Title = "Izberi datoteko s podatki o aglomeracijah";
+            //fd.InitialDirectory = frmMain.app_path_data;  // "C:\\KatApp\\Kataster\\data";
+            //fd.FileName = "aglo.csv";
 
-            // preberi ime datoteke iz dialoga
-            if (fd.ShowDialog() == DialogResult.OK)
-            {
-                // preberi CRP - CSV
-                try
-                {
-                    fnamecrp = fd.FileName;
-                    var lineCount = File.ReadAllLines(@fnamecrp).Length;
-                    // label2.Text = fnamecrp;
-                    // label24.Text = lineCount.ToString();
-                    Obdelaj_aglo();
-                    ncrp = 0;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Napaka: " + ex.Message);
-                    ncrp = 1;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Datoteka ne obstaja: " + fnamecrp);
+            //// preberi ime datoteke iz dialoga
+            //if (fd.ShowDialog() == DialogResult.OK)
+            //{
+            //    // preberi CRP - CSV
+            //    try
+            //    {
+            //        fnamecrp = fd.FileName;
+            //        var lineCount = File.ReadAllLines(@fnamecrp).Length;
+            //        // label2.Text = fnamecrp;
+            //        // label24.Text = lineCount.ToString();
+            //        //Obdelaj_aglo();
+            //        ncrp = 0;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Napaka: " + ex.Message);
+            //        ncrp = 1;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Datoteka ne obstaja: " + fnamecrp);
 
-            }
+            //}
 
         }
 
@@ -735,13 +805,13 @@ namespace Komunala
                             }
                             stevec = ++stevec;
                             vrstica = "";
-                            label11.Text = stevec.ToString();
-                            label11.Refresh();
+                            ls.Text = stevec.ToString();
+                            ls.Refresh();
                         } while (objReader.Peek() != -1);
                         objReader.Close();
                         stevec--;
-                        label11.Text = stevec.ToString();
-                        label11.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     }
                     catch (Exception ex)
                     {
@@ -1039,7 +1109,7 @@ namespace Komunala
                 Obdelaj_hs();
                 Obdelaj_crp();
                 Prenesi_cadis();
-                Obdelaj_aglo();
+                //Obdelaj_aglo();
 
                 Obdelaj_sql();
                 MessageBox.Show("Končano! Podatki so pripravljeni.");
@@ -1061,9 +1131,9 @@ namespace Komunala
         {
             //MessageBox.Show(mapa);
             // TODO: This line of code loads data into the 'dskat2.tbl_ul' table. You can move, or remove it, as needed.
-            label8.Text = ""; // zapisov crp
-            label51.Text = ""; label52.Text = ""; label24.Text = ""; label23.Text = ""; label22.Text = ""; label21.Text = "";label4.Text = "";label17.Text = "";
-            label9.Text = ""; label13.Text = ""; label10.Text = ""; label14.Text = ""; label5.Text = "";label11.Text = "";label18.Text="" ;
+            
+            ls.Text = ""; label24.Text = ""; label23.Text = ""; label22.Text = ""; label21.Text = "";label4.Text = "";label17.Text = "";
+            label5.Text = "";label18.Text="" ;
             //Prikazi_bazo();
             // Preberi_bazo();
             Preveri_baze();
@@ -1476,13 +1546,13 @@ namespace Komunala
                         // MessageBox.Show("emso " + emso + " spol " + spol + " priimek1 " + priimek1);
                         vrstica = "";
                         stevec = ++stevec;
-                        label8.Text = stevec.ToString();
-                        label8.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     } while (objReader.Peek() != -1);
                     objReader.Close();
                     stevec--;
-                    label8.Text = stevec.ToString();
-                    label8.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -1616,13 +1686,13 @@ namespace Komunala
                         }
                         vrstica = "";
                         stevec = ++stevec;
-                        label9.Text = stevec.ToString();
-                        label9.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     } while (objReader.Peek() != -1);
                     objReader.Close();
                     stevec--;
-                    label9.Text = stevec.ToString();
-                    label9.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -1707,13 +1777,13 @@ namespace Komunala
                         }
                         stevec = ++stevec;
                         vrstica = "";
-                        label10.Text = stevec.ToString();
-                        label10.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     } while (objReader.Peek() != -1);
                     objReader.Close();
                     stevec--;
-                    label10.Text = stevec.ToString();
-                    label10.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -1800,13 +1870,13 @@ namespace Komunala
                         }
                         stevec = ++stevec;
                         vrstica = "";
-                        label13.Text = stevec.ToString();
-                        label13.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     } while (objReader.Peek() != -1);
                     objReader.Close();
                     stevec--;
-                    label13.Text = stevec.ToString();
-                    label13.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -1902,13 +1972,13 @@ namespace Komunala
                         }
                         stevec = ++stevec;
                         vrstica = "";
-                        label14.Text = stevec.ToString();
-                        label14.Refresh();
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
                     } while (objReader.Peek() != -1);
                     objReader.Close();
                     stevec--;
-                    label14.Text = stevec.ToString();
-                    label14.Refresh();
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -1942,13 +2012,13 @@ namespace Komunala
                 var lineCount = File.ReadAllLines(@fnameag).Length;
                 lineCount--;
                 //label2.Text = fnamecrp2;
-                label51.Text = lineCount.ToString();
+                ls.Text = lineCount.ToString();
                 nag = 0;
             }
             catch (Exception ex)
             {
-                label52.Text = "Datoteka " + fnameag + " ne obstaja!";
-                label51.Text = "0";
+                ls.Text = "Datoteka " + fnameag + " ne obstaja!";
+                ls.Text = "0";
                 nag = 1;
             }
 
@@ -1959,13 +2029,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnamecrp).Length;
                 lineCount--;
-                label2.Text = fnamecrp2;
+                //label2.Text = fnamecrp2;
                 label24.Text = lineCount.ToString();
                 ncrp = 0;
             }
             catch (Exception ex)
             {
-                label2.Text = "Datoteka "+fnamecrp+" ne obstaja!";
+                // label2.Text = "Datoteka "+fnamecrp+" ne obstaja!";
                 label24.Text = "0";
                 ncrp = 1;
             }
@@ -1977,13 +2047,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnamena).Length;
                 lineCount--;
-                label15.Text = fnamena2;
+                // label15.Text = fnamena2;
                 label21.Text = lineCount.ToString();
                 nna = 0;
             }
             catch (Exception ex)
             {
-                label15.Text = "Datoteka " + fnamena + " ne obstaja!";
+                // label15.Text = "Datoteka " + fnamena + " ne obstaja!";
                 label21.Text = "0";
                 nna = 1;
             }
@@ -1995,13 +2065,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnamehs).Length;
                 lineCount--;
-                label3.Text = fnamehs2;
+                // label3.Text = fnamehs2;
                 label23.Text = lineCount.ToString();
                 nhs = 0;
             }
             catch (Exception ex)
             {
-                label3.Text = "Datoteka " + fnamehs + " ne obstaja!";
+                // label3.Text = "Datoteka " + fnamehs + " ne obstaja!";
                 label23.Text = "0";
                 nhs = 1;
             }
@@ -2013,13 +2083,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnameul).Length;
                 lineCount--;
-                label12.Text = fnameul2;
+                // label12.Text = fnameul2;
                 label22.Text = lineCount.ToString();
                 nul = 0;
             }
             catch (Exception ex)
             {
-                label12.Text = "Datoteka " + fnameul + " ne obstaja!";
+                // label12.Text = "Datoteka " + fnameul + " ne obstaja!";
                 label22.Text = "0";
                 nul = 1;
             }
@@ -2031,13 +2101,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnamept).Length;
                 lineCount--;
-                label25.Text = fnamept2;
+                // label25.Text = fnamept2;
                 label6.Text = lineCount.ToString();
                 npt = 0;
             }
             catch (Exception ex)
             {
-                label25.Text = "Manjka " + fnameul;
+                // label25.Text = "Manjka " + fnameul;
                 label6.Text = "0";
                 npt = 1;
             }
@@ -2050,13 +2120,13 @@ namespace Komunala
             {
                 var lineCount = File.ReadAllLines(@fnamecad).Length;
                 lineCount--;
-                label16.Text = fnamecad2;
+                //label16.Text = fnamecad2;
                 label7.Text = lineCount.ToString();
                 ncad = 0;
             }
             catch (Exception ex)
             {
-                label16.Text = "Manjka " + fnamecad2;
+                // label16.Text = "Manjka " + fnamecad2;
                 label7.Text = "0";
                 ncad = 1;
             }
@@ -2076,7 +2146,7 @@ namespace Komunala
                 {
                     fnamecrp = fd.FileName;
                     var lineCount = File.ReadAllLines(@fnamecrp).Length;
-                    label2.Text = fnamecrp;
+                   // label2.Text = fnamecrp;
                     label24.Text = lineCount.ToString();
                     ncrp = 0;
                 }

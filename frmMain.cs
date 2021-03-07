@@ -130,8 +130,8 @@ namespace Komunala
             //sec.ShowDialog();
             //frmPogodbeTel sec = new frmPogodbeTel();
             //sec.ShowDialog();
-            //frmBaze sec = new frmBaze();
-            //sec.ShowDialog();
+            frmBaze sec = new frmBaze();
+            sec.ShowDialog();
 
             //frmZK_REN sec = new frmZK_REN();
             //sec.ShowDialog();
@@ -148,7 +148,7 @@ namespace Komunala
 
             //frmUredi_strehe sec = new frmUredi_strehe();
             //sec.ShowDialog();
-            //Environment.Exit(0);
+            Environment.Exit(0);
         }
 
 
