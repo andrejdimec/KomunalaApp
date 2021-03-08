@@ -33,7 +33,7 @@ namespace Komunala
         public static string lokalni_disk = "c:\\";
         public static string app_path = disk+"\\KomunalaApp\\";
         public static string app_path_data = app_path + "data\\";
-        public static string pot_podatki=lokalni_disk+ "\\Podatki\\";
+        public static string pot_podatki=lokalni_disk+ "Podatki\\";
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
 

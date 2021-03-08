@@ -47,7 +47,20 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.label59 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
@@ -55,30 +68,18 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button15 = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnIzvoz = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
             this.ls = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ls1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -286,6 +287,111 @@
             this.gb1.TabIndex = 79;
             this.gb1.TabStop = false;
             // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label47.Location = new System.Drawing.Point(97, 315);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(283, 15);
+            this.label47.TabIndex = 107;
+            this.label47.Text = "Obdelava in združevanje SQL baz podatkov";
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(15, 467);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(70, 28);
+            this.button17.TabIndex = 85;
+            this.button17.Text = "Izvedi";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(15, 507);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(70, 28);
+            this.button15.TabIndex = 82;
+            this.button15.Text = "Izvedi";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(95, 474);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(235, 15);
+            this.label59.TabIndex = 90;
+            this.label59.Text = "4. Stavbam dodaj aglomeracije iz katastra";
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(15, 427);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(70, 28);
+            this.button13.TabIndex = 82;
+            this.button13.Text = "Izvedi";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(97, 514);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(288, 15);
+            this.label44.TabIndex = 111;
+            this.label44.Text = "Preveri koliko naslovov iz datoteke HS ni v obračunu";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(95, 394);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(318, 15);
+            this.label46.TabIndex = 110;
+            this.label46.Text = "2. Vsaki HSMID številki zapiši naslov in število prebivalcev";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(95, 434);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(290, 15);
+            this.label45.TabIndex = 109;
+            this.label45.Text = "3. Vsaki stavbi dodaj komunalne storitve iz obračuna";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(95, 354);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(311, 15);
+            this.label43.TabIndex = 107;
+            this.label43.Text = "1. Dodeli HSMID številko vsaki osebi v CRP (kje stanuje)";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label18.Location = new System.Drawing.Point(758, 483);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(55, 15);
+            this.label18.TabIndex = 84;
+            this.label18.Text = "label18";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(15, 254);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(70, 28);
+            this.button10.TabIndex = 83;
+            this.button10.Text = "Izvedi";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -295,6 +401,27 @@
             this.label7.Size = new System.Drawing.Size(47, 15);
             this.label7.TabIndex = 88;
             this.label7.Text = "label7";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label17.Location = new System.Drawing.Point(449, 434);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(55, 15);
+            this.label17.TabIndex = 83;
+            this.label17.Text = "label17";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(449, 354);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 15);
+            this.label4.TabIndex = 82;
+            this.label4.Text = "label4";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label30
             // 
@@ -360,113 +487,6 @@
             this.label19.TabIndex = 89;
             this.label19.Text = "Vse tekstovne datoteke pretvori v SQL baze.";
             // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(15, 254);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(70, 28);
-            this.button10.TabIndex = 83;
-            this.button10.Text = "Izvedi";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label47.Location = new System.Drawing.Point(97, 315);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(283, 15);
-            this.label47.TabIndex = 107;
-            this.label47.Text = "Obdelava in združevanje SQL baz podatkov";
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(97, 514);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(288, 15);
-            this.label44.TabIndex = 111;
-            this.label44.Text = "Preveri koliko naslovov iz datoteke HS ni v obračunu";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(95, 394);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(318, 15);
-            this.label46.TabIndex = 110;
-            this.label46.Text = "2. Vsaki HSMID številki zapiši naslov in število prebivalcev";
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(95, 434);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(290, 15);
-            this.label45.TabIndex = 109;
-            this.label45.Text = "3. Vsaki stavbi dodaj komunalne storitve iz obračuna";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(95, 354);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(311, 15);
-            this.label43.TabIndex = 107;
-            this.label43.Text = "1. Dodeli HSMID številko vsaki osebi v CRP (kje stanuje)";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label18.Location = new System.Drawing.Point(758, 483);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(55, 15);
-            this.label18.TabIndex = 84;
-            this.label18.Text = "label18";
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(15, 507);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(70, 28);
-            this.button15.TabIndex = 82;
-            this.button15.Text = "Izvedi";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label17.Location = new System.Drawing.Point(449, 434);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(55, 15);
-            this.label17.TabIndex = 83;
-            this.label17.Text = "label17";
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(15, 427);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(70, 28);
-            this.button13.TabIndex = 82;
-            this.button13.Text = "Izvedi";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(449, 354);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 15);
-            this.label4.TabIndex = 82;
-            this.label4.Text = "label4";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnIzvoz
             // 
             this.btnIzvoz.Location = new System.Drawing.Point(15, 30);
@@ -496,25 +516,6 @@
             this.label48.Size = new System.Drawing.Size(270, 15);
             this.label48.TabIndex = 90;
             this.label48.Text = "Pripravi datoteko c:\\\\hise.csv za prenos v kataster";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(95, 474);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(235, 15);
-            this.label59.TabIndex = 90;
-            this.label59.Text = "4. Stavbam dodaj aglomeracije iz katastra";
-            // 
-            // button17
-            // 
-            this.button17.Location = new System.Drawing.Point(15, 467);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(70, 28);
-            this.button17.TabIndex = 85;
-            this.button17.Text = "Izvedi";
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // ls
             // 
@@ -560,6 +561,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(150, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 15);
+            this.label3.TabIndex = 114;
+            this.label3.Text = "T2 voda";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 15);
+            this.label2.TabIndex = 91;
+            this.label2.Text = "T2 kanalizacija";
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(15, 77);
@@ -578,29 +597,21 @@
             this.button8.Text = "Izvedi";
             this.button8.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // ls1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 15);
-            this.label2.TabIndex = 91;
-            this.label2.Text = "T2 kanalizacija";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(150, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 15);
-            this.label3.TabIndex = 114;
-            this.label3.Text = "T2 voda";
+            this.ls1.AutoSize = true;
+            this.ls1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ls1.Location = new System.Drawing.Point(185, 63);
+            this.ls1.Name = "ls1";
+            this.ls1.Size = new System.Drawing.Size(0, 25);
+            this.ls1.TabIndex = 114;
             // 
             // frmBaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 733);
+            this.Controls.Add(this.ls1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ls);
             this.Controls.Add(this.label61);
@@ -682,5 +693,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label ls1;
     }
 }

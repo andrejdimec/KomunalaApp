@@ -20,6 +20,14 @@ namespace Komunala
     {
         // določi connection
 
+        // začasno
+        public static string lokalni_disk = "c:\\";
+        //public static string app_path = disk + "\\KomunalaApp\\";
+        //public static string app_path_data = app_path + "data\\";
+        public static string pot_podatki = lokalni_disk + "Podatki\\";
+
+
+
         SqlConnection con = frmMain.c;
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
@@ -103,6 +111,8 @@ namespace Komunala
 
         private void button17_Click(object sender, EventArgs e)
         {
+            ls1.Text = counths.ToString();
+            ls1.Refresh();
             ls.Text = "";
             OpenFileDialog open = new OpenFileDialog();
             open.FileName = "";
@@ -113,6 +123,7 @@ namespace Komunala
             {
                 Obdelaj_aglo(open.FileName);
                 ls.Text = "Ok";
+                ls.Refresh();
             }
 
         }
@@ -377,10 +388,13 @@ namespace Komunala
             adapt.Fill(dt);
             dgv1.DataSource = dt;
             con.Close();
-            label18.Text = dgv1.Rows.Count.ToString();
+            ls.Text = dgv1.Rows.Count.ToString();
         }
         private void button15_Click(object sender, EventArgs e)
         {
+            ls1.Text = "";
+            ls.Text = "";
+
             Manjkavcadis();
         }
 
@@ -406,23 +420,13 @@ namespace Komunala
 
         private void Cadis_v_stavbe()
         {
-            // prenesi Cadisova podatke v tbl_hise
             int st = 0;
             string q2;
-            //SqlConnection con2 = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=C:\\KatApp\\Kataster\\data\\kataster.mdf;Integrated Security = True; Connect Timeout = 30");
-            //SqlCommand cmd2;
             string q3;
-            //SqlConnection con3 = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=C:\\KatApp\\Kataster\\data\\kataster.mdf;Integrated Security = True; Connect Timeout = 30");
-            //SqlCommand cmd3;
-            //SqlDataAdapter adapt;
-            //SqlDataReader rdr = null;
-
             string thsmid, tindex_crp, ok_hsmid,tvodovodstr;
             Int32 tkanalizacija = 0, tgreznica = 0, tsmeti = 0;
             Int32 tvodovod = 0;
             int tid;
-
-
 
             try
             {
@@ -437,12 +441,6 @@ namespace Komunala
                 {
                     hsmid_hs = (string)rdr["hsmid"]; // hsmid po katerem boš iskal v cadis
                     tid = (Int32)rdr["id"];  // določi id v katerega boš pisal
-                    // string tidx_crp = "";
-                    // ok_hsmid = "";
-                    //if (String.IsNullOrEmpty((string)rdr2["idx"]))
-                    //{
-                    //    MessageBox.Show("String = null " + st.ToString());
-                    //}
                     try
                     {
                         cadis = 1;
@@ -460,7 +458,6 @@ namespace Komunala
                             tmp_hsmid = "99";
                             cadis = 0;
                             nivcadis++;
-                            // MessageBox.Show(tmp_hsmid);
                         }
 
                         // poišči hsmid iz tbl_hise v tbl_cad
@@ -542,15 +539,14 @@ namespace Komunala
                         cmd3.ExecuteNonQuery();
                         con3.Close();
 
-
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Napaka: " + ex.Message);
                     }
                     st = ++st;
-                    label17.Text = st.ToString();
-                    label17.Refresh();
+                    ls.Text = st.ToString();
+                    ls.Refresh();
                 }
             }
             catch (Exception ex2)
@@ -560,7 +556,6 @@ namespace Komunala
 
             finally
             {
-                // MessageBox.Show("finnaly");
                 if (rdr != null)
                 {
                     rdr.Close();
@@ -569,17 +564,18 @@ namespace Komunala
                 {
                     con.Close();
                 }
-                // MessageBox.Show("pred displaydata");
                 Display_hise();
             }
-           // MessageBox.Show(Convert.ToString(nivcadis));
         }  // void
 
         private void button13_Click(object sender, EventArgs e)
         {
-            // prenesi Cadisova podatke v tbl_hise
+            ls1.Text = countcad.ToString();
+            ls1.Refresh();
+            ls.Text = "";
             Cadis_v_stavbe();
-
+            ls.Text = "OK";
+            ls.Refresh();
         }
 
         private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -591,12 +587,13 @@ namespace Komunala
         {
             // HSMID -> CRP
             int st = 0, brezstavbe = 0;
+            //string ls = "";
             string q2;
            // SqlConnection con2 = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=C:\\KatApp\\Kataster\\data\\kataster.mdf;Integrated Security = True; Connect Timeout = 30");
-            SqlCommand cmd2;
+          //  SqlCommand cmd2;
 
-            SqlDataAdapter adapt;
-            SqlDataReader rdr2 = null;
+            //SqlDataAdapter adapt;
+            //SqlDataReader rdr2 = null;
             string thsmid, tindex_crp, ok_hsmid,ok_namid;
             int tid;
             try
@@ -658,18 +655,7 @@ namespace Komunala
                             ok_namid = "99";
                         }
                         con2.Close();
-
-
-                        // preberi zapis ki ga boš updatal
-                        //q2 = "select id from tbl_crp where id = @tid";
-                        //cmd2 = new SqlCommand(q2, con2);
-                        //cmd2.Parameters.AddWithValue("@tid", tid);
-                        //cmd2.ExecuteNonQuery();
-//                        MessageBox.Show("pred Napaka22");
-
-                        // zapiši najdeni hsmid v datoteko crp - update
                         q2 = "update tbl_crp set hsmid = @thsmid, hs_na = @ths_na where id=@tid";
-                        // MessageBox.Show("Ta hsmid bo zapisal v tbl_hs " + ok_hsmid);
                         cmd2 = new SqlCommand(q2, con2);
                         con2.Open();
                         cmd2.Parameters.AddWithValue("@thsmid", ok_hsmid);
@@ -683,8 +669,8 @@ namespace Komunala
                         MessageBox.Show("Napaka22: " + ex.Message);
                     }
                     st = ++st;
-                    label4.Text = st.ToString();
-                    label4.Refresh();
+                    ls.Text = st.ToString();
+                    ls.Refresh();
                 }
             }
             catch (Exception ex2)
@@ -703,10 +689,12 @@ namespace Komunala
                 {
                     con.Close();
                 }
+                
                 // MessageBox.Show("pred displaydata");
                 DisplayData_crp2();
                 //MessageBox.Show("Prebivalcev brez določene stavbe: " + Convert.ToString(brezstavbe));
             }
+            ls.Text = "OK";
         }  // void
 
         private void IzprazniBazo_cad()  // izprazni tabelo tbl_cad
@@ -723,13 +711,11 @@ namespace Komunala
             csmeti = 0; chsmid = ""; cnaziv = "";ckraj = "";culica = "";chs = "";cposta = "";cime_poste = "";cvodovod = 0;ckanalizacija = 0;cgreznica = 0;cdim = "";ctip_om = ""; 
         }
 
-        private void Prenesi_cadis() // prenesi cadis.crp
+        private void Prenesi_cadis(string vhod) // prenesi cadis.crp
         {
             // prenos CADIS
 
             {
-                if (ncad == 0)
-                {
                     // začni prenos
                     stevec = 0;
                     string cvodovodstr = "", ckanalizacijastr="", cgreznicastr="",csmetistr= "";
@@ -738,7 +724,7 @@ namespace Komunala
                     try
                     {
                         System.IO.StreamReader objReader;
-                        objReader = new System.IO.StreamReader(fnamecad, ASCIIEncoding.UTF8);
+                        objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
                         // število vrstic v CSV
                         // ++stevec; // preskoči prvo vrstico
                         do
@@ -821,26 +807,38 @@ namespace Komunala
                     {
                         Displaydata_cad();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnamecad);
-                }
-
-
             }
         } // private void
 
             private void button10_Click(object sender, EventArgs e)  // prenesi cadis.crp
         {
-            Prenesi_cadis();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Prenesi_cadis(open.FileName);
+                ls.Text = "Ok";
+            }
+
+            //Prenesi_cadis();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+//            St_zapisov();
+            ls1.Text = countcrp.ToString();
+            ls1.Refresh();
+            ls.Text = "";
             // HSMID -> CRP
             if (countcrp>0 && counths>0 && countul>0 && countna>0 && countcad>0)
             {
+                ls1.Text = countcrp.ToString();
                 Hsmid_crp();
             }
             else
@@ -851,7 +849,19 @@ namespace Komunala
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Obdelaj_pt();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+            
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_pt(open.FileName);
+                ls.Text = "Ok";
+            }
         }
 
         private void IzprazniBazo_hise()  // izprazni tabelo tbl_crp
@@ -867,14 +877,6 @@ namespace Komunala
         {
             int st = 0;
             IzprazniBazo_hise();
-           // SqlConnection con2 = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=C:\\KatApp\\Kataster\\data\\kataster.mdf;Integrated Security = True; Connect Timeout = 30");
-            SqlCommand cmd2;
-            //SqlConnection con3 = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=C:\\KatApp\\Kataster\\data\\kataster.mdf;Integrated Security = True; Connect Timeout = 30");
-            SqlCommand cmd3;
-            SqlDataAdapter adapt;
-            // preberi tbl_hs in zapiši v tbl_hise
-            SqlDataReader rdr = null;
-            SqlDataReader rdr2 = null;
 
             string tulmid, thsmid, ths, thd, tlabela, tna_mid, tpt_mid, tpo_mid, tposta, tpt_stev,tsx,tsy,tindex_hs;
             float tx,ty;
@@ -915,20 +917,6 @@ namespace Komunala
                     }
                     con2.Close();
 
-                    // preberi stpr
-                    //q2 = "select priimek1, index_crp from tbl_crp where index_crp = @index_hs";
-                    //cmd2 = new SqlCommand(q2, con2);
-                    //con2.Open();
-                    //cmd2.Parameters.AddWithValue("@index_hs", tindex_hs); // preberi ulico
-                    //cmd2.ExecuteNonQuery();
-                    //ime = (string)cmd2.ExecuteScalar();
-                    //MessageBox.Show(ime);
-                    //if (ime == null)
-                    //{
-                    //    ime = "";
-                    //}
-                    //con2.Close();
-
                     // preberi ime naselja
                     string naime = "";
                     q2 = "select na_uime from tbl_na where na_mid = @tna_mid";
@@ -957,7 +945,6 @@ namespace Komunala
                     }
                     q2 = "select pt_id from tbl_pt where pt_mid = @tpt_mid";
                     cmd2 = new SqlCommand(q2, con2);
-//                    con2.Open();
                     cmd2.Parameters.AddWithValue("@tpt_mid", tpt_mid); // preberi ulico
                     cmd2.ExecuteNonQuery();
                     tpt_stev = (string)cmd2.ExecuteScalar();
@@ -966,15 +953,6 @@ namespace Komunala
                         tpt_stev = "";
                     }
                     con2.Close();
-
-                    // preberi koliko stalnih je na tem naslovu
-                    // po thsmid
-
-                    //string q = "select hs_mid, ulmid, hs, hd,labela,ulmid,na_mid,pt_mid,po_mid,x,y,index_hs from tbl_hs";
-                    //cmd = new SqlCommand(q, con);
-                    //con.Open();
-                    //rdr = cmd.ExecuteReader();
-                    //while (rdr.Read()) ;
 
                     ArrayList seznam_stpr = new ArrayList();
                     ArrayList seznam_zcpr = new ArrayList();
@@ -988,55 +966,19 @@ namespace Komunala
                     while (rdr2.Read())
                     {
                         temp_zacasno = 0; temp_stalno = 0;
-//                        temp_zacasno = (int)rdr["zacasno"];
                         temp_zacasno = Convert.ToInt32(rdr2[34]); // sprememnjeno zaradi dodatnega polja
                         temp_stalno = Convert.ToInt32(rdr2[35]);
-  //                      temp_stalno = (int)rdr["stalno"];
                         stevec_zacasno = stevec_zacasno + temp_zacasno;
                         stevec_stalno = stevec_stalno + temp_stalno;
-
-                        //seznam_stpr.Add(rdr2[27].ToString());
-                        //seznam_zcpr.Add(rdr2[28].ToString());
-                       // MessageBox.Show("stpr " + rdr2[28].ToString());
-                        //MessageBox.Show("stpr "+ rdr2[28].ToString() +" zcpr "+ rdr2[29].ToString());
-
                         x++;
                     }
                     con2.Close();
                     int stevec = 0, stalnih=0, zacasnih=0, nasel=0;
-                    //while (stevec<x)
-                    //{
-                    //    nasel = 0; // ali je našel zadetek
-                    //    //MessageBox.Show("seznam stpr -" + seznam_stpr[stevec] + "- seznam zcpr -" + seznam_zcpr[stevec]+"-");
-
-                    //    if (String.Equals(seznam_stpr[stevec],seznam_zcpr[stevec]))
-                    //    {
-                    //        // ima samo zacasno prebivališče
-                    //        zacasnih++;
-                    //        // MessageBox.Show("ima začasno");
-                    //        nasel = 1;
-                    //    }
-                    //    else
-                    //    {
-                    //        stalnih++;
-                    //    }
-                    //    stevec++;
-                    //}
-                    //if (stalnih>0 || zacasnih>0)
-                    //    {
-                    //    MessageBox.Show(thsmid + " stalnih " + Convert.ToString(stalnih) + " zacasnih " + Convert.ToString(zacasnih));
-                    //    }
-
                     stalnih = stevec_stalno;
                     zacasnih = stevec_zacasno;
-                    //tulmid = (string)rdr["ulmid"];
-                    //tna_mid = (string)rdr["na_mid"];
                     tnaslov = ulime;
                     if (ulime == "")
                         tnaslov = naime;
-                    // zapiši v hiše
-                    //if (tnaslov=="Trate" && tlabela=="37")
-                          // MessageBox.Show(tnaslov + " "+tlabela+" stalno " + Convert.ToString(stevec_stalno) + " začasno " + Convert.ToString(stevec_zacasno));
 
                     try
                     {
@@ -1067,8 +1009,8 @@ namespace Komunala
                         MessageBox.Show("Napaka: " + ex.Message);
                     }
                     st = ++st;
-                    label5.Text = st.ToString();
-                    label5.Refresh();
+                    ls.Text = st.ToString();
+                    ls.Refresh();
                 }
             }
             finally
@@ -1082,11 +1024,17 @@ namespace Komunala
                     con.Close();
                 }
                 Display_hise();
+                ls.Text = "OK";
+                ls.Refresh();
             }
         }
 
         private void btnhise_Click(object sender, EventArgs e)
         {
+            ls1.Text = counths.ToString();
+            ls1.Refresh();
+            ls.Text = "";
+
             if (countcrp > 0 && counths > 0 && countul > 0 && countna > 0 && countcad > 0)
             {
                 Beri_hs();
@@ -1095,29 +1043,27 @@ namespace Komunala
             {
                 MessageBox.Show("Napaka! Nekatere datoteke s podatki iz CSV so prazne");
             }
-
-            // zapiši stavbe
         }
 
         private void button5_Click(object sender, EventArgs e)  // obdelaj vse baze naenkrat
         {
-            if (ncrp == 0 && nhs == 0 && nul == 0 && nna == 0 && npt==0 && ncad==0)
-            {
-                Obdelaj_pt();
-                Obdelaj_na();
-                Obdelaj_ul();
-                Obdelaj_hs();
-                Obdelaj_crp();
-                Prenesi_cadis();
-                //Obdelaj_aglo();
+            //if (ncrp == 0 && nhs == 0 && nul == 0 && nna == 0 && npt==0 && ncad==0)
+            //{
+            //    Obdelaj_pt();
+            //    Obdelaj_na();
+            //    Obdelaj_ul();
+            //    Obdelaj_hs();
+            //    Obdelaj_crp();
+            //    Prenesi_cadis();
+            //    //Obdelaj_aglo();
 
-                Obdelaj_sql();
-                MessageBox.Show("Končano! Podatki so pripravljeni.");
-            }
-            else
-            {
-                MessageBox.Show("Vse potrebne datoteke niso na voljo!");
-            }
+            //    Obdelaj_sql();
+            //    MessageBox.Show("Končano! Podatki so pripravljeni.");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vse potrebne datoteke niso na voljo!");
+            //}
         }
 
         // variable tbl_ul
@@ -1303,18 +1249,16 @@ namespace Komunala
             dat_roj = ""; datom_od_zcpr = "";
         }
 
-        private void Obdelaj_crp()  
+        private void Obdelaj_crp(string vhod)  
         {
             // string lcaseidxtemp, lcaseidxtempz;
-            if (ncrp == 0)
-            {
                 stevec = 0;
                 IzprazniBazo_crp();
                 // preberi CRP - CSV
                 try
                 {
                     System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnamecrp, ASCIIEncoding.UTF8);
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
                     // število vrstic v CSV
                     do
                     {
@@ -1562,16 +1506,23 @@ namespace Komunala
                 {
                     DisplayData_crp();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnamecrp);
-            }
-
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Obdelaj_crp();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_crp(open.FileName);
+                ls.Text = "Ok";
+            }
+            //Obdelaj_crp();
         }
         // konec prenos CRP
 
@@ -1589,17 +1540,15 @@ namespace Komunala
         {
             index_hs = ""; enota = ""; hs_mid = ""; hs = ""; hd = ""; labela = ""; ulmid = ""; na_mid = ""; ob_mid = ""; pt_mid = ""; po_mid = ""; x = ""; y = "";
         }
-        private void Obdelaj_hs()
+        private void Obdelaj_hs(string vhod)
         {
-            if (nhs == 0)
-            {
                 stevec = 0;
                 IzprazniBazo_hs();
                 // preberi HS - CSV
                 try
                 {
                     System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnamehs, ASCIIEncoding.UTF8);
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
                     // število vrstic v CSV
                     do
                     {
@@ -1702,15 +1651,24 @@ namespace Komunala
                 {
                     DisplayData_hs();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnamehs);
-            }
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            Obdelaj_hs();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_hs(open.FileName);
+                ls.Text = "Ok";
+            }
+
+            //Obdelaj_hs();
         }
         // konec prenos HS
 
@@ -1729,10 +1687,8 @@ namespace Komunala
         {
             ul_mid = ""; ob_uime = ""; na_uime = ""; ul_uime = "";
         }
-        private void Obdelaj_ul()
+        private void Obdelaj_ul(string vhod)
         {
-            if (nul == 0)
-            {
                 // začni prenos
                 stevec = 0;
                 IzprazniBazo_ul();
@@ -1740,7 +1696,7 @@ namespace Komunala
                 try
                 {
                     System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnameul, ASCIIEncoding.UTF8);
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
                     // število vrstic v CSV
                     // ++stevec; // preskoči prvo vrstico
                     do
@@ -1793,16 +1749,24 @@ namespace Komunala
                 {
                     DisplayData_ul();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnameul);
-            }
-
         }
         private void button3_Click(object sender, EventArgs e) // prenos z SQL
         {
-            Obdelaj_ul();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_ul(open.FileName);
+                ls.Text = "Ok";
+            }
+
+            //Obdelaj_ul();
         }
         // konec prenos UL
 
@@ -1822,10 +1786,8 @@ namespace Komunala
             ob2_uime = ""; na2_uime = ""; povrsina = 0; na2_mid = "";
         }
 
-        private void Obdelaj_na()
+        private void Obdelaj_na(string vhod)
         {
-            if (nna == 0)
-            {
                 // začni prenos
                 stevec = 0;
                 IzprazniBazo_na();
@@ -1834,7 +1796,7 @@ namespace Komunala
                 try
                 {
                     System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnamena, ASCIIEncoding.UTF8);
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
                     do
                     {
                         vrstica = "";
@@ -1886,17 +1848,25 @@ namespace Komunala
                 {
                     DisplayData_na();
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnamena);
-            }
-
         }
         private void button7_Click(object sender, EventArgs e)  // prenos NA
         {
-            Obdelaj_na();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_na(open.FileName);
+                ls.Text = "Ok";
+            }
+
+
+            //Obdelaj_na();
         }
         // konec prenos NA
 
@@ -1929,17 +1899,15 @@ namespace Komunala
             ag_id = ""; ag_ime = "";
         }
 
-        private void Obdelaj_pt()
+        private void Obdelaj_pt(string filep)
         {
-            if (npt == 0)
-            {
                 // začni prenos
                 stevec = 0;
                 IzprazniBazo_pt();
                 try
                 {
                     System.IO.StreamReader objReader;
-                    objReader = new System.IO.StreamReader(fnamept, ASCIIEncoding.UTF8);
+                    objReader = new System.IO.StreamReader(filep, ASCIIEncoding.UTF8);
                     do
                     {
                         vrstica = "";
@@ -1988,13 +1956,6 @@ namespace Komunala
                 {
                     DisplayData_pt();
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Napaka! Datoteka ne obstaja: " + fnamena);
-            }
-
         }
 
         private void button2_Click(object sender, EventArgs e) // zapri okno
