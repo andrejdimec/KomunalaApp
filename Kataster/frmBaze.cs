@@ -74,7 +74,7 @@ namespace Komunala
         int nag,ncrp, nhs, nul, nna, npt, ncad; // napake pri preverjanju baze
         string tnaslov, tindeks_osebe;
         // variable cadis
-        string chsmid = "", cnaziv = "", ckraj = "", culica = "", chs = "", cposta = "", cime_poste = "", cdim = "", ctip_om = "";
+        string chsmid = "", cnaziv = "", ckraj = "", culica = "", chs = "", cposta = "", cime_poste = "", cdim = "", ctip_om = "",c_tip="",c_oblika="",c_id_vs="",c_upravljanje="" ;
         int csmeti = 0, cvodovod = 0, ckanalizacija = 0, cgreznica = 0;
 
         // variable tbl_crp
@@ -84,7 +84,7 @@ namespace Komunala
 
         // za izvoz v CSV
         string c_hsmid, c_ulica, c_labela, c_naslov, c_stalno, c_zacasno, c_voda, c_kanalizacija, c_smeti, c_greznica, c_x, c_y,c_cadis;
-
+        string toblika_ijs, ttip_prikljucka, tid_vs, tupravljanje_prikljucka,ttip_om,time_cadis;
 
 
         private void tbl_crpBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -138,7 +138,81 @@ namespace Komunala
 
         }
 
-        private void button16_Click_1(object sender, EventArgs e)
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            // ijsvo T2 voda
+            // izvozi datoteko stavbe v CSV
+
+            //string path = "c:\\Kataster\\hise.csv";
+
+            //File.Create(path).Close();
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "t2-voda.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+            {
+                try
+                {
+
+
+                    string q = "select * from tbl_hise"; // preberi vse zapise iz tbl_hise
+
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    using (StreamWriter writetext = new StreamWriter(save.FileName))
+                    {
+                        // glava
+                        str_zapisi = "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "TIP PRIKLJUČKA" + csv + "ID VS" + csv + "UPRAVLJANJE";
+                        writetext.WriteLine(str_zapisi, Encoding.UTF8);
+
+                        while (rdr.Read())
+                        {
+                            str_zapisi = "";
+                            c_hsmid = (string)rdr["hsmid"];
+                            c_x = Convert.ToString((double)rdr["x"]);
+                            c_y = Convert.ToString((double)rdr["y"]);
+                            c_oblika = (string)rdr["oblika_ijs"];
+                            c_tip =  (string)rdr["tip_prikljucka"];
+                            c_id_vs = (string)rdr["id_vs"]; ;
+                            c_upravljanje = (string)rdr["upravljanje_prikljucka"]; ;
+
+                            // string za zapis
+                            str_zapisi = c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_tip + csv + c_id_vs + csv + c_upravljanje;
+                            writetext.WriteLine(str_zapisi, Encoding.UTF8);
+                        }
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka reader: " + ex2.Message);
+                }
+
+                finally
+                {
+                    // MessageBox.Show("finnaly");
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                    MessageBox.Show("Zapis v CSV končan!");
+                    //Display_hise();
+                }
+
+            }
+        }
+
+    
+
+    private void button16_Click_1(object sender, EventArgs e)
         {
             //frmBaze_last secondForm = new frmBaze_last();
             //secondForm.ShowDialog();
@@ -439,6 +513,7 @@ namespace Komunala
                 nivcadis = 0;
                 while (rdr.Read())
                 {
+                    toblika_ijs = "NEZ";ttip_prikljucka = "-99";tid_vs = "-99";tupravljanje_prikljucka = "-99";
                     hsmid_hs = (string)rdr["hsmid"]; // hsmid po katerem boš iskal v cadis
                     tid = (Int32)rdr["id"];  // določi id v katerega boš pisal
                     try
@@ -461,7 +536,7 @@ namespace Komunala
                         }
 
                         // poišči hsmid iz tbl_hise v tbl_cad
-                        tkanalizacija = 0; tvodovod = 0; tgreznica = 0; tsmeti = 0;
+                        tkanalizacija = 0; tvodovod = 0; tgreznica = 0; tsmeti = 0; ttip_om="" ;
                         q2 = "select vodovod from tbl_cad where hsmid = @thsmid";  // če sta indexa iz ulic enaka
                         cmd2 = new SqlCommand(q2, con2);
                         con2.Open();
@@ -469,6 +544,22 @@ namespace Komunala
                         cmd2.ExecuteNonQuery();
                         tvodovod = Convert.ToInt32(cmd2.ExecuteScalar());
                         con2.Close();
+
+                        // ijsvo
+                        if (tvodovod == 1)
+                        {
+                            toblika_ijs = "JAV";
+                            tid_vs = "1633";
+                            tupravljanje_prikljucka = "1";
+                        }
+                        else
+                        {
+                            toblika_ijs = "DRUG";
+                            tid_vs = "99";
+                            tupravljanje_prikljucka = "0";
+                        }
+
+
 
                         q2 = "select kanalizacija from tbl_cad where hsmid = @thsmid";  // če sta indexa iz ulic enaka
                         cmd2 = new SqlCommand(q2, con2);
@@ -492,52 +583,89 @@ namespace Komunala
                         cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
                         cmd2.ExecuteNonQuery();
                         tsmeti = Convert.ToInt32(cmd2.ExecuteScalar());
-                        // tvodovod = Convert.ToInt32(tvodovodstr);
                         con2.Close();
 
+                        q2 = "select tip_om from tbl_cad where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        ttip_om = Convert.ToString(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        q2 = "select naziv from tbl_cad where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        time_cadis = Convert.ToString(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        // ZA IJSVO
+                        ttip_prikljucka = "-1";
+                        if (ttip_om.Contains("GOSPODINJSTVO"))
+                            ttip_prikljucka = "1";
+                        if (ttip_om.Contains("GOSPODARSTVO"))
+                            ttip_prikljucka = "3";
+                        if (ttip_om.Contains("NEGOSPODARSTVO"))
+                            ttip_prikljucka = "2";
+                        if (ttip_om.Equals(""))
+                            toblika_ijs = "NEZ";
+                        
                         //MessageBox.Show("tu");
 
                         // zapiši najdene vrednosti v datoteko tbl_hise - update
 
-                        q3 = "update tbl_hise set cadis = @tcadis where id=@tid";
+                        q3 = "update tbl_hise set cadis = @tcadis, voda = @tvodovod, kanalizacija = @tkanalizacija, greznica = @tgreznica, smeti = @tsmeti, oblika_ijs = @toblika_ijs" +
+                            ", tip_prikljucka=@ttip_prikljucka,id_vs=@tid_vs,upravljanje_prikljucka=@upravljanje,tipom_cadis=@tipom_cadis,ime_cadis=@ime_cadis  where id=@tid";
                         cmd3 = new SqlCommand(q3, con3);
                         con3.Open();
                         cmd3.Parameters.AddWithValue("@tcadis", cadis);
-                        cmd3.Parameters.AddWithValue("@tid", tid);
-                        cmd3.ExecuteNonQuery();
-                        con3.Close();
-
-                        q3 = "update tbl_hise set voda = @tvodovod where id=@tid";
-                        cmd3 = new SqlCommand(q3, con3);
-                        con3.Open();
                         cmd3.Parameters.AddWithValue("@tvodovod", tvodovod);
-                        cmd3.Parameters.AddWithValue("@tid", tid);
-                        cmd3.ExecuteNonQuery();
-                        con3.Close();
-
-                        q3 = "update tbl_hise set kanalizacija = @tkanalizacija where id=@tid";
-                        cmd3 = new SqlCommand(q3, con3);
-                        con3.Open();
                         cmd3.Parameters.AddWithValue("@tkanalizacija", tkanalizacija);
-                        cmd3.Parameters.AddWithValue("@tid", tid);
-                        cmd3.ExecuteNonQuery();
-                        con3.Close();
-
-                        q3 = "update tbl_hise set greznica = @tgreznica where id=@tid";
-                        cmd3 = new SqlCommand(q3, con3);
-                        con3.Open();
                         cmd3.Parameters.AddWithValue("@tgreznica", tgreznica);
+                        cmd3.Parameters.AddWithValue("@tsmeti", tsmeti);
+                        cmd3.Parameters.AddWithValue("@toblika_ijs", toblika_ijs);
+                        cmd3.Parameters.AddWithValue("@ttip_prikljucka", ttip_prikljucka);
+                        cmd3.Parameters.AddWithValue("@tid_vs", tid_vs);
+                        cmd3.Parameters.AddWithValue("@upravljanje", tupravljanje_prikljucka);
                         cmd3.Parameters.AddWithValue("@tid", tid);
+                        cmd3.Parameters.AddWithValue("@tipom_cadis", ttip_om);
+                        cmd3.Parameters.AddWithValue("@ime_cadis", time_cadis);
                         cmd3.ExecuteNonQuery();
                         con3.Close();
 
-                        q3 = "update tbl_hise set smeti = @tsmeti where id=@tid";
-                        cmd3 = new SqlCommand(q3, con3);
-                        con3.Open();
-                        cmd3.Parameters.AddWithValue("@tsmeti", tsmeti);
-                        cmd3.Parameters.AddWithValue("@tid", tid);
-                        cmd3.ExecuteNonQuery();
-                        con3.Close();
+                        //q3 = "update tbl_hise set voda = @tvodovod where id=@tid";
+                        //cmd3 = new SqlCommand(q3, con3);
+                        //con3.Open();
+                        //cmd3.Parameters.AddWithValue("@tvodovod", tvodovod);
+                        //cmd3.Parameters.AddWithValue("@tid", tid);
+                        //cmd3.ExecuteNonQuery();
+                        //con3.Close();
+
+                        //q3 = "update tbl_hise set kanalizacija = @tkanalizacija where id=@tid";
+                        //cmd3 = new SqlCommand(q3, con3);
+                        //con3.Open();
+                        //cmd3.Parameters.AddWithValue("@tkanalizacija", tkanalizacija);
+                        //cmd3.Parameters.AddWithValue("@tid", tid);
+                        //cmd3.ExecuteNonQuery();
+                        //con3.Close();
+
+                        //q3 = "update tbl_hise set greznica = @tgreznica where id=@tid";
+                        //cmd3 = new SqlCommand(q3, con3);
+                        //con3.Open();
+                        //cmd3.Parameters.AddWithValue("@tgreznica", tgreznica);
+                        //cmd3.Parameters.AddWithValue("@tid", tid);
+                        //cmd3.ExecuteNonQuery();
+                        //con3.Close();
+
+                        //q3 = "update tbl_hise set smeti = @tsmeti where id=@tid";
+                        //cmd3 = new SqlCommand(q3, con3);
+                        //con3.Open();
+                        //cmd3.Parameters.AddWithValue("@tsmeti", tsmeti);
+                        //cmd3.Parameters.AddWithValue("@tid", tid);
+                        //cmd3.ExecuteNonQuery();
+                        //con3.Close();
 
                     }
                     catch (Exception ex)
