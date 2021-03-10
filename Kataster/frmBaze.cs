@@ -102,12 +102,95 @@ namespace Komunala
 
         }
 
+        private void button14_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // prenos aglomeracije kanalizacija
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo_kan(open.FileName);
+                ls.Text = "Ok";
+            }
+
+        }
+
         private void label44_Click(object sender, EventArgs e)
         {
 
         }
 
         string idxtemp, natemp, ultemp, idxtempz;
+
+        private void button16_Click_3(object sender, EventArgs e)
+        {
+            // prenesi aglomeracije voda
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo_vod(open.FileName);
+                ls.Text = "Ok";
+            }
+        }
+
+        private void button14_Click_2(object sender, EventArgs e)
+        {
+            // prenos aglomeracije kanalizacija
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo_kan(open.FileName);
+                ls.Text = "Ok";
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // prenesi aglomeracije voda
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo_vod(open.FileName);
+                ls.Text = "Ok";
+            }
+        }
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1977,6 +2060,132 @@ namespace Komunala
                     DisplayData_na();
                 }
         }
+
+        private void Obdelaj_aglo_kan(string vhod)
+        {
+            // začni prenos
+            stevec = 0;
+            IzprazniBazo_ag();
+            string povrsinastr = "";
+
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                do
+                {
+                    vrstica = "";
+                    Izprazni_ag();
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string aglo_id = polje[1];
+                    string aglo_ime = polje[2];
+                    string aglo_id2 = "";
+                    string aglo_ime2 = "";
+                    string tip_aglo = "kan";
+                    try
+                    {
+                            // napiši prebrano v tabelo ul
+                            string query = "insert into tbl_aglo (id_aglo, ime_aglo,id_aglo2, ime_aglo2, tip_aglo) values(@id_aglo, @ime_aglo,@id_aglo2, @ime_aglo2, @tip_aglo)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+                            cmd.Parameters.AddWithValue("@id_aglo", aglo_id);
+                            cmd.Parameters.AddWithValue("@ime_aglo", aglo_ime);
+                            cmd.Parameters.AddWithValue("@tip_aglo", tip_aglo);
+                        cmd.Parameters.AddWithValue("@id_aglo2", aglo_id2);
+                        cmd.Parameters.AddWithValue("@ime_aglo2", aglo_ime2);
+
+                        cmd.ExecuteNonQuery();
+                            con.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                ls.Text = stevec.ToString();
+                ls.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                DisplayData_na();
+            }
+        }
+
+        private void Obdelaj_aglo_vod(string vhod)
+        {
+            // začni prenos
+            stevec = 0;
+            //IzprazniBazo_ag();
+            string povrsinastr = "";
+
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                do
+                {
+                    vrstica = "";
+                    //Izprazni_ag();
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string aglo_id = polje[2];
+                    string aglo_ime = polje[3];
+                    string aglo_id2 = polje[6];
+                    string aglo_ime2 = polje[7];
+                    string tip_aglo = "vod";
+                    try
+                    {
+                        // napiši prebrano v tabelo ul
+                        string query = "insert into tbl_aglo (id_aglo, ime_aglo,id_aglo2, ime_aglo2, tip_aglo) values(@id_aglo, @ime_aglo,@id_aglo2, @ime_aglo2, @tip_aglo)";
+                        cmd = new SqlCommand(query, con);
+                        con.Open();
+                        cmd.Parameters.AddWithValue("@id_aglo", aglo_id);
+                        cmd.Parameters.AddWithValue("@ime_aglo", aglo_ime);
+                        cmd.Parameters.AddWithValue("@id_aglo2", aglo_id2);
+                        cmd.Parameters.AddWithValue("@ime_aglo2", aglo_ime2);
+                        cmd.Parameters.AddWithValue("@tip_aglo", tip_aglo);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                ls.Text = stevec.ToString();
+                ls.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                DisplayData_na();
+            }
+        }
+
         private void button7_Click(object sender, EventArgs e)  // prenos NA
         {
             ls.Text = "";
