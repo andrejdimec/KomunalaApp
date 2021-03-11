@@ -47,6 +47,9 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
@@ -80,9 +83,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.ls1 = new System.Windows.Forms.Label();
-            this.button14 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button16 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -292,6 +292,35 @@
             this.gb1.Size = new System.Drawing.Size(561, 610);
             this.gb1.TabIndex = 79;
             this.gb1.TabStop = false;
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(98, 297);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(70, 28);
+            this.button16.TabIndex = 114;
+            this.button16.Text = "Voda";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click_3);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(16, 297);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(70, 28);
+            this.button14.TabIndex = 112;
+            this.button14.Text = "Kanal.";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click_2);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(183, 304);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(134, 15);
+            this.label10.TabIndex = 113;
+            this.label10.Text = "7. Seznam aglomeracij";
             // 
             // label47
             // 
@@ -562,7 +591,7 @@
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Location = new System.Drawing.Point(624, 240);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 148);
+            this.groupBox1.Size = new System.Drawing.Size(334, 203);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
@@ -593,6 +622,7 @@
             this.button5.TabIndex = 112;
             this.button5.Text = "Izvedi";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // button8
             // 
@@ -612,35 +642,6 @@
             this.ls1.Name = "ls1";
             this.ls1.Size = new System.Drawing.Size(0, 25);
             this.ls1.TabIndex = 114;
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(16, 297);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(70, 28);
-            this.button14.TabIndex = 112;
-            this.button14.Text = "Kanal.";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click_2);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(183, 304);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(134, 15);
-            this.label10.TabIndex = 113;
-            this.label10.Text = "7. Seznam aglomeracij";
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(98, 297);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(70, 28);
-            this.button16.TabIndex = 114;
-            this.button16.Text = "Voda";
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click_3);
             // 
             // frmBaze
             // 

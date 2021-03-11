@@ -138,6 +138,77 @@ namespace Komunala
 
         string idxtemp, natemp, ultemp, idxtempz;
 
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            // ijsvo T2 kanalizacija
+            // izvozi datoteko stavbe v CSV
+
+            string c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = ""
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "t2-kanalizacija.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+            {
+                try
+                {
+
+
+                    string q = "select * from tbl_hise"; // preberi vse zapise iz tbl_hise
+
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    using (StreamWriter writetext = new StreamWriter(save.FileName))
+                    {
+                        // glava
+                        str_zapisi = "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
+                        writetext.WriteLine(str_zapisi, Encoding.UTF8);
+
+                        while (rdr.Read())
+                        {
+                            str_zapisi = "";
+                            c_hsmid = (string)rdr["hsmid"];
+                            c_x = Convert.ToString((double)rdr["x"]);
+                            c_y = Convert.ToString((double)rdr["y"]);
+                            c_oblika = (string)rdr["oblika_ijs"];
+                            c_tip = (string)rdr["tip_prikljucka"];
+                            c_id_vs = (string)rdr["id_vs"]; ;
+                            c_upravljanje = (string)rdr["upravljanje_prikljucka"]; ;
+
+                            // string za zapis
+                            str_zapisi = c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_tip + csv + c_id_vs + csv + c_upravljanje;
+                            writetext.WriteLine(str_zapisi, Encoding.UTF8);
+                        }
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka reader: " + ex2.Message);
+                }
+
+                finally
+                {
+                    // MessageBox.Show("finnaly");
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                    MessageBox.Show("Zapis v CSV končan!");
+                    //Display_hise();
+                }
+
+            }
+
+        }
+
         private void button16_Click_3(object sender, EventArgs e)
         {
             // prenesi aglomeracije voda
