@@ -83,6 +83,10 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.ls1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -585,13 +589,17 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.button11);
+            this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Location = new System.Drawing.Point(624, 240);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 203);
+            this.groupBox1.Size = new System.Drawing.Size(334, 288);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
@@ -642,6 +650,43 @@
             this.ls1.Name = "ls1";
             this.ls1.Size = new System.Drawing.Size(0, 25);
             this.ls1.TabIndex = 114;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(150, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 15);
+            this.label8.TabIndex = 118;
+            this.label8.Text = "T4 voda";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 126);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 15);
+            this.label9.TabIndex = 115;
+            this.label9.Text = "T4 kanalizacija";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(15, 158);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(70, 28);
+            this.button11.TabIndex = 116;
+            this.button11.Text = "Izvedi";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(153, 158);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(70, 28);
+            this.button12.TabIndex = 117;
+            this.button12.Text = "Izvedi";
+            this.button12.UseVisualStyleBackColor = true;
             // 
             // frmBaze
             // 
@@ -734,5 +779,9 @@
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
     }
 }

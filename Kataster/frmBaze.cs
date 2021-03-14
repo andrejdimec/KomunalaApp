@@ -84,7 +84,24 @@ namespace Komunala
 
         // za izvoz v CSV
         string c_hsmid, c_ulica, c_labela, c_naslov, c_stalno, c_zacasno, c_voda, c_kanalizacija, c_smeti, c_greznica, c_x, c_y,c_cadis;
-        string toblika_ijs, ttip_prikljucka, tid_vs, tupravljanje_prikljucka,ttip_om,time_cadis;
+        string toblika_ijs, ttip_prikljucka, tid_vs, tupravljanje_prikljucka, ttip_om, time_cadis, cpedej, cpepos, ckmet, ckmgmid, cpredvidena, cdatpred, cagloid, copombe;
+
+        // t4 kanalizacija
+        string ime_aglo = "";
+        string id_aglo = "";
+        string delez_v_javno = "";
+        string st_preb = "";
+        string obrem_gospodinjstva = "";
+        string obrem_dejavnost = "";
+        string obrem_industrija = "";
+        string delez_priljucenosti = "";
+        string metoda = "";
+        string delez_nepriljucenosti = "";
+        string delez_opremljenosti = "";
+        string preb_na_kanal = "";
+        string delez_idivid = "";
+        string delez_ne_v_javno = "";
+        string komentar = "";
 
 
         private void tbl_crpBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -104,6 +121,148 @@ namespace Komunala
 
         private void button14_Click_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            // ijsvo T4 kanalizacija
+
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "t4-kanalizacija.csv";
+
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+            {
+                try
+                {
+
+
+                    string q = "select * from tbl_aglo where tip_aglo='KAN'"; // preberi vse zapise iz tbl_hise
+
+                    cmd = new SqlCommand(q, con);
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    using (StreamWriter writetext = new StreamWriter(save.FileName))
+                    {
+                        // glava
+                        str_zapisi = "(0) IME AGLO" + csv + "(1) ID AGLO" + csv + "(2) DELEŽ % JAVNO" + csv + "(3) ŠT. PREB-" + csv + "(4) OBREM. GOSPODINJSTVA" + csv + "(5) OBREM. DEJAVNOST" + csv + "(6) OBREM. INDUST." + csv + "(7) DELEŽ PRIKLJUČ." + csv + 
+                            "(8) METODA" + "(9) DELEŽ NEPRIKLJ." + "(10) METODA" + "(11) DELEŽ OPREMLJ." + csv + "(12) ŠT. PREB. NA KANAL." + csv + "(13) DELEŽ INDIVID." + csv + "(14) METODA" + csv + "(15) DELEŽ NE V JAVNO" + csv +
+                            "(16) METODA" + csv + "(17) KOMETNTAR";
+
+
+                        writetext.WriteLine(str_zapisi, Encoding.UTF8);
+
+                        while (rdr.Read())
+                        {
+                            // t4 kanalizacija
+                            id_aglo = "";
+                            ime_aglo = "";
+                            delez_v_javno = "";
+                            st_preb = "";
+                            obrem_gospodinjstva = "";
+                            obrem_dejavnost = "";
+                            obrem_industrija = "";
+                            delez_priljucenosti = "";
+                            metoda = "";
+                            delez_nepriljucenosti = "";
+                            delez_opremljenosti = "";
+                            preb_na_kanal = "";
+                            delez_idivid = "";
+                            delez_ne_v_javno = "";
+                            komentar = "";
+
+                            id_aglo = (string)rdr["id_aglo"];
+                            ime_aglo = (string)rdr["ime_aglo"];
+
+
+                            //                            c_at1 = "-99";
+                            //                            c_at2 = "-99";
+                            //                            c_aglo = "";
+                            //                            str_zapisi = "";
+                            //                            string cid = Convert.ToString((int)rdr["id"]);
+                            //                            c_hsmid = (string)rdr["hsmid"];
+                            //                            c_x = Convert.ToString((double)rdr["x"]);
+                            //                            c_y = Convert.ToString((double)rdr["y"]);
+                            //                            c_oblika = (string)rdr["oblika_ijs"];
+                            //                            c_grez = Convert.ToString((int)rdr["greznica"]);
+                            //                            c_kanal = Convert.ToString((int)rdr["kanalizacija"]);
+                            //                            //c_tip = (string)rdr["tip_prikljucka"];
+                            //                            //c_id_vs = (string)rdr["id_vs"];
+                            //                            c_imecad = (string)rdr["ime_cadis"];
+                            //                            c_omcad = (string)rdr["tipom_cadis"];
+                            //                            c_upravljanje = (string)rdr["upravljanje_prikljucka"];
+
+                            //                            if (rdr["idaglo_kan"] != DBNull.Value)
+                            //                                c_aglo = (string)rdr["idaglo_kan"];
+                            //                            else
+                            //                                c_aglo = "0";
+
+                            //                            c_at4 = "-99";
+                            //                            c_oblika = "NEZNAN";
+                            //                            c_at3 = "";
+                            //                            if (c_kanal.Equals("1"))
+                            //                            {
+                            //                                c_oblika = "KANAL";
+                            //                                c_at3 = "ID sistema";
+                            //                                c_at4 = "ID KČN";
+                            //                            }
+                            //                            if (c_grez.Equals("1"))
+                            //                            {
+                            //                                c_oblika = "GREZ_P";
+                            //                                c_at4 = "ID KČN";
+                            //                            }
+                            //                            if (c_imecad.Length > 20)
+                            //                            {
+                            //                                c_imecad = c_imecad.Substring(0, 19)
+                            //;
+                            //                            }
+
+                            //                            if (c_omcad.Contains("KMETIJSTVO"))
+                            //                            {
+                            //                                ckmet = "DA";
+                            //                            }
+                            //                            if (c_aglo.Length > 1)
+                            //                            {
+                            //                                if (!c_oblika.Equals("KANAL"))
+                            //                                {
+                            //                                    cpredvidena = "KANAL";
+                            //                                    cdatpred = "31.12.2023";
+                            //                                }
+                            //                            }
+                            // string za zapis
+                            str_zapisi = ime_aglo+csv+id_aglo + csv + delez_v_javno + csv + st_preb + csv + obrem_gospodinjstva + csv + obrem_dejavnost + csv + obrem_industrija + csv + delez_priljucenosti + csv + metoda + csv + delez_nepriljucenosti +
+                            csv + metoda + csv + delez_opremljenosti + csv + preb_na_kanal + csv + delez_idivid + csv + metoda + csv + delez_ne_v_javno + csv + metoda + csv + komentar;
+
+                            writetext.WriteLine(str_zapisi, Encoding.UTF8);
+                        }
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka reader: " + ex2.Message);
+                }
+
+                finally
+                {
+                    // MessageBox.Show("finnaly");
+                    if (rdr != null)
+                    {
+                        rdr.Close();
+                    }
+                    if (con != null)
+                    {
+                        con.Close();
+                    }
+                    MessageBox.Show("Zapis v CSV končan!");
+                    //Display_hise();
+                }
+
+            }
+
 
         }
 
@@ -143,7 +302,7 @@ namespace Komunala
             // ijsvo T2 kanalizacija
             // izvozi datoteko stavbe v CSV
 
-            string c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = ""
+            string c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "",cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "" ,c_omcad = "";
 
             SaveFileDialog save = new SaveFileDialog();
             save.FileName = "t2-kanalizacija.csv";
@@ -165,22 +324,67 @@ namespace Komunala
                     using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
                         // glava
-                        str_zapisi = "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
+                        str_zapisi = "IME CADIS" + csv+"OM CADIS"+csv+ "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
                         writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
                         while (rdr.Read())
                         {
+                            c_kanal = ""; c_grez = ""; c_aglo = ""; c_at1 = ""; c_at2 = ""; c_at3 = ""; c_at4 = ""; cpedej = ""; cpepos = ""; ckmgmid = ""; ckmet = ""; cpredvidena = ""; cdatpred = ""; cagloid = ""; copombe = ""; c_imecad = ""; c_omcad = "";
+                            c_at1 = "-99";
+                            c_at2 = "-99";
+                            c_aglo = "";
                             str_zapisi = "";
+                            string cid= Convert.ToString((int)rdr["id"]);
                             c_hsmid = (string)rdr["hsmid"];
                             c_x = Convert.ToString((double)rdr["x"]);
                             c_y = Convert.ToString((double)rdr["y"]);
                             c_oblika = (string)rdr["oblika_ijs"];
-                            c_tip = (string)rdr["tip_prikljucka"];
-                            c_id_vs = (string)rdr["id_vs"]; ;
-                            c_upravljanje = (string)rdr["upravljanje_prikljucka"]; ;
+                            c_grez = Convert.ToString((int)rdr["greznica"]);
+                            c_kanal = Convert.ToString((int)rdr["kanalizacija"]);
+                            //c_tip = (string)rdr["tip_prikljucka"];
+                            //c_id_vs = (string)rdr["id_vs"];
+                            c_imecad = (string)rdr["ime_cadis"];
+                            c_omcad = (string)rdr["tipom_cadis"];
+                            c_upravljanje = (string)rdr["upravljanje_prikljucka"];
 
+                            if (rdr["idaglo_kan"] != DBNull.Value)
+                                c_aglo = (string)rdr["idaglo_kan"]; 
+                            else
+                                c_aglo = "0";
+
+                            c_at4 = "-99";
+                            c_oblika = "NEZNAN";
+                            c_at3 = "";                            
+                            if (c_kanal.Equals("1"))
+                            {
+                                c_oblika = "KANAL";
+                                c_at3 = "ID sistema";
+                                c_at4 = "ID KČN";
+                            }
+                            if (c_grez.Equals("1"))
+                            {
+                                c_oblika = "GREZ_P";
+                                c_at4 = "ID KČN";
+                            }
+                            if (c_imecad.Length >20)
+                            {
+                                c_imecad = c_imecad.Substring(0, 19)
+;                            }
+
+                            if (c_omcad.Contains("KMETIJSTVO"))
+                                {
+                                    ckmet = "DA";
+                                }
+                            if (c_aglo.Length>1)
+                            {
+                                if (!c_oblika.Equals("KANAL"))
+                                {
+                                    cpredvidena = "KANAL";
+                                    cdatpred = "31.12.2023";
+                                }
+                            }
                             // string za zapis
-                            str_zapisi = c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_tip + csv + c_id_vs + csv + c_upravljanje;
+                            str_zapisi = cid+csv+c_imecad+csv+c_omcad+csv+c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_at1 + csv + c_at2 + csv + c_at3 + csv + c_at4 + csv + cpedej + csv +cpepos+csv+ckmet+csv+ckmgmid+csv+cpredvidena+csv+cdatpred+csv+c_aglo+csv+copombe;
                             writetext.WriteLine(str_zapisi, Encoding.UTF8);
                         }
                     }
@@ -405,7 +609,8 @@ namespace Komunala
                     string idaglo_vod = polje[18];
                     string imeaglo_vod = polje[19];
                     string hsmid_aglo = polje[2];
-                    
+                    if (idaglo_kan == null)
+                        idaglo_kan = "0";
                     //pt_mid = polje[2];
                     try
                     {
