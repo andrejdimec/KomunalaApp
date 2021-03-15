@@ -435,6 +435,7 @@ namespace Komunala
         private void button14_Click_2(object sender, EventArgs e)
         {
             // prenos aglomeracije kanalizacija
+            IzprazniBazo_ag();
             ls.Text = "";
             OpenFileDialog open = new OpenFileDialog();
             open.InitialDirectory = frmMain.pot_podatki;
@@ -1750,43 +1751,81 @@ namespace Komunala
                     // število vrstic v CSV
                     do
                     {
-                        vrstica = "";
-                        string idxulica = "";
-                        string idxulica_s = "";
-                        string idxulica_z = "";
-                        izprazni_crp();
-                        vrstica = vrstica + objReader.ReadLine() + "\r\n";
-                        // razdeli vrstico ločeno s ;
-                        string[] polje = vrstica.Split(';');
-                        emso = polje[0];
-                        spol = polje[1];
-                        dat_roj = polje[2];
-                        priimek1 = polje[3];
-                        priimek2 = polje[4];
-                        ime1 = polje[5];
-                        ime2 = polje[6];
-                        drzava = polje[7];
-                        obcina_roj = polje[9];
-                        naselje_roj = polje[10];
-                        drzava_roj = polje[11];
-                        naselje_stpr = polje[13];
-                        ulica_stpr = polje[14];
-                        hs_stpr = polje[15];
-                        hsd_stpr = polje[16];
-                        posta_stpr = polje[17];
-                        naziv_poste_stpr = polje[18];
-                        ulica_zcpr = polje[19];
-                        hs_zcpr = polje[20];
-                        hsd_zcpr = polje[21];
-                        posta_zcpr = polje[22];
-                        naziv_poste_zcpr = polje[23];
-                        datom_od_zcpr = polje[24];
-                        status_preb = polje[25];
-                        stan = polje[26];
 
-                        // napiši prebrano v tabelo crp
-                        try
-                        {
+                    // novo od 2021
+                    vrstica = "";
+                    string idxulica = "";
+                    string idxulica_s = "";
+                    string idxulica_z = "";
+                    izprazni_crp();
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    emso = polje[0];
+                    spol = polje[1];
+                    dat_roj = polje[2];
+                    priimek1 = polje[5];
+                    priimek2 = polje[6];
+                    ime1 = polje[8];
+                    ime2 = polje[9];
+                    drzava = polje[11];
+                    obcina_roj = polje[15];
+                    naselje_roj = polje[17];
+                    drzava_roj = polje[29];
+                    naselje_stpr = polje[39];
+                    ulica_stpr = polje[41];
+                    hs_stpr = polje[42];
+                    hsd_stpr = polje[43];
+                    posta_stpr = polje[48];
+                    naziv_poste_stpr = polje[49];
+                    ulica_zcpr = polje[62];
+                    hs_zcpr = polje[63];
+                    hsd_zcpr = polje[64];
+                    posta_zcpr = polje[66];
+                    naziv_poste_zcpr = polje[67];
+                    datom_od_zcpr = polje[68];
+                    status_preb = polje[82];
+                    stan = polje[84];
+
+
+                    // staro do 02-2021    
+                    //vrstica = "";
+                    //string idxulica = "";
+                    //string idxulica_s = "";
+                    //string idxulica_z = "";
+                    //izprazni_crp();
+                    //vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                    //// razdeli vrstico ločeno s ;
+                    //string[] polje = vrstica.Split(';');
+                    //emso = polje[0];
+                    //spol = polje[1];
+                    //dat_roj = polje[2];
+                    //priimek1 = polje[3];
+                    //priimek2 = polje[4];
+                    //ime1 = polje[5];
+                    //ime2 = polje[6];
+                    //drzava = polje[7];
+                    //obcina_roj = polje[9];
+                    //naselje_roj = polje[10];
+                    //drzava_roj = polje[11];
+                    //naselje_stpr = polje[13];
+                    //ulica_stpr = polje[14];
+                    //hs_stpr = polje[15];
+                    //hsd_stpr = polje[16];
+                    //posta_stpr = polje[17];
+                    //naziv_poste_stpr = polje[18];
+                    //ulica_zcpr = polje[19];
+                    //hs_zcpr = polje[20];
+                    //hsd_zcpr = polje[21];
+                    //posta_zcpr = polje[22];
+                    //naziv_poste_zcpr = polje[23];
+                    //datom_od_zcpr = polje[24];
+                    //status_preb = polje[25];
+                    //stan = polje[26];
+
+                    // napiši prebrano v tabelo crp
+                    try
+                    {
                             if (stevec > 0)  // preskoči prvo vrstico
                             {
                                 // naredi indekse
@@ -2357,8 +2396,8 @@ namespace Komunala
 
                     // razdeli vrstico ločeno s ;
                     string[] polje = vrstica.Split(';');
-                    string aglo_id = polje[1];
-                    string aglo_ime = polje[2];
+                    string aglo_id = polje[2];
+                    string aglo_ime = polje[3];
                     string aglo_id2 = "";
                     string aglo_ime2 = "";
                     string tip_aglo = "kan";
