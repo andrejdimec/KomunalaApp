@@ -234,6 +234,7 @@ namespace Komunala
                             //                                }
                             //                            }
                             // string za zapis
+
                             str_zapisi = ime_aglo+csv+id_aglo + csv + delez_v_javno + csv + st_preb + csv + obrem_gospodinjstva + csv + obrem_dejavnost + csv + obrem_industrija + csv + delez_priljucenosti + csv + metoda + csv + delez_nepriljucenosti +
                             csv + metoda + csv + delez_opremljenosti + csv + preb_na_kanal + csv + delez_idivid + csv + metoda + csv + delez_ne_v_javno + csv + metoda + csv + komentar;
 
