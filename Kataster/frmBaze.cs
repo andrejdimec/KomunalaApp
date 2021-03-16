@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections;
 using System.CodeDom;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Komunala
 {
@@ -303,7 +304,7 @@ namespace Komunala
             // ijsvo T2 kanalizacija
             // izvozi datoteko stavbe v CSV
 
-            string c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "",cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "" ,c_omcad = "";
+            string c_nas="",c_lab="",c_naslov="",c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "",cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "" ,c_omcad = "";
 
             SaveFileDialog save = new SaveFileDialog();
             save.FileName = "t2-kanalizacija.csv";
@@ -325,14 +326,14 @@ namespace Komunala
                     using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
                         // glava
-                        str_zapisi = "IME CADIS" + csv+"OM CADIS"+csv+ "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
+                        str_zapisi = "ID"+csv+"IME CADIS" +csv+ "NASLOV"+csv+"OM CADIS"+csv+ "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
                         writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
                         while (rdr.Read())
                         {
                             c_kanal = ""; c_grez = ""; c_aglo = ""; c_at1 = ""; c_at2 = ""; c_at3 = ""; c_at4 = ""; cpedej = ""; cpepos = ""; ckmgmid = ""; ckmet = ""; cpredvidena = ""; cdatpred = ""; cagloid = ""; copombe = ""; c_imecad = ""; c_omcad = "";
-                            c_at1 = "-99";
-                            c_at2 = "-99";
+                            c_at1 = "";
+                            c_at2 = "";
                             c_aglo = "";
                             str_zapisi = "";
                             string cid= Convert.ToString((int)rdr["id"]);
@@ -347,25 +348,40 @@ namespace Komunala
                             c_imecad = (string)rdr["ime_cadis"];
                             c_omcad = (string)rdr["tipom_cadis"];
                             c_upravljanje = (string)rdr["upravljanje_prikljucka"];
-
+                            c_nas = (string)rdr["naslov"];
+                            c_lab = (string)rdr["labela"];
+                            c_naslov = c_nas + " " + c_lab;
                             if (rdr["idaglo_kan"] != DBNull.Value)
                                 c_aglo = (string)rdr["idaglo_kan"]; 
                             else
-                                c_aglo = "0";
+                                c_aglo = "-1";
 
-                            c_at4 = "-99";
+                            c_at4 = "";
                             c_oblika = "NEZNAN";
                             c_at3 = "";                            
                             if (c_kanal.Equals("1"))
                             {
                                 c_oblika = "KANAL";
-                                c_at3 = "ID sistema";
-                                c_at4 = "ID KČN";
+                                
+                                // radgona
+                                c_at3 = "10905";
+                                c_at4 = "3488";
+                                if (c_aglo.Equals("3168"))
+                                // negova
+                                {
+                                    c_at3 = "10906";
+                                    c_at4 = "2530";
+                                }
                             }
                             if (c_grez.Equals("1"))
                             {
                                 c_oblika = "GREZ_P";
-                                c_at4 = "ID KČN";
+                                c_at4 = "3488";
+                                if (c_aglo.Equals("3168"))
+                                // negova
+                                {
+                                    c_at4 = "2530";
+                                }
                             }
                             if (c_imecad.Length >20)
                             {
@@ -384,9 +400,12 @@ namespace Komunala
                                     cdatpred = "31.12.2023";
                                 }
                             }
+                            if (c_oblika.Equals("NEZNAN"))
+                                copombe = "NIMAMO PODATKOV";
                             // string za zapis
-                            str_zapisi = cid+csv+c_imecad+csv+c_omcad+csv+c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_at1 + csv + c_at2 + csv + c_at3 + csv + c_at4 + csv + cpedej + csv +cpepos+csv+ckmet+csv+ckmgmid+csv+cpredvidena+csv+cdatpred+csv+c_aglo+csv+copombe;
+                            str_zapisi = cid+csv+c_imecad+csv+c_naslov+ csv+c_omcad+csv+c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_at1 + csv + c_at2 + csv + c_at3 + csv + c_at4 + csv + cpedej + csv +cpepos+csv+ckmet+csv+ckmgmid+csv+cpredvidena+csv+cdatpred+csv+c_aglo+csv+copombe;
                             writetext.WriteLine(str_zapisi, Encoding.UTF8);
+                            // writetext.WriteLine(str_zapisi);
                         }
                     }
                 }
@@ -412,6 +431,33 @@ namespace Komunala
 
             }
 
+        }
+
+
+        public void WriteSample()
+        {
+            Excel.Application excelApp = new Excel.Application();
+            if (excelApp != null)
+            {
+                Excel.Workbook excelWorkbook = excelApp.Workbooks.Add();
+                Excel.Worksheet excelWorksheet = (Excel.Worksheet)excelWorkbook.Sheets.Add();
+
+                excelWorksheet.Cells[1, 1] = "Value1";
+                excelWorksheet.Cells[2, 1] = "Value2";
+                excelWorksheet.Cells[3, 1] = "Value3";
+                excelWorksheet.Cells[4, 1] = "Value4";
+
+                excelApp.ActiveWorkbook.SaveAs(@"C:\abc.xls", Excel.XlFileFormat.xlWorkbookNormal);
+
+                excelWorkbook.Close();
+                excelApp.Quit();
+
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorksheet);
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorkbook);
+                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelApp);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
         }
 
         private void button16_Click_3(object sender, EventArgs e)
