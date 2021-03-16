@@ -13,7 +13,7 @@ using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections;
 using System.CodeDom;
-using Excel = Microsoft.Office.Interop.Excel;
+//using Excel = Microsoft.Interop.Excel;
 
 namespace Komunala
 {
@@ -69,7 +69,8 @@ namespace Komunala
         string fnamena2;
         string fnamept;
         string fnamept2, fnameag, fnameag2;
-        string csv = ";";
+        char csv;
+        
         string str_zapisi;
         string ag_id, ag_ime;  // aglomeracije
         int nag,ncrp, nhs, nul, nna, npt, ncad; // napake pri preverjanju baze
@@ -304,7 +305,7 @@ namespace Komunala
             // ijsvo T2 kanalizacija
             // izvozi datoteko stavbe v CSV
 
-            string c_nas="",c_lab="",c_naslov="",c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "",cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "" ,c_omcad = "";
+            string cid="",c_nas="",c_lab="",c_naslov="",c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "",cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "" ,c_omcad = "";
 
             SaveFileDialog save = new SaveFileDialog();
             save.FileName = "t2-kanalizacija.csv";
@@ -331,12 +332,12 @@ namespace Komunala
 
                         while (rdr.Read())
                         {
-                            c_kanal = ""; c_grez = ""; c_aglo = ""; c_at1 = ""; c_at2 = ""; c_at3 = ""; c_at4 = ""; cpedej = ""; cpepos = ""; ckmgmid = ""; ckmet = ""; cpredvidena = ""; cdatpred = ""; cagloid = ""; copombe = ""; c_imecad = ""; c_omcad = "";
+                            cid = ""; c_kanal = ""; c_grez = ""; c_aglo = ""; c_at1 = ""; c_at2 = ""; c_at3 = ""; c_at4 = ""; cpedej = ""; cpepos = ""; ckmgmid = ""; ckmet = ""; cpredvidena = ""; cdatpred = ""; cagloid = ""; copombe = ""; c_imecad = ""; c_omcad = "";
                             c_at1 = "";
                             c_at2 = "";
                             c_aglo = "";
                             str_zapisi = "";
-                            string cid= Convert.ToString((int)rdr["id"]);
+                            cid= Convert.ToString((int)rdr["id"]);
                             c_hsmid = (string)rdr["hsmid"];
                             c_x = Convert.ToString((double)rdr["x"]);
                             c_y = Convert.ToString((double)rdr["y"]);
@@ -436,28 +437,28 @@ namespace Komunala
 
         public void WriteSample()
         {
-            Excel.Application excelApp = new Excel.Application();
-            if (excelApp != null)
-            {
-                Excel.Workbook excelWorkbook = excelApp.Workbooks.Add();
-                Excel.Worksheet excelWorksheet = (Excel.Worksheet)excelWorkbook.Sheets.Add();
+            //Excel.Application excelApp = new Excel.Application();
+            //if (excelApp != null)
+            //{
+            //    Excel.Workbook excelWorkbook = excelApp.Workbooks.Add();
+            //    Excel.Worksheet excelWorksheet = (Excel.Worksheet)excelWorkbook.Sheets.Add();
 
-                excelWorksheet.Cells[1, 1] = "Value1";
-                excelWorksheet.Cells[2, 1] = "Value2";
-                excelWorksheet.Cells[3, 1] = "Value3";
-                excelWorksheet.Cells[4, 1] = "Value4";
+            //    excelWorksheet.Cells[1, 1] = "Value1";
+            //    excelWorksheet.Cells[2, 1] = "Value2";
+            //    excelWorksheet.Cells[3, 1] = "Value3";
+            //    excelWorksheet.Cells[4, 1] = "Value4";
 
-                excelApp.ActiveWorkbook.SaveAs(@"C:\abc.xls", Excel.XlFileFormat.xlWorkbookNormal);
+            //    excelApp.ActiveWorkbook.SaveAs(@"C:\abc.xls", Excel.XlFileFormat.xlWorkbookNormal);
 
-                excelWorkbook.Close();
-                excelApp.Quit();
+            //    excelWorkbook.Close();
+            //    excelApp.Quit();
 
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorksheet);
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorkbook);
-                System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelApp);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            }
+            //    System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorksheet);
+            //    System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelWorkbook);
+            //    System.Runtime.InteropServices.Marshal.FinalReleaseComObject(excelApp);
+            //    GC.Collect();
+            //    GC.WaitForPendingFinalizers();
+            //}
         }
 
         private void button16_Click_3(object sender, EventArgs e)
@@ -1007,6 +1008,9 @@ namespace Komunala
                         cmd2.ExecuteNonQuery();
                         time_cadis = Convert.ToString(cmd2.ExecuteScalar());
                         con2.Close();
+
+                        time_cadis = time_cadis.Replace("\u0022", "");
+                        ttip_om = ttip_om.Replace("\u0022", "");
 
                         // ZA IJSVO
                         ttip_prikljucka = "-1";
@@ -1610,9 +1614,12 @@ namespace Komunala
 
         private void frmBaze_Load(object sender, EventArgs e)
         {
+            csv = ';';
+            csv = '\t';
+
             //MessageBox.Show(mapa);
             // TODO: This line of code loads data into the 'dskat2.tbl_ul' table. You can move, or remove it, as needed.
-            
+
             ls.Text = ""; label24.Text = ""; label23.Text = ""; label22.Text = ""; label21.Text = "";label4.Text = "";label17.Text = "";
             label5.Text = "";label18.Text="" ;
             //Prikazi_bazo();
