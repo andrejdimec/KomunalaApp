@@ -274,6 +274,26 @@ namespace Komunala
 
         }
 
+        private void button18_Click_1(object sender, EventArgs e)
+        {
+            // dodaj MB vodovod
+            ls1.Text = counths.ToString();
+            ls1.Refresh();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_mb_vodovod(open.FileName);
+                ls.Text = "Ok";
+                ls.Refresh();
+            }
+
+        }
+
         private void button12_Click(object sender, EventArgs e)
         {
             // prenos aglomeracije kanalizacija
@@ -547,6 +567,7 @@ namespace Komunala
 
         private void button8_Click_1(object sender, EventArgs e)
         {
+            string cid = "", c_nas = "", c_lab = "", c_naslov = "", c_kanal = "", c_grez = "", c_aglo = "", c_at1 = "", c_at2 = "", c_at3 = "", c_at4 = "", cpedej = "", cpepos = "", ckmgmid = "", ckmet = "", cpredvidena = "", cdatpred = "", cagloid = "", copombe = "", c_imecad = "", c_omcad = "";
             // ijsvo T2 voda
             // izvozi datoteko stavbe v CSV
 
@@ -574,22 +595,36 @@ namespace Komunala
                     using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
                         // glava
-                        str_zapisi = "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "TIP PRIKLJUČKA" + csv + "ID VS" + csv + "UPRAVLJANJE";
+                        str_zapisi = "ID" + csv + "IME CADIS" + csv + "NASLOV" + csv + "OM CADIS" + csv + "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "TIP PRIKLJUČKA" + csv + "ID VS" + csv + "UPRAVLJANJE";
                         writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
                         while (rdr.Read())
                         {
+                            cid = ""; c_kanal = ""; c_grez = ""; c_aglo = ""; c_at1 = ""; c_at2 = ""; c_at3 = ""; c_at4 = ""; cpedej = ""; cpepos = ""; ckmgmid = ""; ckmet = ""; cpredvidena = ""; cdatpred = ""; cagloid = ""; copombe = ""; c_imecad = ""; c_omcad = "";
                             str_zapisi = "";
                             c_hsmid = (string)rdr["hsmid"];
                             c_x = Convert.ToString((double)rdr["x"]);
                             c_y = Convert.ToString((double)rdr["y"]);
                             c_oblika = (string)rdr["oblika_ijs"];
                             c_tip =  (string)rdr["tip_prikljucka"];
-                            c_id_vs = (string)rdr["id_vs"]; ;
-                            c_upravljanje = (string)rdr["upravljanje_prikljucka"]; ;
+                            c_id_vs = (string)rdr["id_vs"]; 
+                            c_upravljanje = (string)rdr["upravljanje_prikljucka"];
+                            c_imecad = (string)rdr["ime_cadis"];
+                            c_omcad = (string)rdr["tipom_cadis"];
+                            cid = Convert.ToString((int)rdr["id"]);
+                            c_nas = (string)rdr["naslov"];
+                            c_lab = (string)rdr["labela"];
+                            c_naslov = c_nas + " " + c_lab;
+
+                            //if (c_nas.Contains("Negova"))
+                            //{
+                            //    c_oblika="Negoa"
+                            //}
+
+
 
                             // string za zapis
-                            str_zapisi = c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_tip + csv + c_id_vs + csv + c_upravljanje;
+                            str_zapisi = cid + csv + c_imecad + csv + c_naslov + csv + c_omcad + csv + c_hsmid + csv + c_x + csv + c_y + csv + c_oblika + csv + c_tip + csv + c_id_vs + csv + c_upravljanje;
                             writetext.WriteLine(str_zapisi, Encoding.UTF8);
                         }
                     }
@@ -732,6 +767,110 @@ namespace Komunala
             finally
             {
                // DisplayData_pt();
+            }
+
+        }
+
+
+        private void Obdelaj_mb_vodovod(string fnameag)
+        {
+
+            int mb_vodovod=3;
+            int vodovod = 0;
+
+            // začni prenos
+            stevec = 0;
+            //IzprazniBazo_ag();
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(fnameag, ASCIIEncoding.UTF8);
+                do
+                {
+                    mb_vodovod = 3;
+                    vrstica = "";
+                    //Izprazni_ag();
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string hsmid_mb = polje[1];
+
+                    string q2 = "select hsmid from tbl_hise where hsmid = @idx";
+                    cmd2 = new SqlCommand(q2, con2);
+                    con2.Open();
+                    cmd2.Parameters.AddWithValue("@idx", hsmid_mb);
+                    cmd2.ExecuteNonQuery();
+                    string ok_hsmid = (string)cmd2.ExecuteScalar();
+                    con2.Close();
+
+                    if (ok_hsmid != null)
+                    {
+                        // napiši MB v tabelo hise
+                        try
+                        {
+                            q2 = "select voda,oblika_ijs,id_vs from tbl_hise where hsmid = @idx";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@idx", hsmid_mb);
+                            rdr2 = cmd2.ExecuteReader();
+
+                            while (rdr2.Read())
+                            {
+                                vodovod = (int)rdr2["voda"];
+                                c_oblika = (string)rdr2["oblika_ijs"];
+                                c_id_vs = (string)rdr2["id_vs"];
+                                //string ok_hsmid = (string)cmd2.ExecuteScalar();
+                            }
+                            if (vodovod == 1)
+                            {
+                                mb_vodovod = vodovod;
+                            }
+                            else
+                            {
+                                // mb vodovod = true
+                                mb_vodovod = 3;
+                                c_oblika = "JAV";
+                                c_id_vs = "1171";
+
+                            }
+                                con2.Close();
+
+                                q2 = "update tbl_hise set voda = @vodovod, oblika_ijs = @oblika, id_vs = @vs where hsmid=@idx";
+                                // MessageBox.Show("Ta hsmid bo zapisal v tbl_hs " + ok_hsmid);
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@vodovod", mb_vodovod);
+                            cmd2.Parameters.AddWithValue("@oblika", c_oblika);
+                            cmd2.Parameters.AddWithValue("@vs", c_id_vs);
+                            cmd2.Parameters.AddWithValue("@idx", hsmid_mb);
+                                cmd2.ExecuteNonQuery();
+                                con2.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Napaka update MB vodovod: " + stevec.ToString() + " " + ex.Message);
+                            }
+
+                        
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                //label52.Text = stevec.ToString();
+                //label52.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka - aglomeracije: " + ex.Message);
+            }
+            finally
+            {
+                // DisplayData_pt();
             }
 
         }
@@ -969,6 +1108,7 @@ namespace Komunala
 
 
 
+
                         q2 = "select kanalizacija from tbl_cad where hsmid = @thsmid";  // če sta indexa iz ulic enaka
                         cmd2 = new SqlCommand(q2, con2);
                         con2.Open();
@@ -1013,12 +1153,14 @@ namespace Komunala
                         ttip_om = ttip_om.Replace("\u0022", "");
 
                         // ZA IJSVO
-                        ttip_prikljucka = "-1";
+                        ttip_prikljucka = "";
                         if (ttip_om.Contains("GOSPODINJSTVO"))
                             ttip_prikljucka = "1";
                         if (ttip_om.Contains("GOSPODARSTVO"))
                             ttip_prikljucka = "3";
                         if (ttip_om.Contains("NEGOSPODARSTVO"))
+                            ttip_prikljucka = "2";
+                        if (ttip_om.Contains("KMETIJSTVO"))
                             ttip_prikljucka = "2";
                         if (ttip_om.Equals(""))
                             toblika_ijs = "NEZ";

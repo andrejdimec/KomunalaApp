@@ -78,15 +78,17 @@
             this.label61 = new System.Windows.Forms.Label();
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.ls1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -186,7 +188,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(50, 722);
+            this.button2.Location = new System.Drawing.Point(50, 751);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(106, 34);
             this.button2.TabIndex = 68;
@@ -254,6 +256,8 @@
             // 
             // gb1
             // 
+            this.gb1.Controls.Add(this.button18);
+            this.gb1.Controls.Add(this.label11);
             this.gb1.Controls.Add(this.button16);
             this.gb1.Controls.Add(this.button14);
             this.gb1.Controls.Add(this.label10);
@@ -293,7 +297,7 @@
             this.gb1.Controls.Add(this.label22);
             this.gb1.Location = new System.Drawing.Point(34, 94);
             this.gb1.Name = "gb1";
-            this.gb1.Size = new System.Drawing.Size(561, 610);
+            this.gb1.Size = new System.Drawing.Size(561, 635);
             this.gb1.TabIndex = 79;
             this.gb1.TabStop = false;
             // 
@@ -348,7 +352,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(15, 546);
+            this.button15.Location = new System.Drawing.Point(16, 583);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(70, 28);
             this.button15.TabIndex = 82;
@@ -378,7 +382,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(97, 553);
+            this.label44.Location = new System.Drawing.Point(98, 590);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(288, 15);
             this.label44.TabIndex = 111;
@@ -604,6 +608,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(150, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 15);
+            this.label8.TabIndex = 118;
+            this.label8.Text = "T4 voda";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 126);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 15);
+            this.label9.TabIndex = 115;
+            this.label9.Text = "T4 kanalizacija";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(15, 158);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(70, 28);
+            this.button11.TabIndex = 116;
+            this.button11.Text = "Izvedi";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(153, 158);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(70, 28);
+            this.button12.TabIndex = 117;
+            this.button12.Text = "Izvedi";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -651,48 +692,30 @@
             this.ls1.Size = new System.Drawing.Size(0, 25);
             this.ls1.TabIndex = 114;
             // 
-            // label8
+            // button18
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(150, 126);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 15);
-            this.label8.TabIndex = 118;
-            this.label8.Text = "T4 voda";
+            this.button18.Location = new System.Drawing.Point(16, 545);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(70, 28);
+            this.button18.TabIndex = 115;
+            this.button18.Text = "Izvedi";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click_1);
             // 
-            // label9
+            // label11
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 15);
-            this.label9.TabIndex = 115;
-            this.label9.Text = "T4 kanalizacija";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(15, 158);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(70, 28);
-            this.button11.TabIndex = 116;
-            this.button11.Text = "Izvedi";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click_1);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(153, 158);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(70, 28);
-            this.button12.TabIndex = 117;
-            this.button12.Text = "Izvedi";
-            this.button12.UseVisualStyleBackColor = true;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(98, 552);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(199, 15);
+            this.label11.TabIndex = 116;
+            this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
             // 
             // frmBaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 778);
+            this.ClientSize = new System.Drawing.Size(996, 811);
             this.Controls.Add(this.ls1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ls);
@@ -783,5 +806,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Label label11;
     }
 }
