@@ -105,6 +105,9 @@ namespace Komunala
         string delez_ne_v_javno = "";
         string komentar = "";
 
+        double poraba = 0;
+        double stara_poraba = 0;
+
 
         private void tbl_crpBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
@@ -310,6 +313,25 @@ namespace Komunala
                 Obdelaj_aglo_kan(open.FileName);
                 ls.Text = "Ok";
             }
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            // prenos porabe vode v bazo
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_cadis_voda(open.FileName);
+                ls.Text = "Ok";
+                ls.Refresh();
+            }
+
 
         }
 
@@ -771,6 +793,95 @@ namespace Komunala
 
         }
 
+        private void Obdelaj_cadis_voda(string fnameag)
+        {
+
+            string q2 = "";
+
+            stevec = 0;
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(fnameag, ASCIIEncoding.UTF8);
+                do
+                {
+                    //poraba = 0; stara_poraba = 0;
+                    vrstica = "";
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string hsmid_cad = polje[0];
+                    double poraba_cad = Convert.ToDouble(polje[3]);
+
+                    try
+                    {
+                            // ali obstaja hs_mid v tabeli hise?
+                            q2 = "select hsmid from tbl_hise where hsmid = @idx";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                            cmd2.ExecuteNonQuery();
+                            string ok_hsmid = (string)cmd2.ExecuteScalar();
+                            con2.Close();
+
+                            if (ok_hsmid != null)
+                            {
+                                // samo če hsmid obstaja vpiši porabo    
+
+                                // preberi staro porabo
+                                q2 = "select poraba_vod from tbl_hise where hsmid = @idx";
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                                cmd2.ExecuteNonQuery();
+                                
+                            
+                                object porabaobj = cmd2.ExecuteScalar();
+                            if (!porabaobj.Equals(DBNull.Value))
+                                stara_poraba = Convert.ToDouble(porabaobj);
+                            else
+                                stara_poraba = 0;
+                                
+                            con2.Close();
+
+                                // prištej porabo k obstoječi
+                                poraba = stara_poraba + poraba_cad;
+
+                                // zapiši porabo
+                                q2 = "update tbl_hise set poraba_vod = @poraba_vod where hsmid=@idx";
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@poraba_vod", poraba);
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                                cmd2.ExecuteNonQuery();
+                                con2.Close();
+                            }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                //label52.Text = stevec.ToString();
+                //label52.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                // DisplayData_pt();
+            }
+
+        }
 
         private void Obdelaj_mb_vodovod(string fnameag)
         {

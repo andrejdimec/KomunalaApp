@@ -89,11 +89,16 @@
             this.ls1 = new System.Windows.Forms.Label();
             this.button18 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnhise
@@ -544,7 +549,7 @@
             // 
             this.groupBox2.Controls.Add(this.label48);
             this.groupBox2.Controls.Add(this.btnIzvoz);
-            this.groupBox2.Location = new System.Drawing.Point(624, 94);
+            this.groupBox2.Location = new System.Drawing.Point(624, 487);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 130);
             this.groupBox2.TabIndex = 87;
@@ -603,7 +608,7 @@
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Location = new System.Drawing.Point(624, 240);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 288);
+            this.groupBox1.Size = new System.Drawing.Size(334, 223);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
@@ -711,11 +716,52 @@
             this.label11.TabIndex = 116;
             this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button20);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.button19);
+            this.groupBox3.Location = new System.Drawing.Point(624, 104);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(334, 114);
+            this.groupBox3.TabIndex = 91;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = " Prenos porabe v bazo";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 70);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(215, 15);
+            this.label12.TabIndex = 90;
+            this.label12.Text = "Prenos podatkov iz Cadis v tabelo hiše";
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(15, 30);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(95, 28);
+            this.button19.TabIndex = 85;
+            this.button19.Text = "Voda";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(153, 30);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(95, 28);
+            this.button20.TabIndex = 91;
+            this.button20.Text = "Kanalizacija";
+            this.button20.UseVisualStyleBackColor = true;
+            // 
             // frmBaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(996, 811);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.ls1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ls);
@@ -738,6 +784,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -808,5 +856,9 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button20;
     }
 }
