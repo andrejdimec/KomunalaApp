@@ -179,67 +179,57 @@ namespace Komunala
                             delez_idivid = "";
                             delez_ne_v_javno = "";
                             komentar = "";
+                            int preb_temp = 0; 
+                            int pisi_preb = 0;
+                            double gosp_temp = 0;
+                            double skupaj_gosp = 0;
+                            double pe_gosp = 0;
+                            double ind_temp = 0;
+                            double skupaj_ind = 0;
+                            double pe_ind = 0;
 
                             id_aglo = (string)rdr["id_aglo"];
                             ime_aglo = (string)rdr["ime_aglo"];
+                            delez_v_javno = "Kataster";
+
+                            // preberi vse stavbe v aglomeraciji
+
+                            try
+                            {
 
 
-                            //                            c_at1 = "-99";
-                            //                            c_at2 = "-99";
-                            //                            c_aglo = "";
-                            //                            str_zapisi = "";
-                            //                            string cid = Convert.ToString((int)rdr["id"]);
-                            //                            c_hsmid = (string)rdr["hsmid"];
-                            //                            c_x = Convert.ToString((double)rdr["x"]);
-                            //                            c_y = Convert.ToString((double)rdr["y"]);
-                            //                            c_oblika = (string)rdr["oblika_ijs"];
-                            //                            c_grez = Convert.ToString((int)rdr["greznica"]);
-                            //                            c_kanal = Convert.ToString((int)rdr["kanalizacija"]);
-                            //                            //c_tip = (string)rdr["tip_prikljucka"];
-                            //                            //c_id_vs = (string)rdr["id_vs"];
-                            //                            c_imecad = (string)rdr["ime_cadis"];
-                            //                            c_omcad = (string)rdr["tipom_cadis"];
-                            //                            c_upravljanje = (string)rdr["upravljanje_prikljucka"];
+                                string q2 = "select * from tbl_hise where idaglo_kan=@idaglo"; // preberi vse zapise iz tbl_hise
 
-                            //                            if (rdr["idaglo_kan"] != DBNull.Value)
-                            //                                c_aglo = (string)rdr["idaglo_kan"];
-                            //                            else
-                            //                                c_aglo = "0";
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idaglo", id_aglo);
+                                rdr2 = cmd2.ExecuteReader();
+                                while (rdr2.Read())
+                                {
+                                    gosp_temp= (double)rdr2["poraba_kan"];
+                                    preb_temp = (int)rdr2["stalno"];
+                                    pisi_preb = pisi_preb + preb_temp;
+                                    skupaj_gosp = skupaj_gosp + gosp_temp;
+                                } // while reader
+                            }
+                            catch (Exception ex2)
+                            {
+                                MessageBox.Show("Napaka reader hiše: " + ex2.Message);
+                            }
+                            finally
+                            {
+                                    rdr2.Close();
+                                    con2.Close();
 
-                            //                            c_at4 = "-99";
-                            //                            c_oblika = "NEZNAN";
-                            //                            c_at3 = "";
-                            //                            if (c_kanal.Equals("1"))
-                            //                            {
-                            //                                c_oblika = "KANAL";
-                            //                                c_at3 = "ID sistema";
-                            //                                c_at4 = "ID KČN";
-                            //                            }
-                            //                            if (c_grez.Equals("1"))
-                            //                            {
-                            //                                c_oblika = "GREZ_P";
-                            //                                c_at4 = "ID KČN";
-                            //                            }
-                            //                            if (c_imecad.Length > 20)
-                            //                            {
-                            //                                c_imecad = c_imecad.Substring(0, 19)
-                            //;
-                            //                            }
+                            }
+                            st_preb = pisi_preb.ToString();
+                            obrem_gospodinjstva = st_preb;
 
-                            //                            if (c_omcad.Contains("KMETIJSTVO"))
-                            //                            {
-                            //                                ckmet = "DA";
-                            //                            }
-                            //                            if (c_aglo.Length > 1)
-                            //                            {
-                            //                                if (!c_oblika.Equals("KANAL"))
-                            //                                {
-                            //                                    cpredvidena = "KANAL";
-                            //                                    cdatpred = "31.12.2023";
-                            //                                }
-                            //                            }
-                            // string za zapis
+                            skupaj_gosp = skupaj_gosp * 1000;
+                            pe_gosp = skupaj_gosp / 54750;
 
+                            obrem_dejavnost = pe_gosp.ToString("F2");
+                            
                             str_zapisi = ime_aglo+csv+id_aglo + csv + delez_v_javno + csv + st_preb + csv + obrem_gospodinjstva + csv + obrem_dejavnost + csv + obrem_industrija + csv + delez_priljucenosti + csv + metoda + csv + delez_nepriljucenosti +
                             csv + metoda + csv + delez_opremljenosti + csv + preb_na_kanal + csv + delez_idivid + csv + metoda + csv + delez_ne_v_javno + csv + metoda + csv + komentar;
 
@@ -337,6 +327,24 @@ namespace Komunala
 
         private void label44_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            // prenos porabe nanalščine v bazo
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_cadis_kan(open.FileName);
+                ls.Text = "Ok";
+                ls.Refresh();
+            }
 
         }
 
@@ -796,7 +804,16 @@ namespace Komunala
         private void Obdelaj_cadis_voda(string fnameag)
         {
 
+            
             string q2 = "";
+
+            // daj porabo na nulo
+            q2 = "UPDATE tbl_hise SET poraba_vod = 0";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            con2.Close();
+
 
             stevec = 0;
             try
@@ -805,7 +822,7 @@ namespace Komunala
                 objReader = new System.IO.StreamReader(fnameag, ASCIIEncoding.UTF8);
                 do
                 {
-                    //poraba = 0; stara_poraba = 0;
+                    poraba = 0; stara_poraba = 0;
                     vrstica = "";
                     vrstica = vrstica + objReader.ReadLine() + "\r\n";
 
@@ -847,7 +864,8 @@ namespace Komunala
 
                                 // prištej porabo k obstoječi
                                 poraba = stara_poraba + poraba_cad;
-
+                            if (poraba < 0)
+                                poraba = 0;
                                 // zapiši porabo
                                 q2 = "update tbl_hise set poraba_vod = @poraba_vod where hsmid=@idx";
                                 cmd2 = new SqlCommand(q2, con2);
@@ -857,6 +875,105 @@ namespace Komunala
                                 cmd2.ExecuteNonQuery();
                                 con2.Close();
                             }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                //label52.Text = stevec.ToString();
+                //label52.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                // DisplayData_pt();
+            }
+
+        }
+
+        private void Obdelaj_cadis_kan(string fnameag)
+        {
+
+            string q2 = "";
+
+            // daj porabo na nulo
+            q2 = "UPDATE tbl_hise SET poraba_kan = 0";
+            cmd2 = new SqlCommand(q2, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            con2.Close();
+
+            stevec = 0;
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(fnameag, ASCIIEncoding.UTF8);
+                do
+                {
+                    poraba = 0; stara_poraba = 0;
+                    vrstica = "";
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string hsmid_cad = polje[0];
+                    double poraba_cad = Convert.ToDouble(polje[3]);
+
+                    try
+                    {
+                        // ali obstaja hs_mid v tabeli hise?
+                        q2 = "select hsmid from tbl_hise where hsmid = @idx";
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                        cmd2.ExecuteNonQuery();
+                        string ok_hsmid = (string)cmd2.ExecuteScalar();
+                        con2.Close();
+
+                        if (ok_hsmid != null)
+                        {
+                            // samo če hsmid obstaja vpiši porabo    
+
+                            // preberi staro porabo
+                            q2 = "select poraba_kan from tbl_hise where hsmid = @idx";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                            cmd2.ExecuteNonQuery();
+
+
+                            object porabaobj = cmd2.ExecuteScalar();
+                            if (!porabaobj.Equals(DBNull.Value))
+                                stara_poraba = Convert.ToDouble(porabaobj);
+                            else
+                                stara_poraba = 0;
+
+                            con2.Close();
+
+                            // prištej porabo k obstoječi
+                            poraba = stara_poraba + poraba_cad;
+                            if (poraba < 0)
+                                poraba = 0;
+
+                            // zapiši porabo
+                            q2 = "update tbl_hise set poraba_kan = @poraba_kan where hsmid=@idx";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@poraba_kan", poraba);
+                            cmd2.Parameters.AddWithValue("@idx", hsmid_cad);
+                            cmd2.ExecuteNonQuery();
+                            con2.Close();
+                        }
                     }
                     catch (Exception ex)
                     {

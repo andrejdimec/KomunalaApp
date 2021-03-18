@@ -47,6 +47,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.gb1 = new System.Windows.Forms.GroupBox();
+            this.button18 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.button16 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -87,12 +89,10 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.ls1 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button20 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -305,6 +305,25 @@
             this.gb1.Size = new System.Drawing.Size(561, 635);
             this.gb1.TabIndex = 79;
             this.gb1.TabStop = false;
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(16, 545);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(70, 28);
+            this.button18.TabIndex = 115;
+            this.button18.Text = "Izvedi";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click_1);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(98, 552);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(199, 15);
+            this.label11.TabIndex = 116;
+            this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
             // 
             // button16
             // 
@@ -697,25 +716,6 @@
             this.ls1.Size = new System.Drawing.Size(0, 25);
             this.ls1.TabIndex = 114;
             // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(16, 545);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(70, 28);
-            this.button18.TabIndex = 115;
-            this.button18.Text = "Izvedi";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click_1);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(98, 552);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(199, 15);
-            this.label11.TabIndex = 116;
-            this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.button20);
@@ -727,6 +727,16 @@
             this.groupBox3.TabIndex = 91;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = " Prenos porabe v bazo";
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(153, 30);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(95, 28);
+            this.button20.TabIndex = 91;
+            this.button20.Text = "Kanalizacija";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // label12
             // 
@@ -746,15 +756,6 @@
             this.button19.Text = "Voda";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(153, 30);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(95, 28);
-            this.button20.TabIndex = 91;
-            this.button20.Text = "Kanalizacija";
-            this.button20.UseVisualStyleBackColor = true;
             // 
             // frmBaze
             // 
