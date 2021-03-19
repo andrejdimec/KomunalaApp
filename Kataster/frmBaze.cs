@@ -154,9 +154,9 @@ namespace Komunala
                     using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
                         // glava
-                        str_zapisi = "(0) IME AGLO" + csv + "(1) ID AGLO" + csv + "(2) DELEŽ % JAVNO" + csv + "(3) ŠT. PREB-" + csv + "(4) OBREM. GOSPODINJSTVA" + csv + "(5) OBREM. DEJAVNOST" + csv + "(6) OBREM. INDUST." + csv + "(7) DELEŽ PRIKLJUČ." + csv + 
-                            "(8) METODA" + "(9) DELEŽ NEPRIKLJ." + "(10) METODA" + "(11) DELEŽ OPREMLJ." + csv + "(12) ŠT. PREB. NA KANAL." + csv + "(13) DELEŽ INDIVID." + csv + "(14) METODA" + csv + "(15) DELEŽ NE V JAVNO" + csv +
-                            "(16) METODA" + csv + "(17) KOMETNTAR";
+                        str_zapisi = "(0) IME AGLO" + csv + "(1) ID AGLO" + csv + "(2) DELEŽ % JAVNO" + csv + "(3) ŠT. PREB-" + csv + "(4) OBREM. GOSPODINJSTVA" + csv + "(5) OBREM. DEJAVNOST" + csv + "(6) OBREM. INDUST." + csv + "(7) DELEŽ OBREMEN." + csv + 
+                            "(8) METODA" + csv+ "(9) DELEŽ BREZ ČIŠČ." + csv + "(10) METODA" + csv + "(11) DELEŽ OPREMLJ." + csv + "(12) ŠT. PREB. NA KANAL." + csv + "(13) DELEŽ INDIVID." + csv + "(14) METODA" + csv + "(15) DELEŽ NE V JAVNO" + csv +
+                            "(16) METODA" + csv + "(17) KOMENTAR";
 
 
                         writetext.WriteLine(str_zapisi, Encoding.UTF8);
@@ -171,6 +171,8 @@ namespace Komunala
                             obrem_gospodinjstva = "";
                             obrem_dejavnost = "";
                             obrem_industrija = "";
+                            string delez_obremen_s="";
+                            double delez_obremen = 0;
                             delez_priljucenosti = "";
                             metoda = "";
                             delez_nepriljucenosti = "";
@@ -181,12 +183,22 @@ namespace Komunala
                             komentar = "";
                             int preb_temp = 0; 
                             int pisi_preb = 0;
-                            double gosp_temp = 0;
-                            double skupaj_gosp = 0;
-                            double pe_gosp = 0;
+                            double dejav_temp = 0;
+                            double skupaj_dejav = 0;
+                            double pe_dejav = 0;
                             double ind_temp = 0;
                             double skupaj_ind = 0;
                             double pe_ind = 0;
+                            double pe_skupaj = 0;
+                            double pe_vkanal = 0;
+                            int pe_gospodinjstvo = 0;
+                            int pe_gospodinjstvo_kan = 0;
+                            double pe_dejav_kan = 0;
+
+                            int stavb = 0;
+                            int stavb_kan = 0;
+                            int ima_kan = 0;
+                            //int stavb = 0;
 
                             id_aglo = (string)rdr["id_aglo"];
                             ime_aglo = (string)rdr["ime_aglo"];
@@ -206,10 +218,27 @@ namespace Komunala
                                 rdr2 = cmd2.ExecuteReader();
                                 while (rdr2.Read())
                                 {
-                                    gosp_temp= (double)rdr2["poraba_kan"];
+                                    stavb++;
+                                    dejav_temp= (double)rdr2["pe_dejav"];
+                                    ind_temp = (double)rdr2["pe_posst"];
+                                    pe_gospodinjstvo = (int)rdr2["stalno"];
                                     preb_temp = (int)rdr2["stalno"];
+                                    ima_kan = (int)rdr2["kanalizacija"];
+
                                     pisi_preb = pisi_preb + preb_temp;
-                                    skupaj_gosp = skupaj_gosp + gosp_temp;
+                                    pe_dejav = pe_dejav + dejav_temp;
+                                    pe_ind = pe_ind + ind_temp;
+
+                                    pe_skupaj = pe_skupaj + pe_gospodinjstvo + dejav_temp + ind_temp;
+
+                                    if (ima_kan==1)
+                                    {
+                                        pe_vkanal = pe_vkanal + pe_gospodinjstvo + dejav_temp + ind_temp;
+                                        pe_gospodinjstvo_kan = pe_gospodinjstvo_kan + pe_gospodinjstvo;
+                                        pe_dejav_kan = pe_dejav_kan + dejav_temp;
+                                        
+                                        stavb_kan++;
+                                    }
                                 } // while reader
                             }
                             catch (Exception ex2)
@@ -222,16 +251,20 @@ namespace Komunala
                                     con2.Close();
 
                             }
+                            
                             st_preb = pisi_preb.ToString();
                             obrem_gospodinjstva = st_preb;
 
-                            skupaj_gosp = skupaj_gosp * 1000;
-                            pe_gosp = skupaj_gosp / 54750;
+                            obrem_dejavnost = pe_dejav.ToString("F2");
+                            obrem_industrija = pe_ind.ToString("F2");
 
-                            obrem_dejavnost = pe_gosp.ToString("F2");
-                            
-                            str_zapisi = ime_aglo+csv+id_aglo + csv + delez_v_javno + csv + st_preb + csv + obrem_gospodinjstva + csv + obrem_dejavnost + csv + obrem_industrija + csv + delez_priljucenosti + csv + metoda + csv + delez_nepriljucenosti +
-                            csv + metoda + csv + delez_opremljenosti + csv + preb_na_kanal + csv + delez_idivid + csv + metoda + csv + delez_ne_v_javno + csv + metoda + csv + komentar;
+                            delez_obremen = (pe_vkanal * 100) / pe_skupaj;
+                            delez_obremen_s = delez_obremen.ToString("F2");
+                            double individualno = 100 - delez_obremen;
+                            string individualno_s = individualno.ToString("F2");
+
+                            str_zapisi = ime_aglo+csv+id_aglo + csv + delez_v_javno + csv + st_preb + csv + obrem_gospodinjstva + csv + obrem_dejavnost + csv + obrem_industrija + csv + delez_obremen_s + csv + "1" + csv 
+                                + "0 - vnesi"+csv+"1"+"% povrsine"+pe_gospodinjstvo_kan + csv + individualno_s+csv+ "1" + csv + delez_opremljenosti + csv + preb_na_kanal + csv + delez_idivid + csv + metoda + csv + delez_ne_v_javno + csv + metoda + csv + komentar;
 
                             writetext.WriteLine(str_zapisi, Encoding.UTF8);
                         }
@@ -377,7 +410,7 @@ namespace Komunala
                     using (StreamWriter writetext = new StreamWriter(save.FileName))
                     {
                         // glava
-                        str_zapisi = "ID"+csv+"IME CADIS" +csv+ "NASLOV"+csv+"OM CADIS"+csv+ "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + "ATR3" + "ATR4" + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
+                        str_zapisi = "ID"+csv+"IME CADIS" +csv+ "NASLOV"+csv+"OM CADIS"+csv+ "HSMID" + csv + "X" + csv + "Y" + csv + "OBLIKA IJS" + csv + "ATR1"+ csv + "ATR2" + csv + "ATR3" + csv + "ATR4" + csv + "PE Dejavnost" + csv+ "PE Posst" + csv+ "Upor kmet" + csv+ "KMGMID" + csv+ "IJS predvidena" + csv+ "Datum predv." + csv+ "AGLO ID" + csv+ "Opombe";
                         writetext.WriteLine(str_zapisi, Encoding.UTF8);
 
                         while (rdr.Read())
@@ -402,6 +435,12 @@ namespace Komunala
                             c_nas = (string)rdr["naslov"];
                             c_lab = (string)rdr["labela"];
                             c_naslov = c_nas + " " + c_lab;
+                            double pepos = (double)rdr["pe_posst"];
+                            double pedej = (double)rdr["pe_dejav"];
+
+                            cpepos = pepos.ToString("F2");
+                            cpedej = pedej.ToString("F2");
+
                             if (rdr["idaglo_kan"] != DBNull.Value)
                                 c_aglo = (string)rdr["idaglo_kan"]; 
                             else
@@ -703,6 +742,14 @@ namespace Komunala
             string pisi_idaglo_kan = "";
             string pisi_imeaglo_kan = "";
 
+            // daj porabo na nulo
+            string q = "UPDATE tbl_hise SET idaglo_vod = -1, idaglo_kan=-1,imeaglo_vod='',imeaglo_kan=''";
+            cmd2 = new SqlCommand(q, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            con2.Close();
+
+
             // začni prenos
             stevec = 0;
             //IzprazniBazo_ag();
@@ -906,8 +953,8 @@ namespace Komunala
 
             string q2 = "";
 
-            // daj porabo na nulo
-            q2 = "UPDATE tbl_hise SET poraba_kan = 0";
+            // daj porabo in pe na nulo
+            q2 = "UPDATE tbl_hise SET poraba_kan = 0,pe_posst=0,pe_dejav=0";
             cmd2 = new SqlCommand(q2, con2);
             con2.Open();
             cmd2.ExecuteNonQuery();
@@ -958,6 +1005,9 @@ namespace Komunala
                             else
                                 stara_poraba = 0;
 
+                            // določi PE
+
+
                             con2.Close();
 
                             // prištej porabo k obstoječi
@@ -986,16 +1036,78 @@ namespace Komunala
                 } while (objReader.Peek() != -1);
                 objReader.Close();
                 stevec--;
-                //label52.Text = stevec.ToString();
-                //label52.Refresh();
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Napaka: " + ex.Message);
             }
+            // izračunaj PE
+            try
+            {
+                string q = "select id,tip_prikljucka, poraba_kan, poraba_vod from tbl_hise";
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string tip_prikljucka = (String)rdr["tip_prikljucka"]; 
+                    int id = (int)rdr["id"];
+                    double poraba_k = (double)rdr["poraba_kan"];
+                    double poraba_v = (double)rdr["poraba_vod"];
+
+                    if (poraba_k > poraba_v)
+                        poraba = poraba_k;
+                    else
+                        poraba = poraba_v;
+                    
+                    // izračunaj PE
+                    double pe_dejav = 0; 
+                    double pe_posst=0;
+
+                    if (tip_prikljucka == "1")
+                    {
+                        pe_dejav = 0;
+                        pe_posst = 0;
+                    }
+
+                    if (tip_prikljucka == "2" | tip_prikljucka == "3")
+                    {
+                        pe_dejav = poraba * 1000;
+                        pe_dejav = pe_dejav / 54750;
+                        pe_posst = 0;
+                    }
+
+                    if (tip_prikljucka == "4")
+                    {
+                        pe_dejav = 0;
+                        pe_posst = poraba * 1000;
+                        pe_posst = pe_posst / 54750;
+                    }
+
+
+
+                    // zapiši pe
+                    q2 = "update tbl_hise set pe_dejav = @pe_dejav, pe_posst = @pe_posst where id=@idx";
+                    cmd2 = new SqlCommand(q2, con2);
+                    con2.Open();
+                    cmd2.Parameters.AddWithValue("@pe_dejav", pe_dejav);
+                    cmd2.Parameters.AddWithValue("@pe_posst",pe_posst);
+                    cmd2.Parameters.AddWithValue("@idx", id);
+                    cmd2.ExecuteNonQuery();
+                    con2.Close();
+
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader določi PE: " + ex2.Message);
+            }
             finally
             {
-                // DisplayData_pt();
+                rdr.Close();
+                con.Close();
             }
 
         }
@@ -1004,6 +1116,7 @@ namespace Komunala
         {
 
             int mb_vodovod=3;
+            string c_opomba="";
             int vodovod = 0;
 
             // začni prenos
@@ -1037,7 +1150,7 @@ namespace Komunala
                         // napiši MB v tabelo hise
                         try
                         {
-                            q2 = "select voda,oblika_ijs,id_vs from tbl_hise where hsmid = @idx";
+                            q2 = "select voda,oblika_ijs,id_vs, opomba from tbl_hise where hsmid = @idx";
                             cmd2 = new SqlCommand(q2, con2);
                             con2.Open();
                             cmd2.Parameters.AddWithValue("@idx", hsmid_mb);
@@ -1045,6 +1158,7 @@ namespace Komunala
 
                             while (rdr2.Read())
                             {
+                                c_opomba = "MB vodovod";
                                 vodovod = (int)rdr2["voda"];
                                 c_oblika = (string)rdr2["oblika_ijs"];
                                 c_id_vs = (string)rdr2["id_vs"];
@@ -1064,13 +1178,14 @@ namespace Komunala
                             }
                                 con2.Close();
 
-                                q2 = "update tbl_hise set voda = @vodovod, oblika_ijs = @oblika, id_vs = @vs where hsmid=@idx";
+                                q2 = "update tbl_hise set voda = @vodovod, oblika_ijs = @oblika, id_vs = @vs, opomba=@opomba where hsmid=@idx";
                                 // MessageBox.Show("Ta hsmid bo zapisal v tbl_hs " + ok_hsmid);
                                 cmd2 = new SqlCommand(q2, con2);
                                 con2.Open();
                                 cmd2.Parameters.AddWithValue("@vodovod", mb_vodovod);
                             cmd2.Parameters.AddWithValue("@oblika", c_oblika);
                             cmd2.Parameters.AddWithValue("@vs", c_id_vs);
+                            cmd2.Parameters.AddWithValue("@opomba", c_opomba);
                             cmd2.Parameters.AddWithValue("@idx", hsmid_mb);
                                 cmd2.ExecuteNonQuery();
                                 con2.Close();
@@ -1388,6 +1503,8 @@ namespace Komunala
                             ttip_prikljucka = "3";
                         if (ttip_om.Contains("NEGOSPODARSTVO"))
                             ttip_prikljucka = "2";
+                        if (ttip_om.Contains("POSEBNE"))
+                            ttip_prikljucka = "4";
                         if (ttip_om.Contains("KMETIJSTVO"))
                             ttip_prikljucka = "2";
                         if (ttip_om.Equals(""))
