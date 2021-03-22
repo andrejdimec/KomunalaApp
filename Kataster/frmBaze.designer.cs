@@ -93,6 +93,10 @@
             this.button20 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button21 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -568,7 +572,7 @@
             // 
             this.groupBox2.Controls.Add(this.label48);
             this.groupBox2.Controls.Add(this.btnIzvoz);
-            this.groupBox2.Location = new System.Drawing.Point(624, 487);
+            this.groupBox2.Location = new System.Drawing.Point(624, 599);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 130);
             this.groupBox2.TabIndex = 87;
@@ -607,7 +611,7 @@
             // dgv1
             // 
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv1.Location = new System.Drawing.Point(906, 677);
+            this.dgv1.Location = new System.Drawing.Point(906, 758);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowHeadersWidth = 62;
             this.dgv1.Size = new System.Drawing.Size(52, 27);
@@ -617,6 +621,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.button22);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.button21);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.button11);
@@ -627,7 +635,7 @@
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Location = new System.Drawing.Point(624, 240);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 223);
+            this.groupBox1.Size = new System.Drawing.Size(334, 301);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
@@ -668,6 +676,7 @@
             this.button12.TabIndex = 117;
             this.button12.Text = "Izvedi";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click_1);
             // 
             // label3
             // 
@@ -756,6 +765,43 @@
             this.button19.Text = "Voda";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 208);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 15);
+            this.label13.TabIndex = 119;
+            this.label13.Text = "Drugi podatki kanal.";
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(15, 240);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(70, 28);
+            this.button21.TabIndex = 120;
+            this.button21.Text = "Izvedi";
+            this.button21.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(150, 208);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(109, 15);
+            this.label14.TabIndex = 121;
+            this.label14.Text = "Drugi podatki voda";
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(153, 240);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(70, 28);
+            this.button22.TabIndex = 122;
+            this.button22.Text = "Izvedi";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // frmBaze
             // 
@@ -861,5 +907,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button22;
     }
 }

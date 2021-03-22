@@ -1,0 +1,2 @@
+ID VS	Občina MID	ID porečja	Količina dobavljene pitne vode v vodovodni sistem (m3)	Količina dobavljene pitne vode v vodovodni sistem -  površinske vode (m3)	Količina dobavljene pitne vode v vodovodni sistem -  podzemne vode (m3)	Količina dobavljene pitne vode v vodovodni sistem -  izviri podzemne vode (m3)
+1633	11026826	4	934242	0	934242	0

@@ -1,0 +1,2 @@
+ID VS vir	ID_VS	pogodba o dobavi vode iz drugega VS	X	Y	pogodbena količina (m3/leto)	realizirana količina (m3/leto)	komentar
+1171	1633	21.04.2011	171548	573981	1702944	500	IJS ni upravljalec črpališča, pogodbena količina izhaja iz delnega vodnega dovoljenja

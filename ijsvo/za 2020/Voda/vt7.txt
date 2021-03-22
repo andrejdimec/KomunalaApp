@@ -1,0 +1,1 @@
+ID lokalni	MID EHIŠ	X	Y	ident.št. DDV	matična št.	osnovna dejavnost SKD	količina dob.vode iz VS	pridobljena vodna pravica	komentar	ID VS

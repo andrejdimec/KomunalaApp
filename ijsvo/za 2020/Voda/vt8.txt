@@ -1,0 +1,3 @@
+ID VS	MID Občine	Porečje	Dolžina omrežja vodovodnega sistema  v posamezni občini [m]	Število priključkov	Komentar
+1633	11026826	4	182829	2303	
+1171	11026826	4	25937	345	MB vodovod

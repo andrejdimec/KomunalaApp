@@ -1,0 +1,4 @@
+ID VS	Občina MID	ID porečja	Avtorizirana obračunana količina pitne vode – gospodinjstva (m3)	Avtorizirana obračunana količina pitne vode – javne inštitucije (m3)	Avtorizirana obračunana količina pitne vode – A (dejavnost kmetijstva) (m3)	Industrija	Avtorizirana obračunana količina pitne vode – C (predelovalna dejavnost) (m3)	Avtorizirana obračunana količina pitne vode – D (oskrba z električno energijo, plinom in paro) (m3)	Avtorizirana obračunana količina pitne vode – E (dejavnosti oskrbe z vodo, ravnanja z odplakami on odpadki, saniranje okolja) (m3)	Avtorizirana obračunana količina pitne vode – druge dejavnosti (storitve, trgovina, turizem) 
+1633	11026826	4	265954	19904	24854	14336	68052	0	0	32000
+										
+			425100			Potrebno prišteti JPP	Že prišteto JPP			Ocena
