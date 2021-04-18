@@ -109,6 +109,61 @@ namespace Komunala
         double poraba = 0;
         double stara_poraba = 0;
 
+        // bass
+        string sifra_om, naziv_om, naslov, posta, sifra_okolisa, naziv, hsmid, tip_okol, st_stan, st_clan, sif_uporab, uporabnik, sif_last, lastnik, sk_obj, naziv_sk_obj, upravljanje, sklad, sk_obj2, aktiven, naziv2, datum_od, datum_do, tip_storitev, sifra_uvoza,stevec_str;
+        string lab, namid, obmid, ptmid, ptid, ptime, ulid, ulime, naid, naime,gidx;
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            // Zapiši aglomeracije za Bass
+
+            ls1.Text = counths.ToString();
+            ls1.Refresh();
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Obdelaj_aglo_bass(open.FileName);
+                ls.Text = "Ok";
+                ls.Refresh();
+            }
+
+        }
+
+        string ulmid_tmp, ulime_tmp, namid_tmp, naime_tmp;
+        bool ima_hsmid, v_mestu;
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            ls1.Text = countcad.ToString();
+            ls1.Refresh();
+            ls.Text = "";
+            Zdruzi_OM_HS();
+            ls.Text = "OK";
+            ls.Refresh();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            // Prenos hs za bass
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Prenesi_hs_bass(open.FileName);
+                ls.Text = "Ok";
+            }
+        }
 
         private void tbl_crpBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
@@ -413,6 +468,290 @@ namespace Komunala
         }
 
         string idxtemp, natemp, ultemp, idxtempz;
+
+        private void IzprazniBazo_cad_om()  
+        {
+            string query = "delete from om";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void Izprazni_cad_om() 
+        {
+            sifra_om = ""; naziv_om = ""; naslov = ""; posta = ""; sifra_okolisa = ""; naziv = ""; hsmid = ""; tip_okol = ""; st_stan = ""; st_clan = "";
+            sif_uporab = ""; uporabnik = ""; sif_last = ""; lastnik = ""; sk_obj = ""; naziv_sk_obj = ""; upravljanje = ""; sklad = ""; sk_obj2 = ""; aktiven = "";
+            naziv2 = ""; datum_od = ""; datum_do = ""; tip_storitev = ""; sifra_uvoza = ""; stevec_str = "";
+        }
+
+        private void Prenesi_cadis_om(string vhod) // prenesi cadis.crp
+        {
+            // prenos CADIS OM
+            {
+                // začni prenos
+                stevec = 0;
+                //string cvodovodstr = "", ckanalizacijastr = "", cgreznicastr = "", csmetistr = "";
+                IzprazniBazo_cad_om();
+                // preberi ul - CSV
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                    // število vrstic v CSV
+                    // ++stevec; // preskoči prvo vrstico
+                    do
+                    {
+                        vrstica = "";
+                        Izprazni_cad_om();
+                        vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                        string[] polje = vrstica.Split(';');
+
+                        sifra_om = polje[0];
+                        naziv_om = polje[1];
+                        naslov = polje[2];
+                        posta = polje[3];
+                        sifra_okolisa = polje[4];
+                        naziv = polje[5];
+                        hsmid = polje[6];
+                        tip_okol = polje[7];
+                        st_stan = polje[8];
+                        st_clan = polje[9];
+                        sif_uporab = polje[10];
+                        uporabnik = polje[11];
+                        sif_last = polje[12];
+                        lastnik = polje[13];
+                        sk_obj = polje[14];
+                        naziv_sk_obj = polje[15];
+                        upravljanje = polje[16];
+                        sklad = polje[17];
+                        sk_obj2 = polje[18];
+                        aktiven = polje[19];
+                        naziv2 = polje[20];
+                        datum_od = polje[21];
+                        datum_do = polje[22];
+                        tip_storitev = polje[23];
+                        sifra_uvoza = polje[24];
+                        stevec_str = polje[25];
+                        string idx_temp = naslov.ToLower();
+                        idx_temp = idx_temp.Replace(" ", "");
+                        idx_temp = idx_temp.Replace("č", "cc");
+                        idx_temp = idx_temp.Replace("š", "ss");
+                        idx_temp = idx_temp.Replace("ž", "zz");
+
+                        try
+                        {
+                            string query = "Insert into om (sifra_om, naziv_om, naslov, posta, sifra_okolisa, naziv, hsmid, tip_okol, st_stan, st_clan, sif_uporab, uporabnik, sif_last, lastnik, sk_obj, naziv_sk_obj, upravljanje, sklad, sk_obj2, aktiven, naziv2, datum_od, datum_do, tip_storitev, sifra_uvoza,stevec,idx) values " +
+                                "(@sifra_om, @naziv_om, @naslov, @posta, @sifra_okolisa, @naziv, @hsmid, @tip_okol, @st_stan, @st_clan, @sif_uporab, @uporabnik, @sif_last, @lastnik, @sk_obj, @naziv_sk_obj, @upravljanje, @sklad, @sk_obj2, @aktiven, @naziv2, @datum_od, @datum_do, @tip_storitev, @sifra_uvoza,@stevec,@idx)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+
+                            cmd.Parameters.AddWithValue("@sifra_om",sifra_om);
+                            cmd.Parameters.AddWithValue("@naziv_om",naziv_om);
+                            cmd.Parameters.AddWithValue("@naslov",naslov);
+                            cmd.Parameters.AddWithValue("@posta",posta);
+                            cmd.Parameters.AddWithValue("@sifra_okolisa",sifra_okolisa);
+                            cmd.Parameters.AddWithValue("@naziv",naziv);
+                            cmd.Parameters.AddWithValue("@hsmid",hsmid);
+                            cmd.Parameters.AddWithValue("@tip_okol",tip_okol);
+                            cmd.Parameters.AddWithValue("@st_stan",st_stan);
+                            cmd.Parameters.AddWithValue("@st_clan",st_clan);
+                            cmd.Parameters.AddWithValue("@sif_uporab",sif_uporab);
+                            cmd.Parameters.AddWithValue("@uporabnik",uporabnik);
+                            cmd.Parameters.AddWithValue("@sif_last",sif_last);
+                            cmd.Parameters.AddWithValue("@lastnik",lastnik);
+                            cmd.Parameters.AddWithValue("@sk_obj",sk_obj);
+                            cmd.Parameters.AddWithValue("@naziv_sk_obj",naziv_sk_obj);
+                            cmd.Parameters.AddWithValue("@upravljanje",upravljanje);
+                            cmd.Parameters.AddWithValue("@sklad",sklad);
+                            cmd.Parameters.AddWithValue("@sk_obj2",sk_obj2);
+                            cmd.Parameters.AddWithValue("@aktiven",aktiven);
+                            cmd.Parameters.AddWithValue("@naziv2",naziv2);
+                            cmd.Parameters.AddWithValue("@datum_od",datum_od);
+                            cmd.Parameters.AddWithValue("@datum_do",datum_do);
+                            cmd.Parameters.AddWithValue("@tip_storitev",tip_storitev);
+                            cmd.Parameters.AddWithValue("@sifra_uvoza",sifra_uvoza);
+                            cmd.Parameters.AddWithValue("@stevec",stevec_str);
+                            cmd.Parameters.AddWithValue("@idx", idx_temp);
+
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka: " + ex.Message);
+                        }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
+                    } while (objReader.Peek() != -1);
+                    objReader.Close();
+                    stevec--;
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    //Displaydata_cad();
+                }
+            }
+        } // private void
+
+
+        private void IzprazniBazo_hs_bass()
+        {
+            string query = "delete from hs_bass";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private void Izprazni_hs_bass()
+        {
+            hsmid = ""; hs = ""; hd = ""; lab = ""; ulmid = ""; namid = ""; obmid = ""; ptmid = ""; x = ""; y = ""; ptid = ""; ptime = ""; ulid = ""; ulime = ""; naid = ""; naime = ""; gidx = "";
+        }
+
+        private void Prenesi_hs_bass(string vhod) // prenesi cadis.crp
+        {
+            string idx_temp = "";
+
+                stevec = 0;
+                IzprazniBazo_hs_bass();
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                    do
+                    {
+                        vrstica = "";
+                        Izprazni_hs_bass();
+                        vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                        string[] polje = vrstica.Split(';');
+
+                        hsmid = polje[0];
+                        hs = polje[1];
+                        hd = polje[2];
+                        lab = polje[3];
+                        ulmid = polje[4];
+                        namid = polje[5];
+                        obmid = polje[6];
+                        ptmid = polje[7];
+                        x = polje[8];
+                        y = polje[9];
+                        ptid = polje[10];
+                        ptime = polje[11];
+                        ulid = polje[12];
+                        ulime = polje[13];
+                        naid = polje[14];
+                        naime = polje[15];
+
+                        if (ulid=="")
+                        {
+                            idx_temp = naime;
+                        }
+                        else
+                        {
+                            idx_temp = ulime;
+                        }
+                        idx_temp = idx_temp.Replace(" ", "");
+                        idx_temp = idx_temp + lab;
+                        idx_temp = idx_temp.ToLower();
+                    idx_temp = idx_temp.Replace("č", "cc");
+                    idx_temp = idx_temp.Replace("š", "ss");
+                    idx_temp = idx_temp.Replace("ž", "zz");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    foreach (char c in idx_temp)
+                    {
+                        if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
+                        {
+                            sb.Append(c);
+                        }
+                    }
+                    gidx = sb.ToString();
+
+                    //gidx = idx_temp;
+
+
+                    //gidx = "";
+
+                    try
+                    {
+                            string query = "Insert into hs_bass (hsmid,hs,hd,lab, ulmid,namid, obmid, ptmid, x,y,ptid, ptime, ulid, ulime, naid, naime,gidx) values " +
+                                "(@hsmid,@hs,@hd,@lab, @ulmid,@namid, @obmid, @ptmid, @x,@y,@ptid, @ptime, @ulid, @ulime, @naid, @naime,@gidx)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+
+                            cmd.Parameters.AddWithValue("@hsmid",hsmid);
+                            cmd.Parameters.AddWithValue("@hs",hs);
+                            cmd.Parameters.AddWithValue("@hd",hd);
+                            cmd.Parameters.AddWithValue("@lab",lab);
+                            cmd.Parameters.AddWithValue("@ulmid",ulmid);
+                            cmd.Parameters.AddWithValue("@namid",namid);
+                            cmd.Parameters.AddWithValue("@obmid",obmid);
+                            cmd.Parameters.AddWithValue("@ptmid",ptmid);
+                            cmd.Parameters.AddWithValue("@x",x);
+                            cmd.Parameters.AddWithValue("@y",y);
+                            cmd.Parameters.AddWithValue("@ptid",ptid);
+                            cmd.Parameters.AddWithValue("@ptime",ptime);
+                            cmd.Parameters.AddWithValue("@ulid",ulid);
+                            cmd.Parameters.AddWithValue("@ulime",ulime);
+                            cmd.Parameters.AddWithValue("@naid",naid);
+                            cmd.Parameters.AddWithValue("@naime",naime);
+                            cmd.Parameters.AddWithValue("@gidx",gidx);
+
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka: " + ex.Message);
+                        }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
+                    } while (objReader.Peek() != -1);
+                    objReader.Close();
+                    stevec--;
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    //Displaydata_cad();
+                }
+        } // private void
+
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            // prenesi OM iz cadis v SQL bazo om
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Prenesi_cadis_om(open.FileName);
+                ls.Text = "Ok";
+            }
+
+        }
 
         private void button22_Click(object sender, EventArgs e)
         {
@@ -1213,6 +1552,112 @@ namespace Komunala
 
         }
 
+
+        private void Obdelaj_aglo_bass(string fnameag)
+        {
+
+            string pisi_idaglo_vod = "";
+            string pisi_imeaglo_vod = "";
+            string pisi_idaglo_kan = "";
+            string pisi_imeaglo_kan = "";
+
+
+            string q = "UPDATE om SET gaglo_vod = '', gaglo_kan=''";
+            cmd2 = new SqlCommand(q, con2);
+            con2.Open();
+            cmd2.ExecuteNonQuery();
+            con2.Close();
+
+
+            // začni prenos
+            stevec = 0;
+            //IzprazniBazo_ag();
+            try
+            {
+                System.IO.StreamReader objReader;
+                objReader = new System.IO.StreamReader(fnameag, ASCIIEncoding.UTF8);
+                do
+                {
+                    vrstica = "";
+                    //Izprazni_ag();
+                    vrstica = vrstica + objReader.ReadLine() + "\r\n";
+
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    string idaglo_kan = polje[16];
+                    string imeaglo_kan = polje[17];
+                    string idaglo_vod = polje[18];
+                    string imeaglo_vod = polje[19];
+                    string hsmid_aglo = polje[2];
+                    if (idaglo_kan == null)
+                        idaglo_kan = "";
+                    if (idaglo_kan == "0")
+                        idaglo_kan = "";
+                    if (idaglo_vod == "0")
+                        idaglo_vod = "";
+                    //pt_mid = polje[2];
+                    try
+                    {
+                            try
+                            {
+                                string q2 = "select ghsmid from om where ghsmid = @idx";
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_aglo);
+                                cmd2.ExecuteNonQuery();
+                                string ok_hsmid = (string)cmd2.ExecuteScalar();
+                                if (ok_hsmid == null)
+                                {
+                                    pisi_idaglo_vod = "-99";
+                                    pisi_idaglo_kan = "-99";
+                                }
+                                else
+                                {
+                                    pisi_idaglo_vod = idaglo_vod;
+                                    pisi_idaglo_kan = idaglo_kan;
+                                }
+                                con2.Close();
+
+                                q2 = "update om set gaglo_vod = @idaglo_vod, gaglo_kan = @idaglo_kan where ghsmid=@idx";
+                                // MessageBox.Show("Ta hsmid bo zapisal v tbl_hs " + ok_hsmid);
+                                cmd2 = new SqlCommand(q2, con2);
+                                con2.Open();
+                                cmd2.Parameters.AddWithValue("@idaglo_kan", pisi_idaglo_kan);
+                                cmd2.Parameters.AddWithValue("@idaglo_vod", pisi_idaglo_vod);
+                                cmd2.Parameters.AddWithValue("@idx", hsmid_aglo);
+                                cmd2.ExecuteNonQuery();
+                                con2.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Napakaupdate aglomeracija: " + ex.Message);
+                            }
+                        }
+                    
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    stevec = ++stevec;
+                    vrstica = "";
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } while (objReader.Peek() != -1);
+                objReader.Close();
+                stevec--;
+                //label52.Text = stevec.ToString();
+                //label52.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka - aglomeracije: " + ex.Message);
+            }
+            finally
+            {
+            }
+
+        }
+
         private void Obdelaj_cadis_voda(string fnameag)
         {
 
@@ -1968,6 +2413,241 @@ namespace Komunala
             ls.Text = "OK";
             ls.Refresh();
         }
+
+        private void Zdruzi_OM_HS()
+            // Bass
+        {
+            int st = 0;
+            string q2;
+            string q3;
+            int tid;
+            string namid_t, ptmid_t, ptime_t, ulime_t, naime_t, ulid_t, naid_t, ulmid_t;
+
+            try
+            {
+                string q = "select * from om"; // preberi vse zapise iz tbl_hise
+
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                string idx_tmp, naslov_tmp;
+                while (rdr.Read())
+                {
+                    idx_tmp = (string)rdr["idx"]; // hsmid po katerem boš iskal v HS
+                    tid = (Int32)rdr["id"];  // določi id v katerega boš pisal
+                    naslov_tmp = (string)rdr["naslov"];
+
+                    try
+                    {
+
+                        //string tmp_hsmid;
+                        ima_hsmid = false;
+                        hsmid = ""; hs = ""; hd = ""; lab = ""; ulmid = ""; namid = ""; obmid = ""; ptmid = ""; x = ""; y = ""; ptid = ""; ptime = ""; ulid = ""; ulime = ""; naid = ""; naime = ""; gidx = "";
+                        q2 = "select * from hs_bass where gidx = @gindex";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@gindex", idx_tmp);
+                        rdr2 = cmd2.ExecuteReader();
+                        // string idx_tmp;
+                        while (rdr2.Read())
+                        {
+                            ima_hsmid = true;
+                            hsmid = (string)rdr2["hsmid"];
+                            hs = (string)rdr2["hs"];
+                            hd = (string)rdr2["hd"];
+                            lab = (string)rdr2["lab"];
+                            ulmid = (string)rdr2["ulmid"];
+                            namid = (string)rdr2["namid"];
+                            obmid = (string)rdr2["obmid"];
+                            ptmid = (string)rdr2["ptmid"];
+                            x = (string)rdr2["x"];
+                            y = (string)rdr2["y"];
+                            ptid = (string)rdr2["ptid"];
+                            ptime = (string)rdr2["ptime"];
+                            ulid = (string)rdr2["ulid"];
+                            ulime = (string)rdr2["ulime"];
+                            naid = (string)rdr2["naid"];
+                            naime = (string)rdr2["naime"];
+                            string idx_bass = (string)rdr2["gidx"];
+
+                            q3 = "update om set gidx = @gixd,ghsmid = @ghsmid, ghs = @ghs, ghd = @ghd, glab = @glab, gulmid = @gulmid, gnamid = @gnamid, gobmid = @gobmid, gptmid = @gptmid, gy = @gy, gx = @gx, gptid = @gptid, gptime = @gptime, gulid = @gulid, gulime = @gulime, gnaid = @gnaid, gnaime = @gnaime " +
+                            "where id=@tid";
+                            cmd3 = new SqlCommand(q3, con3);
+                            con3.Open();
+                            cmd3.Parameters.AddWithValue("@tid", tid);
+                            cmd3.Parameters.AddWithValue("@gixd", idx_bass);
+                            cmd3.Parameters.AddWithValue("@ghsmid", hsmid);
+                            cmd3.Parameters.AddWithValue("@ghs", hs);
+                            cmd3.Parameters.AddWithValue("@ghd", hd);
+                            cmd3.Parameters.AddWithValue("@glab", lab);
+                            cmd3.Parameters.AddWithValue("@gulmid", ulmid);
+                            cmd3.Parameters.AddWithValue("@gnamid", namid);
+                            cmd3.Parameters.AddWithValue("@gobmid", obmid);
+                            cmd3.Parameters.AddWithValue("@gptmid", ptmid);
+                            cmd3.Parameters.AddWithValue("@gy", y);
+                            cmd3.Parameters.AddWithValue("@gx", x);
+                            cmd3.Parameters.AddWithValue("@gptid", ptid);
+                            cmd3.Parameters.AddWithValue("@gptime", ptime);
+                            cmd3.Parameters.AddWithValue("@gulid", ulid);
+                            cmd3.Parameters.AddWithValue("@gulime", ulime);
+                            cmd3.Parameters.AddWithValue("@gnaid", naid);
+                            cmd3.Parameters.AddWithValue("@gnaime", naime);
+                            cmd3.ExecuteNonQuery();
+                            con3.Close();
+                        }
+                        con2.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+
+                    if (ima_hsmid==false)
+                    {
+                        
+                        naslov_tmp = naslov_tmp.ToLower();
+                        // če nima hsmid najdi vsaj ulico in kraj
+
+                        // najprej preveri ulice, če je v mestu
+                        q2 = "select * from tbl_ul";
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        rdr2 = cmd2.ExecuteReader();
+                        v_mestu = false;
+                        while (rdr2.Read())
+                        {
+                            ulmid_tmp = (string)rdr2["ul_mid"];
+                            ulime_tmp = (string)rdr2["ul_uime"];
+                            //ulime_tmp = ulime_tmp.ToLower();
+                            string tul = ulime_tmp.ToLower();
+                            if (naslov_tmp.Contains(tul))
+                            {
+                                v_mestu = true;
+                                ulmid = ulmid_tmp;
+                                ulime = ulime_tmp;
+
+                                // najdi ostale lokacijske podatke
+                                q3 = "select * from hs_bass where ulmid=@ulmid";
+                                cmd3 = new SqlCommand(q3, con3);
+                                con3.Open();
+                                cmd3.Parameters.AddWithValue("@ulmid", ulmid);
+                                rdr3 = cmd3.ExecuteReader();
+                                while (rdr3.Read())
+                                {
+                                    namid = (string)rdr3["ulmid"];
+                                    ptmid = (string)rdr3["ptmid"];
+                                    naime = (string)rdr3["naime"];
+                                    ptime = (string)rdr3["ptime"];
+                                    obmid = (string)rdr3["obmid"];
+                                    ptid = (string)rdr3["ptid"];
+                                    ulid = (string)rdr3["ulid"];
+                                    naid = (string)rdr3["naid"];
+                                }
+                                con3.Close();
+                            }
+                        }
+                        con2.Close();
+
+                        if (v_mestu==false)
+                        {
+                            // poišči naselje
+                            q2 = "select * from tbl_na";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            rdr2 = cmd2.ExecuteReader();
+                            while (rdr2.Read())
+                            {
+                                namid_tmp = (string)rdr2["na_mid"];
+                                naime_tmp = (string)rdr2["na_uime"];
+                                //ulime_tmp = ulime_tmp.ToLower();
+                                string tna = naime_tmp.ToLower();
+                                if (naslov_tmp.Contains(tna))
+                                {
+                                    //v_mestu = true;
+                                    namid = namid_tmp;
+                                    naime = naime_tmp;
+
+                                    // najdi ostale lokacijske podatke
+                                    q3 = "select * from hs_bass where namid=@namid";
+                                    cmd3 = new SqlCommand(q3, con3);
+                                    con3.Open();
+                                    cmd3.Parameters.AddWithValue("@namid", namid);
+                                    rdr3 = cmd3.ExecuteReader();
+                                    while (rdr3.Read())
+                                    {
+                                        namid = (string)rdr3["ulmid"];
+                                        ptmid = (string)rdr3["ptmid"];
+                                        naime = (string)rdr3["naime"];
+                                        ptime = (string)rdr3["ptime"];
+                                        obmid = (string)rdr3["obmid"];
+                                        ptid = (string)rdr3["ptid"];
+                                        ulid = (string)rdr3["ulid"];
+                                        naid = (string)rdr3["naid"];
+                                        ulmid = (string)rdr3["ulmid"];
+                                    }
+                                    con3.Close();
+                                }
+                            }
+                            con2.Close();
+
+
+                            //ulmid = "Nima";
+                            //ulime = "Nima imena";
+                        }
+
+
+                        q3 = "update om set gidx = @gixd,ghsmid = @ghsmid, ghs = @ghs, ghd = @ghd, glab = @glab, gulmid = @gulmid, gnamid = @gnamid, gobmid = @gobmid, gptmid = @gptmid, gy = @gy, gx = @gx, gptid = @gptid, gptime = @gptime, gulid = @gulid, gulime = @gulime, gnaid = @gnaid, gnaime = @gnaime " +
+                        "where id=@tid";
+                        cmd3 = new SqlCommand(q3, con3);
+                        con3.Open();
+                        cmd3.Parameters.AddWithValue("@tid", tid);
+                        cmd3.Parameters.AddWithValue("@gixd", "Nima HS_MID");
+                        cmd3.Parameters.AddWithValue("@ghsmid", "99");
+                        cmd3.Parameters.AddWithValue("@ghs", "");
+                        cmd3.Parameters.AddWithValue("@ghd", "");
+                        cmd3.Parameters.AddWithValue("@glab", "");
+                        cmd3.Parameters.AddWithValue("@gulmid", ulmid);
+                        cmd3.Parameters.AddWithValue("@gnamid", namid);
+                        cmd3.Parameters.AddWithValue("@gobmid", obmid);
+                        cmd3.Parameters.AddWithValue("@gptmid", ptmid);
+                        cmd3.Parameters.AddWithValue("@gy", "");
+                        cmd3.Parameters.AddWithValue("@gx","");
+                        cmd3.Parameters.AddWithValue("@gptid", ptid);
+                        cmd3.Parameters.AddWithValue("@gptime", ptime);
+                        cmd3.Parameters.AddWithValue("@gulid", ulid);
+                        cmd3.Parameters.AddWithValue("@gulime", ulime);
+                        cmd3.Parameters.AddWithValue("@gnaid", naid);
+                        cmd3.Parameters.AddWithValue("@gnaime", naime);
+                        cmd3.ExecuteNonQuery();
+                        con3.Close();
+
+                    }
+                    ima_hsmid = false;
+                    st = ++st;
+                    ls.Text = st.ToString();
+                    ls.Refresh();
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader: " + ex2.Message);
+            }
+
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (con != null)
+                {
+                    con.Close();
+                }
+                Display_hise();
+            }
+        }  // void
+
+
 
         private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

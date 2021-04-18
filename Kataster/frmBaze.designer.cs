@@ -80,6 +80,10 @@
             this.label61 = new System.Windows.Forms.Label();
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.button21 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
@@ -93,16 +97,19 @@
             this.button20 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.button21 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.button22 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.button23 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnhise
@@ -572,9 +579,9 @@
             // 
             this.groupBox2.Controls.Add(this.label48);
             this.groupBox2.Controls.Add(this.btnIzvoz);
-            this.groupBox2.Location = new System.Drawing.Point(624, 599);
+            this.groupBox2.Location = new System.Drawing.Point(624, 508);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(334, 130);
+            this.groupBox2.Size = new System.Drawing.Size(334, 102);
             this.groupBox2.TabIndex = 87;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = " Prenos v kataster ";
@@ -633,12 +640,49 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Location = new System.Drawing.Point(624, 240);
+            this.groupBox1.Location = new System.Drawing.Point(624, 214);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 301);
+            this.groupBox1.Size = new System.Drawing.Size(334, 288);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(150, 208);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(109, 15);
+            this.label14.TabIndex = 121;
+            this.label14.Text = "Drugi podatki voda";
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(153, 240);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(70, 28);
+            this.button22.TabIndex = 122;
+            this.button22.Text = "Izvedi";
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 208);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 15);
+            this.label13.TabIndex = 119;
+            this.label13.Text = "Drugi podatki kanal.";
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(15, 240);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(70, 28);
+            this.button21.TabIndex = 120;
+            this.button21.Text = "Izvedi";
+            this.button21.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -730,7 +774,7 @@
             this.groupBox3.Controls.Add(this.button20);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.button19);
-            this.groupBox3.Location = new System.Drawing.Point(624, 104);
+            this.groupBox3.Location = new System.Drawing.Point(624, 94);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(334, 114);
             this.groupBox3.TabIndex = 91;
@@ -766,48 +810,75 @@
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
-            // label13
+            // groupBox4
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(12, 208);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(116, 15);
-            this.label13.TabIndex = 119;
-            this.label13.Text = "Drugi podatki kanal.";
+            this.groupBox4.Controls.Add(this.button26);
+            this.groupBox4.Controls.Add(this.button25);
+            this.groupBox4.Controls.Add(this.button24);
+            this.groupBox4.Controls.Add(this.label15);
+            this.groupBox4.Controls.Add(this.button23);
+            this.groupBox4.Location = new System.Drawing.Point(980, 94);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(275, 396);
+            this.groupBox4.TabIndex = 91;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "  Bass  prenosi";
             // 
-            // button21
+            // button25
             // 
-            this.button21.Location = new System.Drawing.Point(15, 240);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(70, 28);
-            this.button21.TabIndex = 120;
-            this.button21.Text = "Izvedi";
-            this.button21.UseVisualStyleBackColor = true;
+            this.button25.Location = new System.Drawing.Point(15, 165);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(106, 28);
+            this.button25.TabIndex = 92;
+            this.button25.Text = "Združi OM+HS";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
-            // label14
+            // button24
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(150, 208);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(109, 15);
-            this.label14.TabIndex = 121;
-            this.label14.Text = "Drugi podatki voda";
+            this.button24.Location = new System.Drawing.Point(15, 109);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(106, 28);
+            this.button24.TabIndex = 91;
+            this.button24.Text = "HS -> SQL";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
-            // button22
+            // label15
             // 
-            this.button22.Location = new System.Drawing.Point(153, 240);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(70, 28);
-            this.button22.TabIndex = 122;
-            this.button22.Text = "Izvedi";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(12, 70);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(192, 15);
+            this.label15.TabIndex = 90;
+            this.label15.Text = "Dodaj lokacije GURS OM iz Cadis";
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(15, 30);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(106, 28);
+            this.button23.TabIndex = 85;
+            this.button23.Text = "OM -> SQL";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(15, 219);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(106, 28);
+            this.button26.TabIndex = 93;
+            this.button26.Text = "Aglo -> OM";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // frmBaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(996, 811);
+            this.ClientSize = new System.Drawing.Size(1295, 811);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.ls1);
             this.Controls.Add(this.groupBox1);
@@ -833,6 +904,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -911,5 +984,11 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button26;
     }
 }
