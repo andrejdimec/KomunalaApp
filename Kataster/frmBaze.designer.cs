@@ -98,11 +98,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.button23 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button27 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -812,6 +814,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.button27);
             this.groupBox4.Controls.Add(this.button26);
             this.groupBox4.Controls.Add(this.button25);
             this.groupBox4.Controls.Add(this.button24);
@@ -823,6 +827,16 @@
             this.groupBox4.TabIndex = 91;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "  Bass  prenosi";
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(15, 219);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(106, 28);
+            this.button26.TabIndex = 93;
+            this.button26.Text = "Aglo -> OM";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button25
             // 
@@ -863,15 +877,24 @@
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
-            // button26
+            // label16
             // 
-            this.button26.Location = new System.Drawing.Point(15, 219);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(106, 28);
-            this.button26.TabIndex = 93;
-            this.button26.Text = "Aglo -> OM";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(12, 318);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(150, 15);
+            this.label16.TabIndex = 95;
+            this.label16.Text = "Razdeli šifro in naziv v OM";
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(15, 278);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(106, 28);
+            this.button27.TabIndex = 94;
+            this.button27.Text = "Razdeli šifre";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // frmBaze
             // 
@@ -990,5 +1013,7 @@
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button27;
     }
 }

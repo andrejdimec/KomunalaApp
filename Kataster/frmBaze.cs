@@ -113,6 +113,165 @@ namespace Komunala
         string sifra_om, naziv_om, naslov, posta, sifra_okolisa, naziv, hsmid, tip_okol, st_stan, st_clan, sif_uporab, uporabnik, sif_last, lastnik, sk_obj, naziv_sk_obj, upravljanje, sklad, sk_obj2, aktiven, naziv2, datum_od, datum_do, tip_storitev, sifra_uvoza,stevec_str;
         string lab, namid, obmid, ptmid, ptid, ptime, ulid, ulime, naid, naime,gidx;
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+            // razdeli šifro in naziv v OM za Bass
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Razdeli_om(open.FileName);
+                ls.Text = "Ok";
+            }
+
+        }
+        private void Shrani_vrsto(string vrstica, string imedatoteke)
+        {
+                try
+                {
+                    using (StreamWriter writetext = new StreamWriter(imedatoteke))
+                    {
+                        writetext.WriteLine(vrstica, Encoding.UTF8);
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka pri shranjevanju: " + ex2.Message);
+                }
+        }
+
+        private void Razdeli_om(string vhod)
+        {
+            csv = ';';
+            string dod1, dod2, dod3, dod4, dod5, dod6;
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "om s storitvami - ločeno.csv";
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+            {
+                using (StreamWriter writetext = new StreamWriter(save.FileName))
+                {
+                    // glava
+                    str_zapisi = "STRANKA_SIFRA" + csv + "OM_SIFRA" + csv + "STOR_DELEZ" + csv + "STOR_KOLICNIK1" + csv + "STOR_KOLICNIK2" + csv + "STOR_KOLICNIK3" + csv + "STOR_TIP_STORITVE" + csv + "STOR_SKUPINA_STORITEV" + csv +
+                        "STOR_STOR_STORITEV" + csv + "STOR_VEZAVA" + csv + "STOR_CENA" + csv + "STOR_ENOTA_MERE" + csv + "STOR_STOR_DAVST" + csv + "STOR_STOR_NACOBR" + csv + "STOR_STOR_DELITEV_STROSKOV" 
+                        + csv + "TIP_STORITVE_SIF" + csv + "TIP_STORITVE_TEKST" + csv + "SKUPINA_STORITVE_SIF" + csv + "SKUPINA_STORITVE_TEKST" + csv + "STORITEV_SIF" + csv + "STORITEV_TEKST";
+                    writetext.WriteLine(str_zapisi,Encoding.ASCII);
+                
+
+                string tip_stor = ""; 
+                string skup_stor = "";
+                string stor = "";
+                // Bass - razdeli šifre OM
+                stevec = 0;
+                try
+                {
+                    System.IO.StreamReader objReader;
+                    objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                    do
+                    {
+                            dod1 = ""; dod2 = ""; dod3 = ""; dod4 = ""; dod5 = ""; dod6 = "";
+                            vrstica = "";
+                            //Izprazni_cad_om();
+                            //vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                            vrstica = objReader.ReadLine();
+                            string[] polje = vrstica.Split(';');
+
+                            tip_stor = polje[6];
+                            skup_stor = polje[7];
+                            stor = polje[8];
+                            // razdeli prvi stolpec
+                            if (tip_stor.Contains(' '))
+                            {
+                                string[] sifra = tip_stor.Split(' ');
+                                dod1 = sifra[0];
+                                dod2 = sifra[1];
+                                if (dod2.Length > 0)
+                                {
+                                    dod2 = tip_stor.Remove(0, dod1.Length + 1);
+                                }
+                                else
+                                {
+                                    dod2 = dod1;
+                                }
+                            }
+                            else
+                            {
+                                dod1 = ""; dod2 = "";
+                            }
+
+                            // razdeli drugi stolpec
+                            if (skup_stor.Contains(' '))
+                            {
+                                string[] sifra = skup_stor.Split(' ');
+                                dod3 = sifra[0];
+                                dod4 = sifra[1];
+                                if (dod4.Length > 0)
+                                {
+                                    dod4 = skup_stor.Remove(0, dod3.Length + 1);
+                                }
+                                else
+                                {
+                                    dod4 = dod2;
+                                }
+                            }
+                            else
+                            {
+                                dod3 = ""; dod4 = "";
+                            }
+
+                            // razdeli tretji stolpec
+                            if (stor.Contains(' '))
+                            {
+                                string[] sifra = stor.Split(' ');
+                                dod5 = sifra[0];
+                                dod6 = sifra[1];
+                                if (dod6.Length > 0)
+                                {
+                                    dod6 = stor.Remove(0, dod5.Length + 1);
+                                }
+                                else
+                                {
+                                    dod6 = dod5;
+                                }
+                            }
+                            else
+                            {
+                                dod5 = ""; dod6 = "";
+                            }
+
+                            string vrstica_pisi = vrstica + csv + dod1 + csv + dod2 + csv + dod3 + csv + dod4 + csv + dod5 + csv + dod6;
+                            writetext.WriteLine(vrstica_pisi, Encoding.UTF8);
+                            stevec = ++stevec;
+                            vrstica = "";
+                            ls.Text = stevec.ToString();
+                            ls.Refresh();
+                    } while (objReader.Peek() != -1);
+                    objReader.Close();
+                    stevec--;
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka: " + ex.Message);
+                }
+                finally
+                {
+                    MessageBox.Show("Zapis v CSV končan!");
+                }
+            }
+            } // if savedialog ok
+        }
+
+
         private void button26_Click(object sender, EventArgs e)
         {
             // Zapiši aglomeracije za Bass
