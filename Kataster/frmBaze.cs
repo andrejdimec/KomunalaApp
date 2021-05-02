@@ -129,7 +129,6 @@ namespace Komunala
                 Razdeli_om(open.FileName);
                 ls.Text = "Ok";
             }
-
         }
         private void Shrani_vrsto(string vrstica, string imedatoteke)
         {
@@ -145,6 +144,110 @@ namespace Komunala
                     MessageBox.Show("Napaka pri shranjevanju: " + ex2.Message);
                 }
         }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            // razdeli šifro in naziv v OM za Bass
+            ls.Text = "";
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = frmMain.pot_podatki;
+
+            open.FileName = "";
+
+            open.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Razdeli_om2(open.FileName);
+                ls.Text = "Ok";
+            }
+
+        }
+
+        private void Razdeli_om2(string vhod)
+        {
+            csv = ';';
+            string dod1, dod2, dod3, dod4, dod5, dod6;
+            SaveFileDialog save = new SaveFileDialog();
+            save.FileName = "Objekti in OM - ločeno Andrej.csv";
+            save.Filter = "Ločeno s podpičjem | *.csv";
+
+            if (save.ShowDialog() == DialogResult.OK)
+
+            {
+                using (StreamWriter writetext = new StreamWriter(save.FileName))
+                {
+                    // glava
+                    str_zapisi = "SIFRA_OBJ" + csv + "SIFRAOM" + csv + "OM_NAZIV" + csv + "OM_NASLOV" + csv + "KOLICINA" + csv + "VREDNOST" + csv + "VREDNOSTZDDV" + csv + "VREDNOST_DDV";
+                    writetext.WriteLine(str_zapisi, Encoding.ASCII);
+
+
+                    string tip_stor = "";
+                    string skup_stor = "";
+                    string stor = "";
+                    // Bass - razdeli šifre OM
+                    stevec = 0;
+                    try
+                    {
+                        System.IO.StreamReader objReader;
+                        objReader = new System.IO.StreamReader(vhod, ASCIIEncoding.UTF8);
+                        do
+                        {
+                            dod1 = ""; dod2 = ""; dod3 = ""; dod4 = ""; dod5 = ""; dod6 = "";
+                            vrstica = "";
+                            //Izprazni_cad_om();
+                            //vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                            vrstica = objReader.ReadLine();
+                            string[] polje = vrstica.Split(';');
+
+                            tip_stor = polje[1];
+                            //skup_stor = polje[7];
+                            //stor = polje[8];
+                            // razdeli prvi stolpec
+                            if (tip_stor.Contains(' '))
+                            {
+                                string[] sifra = tip_stor.Split(' ');
+                                dod1 = sifra[0];
+                                dod2 = sifra[1];
+                                if (dod2.Length > 0)
+                                {
+                                    dod2 = tip_stor.Remove(0, dod1.Length + 1);
+                                }
+                                else
+                                {
+                                    dod2 = dod1;
+                                }
+                            }
+                            else
+                            {
+                                dod1 = ""; dod2 = "";
+                            }
+
+
+                            string vrstica_pisi = vrstica + csv + dod1 + csv + dod2;
+                            writetext.WriteLine(vrstica_pisi, Encoding.UTF8);
+                            stevec = ++stevec;
+                            vrstica = "";
+                            ls.Text = stevec.ToString();
+                            ls.Refresh();
+                        } while (objReader.Peek() != -1);
+                        objReader.Close();
+                        stevec--;
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    finally
+                    {
+                        MessageBox.Show("Zapis v CSV končan!");
+                    }
+                }
+            } // if savedialog ok
+        }
+
 
         private void Razdeli_om(string vhod)
         {
