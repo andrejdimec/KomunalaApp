@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ikona.ico</ApplicationIcon>
+    <ApplicationIcon>logo-komunala-krog.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -589,6 +589,7 @@
     <None Include="ikone\gumbi-pogodbe.jpg" />
     <None Include="ikone\gumb-gjs-baze.jpg" />
     <None Include="ikone\gumb-ren-baze.jpg" />
+    <Content Include="logo-komunala-krog.ico" />
     <Content Include="on.jpg" />
     <Content Include="ona.jpg" />
     <Content Include="Opombe.txt" />
