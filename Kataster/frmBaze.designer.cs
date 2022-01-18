@@ -98,6 +98,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.button28 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.button27 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
@@ -105,8 +107,6 @@
             this.button24 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.button23 = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.button28 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -510,9 +510,9 @@
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(97, 261);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(291, 15);
+            this.label30.Size = new System.Drawing.Size(154, 15);
             this.label30.TabIndex = 94;
-            this.label30.Text = "6. CADIS.csv - Izvoženo iz obračuna (OM po HSMID)";
+            this.label30.Text = "6. Prenos iz Bass-ove baze";
             // 
             // label29
             // 
@@ -832,6 +832,25 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "  Bass  prenosi";
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(137, 360);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(55, 15);
+            this.label25.TabIndex = 97;
+            this.label25.Text = "2.5.2021";
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(15, 347);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(106, 28);
+            this.button28.TabIndex = 96;
+            this.button28.Text = "Razdeli OM";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -899,25 +918,6 @@
             this.button23.Text = "OM -> SQL";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(137, 360);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(55, 15);
-            this.label25.TabIndex = 97;
-            this.label25.Text = "2.5.2021";
-            // 
-            // button28
-            // 
-            this.button28.Location = new System.Drawing.Point(15, 347);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(106, 28);
-            this.button28.TabIndex = 96;
-            this.button28.Text = "Razdeli OM";
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // frmBaze
             // 

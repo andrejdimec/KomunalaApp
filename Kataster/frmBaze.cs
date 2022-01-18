@@ -12,7 +12,11 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections;
+using MySql.Data.MySqlClient;
+using MySql.Data.Types;
+
 using System.CodeDom;
+
 //using Excel = Microsoft.Interop.Excel;
 
 namespace Komunala
@@ -20,12 +24,16 @@ namespace Komunala
     public partial class frmBaze : Form
     {
         // določi connection
-
+        
         // začasno
         public static string lokalni_disk = "c:\\";
         //public static string app_path = disk + "\\KomunalaApp\\";
         //public static string app_path_data = app_path + "data\\";
         public static string pot_podatki = lokalni_disk + "Podatki\\";
+        
+        public static string strc = @"Server=192.168.100.18;Database=radgona;Uid=dimec;Pwd='6iXrN6J8@J';Connect Timeout=30;"; // do bass strežnika
+        MySqlConnection conb = new MySqlConnection (strc);
+        MySqlCommand cmdb;
 
 
 
@@ -42,6 +50,7 @@ namespace Komunala
 
         SqlCommand cmd3;
         SqlDataReader rdr3 = null;
+        MySqlDataReader rdrb = null;
 
         int stevec_zacasno = 0;
         int stevec_stalno = 0;
@@ -3038,6 +3047,14 @@ namespace Komunala
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        private void IzprazniBazo_bass()  // izprazni tabelo tbl_cad
+        {
+            string query = "delete from tbl_bass";
+            cmd = new SqlCommand(query, con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
 
         private void Izprazni_cad() // izprazni variable za tabelo tbl_ul
         {
@@ -3143,24 +3160,153 @@ namespace Komunala
             }
         } // private void
 
-            private void button10_Click(object sender, EventArgs e)  // prenesi cadis.crp
+        private void Prenesi_Bass()
         {
-            ls.Text = "";
-            OpenFileDialog open = new OpenFileDialog();
-            open.InitialDirectory = frmMain.pot_podatki;
+            // prenos Bass
 
-            open.FileName = "";
-
-            open.Filter = "Ločeno s podpičjem | *.csv";
-
-            if (open.ShowDialog() == DialogResult.OK)
             {
-                Prenesi_cadis(open.FileName);
-                ls.Text = "Ok";
+                // začni prenos
+                stevec = 0;
+                string cvodovodstr = "", ckanalizacijastr = "", cgreznicastr = "", csmetistr = "";
+                IzprazniBazo_bass();
+                // preberi ul - CSV
+                try
+                {
+                    // beri vsa odjemna mesta
+                    string q = "select om,om_naziv,om_hsmid from inkasso_2021_om_radgona";
+                    cmdb = new MySqlCommand(q, conb);
+                    conb.Open();
+                    
+                    rdrb = cmdb.ExecuteReader();
+                    while (rdrb.Read())
+                    {
+
+                        
+                        vrstica = "";
+                        Izprazni_cad();
+                        //vrstica = vrstica + objReader.ReadLine() + "\r\n";
+                        //vrstica = "";
+                        // razdeli vrstico ločeno s ;
+                        // string[] polje = vrstica.Split(';');
+                        int tmphsmid = (Int32)rdrb["om_hsmid"];
+                        chsmid = Convert.ToString(tmphsmid);
+
+                        if (rdrb["om_naziv"] != DBNull.Value)
+                            cnaziv = (string)rdrb["om_naziv"];
+                        else
+                            cnaziv = "-1";
+
+
+//                        cnaziv = (string)rdrb["om_naziv"];
+                        //ckraj = polje[2];
+                        //culica = polje[3];
+                        //chs = polje[4];
+                        //cposta = polje[5];
+                        //cime_poste = polje[6];
+                        //cvodovodstr = polje[7];
+                        //ckanalizacijastr = polje[8];
+                        //cgreznicastr = polje[9];
+                        //csmetistr = polje[10];
+                        ////cvodovod = 1;ckanalizacija = 1;cgreznica = 1;csmeti = 1;
+                        //cdim = polje[11];
+                        //ctip_om = polje[12];
+                        ////source = source.Substring(0, length);
+                        //int dolzina = 999; // največja dolžina naziva
+                        //if (cnaziv.Length > dolzina)
+                        //{
+                        //    cnaziv = cnaziv.Substring(0, 9);
+                        //}
+                        try
+                        {
+                            if (stevec > 0)
+                            {
+                                //cvodovod = Int32.Parse(cvodovodstr);
+                                //ckanalizacija = Int32.Parse(ckanalizacijastr);
+                                //csmeti = Int32.Parse(csmetistr);
+                                //cgreznica = Int32.Parse(cgreznicastr);
+                                
+                                // napiši prebrano v tabelo tbl_bass
+                                string query = "Insert into tbl_bass (hsmid,naziv,kraj,ulica,hs,posta,ime_poste,vodovod,kanalizacija,greznica,smeti,dimenzija,tip_om) values " +
+                                    "(@chsmid,@cnaziv,@ckraj,@culica,@chs,@cposta,@cime_poste,@cvodovod,@ckanalizacija,@cgreznica,@csmeti,@cdimenzija,@ctip_om)";
+                                cmd = new SqlCommand(query, con);
+                                con.Open();
+                                cmd.Parameters.AddWithValue("@chsmid", chsmid);
+                                cmd.Parameters.AddWithValue("@cnaziv", cnaziv);
+                                cmd.Parameters.AddWithValue("@ckraj", ckraj);
+                                cmd.Parameters.AddWithValue("@culica", culica);
+                                cmd.Parameters.AddWithValue("@chs", chs);
+                                cmd.Parameters.AddWithValue("@cposta", cposta);
+                                cmd.Parameters.AddWithValue("@cime_poste", cime_poste);
+                                cmd.Parameters.AddWithValue("@cvodovod", cvodovod);
+                                cmd.Parameters.AddWithValue("@ckanalizacija", ckanalizacija);
+                                cmd.Parameters.AddWithValue("@cgreznica", cgreznica);
+                                cmd.Parameters.AddWithValue("@csmeti", csmeti);
+                                cmd.Parameters.AddWithValue("@cdimenzija", cdim);
+                                cmd.Parameters.AddWithValue("@ctip_om", ctip_om);
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Napaka insert: " + ex.Message);
+                        }
+                        stevec = ++stevec;
+                        vrstica = "";
+                        ls.Text = stevec.ToString();
+                        ls.Refresh();
+                    } // while reader
+                    
+                    stevec--;
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show("Napaka MySQL reader: " + ex2.Message);
+                }
+                finally
+                {
+                    if (rdrb != null)
+                    {
+                        rdrb.Close();
+                    }
+                    if (conb != null)
+                    {
+                        conb.Close();
+                    }
+                }
             }
 
-            //Prenesi_cadis();
+
         }
+
+        private void button10_Click(object sender, EventArgs e)  // prenesi iz Bassove baze
+        {
+            ls.Text = "";
+            Prenesi_Bass();
+            ls.Text = "Ok";
+
+        }
+
+        //private void button10_Click(object sender, EventArgs e)  // prenesi cadis.crp
+        //{
+        //    ls.Text = "";
+        //    OpenFileDialog open = new OpenFileDialog();
+        //    open.InitialDirectory = frmMain.pot_podatki;
+
+        //    open.FileName = "";
+
+        //    open.Filter = "Ločeno s podpičjem | *.csv";
+
+        //    if (open.ShowDialog() == DialogResult.OK)
+        //    {
+        //        Prenesi_cadis(open.FileName);
+        //        ls.Text = "Ok";
+        //    }
+
+        //    //Prenesi_cadis();
+        //}
 
         private void button9_Click(object sender, EventArgs e)
         {
