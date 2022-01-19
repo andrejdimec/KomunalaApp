@@ -34,8 +34,10 @@ namespace Komunala
         public static string strc = @"Server=192.168.100.18;Database=radgona;Uid=dimec;Pwd='6iXrN6J8@J';Connect Timeout=30;"; // do bass strežnika
         MySqlConnection conb = new MySqlConnection (strc);
         MySqlCommand cmdb;
-
-
+        MySqlConnection conb2 = new MySqlConnection(strc);
+        MySqlCommand cmdb2;
+        MySqlDataReader rdrb = null;
+        MySqlDataReader rdrb2 = null;
 
         SqlConnection con = frmMain.c;
         SqlConnection con2 = frmMain.c2;
@@ -50,7 +52,6 @@ namespace Komunala
 
         SqlCommand cmd3;
         SqlDataReader rdr3 = null;
-        MySqlDataReader rdrb = null;
 
         int stevec_zacasno = 0;
         int stevec_stalno = 0;
@@ -3163,6 +3164,11 @@ namespace Komunala
         private void Prenesi_Bass()
         {
             // prenos Bass
+            int tna_mid = 0; 
+            string tulmid = "";
+            string ths = "";
+            string thsd = "";
+            string idxom = "";
 
             {
                 // začni prenos
@@ -3173,88 +3179,168 @@ namespace Komunala
                 try
                 {
                     // beri vsa odjemna mesta
-                    string q = "select om,om_naziv,om_hsmid from inkasso_2021_om_radgona where om_aktiven='T'";
+                    string q = "select om,om_naziv,om_hsmid,kraj_sk_sifra,ulica_sifra,om_hs,om_hsd from inkasso_2021_om_radgona where om_aktiven='T'";
                     cmdb = new MySqlCommand(q, conb);
                     conb.Open();
                     
                     rdrb = cmdb.ExecuteReader();
                     while (rdrb.Read())
                     {
-
-                        
-                        vrstica = "";
-                        Izprazni_cad();
-                        //vrstica = vrstica + objReader.ReadLine() + "\r\n";
-                        //vrstica = "";
-                        // razdeli vrstico ločeno s ;
-                        // string[] polje = vrstica.Split(';');
-                        int tmphsmid = (Int32)rdrb["om_hsmid"];
-                        chsmid = Convert.ToString(tmphsmid);
-
-                        if (rdrb["om_naziv"] != DBNull.Value)
-                            cnaziv = (string)rdrb["om_naziv"];
-                        else
-                            cnaziv = "-1";
-
-
-//                        cnaziv = (string)rdrb["om_naziv"];
-                        //ckraj = polje[2];
-                        //culica = polje[3];
-                        //chs = polje[4];
-                        //cposta = polje[5];
-                        //cime_poste = polje[6];
-                        //cvodovodstr = polje[7];
-                        //ckanalizacijastr = polje[8];
-                        //cgreznicastr = polje[9];
-                        //csmetistr = polje[10];
-                        ////cvodovod = 1;ckanalizacija = 1;cgreznica = 1;csmeti = 1;
-                        //cdim = polje[11];
-                        //ctip_om = polje[12];
-                        ////source = source.Substring(0, length);
-                        //int dolzina = 999; // največja dolžina naziva
-                        //if (cnaziv.Length > dolzina)
+                        //if (stevec < 101) // začasno
                         //{
-                        //    cnaziv = cnaziv.Substring(0, 9);
-                        //}
-                        try
-                        {
-                            if (stevec > 0)
+                            Izprazni_cad();
+
+                            idxom = (string)rdrb["om"];
+                            int tmphsmid = (Int32)rdrb["om_hsmid"];
+                            if (tmphsmid < 10000000)
+                                tmphsmid = 99;
+                            chsmid = Convert.ToString(tmphsmid);
+
+                            if (rdrb["om_naziv"] != DBNull.Value)
+                                cnaziv = (string)rdrb["om_naziv"];
+                            else
+                                cnaziv = "-1";
+
+
+                            // kraj
+                            // preberi ime naselja
+
+                            if (rdrb["kraj_sk_sifra"] != DBNull.Value)
+                                tna_mid = (Int32)rdrb["kraj_sk_sifra"];
+                            else
+                                tna_mid = -1;
+
+                            string naime = "";
+                            string q2 = "select na_uime from tbl_na where na_mid = @tna_mid";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@tna_mid", tna_mid.ToString()); // preberi ulico
+                            cmd2.ExecuteNonQuery();
+                            ckraj = (string)cmd2.ExecuteScalar();
+                            if (ckraj == null)
                             {
-                                //cvodovod = Int32.Parse(cvodovodstr);
-                                //ckanalizacija = Int32.Parse(ckanalizacijastr);
-                                //csmeti = Int32.Parse(csmetistr);
-                                //cgreznica = Int32.Parse(cgreznicastr);
-                                
-                                // napiši prebrano v tabelo tbl_bass
-                                string query = "Insert into tbl_bass (hsmid,naziv,kraj,ulica,hs,posta,ime_poste,vodovod,kanalizacija,greznica,smeti,dimenzija,tip_om) values " +
-                                    "(@chsmid,@cnaziv,@ckraj,@culica,@chs,@cposta,@cime_poste,@cvodovod,@ckanalizacija,@cgreznica,@csmeti,@cdimenzija,@ctip_om)";
-                                cmd = new SqlCommand(query, con);
-                                con.Open();
-                                cmd.Parameters.AddWithValue("@chsmid", chsmid);
-                                cmd.Parameters.AddWithValue("@cnaziv", cnaziv);
-                                cmd.Parameters.AddWithValue("@ckraj", ckraj);
-                                cmd.Parameters.AddWithValue("@culica", culica);
-                                cmd.Parameters.AddWithValue("@chs", chs);
-                                cmd.Parameters.AddWithValue("@cposta", cposta);
-                                cmd.Parameters.AddWithValue("@cime_poste", cime_poste);
-                                cmd.Parameters.AddWithValue("@cvodovod", cvodovod);
-                                cmd.Parameters.AddWithValue("@ckanalizacija", ckanalizacija);
-                                cmd.Parameters.AddWithValue("@cgreznica", cgreznica);
-                                cmd.Parameters.AddWithValue("@csmeti", csmeti);
-                                cmd.Parameters.AddWithValue("@cdimenzija", cdim);
-                                cmd.Parameters.AddWithValue("@ctip_om", ctip_om);
-                                cmd.ExecuteNonQuery();
-                                con.Close();
+                                ckraj = "N/A";
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Napaka insert: " + ex.Message);
-                        }
+                            con2.Close();
+
+                            // preberi ime ulice
+
+                            if (rdrb["ulica_sifra"] != DBNull.Value)
+                                tna_mid = (Int32)rdrb["ulica_sifra"];
+                            else
+                                tna_mid = -1;
+
+                            string ime = "", ulime = "";
+                            q2 = "select ul_uime from tbl_ul where ul_mid = @tulmid";
+                            cmd2 = new SqlCommand(q2, con2);
+                            con2.Open();
+                            cmd2.Parameters.AddWithValue("@tulmid", tna_mid.ToString()); // preberi ulico
+                            cmd2.ExecuteNonQuery();
+                            ulime = (string)cmd2.ExecuteScalar();
+                            if (ulime == null)
+                            {
+                                ulime = ckraj;
+                            }
+                            con2.Close();
+                            culica = ulime;
+
+                            // hišna številka
+                            if (rdrb["om_hs"] != DBNull.Value)
+                                ths = (string)rdrb["om_hs"];
+                            else
+                                ths = "";
+
+                            if (rdrb["om_hsd"] != DBNull.Value)
+                                thsd = (string)rdrb["om_hsd"];
+                            else
+                                thsd = "";
+                            chs = ths + thsd;
+
+                            // poišči storitve po šifrantu iz bass
+                            string imavodo1 = "01";
+                            string imavodo2 = "02";
+                            string imaodvajanje = "ODV";
+                            string imaciscenje = "CIS";
+                            string imagreznico = "GREOS";
+                            string imasmeti1 = "SM0001";
+                            string imasmeti2 = "SM0002";
+                            string imasmeti3 = "SM0003";
+                            string imasmeti4 = "SM0004";
+                            string imasmeti5 = "SM0005";
+                            string imasmeti6 = "SMD001";
+                            string imasmeti7 = "SMD002";
+                            string imasmeti8 = "SMD003";
+                            string imasmeti9 = "SMD004";
+
+                            try
+                            {
+                                string q3 = "select om,omstoritve_storitev from inkasso_2021_omstoritve_radgona where om=@idxom";
+                                cmdb2 = new MySqlCommand(q3, conb2);
+                                conb2.Open();
+                                cmdb2.Parameters.AddWithValue("@idxom", idxom); // preberi ulico
+                                rdrb2 = cmdb2.ExecuteReader();
+                                while (rdrb2.Read())
+                                {
+                                    string tmpstoritev = (string)rdrb2["omstoritve_storitev"];
+                                    if (tmpstoritev == imavodo1 || tmpstoritev == imavodo2)
+                                        cvodovod = 1;
+                                    if (tmpstoritev == imaodvajanje)
+                                        ckanalizacija = 1;
+                                    if (tmpstoritev == imagreznico)
+                                        cgreznica = 1;
+                                    if (tmpstoritev == imasmeti1 || tmpstoritev == imasmeti2 || tmpstoritev == imasmeti3 || tmpstoritev == imasmeti4 || tmpstoritev == imasmeti5 || tmpstoritev == imasmeti6 || tmpstoritev == imasmeti7 || tmpstoritev == imasmeti8 || tmpstoritev == imasmeti9)
+                                        csmeti = 1;
+
+
+
+                                } // while reader
+                            }
+                            catch (Exception ex3)
+                            {
+                                MessageBox.Show("Napaka MySQL reader storitve: " + ex3.Message);
+                            }
+                            finally
+                            {
+                                rdrb2.Close();
+                                conb2.Close();
+                            }
+
+                            try
+                            {
+                                if (stevec > 0)
+                                {
+                                    // napiši prebrano v tabelo tbl_bass
+                                    string query = "Insert into tbl_bass (hsmid,naziv,kraj,ulica,hs,posta,ime_poste,vodovod,kanalizacija,greznica,smeti,dimenzija,tip_om) values " +
+                                        "(@chsmid,@cnaziv,@ckraj,@culica,@chs,@cposta,@cime_poste,@cvodovod,@ckanalizacija,@cgreznica,@csmeti,@cdimenzija,@ctip_om)";
+                                    cmd = new SqlCommand(query, con);
+                                    con.Open();
+                                    cmd.Parameters.AddWithValue("@chsmid", chsmid);
+                                    cmd.Parameters.AddWithValue("@cnaziv", cnaziv);
+                                    cmd.Parameters.AddWithValue("@ckraj", ckraj);
+                                    cmd.Parameters.AddWithValue("@culica", culica);
+                                    cmd.Parameters.AddWithValue("@chs", chs);
+                                    cmd.Parameters.AddWithValue("@cposta", cposta);
+                                    cmd.Parameters.AddWithValue("@cime_poste", cime_poste);
+                                    cmd.Parameters.AddWithValue("@cvodovod", cvodovod);
+                                    cmd.Parameters.AddWithValue("@ckanalizacija", ckanalizacija);
+                                    cmd.Parameters.AddWithValue("@cgreznica", cgreznica);
+                                    cmd.Parameters.AddWithValue("@csmeti", csmeti);
+                                    cmd.Parameters.AddWithValue("@cdimenzija", cdim);
+                                    cmd.Parameters.AddWithValue("@ctip_om", ctip_om);
+                                    cmd.ExecuteNonQuery();
+                                    con.Close();
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Napaka insert: " + ex.Message);
+                            }
+//                        } // začasno if števec<101
                         stevec = ++stevec;
                         vrstica = "";
                         ls.Text = stevec.ToString();
                         ls.Refresh();
+                        
                     } // while reader
                     
                     stevec--;
@@ -4227,10 +4313,10 @@ namespace Komunala
 
                         // razdeli vrstico ločeno s ;
                         string[] polje = vrstica.Split(';');
-                        ul_mid = polje[11];
-                        ob_uime = polje[4];
-                        na_uime = polje[9];
-                        ul_uime = polje[14];
+                        ul_mid = polje[2];
+                        ob_uime = polje[7];
+                        na_uime = polje[6];
+                        ul_uime = polje[4];
                         try
                         {
                             if (stevec > 0)
@@ -4325,10 +4411,10 @@ namespace Komunala
 
                         // razdeli vrstico ločeno s ;
                         string[] polje = vrstica.Split(';');
-                        ob2_uime = polje[3];
-                        na2_uime = polje[8];
-                        na2_mid = polje[5];
-                        povrsinastr = polje[11];
+                        ob2_uime = polje[6];
+                        na2_uime = polje[4];
+                        na2_mid = polje[2];
+                        povrsinastr = polje[7];
                         try
                         {
                             if (stevec > 0)
