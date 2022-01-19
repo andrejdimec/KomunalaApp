@@ -3173,7 +3173,7 @@ namespace Komunala
                 try
                 {
                     // beri vsa odjemna mesta
-                    string q = "select om,om_naziv,om_hsmid from inkasso_2021_om_radgona";
+                    string q = "select om,om_naziv,om_hsmid from inkasso_2021_om_radgona where om_aktiven='T'";
                     cmdb = new MySqlCommand(q, conb);
                     conb.Open();
                     
