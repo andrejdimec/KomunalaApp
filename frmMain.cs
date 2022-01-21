@@ -24,7 +24,8 @@ namespace Komunala
         string verzija = "14.1.2022";
         public static string nazivPrograma = "Komunala Radgona";
         public static string podatki_ren = "Avgust 2020";
-        public static string podatki_gjs = "Januar 2021";
+        public static string podatki_crp = "December 2020";
+        public static string podatki_gjs = "Januar 2022 - Bass";
 
         SqlCommand cmd;
         SqlDataReader rdr = null;

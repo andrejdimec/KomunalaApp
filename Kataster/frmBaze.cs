@@ -3179,6 +3179,8 @@ namespace Komunala
                 try
                 {
                     // beri vsa odjemna mesta
+                    // najprej prenesi samo odjemna mesta, potem dodaj še HSMID, če ga ni vzelo iz bass-a
+
                     string q = "select om,om_naziv,om_hsmid,kraj_sk_sifra,ulica_sifra,om_hs,om_hsd from inkasso_2021_om_radgona where om_aktiven='T'";
                     cmdb = new MySqlCommand(q, conb);
                     conb.Open();
