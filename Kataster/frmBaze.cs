@@ -14,6 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Collections;
 using MySql.Data.MySqlClient;
 using MySql.Data.Types;
+using System.Data.OleDb;
 
 using System.CodeDom;
 
@@ -30,7 +31,8 @@ namespace Komunala
         //public static string app_path = disk + "\\KomunalaApp\\";
         //public static string app_path_data = app_path + "data\\";
         public static string pot_podatki = lokalni_disk + "Podatki\\";
-        
+
+
         public static string strc = @"Server=192.168.100.18;Database=radgona;Uid=dimec;Pwd='6iXrN6J8@J';Connect Timeout=30;"; // do bass strežnika
         MySqlConnection conb = new MySqlConnection (strc);
         MySqlCommand cmdb;
@@ -42,10 +44,15 @@ namespace Komunala
         SqlConnection con = frmMain.c;
         SqlConnection con2 = frmMain.c2;
         SqlConnection con3 = frmMain.c3;
+        OleDbConnection cona = frmMain.ca;
+        
         SqlDataAdapter adapt;
 
         SqlCommand cmd;
         SqlDataReader rdr = null;
+
+        OleDbCommand cmda;
+        OleDbDataReader rdra = null;
 
         SqlCommand cmd2;
         SqlDataReader rdr2 = null;
@@ -403,6 +410,272 @@ namespace Komunala
                 ls.Text = "Ok";
                 ls.Refresh();
             }
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            // prenesi CRP iz ACESS baze z uvoženo tabelo iz EXCEL-a - jan 2022
+            stevec = 0;
+            IzprazniBazo_crp();
+            try
+            {
+                rdra = null;
+                string q9 = "select * from crp";
+                cmda = new OleDbCommand(q9, cona);
+                cona.Open();
+                rdra = cmda.ExecuteReader();
+                while (rdra.Read())
+                {
+                    //namid_ok = (String)rdr["na_mid"];  // določi namid stalnega
+                    //naselje_ok = (String)rdr["na_uime"];  // določi naselje stalnega
+                    vrstica = "";
+                    string idxulica = "";
+                    string idxulica_s = "";
+                    string idxulica_z = "";
+                    izprazni_crp();
+                    vrstica = "";
+                    // razdeli vrstico ločeno s ;
+                    string[] polje = vrstica.Split(';');
+                    emso = "N/A";
+                    if (rdra["spol"] != DBNull.Value) spol = (string)rdra["spol"];
+                    if (rdra["Datum rojstva"] != DBNull.Value) dat_roj = Convert.ToString((DateTime)rdra["Datum rojstva"]);
+                    if (rdra["Priimek1"] != DBNull.Value) priimek1 = (string)rdra["Priimek1"];
+                    if (rdra["Priimek2"] != DBNull.Value) priimek2 = (string)rdra["Priimek2"];
+                    if (rdra["Ime1"] != DBNull.Value) ime1 = (string)rdra["Ime1"];
+                    if (rdra["Ime2"] != DBNull.Value) ime2 = (string)rdra["Ime2"];
+
+                    if (rdra["Ime državljanstva1"] != DBNull.Value) drzava = (string)rdra["Ime državljanstva1"];
+                    if (rdra["Naziv občine roj"] != DBNull.Value) obcina_roj = (string)rdra["Naziv občine roj"];
+                    if (rdra["Naziv naselja roj"] != DBNull.Value) naselje_roj = (string)rdra["Naziv naselja roj"];
+                    if (rdra["Država roj"] != DBNull.Value) drzava_roj = (string)rdra["Država roj"];
+                    if (rdra["Naziv naselja STPR"] != DBNull.Value) naselje_stpr = (string)rdra["Naziv naselja STPR"];
+                    if (rdra["Naziv ulice STPR"] != DBNull.Value) ulica_stpr = (string)rdra["Naziv ulice STPR"];
+                    if (rdra["Hišna št STPR"] != DBNull.Value) hs_stpr = Convert.ToString((double)rdra["Hišna št STPR"]);
+                    if (rdra["Hišna št STPR dodatek"] != DBNull.Value) hsd_stpr = (string)rdra["Hišna št STPR dodatek"];
+                    if (rdra["Pošta STPR"] != DBNull.Value) posta_stpr = Convert.ToString((double)rdra["Pošta STPR"]);
+                    if (rdra["Pošte STPR naziv"] != DBNull.Value) naziv_poste_stpr = (string)rdra["Pošte STPR naziv"];
+                    if (rdra["Naziv ulice ZCPR"] != DBNull.Value) ulica_zcpr = (string)rdra["Naziv ulice ZCPR"];
+                    if (rdra["Hišna št ZCPR"] != DBNull.Value) hs_zcpr = Convert.ToString((double)rdra["Hišna št ZCPR"]);
+                    if (rdra["Hišna št ZCPR dodatek"] != DBNull.Value) hsd_zcpr = (string)rdra["Hišna št ZCPR dodatek"];
+                    if (rdra["Pošta ZCPR"] != DBNull.Value) posta_zcpr = (string)rdra["Pošta ZCPR"];
+                    if (rdra["Pošte ZCPR naziv"] != DBNull.Value) naziv_poste_zcpr = (string)rdra["Pošte ZCPR naziv"];
+                    if (rdra["Datum od ZCPR"] != DBNull.Value) datum_od_zcpr = Convert.ToString((DateTime)rdra["Datum od ZCPR"]);
+                    if (rdra["Status prebivališča"] != DBNull.Value) status_preb = Convert.ToString((double)rdra["Status prebivališča"]);
+                    if (rdra["Zakonski stan naziv"] != DBNull.Value) stan = (string)rdra["Zakonski stan naziv"];
+
+                    // napiši prebrano v tabelo crp
+                    try
+                    {
+                        if (stevec > 0)  // preskoči prvo vrstico
+                        {
+                            // naredi indekse
+
+                            // indeks crp - vsi ga morajo imeti iz radgonske občine
+                            string stalno = "1"; //"Ima samo stalno prebivališče";
+                            string zacasno = "2"; //"Ima samo začasno prebivališče";
+                            string oboje = "3"; //"Ima stalno in začasno prebivališče";
+                            string izbira = status_preb;
+                            string namid_ok = ""; // na_mid, ki se bo zapisal v bazo crp
+                            string naselje_ok = ""; // ime naselja, ki se bo zapisalo v bazo
+                            string idxtemp = "";
+                            string idxt = "";
+                            string lcaseidxtemp = "";
+                            string lcaseidxtempz = "";
+                            int tzacasno = 0;
+                            int tstalno = 0;
+
+                            if (izbira == stalno)
+                            {
+                                // če ima samo stalno je sigurno v radgoni
+                                idxtemp = ulica_stpr + hs_stpr + hsd_stpr;
+                                idxtemp = string.Join("", idxtemp.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)); // odstrani presledke
+                                lcaseidxtemp = idxtemp.ToLower(); // v male črke
+                                idxt = lcaseidxtemp;
+                                idxulica_s = ulica_stpr;
+                                idxulica = ulica_stpr;
+                                idxulica_z = "99";
+                                lcaseidxtempz = "99";
+                                tzacasno = 0;
+                                tstalno = 1;
+                            }
+
+                            if (izbira == zacasno)
+                            {
+                                // če ima samo začasno je sigurno v radgoni
+                                idxtemp = ulica_zcpr + hs_zcpr + hsd_zcpr;
+                                idxtemp = string.Join("", idxtemp.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)); // odstrani presledke
+                                lcaseidxtemp = idxtemp.ToLower(); // v male črke
+                                idxt = lcaseidxtemp;
+                                idxulica = ulica_zcpr;
+                                idxulica_s = ulica_zcpr;
+                                idxulica_z = ulica_zcpr;
+                                lcaseidxtempz = lcaseidxtemp;
+                                tzacasno = 1;
+                                tstalno = 0;
+                            }
+                            if (izbira == oboje)
+                            {
+                                // stalno
+                                idxtemp = ulica_stpr + hs_stpr + hsd_stpr;
+                                idxtemp = string.Join("", idxtemp.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)); // odstrani presledke
+                                lcaseidxtemp = idxtemp.ToLower(); // v male črke
+
+                                // zacasno
+                                idxtempz = ulica_zcpr + hs_zcpr + hsd_zcpr;
+                                idxtempz = string.Join("", idxtempz.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)); // odstrani presledke
+                                lcaseidxtempz = idxtempz.ToLower(); // v male črke
+                                                                    //MessageBox.Show(lcaseidxtemp + " " + lcaseidxtempz);
+
+                                // če je idxtemp v indeksu HS je to pravi
+                                // preveri če je idxtemp v radgonski občini
+                                // če je -> idx = idxtemp, index_crp = idxtemp, index_crpz = idxtempz
+                                // če je stalno v radgonski občini daj idxtemp kot index_crp in idxtempz kot index_crpz
+                                natemp = "";
+                                int stpr_v_gr = 0;
+                                string q = "select na_mid from tbl_hs where index_hs = @indeks";
+
+                                cmd = new SqlCommand(q, con);
+                                con.Open();
+                                cmd.Parameters.AddWithValue("@indeks", lcaseidxtemp); // preberi naselje
+                                cmd.ExecuteNonQuery();
+                                natemp = (string)cmd.ExecuteScalar();
+                                con.Close();
+                                tstalno = 1;
+                                if (natemp == null)
+                                {
+                                    // nič ni našel, začasno je v radgoni
+                                    // MessageBox.Show("nič ni našel " + natemp);
+                                    stpr_v_gr = 0;
+                                    idxt = lcaseidxtempz;
+                                    idxulica = ulica_zcpr;
+                                    tzacasno = 1;
+                                    tstalno = 0;
+                                    //tzacasno = 0;
+                                    //tstalno = 1;
+                                }
+
+                                if (natemp != null)
+                                {
+                                    // našel je zapis - stalno je v radgoni ampak 
+                                    stpr_v_gr = 1;
+                                    idxt = lcaseidxtemp;
+                                    idxulica = ulica_stpr;
+                                    tzacasno = 0;
+                                    tstalno = 1;
+                                    //tzacasno = 1;
+                                    //tstalno = 0;
+                                }
+                            }
+                            // konec indeksov
+                            naselje_ok = idxulica;
+
+                            naselje_ok = "Gornja Radgona";
+                            namid_ok = "10092752"; // MID od radgone
+
+                            // poglej če je idxulica med naselji, če ni je gornja radgona
+                            SqlDataReader rdr = null;
+                            try
+                            {
+                                string q = "select na_mid, na_uime from tbl_na where na_uime = @tnauime";
+                                cmd = new SqlCommand(q, con);
+                                con.Open();
+                                cmd.Parameters.AddWithValue("@tnauime", idxulica); // preberi naselje
+                                rdr = cmd.ExecuteReader();
+                                while (rdr.Read())
+                                {
+                                    namid_ok = (String)rdr["na_mid"];  // določi namid stalnega
+                                    naselje_ok = (String)rdr["na_uime"];  // določi naselje stalnega
+                                }
+                            }
+                            catch (Exception ex2)
+                            {
+                                MessageBox.Show("Napaka reader: " + ex2.Message);
+                            }
+                            finally
+                            {
+                                if (rdr != null)
+                                {
+                                    rdr.Close();
+                                }
+                                if (con != null)
+                                {
+                                    con.Close();
+                                }
+                            }
+
+                            tindeks_osebe = dat_roj + priimek1 + ime1 + lcaseidxtemp + lcaseidxtempz;
+                            string query = "insert into tbl_crp(indeks_osebe,emso,spol,dat_roj,priimek1,priimek2,ime1,ime2,drzava," +
+                            "               obcina_roj,naselje_roj,drzava_roj,naselje_stpr,ulica_stpr,hs_stpr,hsd_stpr,posta_stpr,naziv_poste_stpr,ulica_zcpr,hs_zcpr,hsd_zcpr," +
+                            "               posta_zcpr,naziv_poste_zcpr,datom_od_zcpr,status_preb,stan,index_crp,index_crpz,idx,zacasno,stalno,na_s,na_z) values(@indeks_osebe,@emso,@spol,@dat_roj,@priimek1,@priimek2," +
+                            "               @ime1,@ime2,@drzava,@obcina_roj,@naselje_roj,@drzava_roj,@naselje_stpr,@ulica_stpr,@hs_stpr, @hsd_stpr, @posta_stpr, @naziv_poste_stpr," +
+                            "               @ulica_zcpr, @hs_zcpr, @hsd_zcpr, @posta_zcpr, @naziv_poste_zcpr, @datom_od_zcpr, @status_preb, @stan,@index_crp,@index_crpz,@idx,@zacasno,@stalno,@na_s,@na_z)";
+                            cmd = new SqlCommand(query, con);
+                            con.Open();
+                            cmd.Parameters.AddWithValue("@emso", emso);
+                            cmd.Parameters.AddWithValue("@indeks_osebe", tindeks_osebe);
+                            cmd.Parameters.AddWithValue("@spol", spol);
+                            cmd.Parameters.AddWithValue("@dat_roj", dat_roj);
+                            cmd.Parameters.AddWithValue("@priimek1", priimek1);
+                            cmd.Parameters.AddWithValue("@priimek2", priimek2);
+                            cmd.Parameters.AddWithValue("@ime1", ime1);
+                            cmd.Parameters.AddWithValue("@ime2", ime2);
+                            cmd.Parameters.AddWithValue("@drzava", drzava);
+                            cmd.Parameters.AddWithValue("@obcina_roj", obcina_roj);
+                            cmd.Parameters.AddWithValue("@naselje_roj", naselje_roj);
+                            cmd.Parameters.AddWithValue("@drzava_roj", drzava_roj);
+                            cmd.Parameters.AddWithValue("@naselje_stpr", naselje_stpr);
+                            cmd.Parameters.AddWithValue("@ulica_stpr", ulica_stpr);
+                            cmd.Parameters.AddWithValue("@hs_stpr", hs_stpr);
+                            cmd.Parameters.AddWithValue("@hsd_stpr", hsd_stpr);
+                            cmd.Parameters.AddWithValue("@posta_stpr", posta_stpr);
+                            cmd.Parameters.AddWithValue("@naziv_poste_stpr", naziv_poste_stpr);
+                            cmd.Parameters.AddWithValue("@ulica_zcpr", ulica_zcpr);
+                            cmd.Parameters.AddWithValue("@hs_zcpr", hs_zcpr);
+                            cmd.Parameters.AddWithValue("@hsd_zcpr", hsd_zcpr);
+                            cmd.Parameters.AddWithValue("@posta_zcpr", posta_zcpr);
+                            cmd.Parameters.AddWithValue("@naziv_poste_zcpr", naziv_poste_zcpr);
+                            cmd.Parameters.AddWithValue("@datom_od_zcpr", datum_od_zcpr);
+                            cmd.Parameters.AddWithValue("@status_preb", status_preb);
+                            cmd.Parameters.AddWithValue("@stan", stan);
+                            cmd.Parameters.AddWithValue("@index_crp", lcaseidxtemp);
+                            cmd.Parameters.AddWithValue("@index_crpz", lcaseidxtempz); //lcaseidxtempz
+                            cmd.Parameters.AddWithValue("@idx", idxt); //lcaseidxtempz
+                            cmd.Parameters.AddWithValue("@zacasno", tzacasno); // 1 ali 0
+                            cmd.Parameters.AddWithValue("@stalno", tstalno); //lcaseidxtempz
+                            cmd.Parameters.AddWithValue("@na_s", namid_ok);
+                            cmd.Parameters.AddWithValue("@na_z", naselje_ok);
+                            // cmd.Parameters.AddWithValue("@idx", idxt); //lcaseidxtempz
+
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    // MessageBox.Show("emso " + emso + " spol " + spol + " priimek1 " + priimek1);
+                    vrstica = "";
+                    stevec = ++stevec;
+                    ls.Text = stevec.ToString();
+                    ls.Refresh();
+                } 
+                stevec--;
+                ls.Text = stevec.ToString();
+                ls.Refresh();
+    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                rdra.Close();
+                cona.Close();// close
+            }
+
 
         }
 
@@ -2339,7 +2612,7 @@ namespace Komunala
 
         }
 
-        string dat_roj = "", datom_od_zcpr = "";
+        string dat_roj = "", datum_od_zcpr = "";
 
         // variable tbl_hs
         string index_hs = "", enota = "", hs_mid = "", hs = "", hd = "", labela = "", ulmid = "", na_mid = "", ob_mid = "", pt_mid = "", po_mid = "", y = "", x = "";
@@ -3816,7 +4089,7 @@ namespace Komunala
             emso = ""; spol = ""; priimek1 = ""; priimek2 = ""; ime1 = ""; ime2 = ""; drzava = ""; obcina_roj = ""; naselje_roj = "";
             drzava_roj = ""; naselje_stpr = ""; ulica_stpr = ""; hs_stpr = ""; hsd_stpr = ""; posta_stpr = ""; naziv_poste_stpr = "";
             ulica_zcpr = ""; hs_zcpr = ""; hsd_zcpr = ""; posta_zcpr = ""; naziv_poste_zcpr = ""; status_preb = ""; stan = "";
-            dat_roj = ""; datom_od_zcpr = "";
+            dat_roj = ""; datum_od_zcpr = "";
         }
 
         private void Obdelaj_crp(string vhod)  
@@ -3864,7 +4137,7 @@ namespace Komunala
                     hsd_zcpr = polje[64];
                     posta_zcpr = polje[66];
                     naziv_poste_zcpr = polje[67];
-                    datom_od_zcpr = polje[68];
+                    datum_od_zcpr = polje[68];
                     status_preb = polje[82];
                     stan = polje[84];
 
@@ -4075,7 +4348,7 @@ namespace Komunala
                                 cmd.Parameters.AddWithValue("@hsd_zcpr", hsd_zcpr);
                                 cmd.Parameters.AddWithValue("@posta_zcpr", posta_zcpr);
                                 cmd.Parameters.AddWithValue("@naziv_poste_zcpr", naziv_poste_zcpr);
-                                cmd.Parameters.AddWithValue("@datom_od_zcpr", datom_od_zcpr);
+                                cmd.Parameters.AddWithValue("@datom_od_zcpr", datum_od_zcpr);
                                 cmd.Parameters.AddWithValue("@status_preb", status_preb);
                                 cmd.Parameters.AddWithValue("@stan", stan);
                                 cmd.Parameters.AddWithValue("@index_crp", lcaseidxtemp);

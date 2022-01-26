@@ -14,6 +14,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Configuration;
+using System.Data.OleDb;
 
 
 namespace Komunala
@@ -37,6 +38,7 @@ namespace Komunala
         public static string pot_podatki=lokalni_disk+ "Podatki\\";
 
         public static string cs = ConfigurationManager.ConnectionStrings["ConStr"].ToString();
+        public static string cs_a = ConfigurationManager.ConnectionStrings["ConStr_a"].ToString(); // access crp
 
         public static string direktor, imenik, datum_o_1, datum_o_2, tekst_o_1, tekst_o_2, datum_t_1, datum_t_2, tekst_t_1, tekst_t_2;
         public static string fname;
@@ -54,6 +56,7 @@ namespace Komunala
         public static SqlConnection c3 = new SqlConnection(cs);
         public static SqlConnection c9 = new SqlConnection(cs);
         public static SqlConnection c6 = new SqlConnection(cs);
+        public static OleDbConnection ca = new OleDbConnection(cs_a); // access crp
 
         SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(cs);
 
