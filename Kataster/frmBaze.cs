@@ -448,7 +448,7 @@ namespace Komunala
                     if (rdra["Ime državljanstva1"] != DBNull.Value) drzava = (string)rdra["Ime državljanstva1"];
                     if (rdra["Naziv občine roj"] != DBNull.Value) obcina_roj = (string)rdra["Naziv občine roj"];
                     if (rdra["Naziv naselja roj"] != DBNull.Value) naselje_roj = (string)rdra["Naziv naselja roj"];
-                    if (rdra["Država roj"] != DBNull.Value) drzava_roj = (string)rdra["Država roj"];
+                    if (rdra["Naziv države roj"] != DBNull.Value) drzava_roj = (string)rdra["Naziv države roj"];
                     if (rdra["Naziv naselja STPR"] != DBNull.Value) naselje_stpr = (string)rdra["Naziv naselja STPR"];
                     if (rdra["Naziv ulice STPR"] != DBNull.Value) ulica_stpr = (string)rdra["Naziv ulice STPR"];
                     if (rdra["Hišna št STPR"] != DBNull.Value) hs_stpr = Convert.ToString((double)rdra["Hišna št STPR"]);
@@ -668,7 +668,7 @@ namespace Komunala
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Napaka: " + ex.Message);
+                MessageBox.Show("Napaka branje: " + ex.Message + priimek1+ime1+dat_roj);
             }
             finally
             {
@@ -2737,7 +2737,7 @@ namespace Komunala
             Obdelaj_sql();
         }
 
-        private void Cadis_v_stavbe()
+        private void Cadis_v_stavbe()  // staro do 01-2022 pred Bass
         {
             int st = 0;
             string q2;
@@ -2949,12 +2949,193 @@ namespace Komunala
             }
         }  // void
 
+        private void Bass_v_stavbe()  // novo od 01-2022 prehod na Bass
+        {
+            int st = 0;
+            string q2;
+            string q3;
+            string thsmid, tindex_crp, ok_hsmid, tvodovodstr;
+            Int32 tkanalizacija = 0, tgreznica = 0, tsmeti = 0;
+            Int32 tvodovod = 0;
+            int tid;
+
+            try
+            {
+                string q = "select id,hsmid,voda,kanalizacija,smeti from tbl_hise"; // preberi vse zapise iz tbl_hise
+
+                cmd = new SqlCommand(q, con);
+                con.Open();
+                rdr = cmd.ExecuteReader();
+                string hsmid_hs;
+                nivcadis = 0;
+                while (rdr.Read())
+                {
+                    toblika_ijs = "NEZ"; ttip_prikljucka = "-99"; tid_vs = "-99"; tupravljanje_prikljucka = "-99";
+                    hsmid_hs = (string)rdr["hsmid"]; // hsmid po katerem boš iskal v bass
+                    tid = (Int32)rdr["id"];  // določi id v katerega boš pisal
+                    try
+                    {
+                        cadis = 1;
+                        string tmp_hsmid;
+                        // preveri katere stavbe so sploh v cadisu
+                        q2 = "select hsmid from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        tmp_hsmid = (string)cmd2.ExecuteScalar();
+                        con2.Close();
+                        if (tmp_hsmid == null)
+                        {
+                            tmp_hsmid = "99";
+                            cadis = 0;
+                            nivcadis++;
+                        }
+
+                        // poišči hsmid iz tbl_hise v tbl_cad
+                        tkanalizacija = 0; tvodovod = 0; tgreznica = 0; tsmeti = 0; ttip_om = "";
+                        q2 = "select vodovod from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        tvodovod = Convert.ToInt32(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        // ijsvo
+                        if (tvodovod == 1)
+                        {
+                            toblika_ijs = "JAV";
+                            tid_vs = "1633";
+                            tupravljanje_prikljucka = "1";
+                        }
+                        else
+                        {
+                            toblika_ijs = "DRUG";
+                            tid_vs = "99";
+                            tupravljanje_prikljucka = "0";
+                        }
+
+
+
+
+                        q2 = "select kanalizacija from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        tkanalizacija = Convert.ToInt32(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        q2 = "select greznica from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        tgreznica = Convert.ToInt32(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        q2 = "select smeti from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        tsmeti = Convert.ToInt32(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        q2 = "select tip_om from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        ttip_om = Convert.ToString(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        q2 = "select naziv from tbl_bass where hsmid = @thsmid";  // če sta indexa iz ulic enaka
+                        cmd2 = new SqlCommand(q2, con2);
+                        con2.Open();
+                        cmd2.Parameters.AddWithValue("@thsmid", hsmid_hs);
+                        cmd2.ExecuteNonQuery();
+                        time_cadis = Convert.ToString(cmd2.ExecuteScalar());
+                        con2.Close();
+
+                        time_cadis = time_cadis.Replace("\u0022", "");
+                        ttip_om = ttip_om.Replace("\u0022", "");
+
+                        // ZA IJSVO
+                        ttip_prikljucka = "";
+                        if (ttip_om.Contains("GOSPODINJSTVO"))
+                            ttip_prikljucka = "1";
+                        if (ttip_om.Contains("GOSPODARSTVO"))
+                            ttip_prikljucka = "3";
+                        if (ttip_om.Contains("NEGOSPODARSTVO"))
+                            ttip_prikljucka = "2";
+                        if (ttip_om.Contains("POSEBNE"))
+                            ttip_prikljucka = "4";
+                        if (ttip_om.Contains("KMETIJSTVO"))
+                            ttip_prikljucka = "2";
+                        if (ttip_om.Equals(""))
+                            toblika_ijs = "NEZ";
+
+                        //MessageBox.Show("tu");
+
+                        // zapiši najdene vrednosti v datoteko tbl_hise - update
+
+                        q3 = "update tbl_hise set cadis = @tcadis, voda = @tvodovod, kanalizacija = @tkanalizacija, greznica = @tgreznica, smeti = @tsmeti, oblika_ijs = @toblika_ijs" +
+                            ", tip_prikljucka=@ttip_prikljucka,id_vs=@tid_vs,upravljanje_prikljucka=@upravljanje,tipom_cadis=@tipom_cadis,ime_cadis=@ime_cadis  where id=@tid";
+                        cmd3 = new SqlCommand(q3, con3);
+                        con3.Open();
+                        cmd3.Parameters.AddWithValue("@tcadis", cadis);
+                        cmd3.Parameters.AddWithValue("@tvodovod", tvodovod);
+                        cmd3.Parameters.AddWithValue("@tkanalizacija", tkanalizacija);
+                        cmd3.Parameters.AddWithValue("@tgreznica", tgreznica);
+                        cmd3.Parameters.AddWithValue("@tsmeti", tsmeti);
+                        cmd3.Parameters.AddWithValue("@toblika_ijs", toblika_ijs);
+                        cmd3.Parameters.AddWithValue("@ttip_prikljucka", ttip_prikljucka);
+                        cmd3.Parameters.AddWithValue("@tid_vs", tid_vs);
+                        cmd3.Parameters.AddWithValue("@upravljanje", tupravljanje_prikljucka);
+                        cmd3.Parameters.AddWithValue("@tid", tid);
+                        cmd3.Parameters.AddWithValue("@tipom_cadis", ttip_om);
+                        cmd3.Parameters.AddWithValue("@ime_cadis", time_cadis);
+                        cmd3.ExecuteNonQuery();
+                        con3.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Napaka: " + ex.Message);
+                    }
+                    st = ++st;
+                    ls.Text = st.ToString();
+                    ls.Refresh();
+                }
+            }
+            catch (Exception ex2)
+            {
+                MessageBox.Show("Napaka reader: " + ex2.Message);
+            }
+
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (con != null)
+                {
+                    con.Close();
+                }
+                Display_hise();
+            }
+        }  // void
+
+
         private void button13_Click(object sender, EventArgs e)
         {
             ls1.Text = countcad.ToString();
             ls1.Refresh();
             ls.Text = "";
-            Cadis_v_stavbe();
+            Bass_v_stavbe();
             ls.Text = "OK";
             ls.Refresh();
         }
@@ -3983,7 +4164,7 @@ namespace Komunala
             countpt = count;
             count = 0;
 
-            query = "select count(*) from tbl_cad";
+            query = "select count(*) from tbl_bass";
             cmd = new SqlCommand(query, con);
             con.Open();
             cmd.ExecuteNonQuery();
@@ -5098,6 +5279,7 @@ namespace Komunala
                 label7.Text = "0";
                 ncad = 1;
             }
+            label32.Text = "";
         }
 
         private void btnCrp_Click(object sender, EventArgs e) // odpri datoteko CRP
