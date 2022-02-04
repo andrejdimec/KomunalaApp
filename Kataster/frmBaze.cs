@@ -15,6 +15,9 @@ using System.Collections;
 using MySql.Data.MySqlClient;
 using MySql.Data.Types;
 using System.Data.OleDb;
+using GemBox.Spreadsheet;
+// using Microsoft.Office.Interop.Excel;
+
 
 using System.CodeDom;
 
@@ -25,8 +28,10 @@ namespace Komunala
     public partial class frmBaze : Form
     {
         // določi connection
-        
+
         // začasno
+        System.Data.DataTable dtable = new System.Data.DataTable();
+
         public static string lokalni_disk = "c:\\";
         //public static string app_path = disk + "\\KomunalaApp\\";
         //public static string app_path_data = app_path + "data\\";
@@ -2617,82 +2622,134 @@ namespace Komunala
         // variable tbl_hs
         string index_hs = "", enota = "", hs_mid = "", hs = "", hd = "", labela = "", ulmid = "", na_mid = "", ob_mid = "", pt_mid = "", po_mid = "", y = "", x = "";
 
-        private void btnIzvoz_Click(object sender, EventArgs e)
+        
+        private void exportToExcel(System.Data.DataTable dt)  // data table v excel
         {
-            // izvozi datoteko stavbe v CSV
-
-            //string path = "c:\\Kataster\\hise.csv";
-
-            //File.Create(path).Close();
-
-            SaveFileDialog save = new SaveFileDialog();
-            save.FileName = "hise.sql za prenos v kataster.csv";
-
-            save.Filter = "Ločeno s podpičjem | *.csv";
-
-            if (save.ShowDialog() == DialogResult.OK)
-
-                // Izvoz2(save.FileName);
+            /*Set up work book, work sheets, and excel application*/
+            Microsoft.Office.Interop.Excel.Application oexcel = new Microsoft.Office.Interop.Excel.Application();
+            try
             {
-                try
+                string path = AppDomain.CurrentDomain.BaseDirectory;
+                object misValue = System.Reflection.Missing.Value;
+                Microsoft.Office.Interop.Excel.Workbook obook = oexcel.Workbooks.Add(misValue);
+                Microsoft.Office.Interop.Excel.Worksheet osheet = new Microsoft.Office.Interop.Excel.Worksheet();
+
+
+                //  obook.Worksheets.Add(misValue);
+
+                osheet = (Microsoft.Office.Interop.Excel.Worksheet)obook.Sheets["Sheet1"];
+                int colIndex = 0;
+                int rowIndex = 1;
+
+                foreach (DataColumn dc in dt.Columns)
                 {
+                    colIndex++;
+                    osheet.Cells[1, colIndex] = dc.ColumnName;
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+                    rowIndex++;
+                    colIndex = 0;
 
-
-                    string q = "select * from tbl_hise"; // preberi vse zapise iz tbl_hise
-
-                    cmd = new SqlCommand(q, con);
-                    con.Open();
-                    rdr = cmd.ExecuteReader();
-                    //string hsmid_hs;
-                    //nivcadis = 0;
-                    using (StreamWriter writetext = new StreamWriter(save.FileName))
+                    foreach (DataColumn dc in dt.Columns)
                     {
-                        // glava
-                        str_zapisi = "HSMID" + csv + "ULICA" + csv + "LABELA" + csv + "NASLOV" + csv + "STALNO" + csv + "ZACASNO" + csv + "VODA" + csv + "KAN." + csv + "SMETI" + csv + "GREZNICA" + csv + "CADIS";
-                        writetext.WriteLine(str_zapisi, Encoding.UTF8);
-
-                        while (rdr.Read())
-                        {
-                            str_zapisi = "";
-                            c_hsmid = (string)rdr["hsmid"];
-                            c_ulica = (string)rdr["naslov"];
-                            c_labela = (string)rdr["labela"];
-                            c_naslov = c_ulica + " " + c_labela;
-                            c_stalno = Convert.ToString((int)rdr["stalno"]);
-                            c_zacasno = Convert.ToString((int)rdr["zacasno"]);
-                            c_voda = Convert.ToString((int)rdr["voda"]);
-                            c_kanalizacija = Convert.ToString((int)rdr["kanalizacija"]);
-                            c_smeti = Convert.ToString((int)rdr["greznica"]);
-                            c_greznica = Convert.ToString((int)rdr["smeti"]);
-                            c_cadis = Convert.ToString((int)rdr["cadis"]);
-
-                            // string za zapis
-                            str_zapisi = c_hsmid + csv + c_ulica + csv + c_labela + csv + c_naslov + csv + c_stalno + csv + c_zacasno + csv + c_voda + csv + c_kanalizacija + csv + c_smeti + csv + c_greznica + csv + c_cadis;
-                            writetext.WriteLine(str_zapisi, Encoding.UTF8);
-                        }
+                        colIndex++;
+                        osheet.Cells[rowIndex, colIndex] = dr[dc.ColumnName];
                     }
                 }
-                catch (Exception ex2)
-                {
-                    MessageBox.Show("Napaka reader: " + ex2.Message);
-                }
 
-                finally
-                {
-                    // MessageBox.Show("finnaly");
-                    if (rdr != null)
-                    {
-                        rdr.Close();
-                    }
-                    if (con != null)
-                    {
-                        con.Close();
-                    }
-                    MessageBox.Show("Zapis v CSV končan!");
-                    //Display_hise();
-                }
+                osheet.Columns.AutoFit();
+                string filepath = "C:\\Temp\\Book1";
+
+                //Release and terminate excel
+
+                obook.SaveAs(filepath);
+                obook.Close();
+                oexcel.Quit();
+
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Name);
+                oexcel.Quit();
+            }
+            finally
+            {
 
             }
+        }
+        
+        private void btnIzvoz_Click(object sender, EventArgs e)
+        {
+            // dodano shranjevanje v excel - 01 2022
+            var pot = "c:\\kataster\\Geodata D96\\Kora\\hise.xlsx";
+            //SaveFileDialog save = new SaveFileDialog();
+            //save.FileName = pot+"hise_test.xlsx";
+            //save.Filter = "Ločeno s podpičjem | *.csv, *.xlsx";
+
+            //if (save.ShowDialog() == DialogResult.OK)
+            //{
+
+                using (var da = new SqlDataAdapter("select * from tbl_hise", con))
+                {
+                    da.Fill(dtable);
+                }
+
+                var workbook = new ExcelFile();
+                var worksheet = workbook.Worksheets.Add("Stavbe");
+
+                // worksheet.Cells[0, 0].Value = "Test";
+                worksheet.InsertDataTable(dtable,
+                    new InsertDataTableOptions()
+                    {
+                        ColumnHeaders = true,
+                        StartRow = 0
+                    });
+
+                try
+                {
+                    workbook.Save(pot);
+                    MessageBox.Show("Zapisana datoteka: " + pot);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Napaka pri pisanju v Excel", ex.Message);
+                }
+            //}
+            //    try
+            //    {
+
+            //        // podatke v datatable
+            //        using (var da = new SqlDataAdapter("select * from tbl_hise", con))
+            //        {
+            //            da.Fill(dtable);
+            //        }
+
+            //        exportToExcel(dtable);
+            //    }
+            //    catch (Exception ex2)
+            //    {
+            //        MessageBox.Show("Napaka reader: " + ex2.Message);
+            //    }
+
+            //    finally
+            //    {
+            //        // MessageBox.Show("finnaly");
+            //        if (rdr != null)
+            //        {
+            //            rdr.Close();
+            //        }
+            //        if (con != null)
+            //        {
+            //            con.Close();
+            //        }
+            //        MessageBox.Show("Zapis v CSV končan!");
+            //        //Display_hise();
+            //    }
+
+            //}
         }
 
         private void Manjkavcadis()
@@ -2701,7 +2758,7 @@ namespace Komunala
             
             // Stavbe ki manjkajo v Cadis
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_hise where cadis = 0", con);
             int tmpcadis = 0;
             adapt.Fill(dt);
@@ -4183,7 +4240,7 @@ namespace Komunala
         void Displaydata_cad()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_cad", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4193,7 +4250,7 @@ namespace Komunala
         void Display_hise()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_hise", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4202,7 +4259,7 @@ namespace Komunala
         void DisplayData_pt()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_pt", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4211,7 +4268,7 @@ namespace Komunala
         void DisplayData_ul()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_ul", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4220,7 +4277,7 @@ namespace Komunala
         void DisplayData_hs()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_hs", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4230,7 +4287,7 @@ namespace Komunala
         {
             // MessageBox.Show("displaydata_crp");
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_crp", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4240,7 +4297,7 @@ namespace Komunala
         {
             // MessageBox.Show("displaydata_crp2");
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_crp", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;
@@ -4249,7 +4306,7 @@ namespace Komunala
         void DisplayData_na()
         {
             con.Open();
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             adapt = new SqlDataAdapter("select * from tbl_na", con);
             adapt.Fill(dt);
             dgv1.DataSource = dt;

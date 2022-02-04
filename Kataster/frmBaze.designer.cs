@@ -48,33 +48,33 @@
             this.button9 = new System.Windows.Forms.Button();
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.label33 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.button16 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.button17 = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.label59 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.button13 = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.btnIzvoz = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -334,6 +334,16 @@
             this.label33.TabIndex = 119;
             this.label33.Text = "5. CRP - prenesi iz ACCESS baze";
             // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(17, 549);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(70, 28);
+            this.button18.TabIndex = 115;
+            this.button18.Text = "Izvedi";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click_1);
+            // 
             // button29
             // 
             this.button29.Location = new System.Drawing.Point(15, 216);
@@ -353,6 +363,15 @@
             this.label32.Size = new System.Drawing.Size(55, 15);
             this.label32.TabIndex = 118;
             this.label32.Text = "label32";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(99, 556);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(199, 15);
+            this.label11.TabIndex = 116;
+            this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
             // 
             // button16
             // 
@@ -382,6 +401,15 @@
             this.label10.Size = new System.Drawing.Size(134, 15);
             this.label10.TabIndex = 113;
             this.label10.Text = "7. Seznam aglomeracij";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(96, 387);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(311, 15);
+            this.label43.TabIndex = 107;
+            this.label43.Text = "1. Dodeli HSMID številko vsaki osebi v CRP (kje stanuje)";
             // 
             // label47
             // 
@@ -423,80 +451,6 @@
             this.label7.TabIndex = 88;
             this.label7.Text = "label7";
             // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(97, 261);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(154, 15);
-            this.label30.TabIndex = 94;
-            this.label30.Text = "6. Prenos iz Bass-ove baze";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(97, 185);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(340, 15);
-            this.label28.TabIndex = 92;
-            this.label28.Text = "4. HS.csv - Hišne številke v občini (podatki iz katastra - GURS)";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(97, 147);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(292, 15);
-            this.label27.TabIndex = 91;
-            this.label27.Text = "3. UL.csv - Ulice v občini (podatki iz katastra - GURS)";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(97, 109);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(306, 15);
-            this.label26.TabIndex = 90;
-            this.label26.Text = "2. NA.csv - Naselja v občini (podatki iz katastra - GURS)";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(97, 71);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(238, 15);
-            this.label20.TabIndex = 89;
-            this.label20.Text = "1. PT.csv - Poštne številke in pošte (GURS)";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label19.Location = new System.Drawing.Point(95, 36);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(285, 15);
-            this.label19.TabIndex = 89;
-            this.label19.Text = "Vse tekstovne datoteke pretvori v SQL baze.";
-            // 
-            // button18
-            // 
-            this.button18.Location = new System.Drawing.Point(17, 549);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(70, 28);
-            this.button18.TabIndex = 115;
-            this.button18.Text = "Izvedi";
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click_1);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(99, 556);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(199, 15);
-            this.label11.TabIndex = 116;
-            this.label11.Text = "Dodaj MB vodovod oznako iz Cadis";
-            // 
             // button17
             // 
             this.button17.Location = new System.Drawing.Point(16, 510);
@@ -506,6 +460,24 @@
             this.button17.Text = "Izvedi";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(97, 261);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(205, 15);
+            this.label30.TabIndex = 94;
+            this.label30.Text = "6. Prenesi obračun iz Bass-ove baze";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(97, 185);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(340, 15);
+            this.label28.TabIndex = 92;
+            this.label28.Text = "4. HS.csv - Hišne številke v občini (podatki iz katastra - GURS)";
             // 
             // button15
             // 
@@ -526,6 +498,17 @@
             this.label59.TabIndex = 90;
             this.label59.Text = "4. Stavbam dodaj aglomeracije iz katastra";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Location = new System.Drawing.Point(450, 387);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 15);
+            this.label4.TabIndex = 82;
+            this.label4.Text = "label4";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // button13
             // 
             this.button13.Location = new System.Drawing.Point(16, 470);
@@ -536,6 +519,15 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(97, 147);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(292, 15);
+            this.label27.TabIndex = 91;
+            this.label27.Text = "3. UL.csv - Ulice v občini (podatki iz katastra - GURS)";
+            // 
             // label44
             // 
             this.label44.AutoSize = true;
@@ -545,32 +537,23 @@
             this.label44.TabIndex = 111;
             this.label44.Text = "Preveri koliko naslovov iz datoteke HS ni v obračunu";
             // 
-            // label46
+            // label26
             // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(95, 432);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(318, 15);
-            this.label46.TabIndex = 110;
-            this.label46.Text = "2. Vsaki HSMID številki zapiši naslov in število prebivalcev";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(97, 109);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(306, 15);
+            this.label26.TabIndex = 90;
+            this.label26.Text = "2. NA.csv - Naselja v občini (podatki iz katastra - GURS)";
             // 
-            // label45
+            // label20
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(96, 477);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(290, 15);
-            this.label45.TabIndex = 109;
-            this.label45.Text = "3. Vsaki stavbi dodaj komunalne storitve iz obračuna";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(96, 387);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(311, 15);
-            this.label43.TabIndex = 107;
-            this.label43.Text = "1. Dodeli HSMID številko vsaki osebi v CRP (kje stanuje)";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(97, 71);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(238, 15);
+            this.label20.TabIndex = 89;
+            this.label20.Text = "1. PT.csv - Poštne številke in pošte (GURS)";
             // 
             // label17
             // 
@@ -582,16 +565,33 @@
             this.label17.TabIndex = 83;
             this.label17.Text = "label17";
             // 
-            // label4
+            // label19
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(450, 387);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 15);
-            this.label4.TabIndex = 82;
-            this.label4.Text = "label4";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label19.Location = new System.Drawing.Point(95, 36);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(285, 15);
+            this.label19.TabIndex = 89;
+            this.label19.Text = "Vse tekstovne datoteke pretvori v SQL baze.";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(96, 477);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(290, 15);
+            this.label45.TabIndex = 109;
+            this.label45.Text = "3. Vsaki stavbi dodaj komunalne storitve iz obračuna";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(95, 432);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(306, 15);
+            this.label46.TabIndex = 110;
+            this.label46.Text = "2. Naredi tabelo hiše - vpiši naslov in število prebivalcev";
             // 
             // label29
             // 
@@ -608,7 +608,7 @@
             this.btnIzvoz.Name = "btnIzvoz";
             this.btnIzvoz.Size = new System.Drawing.Size(106, 28);
             this.btnIzvoz.TabIndex = 85;
-            this.btnIzvoz.Text = "Stavbe -> CSV";
+            this.btnIzvoz.Text = "Stavbe -> XLSX";
             this.btnIzvoz.UseVisualStyleBackColor = true;
             this.btnIzvoz.Click += new System.EventHandler(this.btnIzvoz_Click);
             // 
@@ -628,9 +628,9 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(12, 70);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(270, 15);
+            this.label48.Size = new System.Drawing.Size(160, 15);
             this.label48.TabIndex = 90;
-            this.label48.Text = "Pripravi datoteko c:\\\\hise.csv za prenos v kataster";
+            this.label48.Text = "Pripravi datoteko za kataster";
             // 
             // ls
             // 
