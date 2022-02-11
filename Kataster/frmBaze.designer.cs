@@ -33,10 +33,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.fd = new System.Windows.Forms.OpenFileDialog();
@@ -75,7 +73,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
             this.btnIzvoz = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label48 = new System.Windows.Forms.Label();
@@ -101,7 +98,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.button28 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.button27 = new System.Windows.Forms.Button();
@@ -110,7 +106,9 @@
             this.button24 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.button23 = new System.Windows.Forms.Button();
-            this.label31 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbl_crpBindingSource)).BeginInit();
             this.gb1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -118,6 +116,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnhise
@@ -160,16 +159,6 @@
             this.label23.TabIndex = 64;
             this.label23.Text = "label23";
             // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label24.Location = new System.Drawing.Point(1698, 124);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(55, 15);
-            this.label24.TabIndex = 63;
-            this.label24.Text = "label24";
-            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(15, 102);
@@ -189,16 +178,6 @@
             this.button4.Text = "Izvedi";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1264, 117);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 28);
-            this.button1.TabIndex = 43;
-            this.button1.Text = "Izvedi";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -593,15 +572,6 @@
             this.label46.TabIndex = 110;
             this.label46.Text = "2. Naredi tabelo hiše - vpiši naslov in število prebivalcev";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(1346, 124);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(235, 15);
-            this.label29.TabIndex = 93;
-            this.label29.Text = "5. CRP.csv - Centralni register prebivalstva";
-            // 
             // btnIzvoz
             // 
             this.btnIzvoz.Location = new System.Drawing.Point(15, 30);
@@ -614,9 +584,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox2.Controls.Add(this.label48);
             this.groupBox2.Controls.Add(this.btnIzvoz);
-            this.groupBox2.Location = new System.Drawing.Point(624, 508);
+            this.groupBox2.Location = new System.Drawing.Point(624, 355);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 102);
             this.groupBox2.TabIndex = 87;
@@ -655,7 +626,7 @@
             // dgv1
             // 
             this.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv1.Location = new System.Drawing.Point(906, 758);
+            this.dgv1.Location = new System.Drawing.Point(557, 45);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowHeadersWidth = 62;
             this.dgv1.Size = new System.Drawing.Size(52, 27);
@@ -677,9 +648,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button8);
-            this.groupBox1.Location = new System.Drawing.Point(624, 214);
+            this.groupBox1.Location = new System.Drawing.Point(990, 94);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 288);
+            this.groupBox1.Size = new System.Drawing.Size(351, 288);
             this.groupBox1.TabIndex = 91;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " IJSVO ";
@@ -849,7 +820,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label25);
             this.groupBox4.Controls.Add(this.button28);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.button27);
@@ -858,25 +828,17 @@
             this.groupBox4.Controls.Add(this.button24);
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.button23);
-            this.groupBox4.Location = new System.Drawing.Point(980, 94);
+            this.groupBox4.Location = new System.Drawing.Point(430, 30);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(261, 635);
+            this.groupBox4.Size = new System.Drawing.Size(82, 53);
             this.groupBox4.TabIndex = 91;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "  Bass  prenosi";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(137, 360);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(55, 15);
-            this.label25.TabIndex = 97;
-            this.label25.Text = "2.5.2021";
+            this.groupBox4.Visible = false;
             // 
             // button28
             // 
-            this.button28.Location = new System.Drawing.Point(15, 347);
+            this.button28.Location = new System.Drawing.Point(275, 109);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(106, 28);
             this.button28.TabIndex = 96;
@@ -887,7 +849,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(12, 318);
+            this.label16.Location = new System.Drawing.Point(231, 140);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(150, 15);
             this.label16.TabIndex = 95;
@@ -895,7 +857,7 @@
             // 
             // button27
             // 
-            this.button27.Location = new System.Drawing.Point(15, 278);
+            this.button27.Location = new System.Drawing.Point(140, 109);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(106, 28);
             this.button27.TabIndex = 94;
@@ -905,7 +867,7 @@
             // 
             // button26
             // 
-            this.button26.Location = new System.Drawing.Point(15, 219);
+            this.button26.Location = new System.Drawing.Point(15, 102);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(106, 28);
             this.button26.TabIndex = 93;
@@ -915,7 +877,7 @@
             // 
             // button25
             // 
-            this.button25.Location = new System.Drawing.Point(15, 165);
+            this.button25.Location = new System.Drawing.Point(275, 30);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(106, 28);
             this.button25.TabIndex = 92;
@@ -925,7 +887,7 @@
             // 
             // button24
             // 
-            this.button24.Location = new System.Drawing.Point(15, 109);
+            this.button24.Location = new System.Drawing.Point(140, 30);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(106, 28);
             this.button24.TabIndex = 91;
@@ -952,30 +914,47 @@
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
-            // label31
+            // groupBox5
             // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label31.Location = new System.Drawing.Point(1261, 165);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(330, 15);
-            this.label31.TabIndex = 115;
-            this.label31.Text = "Staro - Obdelava in združevanje SQL baz podatkov";
+            this.groupBox5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox5.Controls.Add(this.label24);
+            this.groupBox5.Controls.Add(this.button1);
+            this.groupBox5.Location = new System.Drawing.Point(624, 230);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(334, 102);
+            this.groupBox5.TabIndex = 91;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Manjkajoče lokacije v Bass";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(12, 70);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(245, 15);
+            this.label24.TabIndex = 90;
+            this.label24.Text = "Preglej in dopolni lokacijske podatke v Bass";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(15, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 28);
+            this.button1.TabIndex = 85;
+            this.button1.Text = "Izvedi";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // frmBaze
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1768, 811);
-            this.Controls.Add(this.label31);
+            this.ClientSize = new System.Drawing.Size(1381, 811);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.ls1);
-            this.Controls.Add(this.label29);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ls);
-            this.Controls.Add(this.label24);
             this.Controls.Add(this.label61);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dgv1);
@@ -999,6 +978,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1010,10 +991,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.OpenFileDialog fd;
@@ -1038,7 +1017,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
@@ -1085,11 +1063,12 @@
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Button button1;
     }
 }

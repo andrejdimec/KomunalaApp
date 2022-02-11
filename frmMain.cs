@@ -134,9 +134,12 @@ namespace Komunala
             //sec.ShowDialog();
             //frmPogodbeTel sec = new frmPogodbeTel();
             //sec.ShowDialog();
-            frmBaze sec = new frmBaze();
-            sec.ShowDialog();
+            //frmBaze sec = new frmBaze();
+            //sec.ShowDialog();
 
+            Kataster.frmLokacijeBass sec = new Kataster.frmLokacijeBass();
+            sec.ShowDialog();
+            
             ////frmZK_REN sec = new frmZK_REN();
             ////sec.ShowDialog();
 

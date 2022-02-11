@@ -28,9 +28,10 @@ namespace Komunala
     public partial class frmBaze : Form
     {
         // določi connection
-
+        
         // začasno
         System.Data.DataTable dtable = new System.Data.DataTable();
+        DataTable dt_bass = new DataTable();
 
         public static string lokalni_disk = "c:\\";
         //public static string app_path = disk + "\\KomunalaApp\\";
@@ -2685,12 +2686,6 @@ namespace Komunala
         {
             // dodano shranjevanje v excel - 01 2022
             var pot = "c:\\kataster\\Geodata D96\\Kora\\hise.xlsx";
-            //SaveFileDialog save = new SaveFileDialog();
-            //save.FileName = pot+"hise_test.xlsx";
-            //save.Filter = "Ločeno s podpičjem | *.csv, *.xlsx";
-
-            //if (save.ShowDialog() == DialogResult.OK)
-            //{
 
                 using (var da = new SqlDataAdapter("select * from tbl_hise", con))
                 {
@@ -2700,7 +2695,6 @@ namespace Komunala
                 var workbook = new ExcelFile();
                 var worksheet = workbook.Worksheets.Add("Stavbe");
 
-                // worksheet.Cells[0, 0].Value = "Test";
                 worksheet.InsertDataTable(dtable,
                     new InsertDataTableOptions()
                     {
@@ -2717,39 +2711,6 @@ namespace Komunala
                 {
                     MessageBox.Show("Napaka pri pisanju v Excel", ex.Message);
                 }
-            //}
-            //    try
-            //    {
-
-            //        // podatke v datatable
-            //        using (var da = new SqlDataAdapter("select * from tbl_hise", con))
-            //        {
-            //            da.Fill(dtable);
-            //        }
-
-            //        exportToExcel(dtable);
-            //    }
-            //    catch (Exception ex2)
-            //    {
-            //        MessageBox.Show("Napaka reader: " + ex2.Message);
-            //    }
-
-            //    finally
-            //    {
-            //        // MessageBox.Show("finnaly");
-            //        if (rdr != null)
-            //        {
-            //            rdr.Close();
-            //        }
-            //        if (con != null)
-            //        {
-            //            con.Close();
-            //        }
-            //        MessageBox.Show("Zapis v CSV končan!");
-            //        //Display_hise();
-            //    }
-
-            //}
         }
 
         private void Manjkavcadis()
@@ -3672,8 +3633,15 @@ namespace Komunala
             }
         } // private void
 
+        private void Prenesi_Bass_dt() // prenos bass z data table
+        {
+
+        }
+
         private void Prenesi_Bass()
         {
+
+
             // prenos Bass
             int tna_mid = 0; 
             string tulmid = "";

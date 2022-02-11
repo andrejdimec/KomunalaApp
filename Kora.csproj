@@ -206,6 +206,12 @@
     <Compile Include="frmZK_REN.Designer.cs">
       <DependentUpon>frmZK_REN.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kataster\frmLokacijeBass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kataster\frmLokacijeBass.Designer.cs">
+      <DependentUpon>frmLokacijeBass.cs</DependentUpon>
+    </Compile>
     <Compile Include="mb.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -453,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmZK_REN.resx">
       <DependentUpon>frmZK_REN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kataster\frmLokacijeBass.resx">
+      <DependentUpon>frmLokacijeBass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mb.resx">
       <DependentUpon>mb.cs</DependentUpon>
