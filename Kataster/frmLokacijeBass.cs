@@ -455,6 +455,7 @@ namespace Komunala.Kataster
                 sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
             try
             {
+                
                 string q = @"
                             SELECT
                               inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
