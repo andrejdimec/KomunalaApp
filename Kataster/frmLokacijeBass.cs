@@ -50,6 +50,7 @@ namespace Komunala.Kataster
         string pl_pravna = "";
         string pl_ddv = "";
         string pl_davcna = "";
+        int aktivni; // kateri zapis je izbran v dgv1
 
         private void Grid()
         {
@@ -107,18 +108,19 @@ namespace Komunala.Kataster
             dgv1.Columns[4].Width = s5;
             dgv1.Columns[5].Width = s6;
 
+            dgv1.Columns[0].Name = "odme";
             dgv1.Columns[0].HeaderText= "Odjemno mesto";
-            dgv1.Columns[1].Name = "Ulica";
-            dgv1.Columns[2].Name = "Kraj";
-            dgv1.Columns[3].Name = "Plačnik";
-            dgv1.Columns[4].Name = "Naslov";
-            dgv1.Columns[5].Name = "Pošta";
-            dgv1.Columns[6].Name = "sort1";
-            dgv1.Columns[7].Name = "hs";
-            dgv1.Columns[8].Name = "hsd";
+            dgv1.Columns[1].HeaderText = "Ulica";
+            dgv1.Columns[2].HeaderText = "Kraj";
+            dgv1.Columns[3].HeaderText = "Plačnik";
+            dgv1.Columns[4].HeaderText = "Naslov";
+            dgv1.Columns[5].HeaderText = "Pošta";
+            dgv1.Columns[6].HeaderText = "sort1";
+            dgv1.Columns[7].HeaderText = "hs";
+            dgv1.Columns[8].HeaderText = "hsd";
             dgv1.Columns[9].Name = "id";
             dgv1.Columns[10].Name = "placnik_id";
-            dgv1.Columns[11].Name = "om";
+            //dgv1.Columns[11].Name = "om";
 
             dgv1.Columns[6].Visible = false;
             dgv1.Columns[7].Visible = false;
@@ -126,6 +128,8 @@ namespace Komunala.Kataster
             dgv1.Columns[9].Visible = false;
             dgv1.Columns[10].Visible = false;
             dgv1.Columns[11].Visible = false;
+            dgv1.Columns[12].Visible = false;
+            dgv1.Columns[13].Visible = false;
             Padding newPadding = new Padding(6, 0, 0, 0);
             this.dgv1.Columns[0].DefaultCellStyle.Padding = newPadding;
             this.dgv1.Columns[1].DefaultCellStyle.Padding = newPadding;
@@ -135,6 +139,22 @@ namespace Komunala.Kataster
             this.dgv1.Columns[5].DefaultCellStyle.Padding = newPadding;
 
             dgv1.Focus();
+        }
+        private void Current(int y)
+        {
+            int rowIndex = -1;
+            foreach (DataGridViewRow row in dgv1.Rows)
+            {
+                if (row.Cells["om"].Value.ToString().Equals(y))
+                {
+                    rowIndex = row.Index;
+                    dgv1.Rows[rowIndex].Selected = true;
+                    dgv1.CurrentCell = dgv1.Rows[rowIndex].Cells[1];
+                    break;
+                }
+            }
+
+           // this.dgv1.CurrentCell = this.dgv1[1, y];
         }
         private void GridS()
         {
@@ -310,10 +330,12 @@ namespace Komunala.Kataster
         {
             //string tmp = dgv1.Rows[e.RowIndex].Cells[10].Value.ToString();
             //lp.Text = tmp;
-            //int idx_om = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[9].Value.ToString());
-            //int idx_placnik = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[10].Value.ToString());
-            //int idx_omom = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[11].Value.ToString());
-            //Nalozi_zapis(idx_om, idx_placnik,idx_omom);
+            int idx_omom = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[7].Value.ToString());
+            // aktivni = e.RowIndex;
+            aktivni = idx_omom;
+            int idx_om = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[8].Value.ToString());
+            int idx_placnik = Convert.ToInt32(dgv1.Rows[e.RowIndex].Cells[9].Value.ToString());
+            Nalozi_zapis(idx_om, idx_placnik,idx_omom);
 
         }
 
@@ -438,43 +460,83 @@ namespace Komunala.Kataster
 
         private void Displaydt()
         {
+            //inkasso_2021_om_radgona.OM_HSMID AS omhsmid,
+            //                  inkasso_2021_om_radgona.OM_HS AS omhs,
+            //                  inkasso_2021_om_radgona.OM_HSD AS omhsd,
+            //                  inkasso_2021_om_radgona.OM_XH AS omx,
+            //                  inkasso_2021_om_radgona.OM_YH AS omy,
+            //SELECT
+            //                  inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
+            //                  CONCAT(bass_location_street.street_name, ' ', IFNULL(inkasso_2021_om_radgona.OM_HS, ''), inkasso_2021_om_radgona.OM_HSD) AS naslov,
+            //                  bass_location_sett.sett_name AS omkraj,
+            //                  stranke_radgona_2021.NAZIV AS omplacnik,
+            //                  stranke_radgona_2021.NASLOV AS plnaslov,
+            //                  CONCAT(stranke_radgona_2021.PTT, ' ', stranke_radgona_2021_poste.NAZIV),
+            //                  stranke_radgona_2021.KRAJ AS plkraj,
+            //                  inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
+            //                  bass_location_street.street_name AS omulica,
+            //                  inkasso_2021_om_radgona.OM_HS AS omhs,
+            //                  inkasso_2021_om_radgona.OM_HSD AS omhsd,
+            //                  inkasso_2021_om_radgona.OM AS om,
+            //                  inkasso_2021_om_radgona.OM_ID AS omid,
+            //                  stranke_radgona_2021.PTT AS plptt,
+            //                  stranke_radgona_2021.DRZAVA_NAZIV AS pldrzava,
+            //                  stranke_radgona_2021.TELEFON,
+            //                  stranke_radgona_2021_poste.NAZIV AS plposta
+            //                FROM inkasso_2021_om_radgona
+            //                  INNER JOIN bass_location_street
+            //                    ON inkasso_2021_om_radgona.ULICA_SIFRA = bass_location_street.street_code
+            //                  INNER JOIN stranke_radgona_2021
+            //                    ON inkasso_2021_om_radgona.OM_PLACNIK = stranke_radgona_2021.SIFRA
+            //                  INNER JOIN bass_location_sett
+            //                    ON bass_location_street.sett_code = bass_location_sett.sett_code
+            //                  INNER JOIN stranke_radgona_2021_poste
+            //                    ON stranke_radgona_2021.PTT = stranke_radgona_2021_poste.SIFRA
+            //                WHERE inkasso_2021_om_radgona.om_aktiven = 'T'"
+            //                      + brezlokacije +
+            //                      @"
+            //                    GROUP BY inkasso_2021_om_radgona.OM_ID,
+            //                         stranke_radgona_2021.PTT,
+            //                         stranke_radgona_2021.DRZAVA_NAZIV,
+            //                         stranke_radgona_2021.TELEFON,
+            //                         stranke_radgona_2021_poste.NAZIV 
+            //            "
+            //              + sort;
+
+
             int stevid = 0;
             Izprazni_dgv();
             string brezlokacije;
             if (cbl.Checked)
             {
                 brezlokacije = " and (inkasso_2021_om_radgona.OM_HSMID = '99' or inkasso_2021_om_radgona.OM_HSMID = '0') ";
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+                sort = "ORDER BY naslov";
             }
             else
             {
                 brezlokacije = "";
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+                sort = "ORDER BY naslov";
             }
             if (prvic)
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+                sort = "ORDER BY omnaziv";
             try
             {
                 
                 string q = @"
                             SELECT
                               inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
-                              bass_location_street.street_name AS omulica,
-                              inkasso_2021_om_radgona.OM_HSMID AS omhsmid,
-                              inkasso_2021_om_radgona.OM_HS AS omhs,
-                              inkasso_2021_om_radgona.OM_HSD AS omhsd,
-                              inkasso_2021_om_radgona.OM_XH AS omx,
-                              inkasso_2021_om_radgona.OM_YH AS omy,
+                              CONCAT (bass_location_street.street_name, ' ', IFNULL(inkasso_2021_om_radgona.OM_HS,''), inkasso_2021_om_radgona.OM_HSD) AS naslov,
                               bass_location_sett.sett_name AS omkraj,
-                              inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
                               stranke_radgona_2021.NAZIV AS omplacnik,
                               stranke_radgona_2021.NASLOV AS plnaslov,
-                              stranke_radgona_2021.KRAJ AS plkraj,
+                              CONCAT (stranke_radgona_2021.PTT,' ',stranke_radgona_2021_poste.NAZIV),
+                              CONCAT (bass_location_street.street_name, ' ', LPAD(IFNULL(inkasso_2021_om_radgona.OM_HS,''),3,'0'), inkasso_2021_om_radgona.OM_HSD) AS zasort,                              
                               inkasso_2021_om_radgona.OM AS om,
                               inkasso_2021_om_radgona.OM_ID AS omid,
+                              inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
+                              stranke_radgona_2021.KRAJ AS plkraj,
+                              bass_location_street.street_name AS omulica,
                               stranke_radgona_2021.PTT AS plptt,
-                              stranke_radgona_2021.DRZAVA_NAZIV AS pldrzava,
-                              stranke_radgona_2021.TELEFON,
                               stranke_radgona_2021_poste.NAZIV AS plposta
                             FROM inkasso_2021_om_radgona
                               INNER JOIN bass_location_street
@@ -657,10 +719,41 @@ namespace Komunala.Kataster
         private void tbom_TextChanged(object sender, EventArgs e)
         {
             // Išči po odjemnem mestu
-            (dgv1.DataSource as DataTable).DefaultView.RowFilter = string.Format("OM LIKE '%{0}%'", tbom.Text);
+            (dgv1.DataSource as DataTable).DefaultView.RowFilter = string.Format("omnaziv LIKE '%{0}%'", tbom.Text);
+            //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("Name LIKE '%{0}%'", searchTextBox.Text);
             //DataView dv = dt.DefaultView;
-            //dv.RowFilter = "OM LIKE '" + tbom.Text + "%'";
+            //dv.RowFilter = "omnaziv LIKE '" + tbom.Text + "%'";
             //dgv1.DataSource = dv;
+        }
+
+        private void tbom_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+                dgv1.Focus();
+            if (e.KeyCode == Keys.Enter)
+                dgv1.Focus();
+            if (e.KeyCode == Keys.Escape)
+            {
+                tbom.Text="";
+                dgv1.Focus();
+            }
+
+        }
+
+        private void dgv1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // če je iskalnik poln
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (tbom.Text != "")
+                {
+                    int tmpakt = aktivni;
+                    tbom.Text = "";
+                    dgv1.Focus();
+                    Current(tmpakt);
+                }
+            }
+
         }
 
         private void cbl_CheckedChanged(object sender, EventArgs e)
