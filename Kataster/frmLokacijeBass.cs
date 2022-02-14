@@ -52,48 +52,6 @@ namespace Komunala.Kataster
         string pl_davcna = "";
         int aktivni; // kateri zapis je izbran v dgv1
 
-        private void Grid()
-        {
-            dgv1.Width = sirina_mreze + 20;
-            //dgv1.ColumnHeadersVisible = false;
-            dgv1.RowHeadersVisible = false;
-            dgv1.ColumnCount = 12;
-            dgv1.Columns[0].Width = s1;
-            dgv1.Columns[1].Width = s2;
-            dgv1.Columns[2].Width = s3;
-            dgv1.Columns[3].Width = s4;
-            dgv1.Columns[4].Width = s5;
-            dgv1.Columns[5].Width = s6;
-
-            dgv1.Columns[0].Name = "OM";
-            dgv1.Columns[1].Name = "Ulica";
-            dgv1.Columns[2].Name = "Kraj";
-            dgv1.Columns[3].Name = "Plačnik";
-            dgv1.Columns[4].Name = "Naslov";
-            dgv1.Columns[5].Name = "Pošta";
-            dgv1.Columns[6].Name = "sort1";
-            dgv1.Columns[7].Name = "hs";
-            dgv1.Columns[8].Name = "hsd";
-            dgv1.Columns[9].Name = "id";
-            dgv1.Columns[10].Name = "placnik_id";
-            dgv1.Columns[11].Name = "om";
-
-            dgv1.Columns[6].Visible = false;
-            dgv1.Columns[7].Visible = false;
-            dgv1.Columns[8].Visible = false;
-            dgv1.Columns[9].Visible = false;
-            dgv1.Columns[10].Visible = false;
-            dgv1.Columns[11].Visible = false;
-            Padding newPadding = new Padding(6, 0, 0, 0);
-            this.dgv1.Columns[0].DefaultCellStyle.Padding = newPadding;
-            this.dgv1.Columns[1].DefaultCellStyle.Padding = newPadding;
-            this.dgv1.Columns[2].DefaultCellStyle.Padding = newPadding;
-            this.dgv1.Columns[3].DefaultCellStyle.Padding = newPadding;
-            this.dgv1.Columns[4].DefaultCellStyle.Padding = newPadding;
-            this.dgv1.Columns[5].DefaultCellStyle.Padding = newPadding;
-
-            dgv1.Focus();
-        }
 
         private void Griddt()
         {
@@ -178,18 +136,17 @@ namespace Komunala.Kataster
                 dgv1.Sort(dgv1.Columns[0], ListSortDirection.Ascending);
             if (rb2.Checked)
             {
-                dgv1.Sort(dgv1.Columns[6], ListSortDirection.Ascending);
+                dgv1.Sort(dgv1.Columns[1], ListSortDirection.Ascending);
             }
 
             if (rb3.Checked)
                 dgv1.Sort(dgv1.Columns[3], ListSortDirection.Ascending);
-            dgv1.Focus();
+            //dgv1.Focus();
         }
 
         private void Nalozi_zapis(int idx_om, int idx_placnik, int idx_omom)
         {
             dgvs.Rows.Clear();
-            //string q = "select sifra, naziv,naslov,ptt,kraj,drzava_naziv,zr,pravna_os,zavezanec,davcna from stranke_radgona_2021 where sifra = @idx"; //+ sort;
             string q = @"
             SELECT
               inkasso_2021_om_radgona.OM AS om,
@@ -244,16 +201,8 @@ namespace Komunala.Kataster
                     if (rdrb2["plulica"] != DBNull.Value) pl_naslov = (string)rdrb2["plulica"];
                     if (rdrb2["plptt"] != DBNull.Value) pl_ptt = (string)rdrb2["plptt"];
                     if (rdrb2["plkraj"] != DBNull.Value) pl_kraj = (string)rdrb2["plkraj"];
-                    //if (rdrb2["drzava_naziv"] != DBNull.Value) pl_drzava = (string)rdrb2["drzava_naziv"];
-                    //if (rdrb2["zr"] != DBNull.Value) pl_zr = (string)rdrb2["zr"];
                     if (rdrb2["plpravna"] != DBNull.Value) pl_pravna = (string)rdrb2["plpravna"];
                     if (rdrb2["plzavezanec"] != DBNull.Value) pl_ddv = (string)rdrb2["plzavezanec"];
-                    //if (rdrb2["davcna"] != DBNull.Value) pl_davcna = (string)rdrb2["davcna"];
-                    //if (pl_drzava == "SLOVENIJA")
-                    //    pl_drzava = "";
-                    //else
-                    //    pl_drzava = ", " + pl_drzava;
-                    // ltr.Text = pl_zr;
                     if (pl_pravna == "T") lpr.Text = "DA";
                     else lpr.Text = "NE";
                     if (pl_ddv == "T") lza.Text = "DA";
@@ -263,8 +212,6 @@ namespace Komunala.Kataster
                     lom.Text = om_naziv;
                     lomn.Text = om_ulica + " " + om_hs + om_hd + ", "+om_kraj;
                     lhsmid.Text = om_hsmid;
-                    //st_stanovanj = Convert.ToString((int)rdr6["st_stanovanj"]);
-                    //st_poslovnih_prostorov = Convert.ToString((int)rdr6["st_poslovnih_prostorov"]);
                 }
             }
             catch (Exception ex)
@@ -279,10 +226,9 @@ namespace Komunala.Kataster
 
             lp.Text = pl_naziv;
             ln.Text = pl_naslov + ", " + pl_ptt + " " + pl_kraj + pl_drzava;
-            //label21.Text = st_stanovanj;
-            //label18.Text = st_poslovnih_prostorov;
 
             // POIŠČI STORITVE
+            // daj v datatable
             q = @"
             SELECT
               inkasso_2021_om_radgona.OM AS OMOM,
@@ -339,171 +285,8 @@ namespace Komunala.Kataster
 
         }
 
-        private void Display()
-        {
-            int stevid = 0;
-            Izprazni_dgv();
-            string brezlokacije;
-            if (cbl.Checked)
-            {
-                brezlokacije = " and (inkasso_2021_om_radgona.OM_HSMID = '99' or inkasso_2021_om_radgona.OM_HSMID = '0') ";
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
-            }
-            else
-            {
-                brezlokacije = "";
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
-            }
-            if (prvic)
-                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
-            try
-            {
-                string q = @"
-                            SELECT
-                              bass_location_street.street_name AS omulica,
-                              inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
-                              inkasso_2021_om_radgona.OM_HSMID AS omhsmid,
-                              inkasso_2021_om_radgona.OM_HS AS omhs,
-                              inkasso_2021_om_radgona.OM_HSD AS omhsd,
-                              inkasso_2021_om_radgona.OM_XH AS omx,
-                              inkasso_2021_om_radgona.OM_YH AS omy,
-                              bass_location_sett.sett_name AS omkraj,
-                              inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
-                              stranke_radgona_2021.NAZIV AS omplacnik,
-                              stranke_radgona_2021.NASLOV AS plnaslov,
-                              stranke_radgona_2021.KRAJ AS plkraj,
-                              inkasso_2021_om_radgona.OM AS om,
-                              inkasso_2021_om_radgona.OM_ID AS omid,
-                              stranke_radgona_2021.PTT AS plptt,
-                              stranke_radgona_2021.DRZAVA_NAZIV AS pldrzava,
-                              stranke_radgona_2021.TELEFON,
-                              stranke_radgona_2021_poste.NAZIV AS plposta
-                            FROM inkasso_2021_om_radgona
-                              INNER JOIN bass_location_street
-                                ON inkasso_2021_om_radgona.ULICA_SIFRA = bass_location_street.street_code
-                              INNER JOIN stranke_radgona_2021
-                                ON inkasso_2021_om_radgona.OM_PLACNIK = stranke_radgona_2021.SIFRA
-                              INNER JOIN bass_location_sett
-                                ON bass_location_street.sett_code = bass_location_sett.sett_code
-                              INNER JOIN stranke_radgona_2021_poste
-                                ON stranke_radgona_2021.PTT = stranke_radgona_2021_poste.SIFRA
-                            WHERE inkasso_2021_om_radgona.om_aktiven='T'"
-                                + brezlokacije +
-                                @"
-                                GROUP BY inkasso_2021_om_radgona.OM_ID,
-                                     stranke_radgona_2021.PTT,
-                                     stranke_radgona_2021.DRZAVA_NAZIV,
-                                     stranke_radgona_2021.TELEFON,
-                                     stranke_radgona_2021_poste.NAZIV 
-                        "
-                        + sort;
-                        ;
-
-                string omulica = ""; 
-                string omhs = "";
-                string omid = "";
-                string om = "";
-                string omplacnik = "";
-                string plnaslov = "";
-                string omhd = "";
-                string omlabela = "";
-                string omkraj = "";
-                string plposta = "";
-                // string plkraj = "";
-                string pldrzava = "";
-                string plpostat = "";
-                string placnik_id = "";
-                string plptt = "";
-                // string 
-                cmdb = new MySqlCommand(q, conb);
-                conb.Open();
-    
-                rdrb = cmdb.ExecuteReader();
-                while (rdrb.Read())
-                {
-                    stevid++;
-                    string sstev = stevid.ToString();
-                    if (rdrb["omid"] != DBNull.Value) omid = Convert.ToString((int)rdrb["omid"]);
-                    if (rdrb["om"] != DBNull.Value) om = (string)rdrb["om"];
-                    if (rdrb["omnaziv"] != DBNull.Value) om_naziv = (string)rdrb["omnaziv"];
-                    if (rdrb["omhsmid"] != DBNull.Value) om_hsmid = Convert.ToString((Int32)rdrb["omhsmid"]);
-
-                    if (rdrb["omulica"] != DBNull.Value) omulica = (string)rdrb["omulica"];
-                    if (rdrb["omhs"] != DBNull.Value) omhs = (string)rdrb["omhs"];
-                    if (rdrb["omhsd"] != DBNull.Value) omhd = (string)rdrb["omhsd"];
-                    //omulica = 
-                    if (rdrb["omkraj"] != DBNull.Value) omkraj = (string)rdrb["omkraj"];
-                    if (rdrb["omplacnik"] != DBNull.Value) omplacnik = (string)rdrb["omplacnik"];
-                    if (rdrb["plnaslov"] != DBNull.Value) plnaslov = (string)rdrb["plnaslov"];
-                    if (rdrb["plptt"] != DBNull.Value) plptt = (string)rdrb["plptt"];
-                    if (rdrb["plposta"] != DBNull.Value) plpostat = (string)rdrb["plposta"];
-                    if (rdrb["placnik_id"] != DBNull.Value) placnik_id = Convert.ToString((int)rdrb["placnik_id"]);
-                    plposta = plptt + " " + plpostat;
-                    if (rdrb["pldrzava"] != DBNull.Value) pldrzava = (string)rdrb["pldrzava"];
-                    string[] row1 = new string[] { om_naziv, omulica + " " + omhs + omhd,omkraj, omplacnik,plnaslov,plposta,omulica+omhs+omhd,omhs,omhd,omid,placnik_id,om };
-
-                    dgv1.Rows.Add(row1);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Napaka: " + ex.Message);
-            }
-            finally
-            {
-                rdrb.Close();
-                conb.Close();
-            }
-            lz.Text = stevid.ToString();
-            //Zacetek();
-        }
-
         private void Displaydt()
         {
-            //inkasso_2021_om_radgona.OM_HSMID AS omhsmid,
-            //                  inkasso_2021_om_radgona.OM_HS AS omhs,
-            //                  inkasso_2021_om_radgona.OM_HSD AS omhsd,
-            //                  inkasso_2021_om_radgona.OM_XH AS omx,
-            //                  inkasso_2021_om_radgona.OM_YH AS omy,
-            //SELECT
-            //                  inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
-            //                  CONCAT(bass_location_street.street_name, ' ', IFNULL(inkasso_2021_om_radgona.OM_HS, ''), inkasso_2021_om_radgona.OM_HSD) AS naslov,
-            //                  bass_location_sett.sett_name AS omkraj,
-            //                  stranke_radgona_2021.NAZIV AS omplacnik,
-            //                  stranke_radgona_2021.NASLOV AS plnaslov,
-            //                  CONCAT(stranke_radgona_2021.PTT, ' ', stranke_radgona_2021_poste.NAZIV),
-            //                  stranke_radgona_2021.KRAJ AS plkraj,
-            //                  inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
-            //                  bass_location_street.street_name AS omulica,
-            //                  inkasso_2021_om_radgona.OM_HS AS omhs,
-            //                  inkasso_2021_om_radgona.OM_HSD AS omhsd,
-            //                  inkasso_2021_om_radgona.OM AS om,
-            //                  inkasso_2021_om_radgona.OM_ID AS omid,
-            //                  stranke_radgona_2021.PTT AS plptt,
-            //                  stranke_radgona_2021.DRZAVA_NAZIV AS pldrzava,
-            //                  stranke_radgona_2021.TELEFON,
-            //                  stranke_radgona_2021_poste.NAZIV AS plposta
-            //                FROM inkasso_2021_om_radgona
-            //                  INNER JOIN bass_location_street
-            //                    ON inkasso_2021_om_radgona.ULICA_SIFRA = bass_location_street.street_code
-            //                  INNER JOIN stranke_radgona_2021
-            //                    ON inkasso_2021_om_radgona.OM_PLACNIK = stranke_radgona_2021.SIFRA
-            //                  INNER JOIN bass_location_sett
-            //                    ON bass_location_street.sett_code = bass_location_sett.sett_code
-            //                  INNER JOIN stranke_radgona_2021_poste
-            //                    ON stranke_radgona_2021.PTT = stranke_radgona_2021_poste.SIFRA
-            //                WHERE inkasso_2021_om_radgona.om_aktiven = 'T'"
-            //                      + brezlokacije +
-            //                      @"
-            //                    GROUP BY inkasso_2021_om_radgona.OM_ID,
-            //                         stranke_radgona_2021.PTT,
-            //                         stranke_radgona_2021.DRZAVA_NAZIV,
-            //                         stranke_radgona_2021.TELEFON,
-            //                         stranke_radgona_2021_poste.NAZIV 
-            //            "
-            //              + sort;
-
-
             int stevid = 0;
             Izprazni_dgv();
             string brezlokacije;
@@ -564,53 +347,6 @@ namespace Komunala.Kataster
                 dt = new DataTable();
                 da.Fill(dt);
                 dgv1.DataSource = dt;
-
-
-                //    string omulica = "";
-                //    string omhs = "";
-                //    string omid = "";
-                //    string om = "";
-                //    string omplacnik = "";
-                //    string plnaslov = "";
-                //    string omhd = "";
-                //    string omlabela = "";
-                //    string omkraj = "";
-                //    string plposta = "";
-                //    // string plkraj = "";
-                //    string pldrzava = "";
-                //    string plpostat = "";
-                //    string placnik_id = "";
-                //    string plptt = "";
-                //    // string 
-                //    cmdb = new MySqlCommand(q, conb);
-                //    conb.Open();
-
-                //    rdrb = cmdb.ExecuteReader();
-                //    while (rdrb.Read())
-                //    {
-                //        stevid++;
-                //        string sstev = stevid.ToString();
-                //        if (rdrb["omid"] != DBNull.Value) omid = Convert.ToString((int)rdrb["omid"]);
-                //        if (rdrb["om"] != DBNull.Value) om = (string)rdrb["om"];
-                //        if (rdrb["omnaziv"] != DBNull.Value) om_naziv = (string)rdrb["omnaziv"];
-                //        if (rdrb["omhsmid"] != DBNull.Value) om_hsmid = Convert.ToString((Int32)rdrb["omhsmid"]);
-
-                //        if (rdrb["omulica"] != DBNull.Value) omulica = (string)rdrb["omulica"];
-                //        if (rdrb["omhs"] != DBNull.Value) omhs = (string)rdrb["omhs"];
-                //        if (rdrb["omhsd"] != DBNull.Value) omhd = (string)rdrb["omhsd"];
-                //        //omulica = 
-                //        if (rdrb["omkraj"] != DBNull.Value) omkraj = (string)rdrb["omkraj"];
-                //        if (rdrb["omplacnik"] != DBNull.Value) omplacnik = (string)rdrb["omplacnik"];
-                //        if (rdrb["plnaslov"] != DBNull.Value) plnaslov = (string)rdrb["plnaslov"];
-                //        if (rdrb["plptt"] != DBNull.Value) plptt = (string)rdrb["plptt"];
-                //        if (rdrb["plposta"] != DBNull.Value) plpostat = (string)rdrb["plposta"];
-                //        if (rdrb["placnik_id"] != DBNull.Value) placnik_id = Convert.ToString((int)rdrb["placnik_id"]);
-                //        plposta = plptt + " " + plpostat;
-                //        if (rdrb["pldrzava"] != DBNull.Value) pldrzava = (string)rdrb["pldrzava"];
-                //        string[] row1 = new string[] { om_naziv, omulica + " " + omhs + omhd, omkraj, omplacnik, plnaslov, plposta, omulica + omhs + omhd, omhs, omhd, omid, placnik_id, om };
-
-                //        dgv1.Rows.Add(row1);
-                //    }
             }
             catch (Exception ex)
             {
@@ -621,7 +357,6 @@ namespace Komunala.Kataster
                 conb.Close();
             }
             lz.Text = stevid.ToString();
-            //Zacetek();
         }
 
         private void frmLokacijeBass_Load(object sender, EventArgs e)
@@ -720,10 +455,6 @@ namespace Komunala.Kataster
         {
             // Išči po odjemnem mestu
             (dgv1.DataSource as DataTable).DefaultView.RowFilter = string.Format("omnaziv LIKE '%{0}%'", tbom.Text);
-            //(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("Name LIKE '%{0}%'", searchTextBox.Text);
-            //DataView dv = dt.DefaultView;
-            //dv.RowFilter = "omnaziv LIKE '" + tbom.Text + "%'";
-            //dgv1.DataSource = dv;
         }
 
         private void tbom_KeyDown(object sender, KeyEventArgs e)
@@ -886,6 +617,167 @@ namespace Komunala.Kataster
 
         }
 
+
+        private void Display()
+        {
+            int stevid = 0;
+            Izprazni_dgv();
+            string brezlokacije;
+            if (cbl.Checked)
+            {
+                brezlokacije = " and (inkasso_2021_om_radgona.OM_HSMID = '99' or inkasso_2021_om_radgona.OM_HSMID = '0') ";
+                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+            }
+            else
+            {
+                brezlokacije = "";
+                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+            }
+            if (prvic)
+                sort = "ORDER BY omnaziv, omulica, omhs, omhsd";
+            try
+            {
+                string q = @"
+                            SELECT
+                              bass_location_street.street_name AS omulica,
+                              inkasso_2021_om_radgona.OM_NAZIV AS omnaziv,
+                              inkasso_2021_om_radgona.OM_HSMID AS omhsmid,
+                              inkasso_2021_om_radgona.OM_HS AS omhs,
+                              inkasso_2021_om_radgona.OM_HSD AS omhsd,
+                              inkasso_2021_om_radgona.OM_XH AS omx,
+                              inkasso_2021_om_radgona.OM_YH AS omy,
+                              bass_location_sett.sett_name AS omkraj,
+                              inkasso_2021_om_radgona.OM_PLACNIK AS placnik_id,
+                              stranke_radgona_2021.NAZIV AS omplacnik,
+                              stranke_radgona_2021.NASLOV AS plnaslov,
+                              stranke_radgona_2021.KRAJ AS plkraj,
+                              inkasso_2021_om_radgona.OM AS om,
+                              inkasso_2021_om_radgona.OM_ID AS omid,
+                              stranke_radgona_2021.PTT AS plptt,
+                              stranke_radgona_2021.DRZAVA_NAZIV AS pldrzava,
+                              stranke_radgona_2021.TELEFON,
+                              stranke_radgona_2021_poste.NAZIV AS plposta
+                            FROM inkasso_2021_om_radgona
+                              INNER JOIN bass_location_street
+                                ON inkasso_2021_om_radgona.ULICA_SIFRA = bass_location_street.street_code
+                              INNER JOIN stranke_radgona_2021
+                                ON inkasso_2021_om_radgona.OM_PLACNIK = stranke_radgona_2021.SIFRA
+                              INNER JOIN bass_location_sett
+                                ON bass_location_street.sett_code = bass_location_sett.sett_code
+                              INNER JOIN stranke_radgona_2021_poste
+                                ON stranke_radgona_2021.PTT = stranke_radgona_2021_poste.SIFRA
+                            WHERE inkasso_2021_om_radgona.om_aktiven='T'"
+                                + brezlokacije +
+                                @"
+                                GROUP BY inkasso_2021_om_radgona.OM_ID,
+                                     stranke_radgona_2021.PTT,
+                                     stranke_radgona_2021.DRZAVA_NAZIV,
+                                     stranke_radgona_2021.TELEFON,
+                                     stranke_radgona_2021_poste.NAZIV 
+                        "
+                        + sort;
+                ;
+
+                string omulica = "";
+                string omhs = "";
+                string omid = "";
+                string om = "";
+                string omplacnik = "";
+                string plnaslov = "";
+                string omhd = "";
+                string omlabela = "";
+                string omkraj = "";
+                string plposta = "";
+                // string plkraj = "";
+                string pldrzava = "";
+                string plpostat = "";
+                string placnik_id = "";
+                string plptt = "";
+                // string 
+                cmdb = new MySqlCommand(q, conb);
+                conb.Open();
+
+                rdrb = cmdb.ExecuteReader();
+                while (rdrb.Read())
+                {
+                    stevid++;
+                    string sstev = stevid.ToString();
+                    if (rdrb["omid"] != DBNull.Value) omid = Convert.ToString((int)rdrb["omid"]);
+                    if (rdrb["om"] != DBNull.Value) om = (string)rdrb["om"];
+                    if (rdrb["omnaziv"] != DBNull.Value) om_naziv = (string)rdrb["omnaziv"];
+                    if (rdrb["omhsmid"] != DBNull.Value) om_hsmid = Convert.ToString((Int32)rdrb["omhsmid"]);
+
+                    if (rdrb["omulica"] != DBNull.Value) omulica = (string)rdrb["omulica"];
+                    if (rdrb["omhs"] != DBNull.Value) omhs = (string)rdrb["omhs"];
+                    if (rdrb["omhsd"] != DBNull.Value) omhd = (string)rdrb["omhsd"];
+                    //omulica = 
+                    if (rdrb["omkraj"] != DBNull.Value) omkraj = (string)rdrb["omkraj"];
+                    if (rdrb["omplacnik"] != DBNull.Value) omplacnik = (string)rdrb["omplacnik"];
+                    if (rdrb["plnaslov"] != DBNull.Value) plnaslov = (string)rdrb["plnaslov"];
+                    if (rdrb["plptt"] != DBNull.Value) plptt = (string)rdrb["plptt"];
+                    if (rdrb["plposta"] != DBNull.Value) plpostat = (string)rdrb["plposta"];
+                    if (rdrb["placnik_id"] != DBNull.Value) placnik_id = Convert.ToString((int)rdrb["placnik_id"]);
+                    plposta = plptt + " " + plpostat;
+                    if (rdrb["pldrzava"] != DBNull.Value) pldrzava = (string)rdrb["pldrzava"];
+                    string[] row1 = new string[] { om_naziv, omulica + " " + omhs + omhd, omkraj, omplacnik, plnaslov, plposta, omulica + omhs + omhd, omhs, omhd, omid, placnik_id, om };
+
+                    dgv1.Rows.Add(row1);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Napaka: " + ex.Message);
+            }
+            finally
+            {
+                rdrb.Close();
+                conb.Close();
+            }
+            lz.Text = stevid.ToString();
+            //Zacetek();
+        }
+        private void Grid()
+        {
+            dgv1.Width = sirina_mreze + 20;
+            //dgv1.ColumnHeadersVisible = false;
+            dgv1.RowHeadersVisible = false;
+            dgv1.ColumnCount = 12;
+            dgv1.Columns[0].Width = s1;
+            dgv1.Columns[1].Width = s2;
+            dgv1.Columns[2].Width = s3;
+            dgv1.Columns[3].Width = s4;
+            dgv1.Columns[4].Width = s5;
+            dgv1.Columns[5].Width = s6;
+
+            dgv1.Columns[0].Name = "OM";
+            dgv1.Columns[1].Name = "Ulica";
+            dgv1.Columns[2].Name = "Kraj";
+            dgv1.Columns[3].Name = "Plačnik";
+            dgv1.Columns[4].Name = "Naslov";
+            dgv1.Columns[5].Name = "Pošta";
+            dgv1.Columns[6].Name = "sort1";
+            dgv1.Columns[7].Name = "hs";
+            dgv1.Columns[8].Name = "hsd";
+            dgv1.Columns[9].Name = "id";
+            dgv1.Columns[10].Name = "placnik_id";
+            dgv1.Columns[11].Name = "om";
+
+            dgv1.Columns[6].Visible = false;
+            dgv1.Columns[7].Visible = false;
+            dgv1.Columns[8].Visible = false;
+            dgv1.Columns[9].Visible = false;
+            dgv1.Columns[10].Visible = false;
+            dgv1.Columns[11].Visible = false;
+            Padding newPadding = new Padding(6, 0, 0, 0);
+            this.dgv1.Columns[0].DefaultCellStyle.Padding = newPadding;
+            this.dgv1.Columns[1].DefaultCellStyle.Padding = newPadding;
+            this.dgv1.Columns[2].DefaultCellStyle.Padding = newPadding;
+            this.dgv1.Columns[3].DefaultCellStyle.Padding = newPadding;
+            this.dgv1.Columns[4].DefaultCellStyle.Padding = newPadding;
+            this.dgv1.Columns[5].DefaultCellStyle.Padding = newPadding;
+
+            dgv1.Focus();
+        }
 
 
     }
