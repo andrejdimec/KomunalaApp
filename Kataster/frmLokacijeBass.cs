@@ -52,6 +52,89 @@ namespace Komunala.Kataster
         string pl_davcna = "";
         int aktivni; // kateri zapis je izbran v dgv1
 
+        private void frmLokacijeBass_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void tbom_TextChanged(object sender, EventArgs e)
+        {
+            // Išči po odjemnem mestu
+            if (tbom.Text.Length > 1)
+            {
+                (dgv1.DataSource as DataTable).DefaultView.RowFilter = string.Format("omnaziv LIKE '%{0}%'", tbom.Text);
+            }
+        }
+
+        private void tbom_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+                dgv1.Focus();
+            if (e.KeyCode == Keys.Up)
+                dgv1.Focus();
+            if (e.KeyCode == Keys.Enter)
+                dgv1.Focus();
+            if (e.KeyCode == Keys.Escape)
+            {
+                tbom.Text = "";
+                (dgv1.DataSource as DataTable).DefaultView.RowFilter = "";
+                dgv1.Focus();
+                
+            }
+        }
+
+        private void dgv1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // če je iskalnik poln
+            if (e.KeyCode == Keys.F4)
+            {
+                // iskanje po OM
+                tbom.Focus();
+            }
+            if (e.KeyCode == Keys.F5)
+            {
+                // iskanje po OM
+                tbom.Focus();
+            }
+            if (e.KeyCode == Keys.F6)
+            {
+                // iskanje po OM
+                tbom.Focus();
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+            }
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (tbom.Text != "")
+                {
+                    int tmpakt = aktivni;
+                    tbom.Text = "";
+                    dgv1.Focus();
+                    Current(tmpakt);
+                }
+            }
+        }
+
+        private void cbl_CheckedChanged(object sender, EventArgs e)
+        {
+            Display();
+        }
+
+        private void rb1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prvic == false) Sort();
+        }
+
+        private void rb2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prvic == false) Sort();
+        }
+
+        private void rb3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (prvic == false) Sort();
+        }
 
         private void Griddt()
         {
@@ -100,17 +183,17 @@ namespace Komunala.Kataster
         }
         private void Current(int y)
         {
-            int rowIndex = -1;
-            foreach (DataGridViewRow row in dgv1.Rows)
-            {
-                if (row.Cells["om"].Value.ToString().Equals(y))
-                {
-                    rowIndex = row.Index;
-                    dgv1.Rows[rowIndex].Selected = true;
-                    dgv1.CurrentCell = dgv1.Rows[rowIndex].Cells[1];
-                    break;
-                }
-            }
+            //int rowIndex = -1;
+            //foreach (DataGridViewRow row in dgv1.Rows)
+            //{
+            //    if (row.Cells["om"].Value.ToString().Equals(y))
+            //    {
+            //        rowIndex = row.Index;
+            //        dgv1.Rows[rowIndex].Selected = true;
+            //        dgv1.CurrentCell = dgv1.Rows[rowIndex].Cells[1];
+            //        break;
+            //    }
+            //}
 
            // this.dgv1.CurrentCell = this.dgv1[1, y];
         }
@@ -293,12 +376,12 @@ namespace Komunala.Kataster
             if (cbl.Checked)
             {
                 brezlokacije = " and (inkasso_2021_om_radgona.OM_HSMID = '99' or inkasso_2021_om_radgona.OM_HSMID = '0') ";
-                sort = "ORDER BY naslov";
+                //sort = "ORDER BY naslov";
             }
             else
             {
                 brezlokacije = "";
-                sort = "ORDER BY naslov";
+                //sort = "ORDER BY naslov";
             }
             if (prvic)
                 sort = "ORDER BY omnaziv";
@@ -357,8 +440,18 @@ namespace Komunala.Kataster
                 conb.Close();
             }
             lz.Text = stevid.ToString();
+            prvic = false;
         }
 
+        private void OsveziDGV1()
+        {
+            //var da = new MySqlDataAdapter(q, conb);
+
+            //dt = new DataTable();
+            //da.Fill(dt);
+            //dgv1.DataSource = dt;
+            dgv1.Refresh();
+        }
         private void frmLokacijeBass_Load(object sender, EventArgs e)
         {
             prvic = true;
@@ -433,79 +526,6 @@ namespace Komunala.Kataster
             dgv1.Refresh();
         }
 
-        private void frmLokacijeBass_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                // iskanje po nazivu om
-                tbom.Focus();
-                //frmIsci_o secondForm = new frmIsci_o();
-                //secondForm.ShowDialog();
-
-            }
-            if (e.KeyCode == Keys.F2)
-            {
-                //frmIsci_n secondForm = new frmIsci_n();
-                //secondForm.ShowDialog();
-
-            }
-        }
-
-        private void tbom_TextChanged(object sender, EventArgs e)
-        {
-            // Išči po odjemnem mestu
-            (dgv1.DataSource as DataTable).DefaultView.RowFilter = string.Format("omnaziv LIKE '%{0}%'", tbom.Text);
-        }
-
-        private void tbom_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Down)
-                dgv1.Focus();
-            if (e.KeyCode == Keys.Enter)
-                dgv1.Focus();
-            if (e.KeyCode == Keys.Escape)
-            {
-                tbom.Text="";
-                dgv1.Focus();
-            }
-
-        }
-
-        private void dgv1_KeyDown(object sender, KeyEventArgs e)
-        {
-            // če je iskalnik poln
-            if (e.KeyCode == Keys.Escape)
-            {
-                if (tbom.Text != "")
-                {
-                    int tmpakt = aktivni;
-                    tbom.Text = "";
-                    dgv1.Focus();
-                    Current(tmpakt);
-                }
-            }
-
-        }
-
-        private void cbl_CheckedChanged(object sender, EventArgs e)
-        {
-            Display();
-        }
-
-        private void rb1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (prvic==false) Sort();
-        }
-
-        private void rb2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (prvic == false) Sort();
-        }
-
-        private void rb3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (prvic == false) Sort();
-        }
 
         private void btnNazaj_Click(object sender, EventArgs e)
         {
