@@ -137,8 +137,8 @@ namespace Komunala
             //frmBaze sec = new frmBaze();
             //sec.ShowDialog();
 
-            Kataster.frmLokacijeBass sec = new Kataster.frmLokacijeBass();
-            sec.ShowDialog();
+            //Kataster.frmLokacijeBass sec = new Kataster.frmLokacijeBass();
+            //sec.ShowDialog();
             
             ////frmZK_REN sec = new frmZK_REN();
             ////sec.ShowDialog();
@@ -155,7 +155,7 @@ namespace Komunala
 
             ////frmUredi_strehe sec = new frmUredi_strehe();
             ////sec.ShowDialog();
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
 

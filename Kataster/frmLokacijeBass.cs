@@ -471,9 +471,9 @@ namespace Komunala.Kataster
             sirina_mreze = s1 + s2 + s3 + s4 + s5 + s6;
             this.Width = sirina_mreze + 500;
 
-            //crtal2.AutoSize = false;
-            //crtal2.Height = 1;
-            //crtal2.BorderStyle = BorderStyle.Fixed3D;
+            crta2.AutoSize = false;
+            crta2.Height = 1;
+            crta2.BorderStyle = BorderStyle.Fixed3D;
             //crtal.AutoSize = false;
             //crtal.Height = 1;
             //crtal.BorderStyle = BorderStyle.Fixed3D;

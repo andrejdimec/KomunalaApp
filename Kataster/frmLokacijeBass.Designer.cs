@@ -29,11 +29,11 @@ namespace Komunala.Kataster
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgv1 = new System.Windows.Forms.DataGridView();
             this.cbl = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +59,15 @@ namespace Komunala.Kataster
             this.lomn = new System.Windows.Forms.Label();
             this.lom = new System.Windows.Forms.Label();
             this.dgvs = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.crta2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -73,25 +82,25 @@ namespace Komunala.Kataster
             this.dgv1.AllowUserToOrderColumns = true;
             this.dgv1.AllowUserToResizeColumns = false;
             this.dgv1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgv1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgv1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgv1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Khaki;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Khaki;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv1.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgv1.EnableHeadersVisualStyles = false;
             this.dgv1.GridColor = System.Drawing.SystemColors.Control;
             this.dgv1.Location = new System.Drawing.Point(33, 62);
@@ -108,7 +117,7 @@ namespace Komunala.Kataster
             // 
             this.cbl.AutoSize = true;
             this.cbl.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cbl.Location = new System.Drawing.Point(1252, 918);
+            this.cbl.Location = new System.Drawing.Point(1396, 970);
             this.cbl.Name = "cbl";
             this.cbl.Size = new System.Drawing.Size(91, 19);
             this.cbl.TabIndex = 1;
@@ -153,9 +162,9 @@ namespace Komunala.Kataster
             this.panel1.Controls.Add(this.rb3);
             this.panel1.Controls.Add(this.rb2);
             this.panel1.Controls.Add(this.rb1);
-            this.panel1.Location = new System.Drawing.Point(352, 9);
+            this.panel1.Location = new System.Drawing.Point(593, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(310, 45);
+            this.panel1.Size = new System.Drawing.Size(308, 45);
             this.panel1.TabIndex = 6;
             // 
             // rb3
@@ -186,7 +195,7 @@ namespace Komunala.Kataster
             // 
             this.tbom.Location = new System.Drawing.Point(33, 28);
             this.tbom.Name = "tbom";
-            this.tbom.Size = new System.Drawing.Size(254, 23);
+            this.tbom.Size = new System.Drawing.Size(155, 23);
             this.tbom.TabIndex = 7;
             this.tbom.TextChanged += new System.EventHandler(this.tbom_TextChanged);
             this.tbom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbom_KeyDown);
@@ -197,7 +206,7 @@ namespace Komunala.Kataster
             this.btnNazaj.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.btnNazaj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNazaj.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnNazaj.Location = new System.Drawing.Point(1645, 952);
+            this.btnNazaj.Location = new System.Drawing.Point(1244, 949);
             this.btnNazaj.Name = "btnNazaj";
             this.btnNazaj.Size = new System.Drawing.Size(119, 40);
             this.btnNazaj.TabIndex = 8;
@@ -354,38 +363,135 @@ namespace Komunala.Kataster
             this.dgvs.AllowUserToResizeRows = false;
             this.dgvs.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvs.ColumnHeadersHeight = 22;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvs.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvs.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvs.Enabled = false;
             this.dgvs.EnableHeadersVisualStyles = false;
             this.dgvs.GridColor = System.Drawing.SystemColors.Control;
             this.dgvs.Location = new System.Drawing.Point(1397, 366);
             this.dgvs.Name = "dgvs";
             this.dgvs.ReadOnly = true;
-            this.dgvs.Size = new System.Drawing.Size(367, 536);
+            this.dgvs.Size = new System.Drawing.Size(367, 454);
             this.dgvs.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(32, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Naziv OM (F4)";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(208, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 15);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Naslov OM (F5)";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(209, 28);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(155, 23);
+            this.textBox1.TabIndex = 23;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(383, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 15);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Plačnik (F6)";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(384, 28);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(155, 23);
+            this.textBox2.TabIndex = 25;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(1396, 848);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(119, 40);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "Več o OM";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.SystemColors.Window;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(1536, 848);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(119, 40);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "V katastru";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.Window;
+            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button3.Location = new System.Drawing.Point(35, 949);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(119, 40);
+            this.button3.TabIndex = 29;
+            this.button3.Text = "Prenos v kataster";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // crta2
+            // 
+            this.crta2.Location = new System.Drawing.Point(32, 925);
+            this.crta2.Name = "crta2";
+            this.crta2.Size = new System.Drawing.Size(1732, 10);
+            this.crta2.TabIndex = 31;
+            this.crta2.Text = "crta2";
             // 
             // frmLokacijeBass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1798, 1039);
+            this.ClientSize = new System.Drawing.Size(1798, 1021);
+            this.Controls.Add(this.crta2);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvs);
             this.Controls.Add(this.groupBox2);
@@ -442,5 +548,14 @@ namespace Komunala.Kataster
         private System.Windows.Forms.Label lomn;
         private System.Windows.Forms.Label lom;
         private System.Windows.Forms.DataGridView dgvs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label crta2;
     }
 }
