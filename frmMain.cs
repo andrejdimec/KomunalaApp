@@ -21,7 +21,7 @@ namespace Komunala
     public partial class frmMain : Form
     {
 
-        string verzija = "21.2.2021";
+        string verzija = "25.8.2022";
         public static string nazivPrograma = "Komunala Radgona";
         public static string podatki_ren = "Avgust 2020";
         public static string podatki_gjs = "Januar 2021";
